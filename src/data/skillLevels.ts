@@ -6,7 +6,6 @@ export type SkillStat = {
   id: string
   name: string
   level: number
-  tileId: string | null
 }
 
 export const BASE_SKILL_LEVEL = 1
@@ -73,33 +72,16 @@ export function maxSkillLevel(skillId: string, tiles: Tile[]): number {
   return level
 }
 
-function tileIdForLevel(skillId: string, level: number): string {
-  const bracket = [...SKILL_BRACKETS]
-    .reverse()
-    .find((entry) => entry.max <= level)
-  return osrsTileId(skillId, bracket?.id ?? '1-10')
-}
-
 export function skillStats(tiles: Tile[]): SkillStat[] {
   return STATS_SKILL_ORDER.map((id) => {
     const skill = SKILL_BY_ID.get(id)
     if (!skill) {
       throw new Error(`Unknown stats skill: ${id}`)
     }
-    if (isCombatSkill(id)) {
-      return {
-        id,
-        name: skill.name,
-        level: COMBAT_SKILL_LEVEL,
-        tileId: null,
-      }
-    }
-    const level = maxSkillLevel(id, tiles)
     return {
       id,
       name: skill.name,
-      level,
-      tileId: tileIdForLevel(id, level),
+      level: maxSkillLevel(id, tiles),
     }
   })
 }

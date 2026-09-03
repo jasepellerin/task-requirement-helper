@@ -70,13 +70,11 @@ describe('skillStats', () => {
       id: 'attack',
       name: 'Attack',
       level: 99,
-      tileId: null,
     })
     expect(stats.find((skill) => skill.id === 'crafting')).toEqual({
       id: 'crafting',
       name: 'Crafting',
       level: 20,
-      tileId: osrsTileId('crafting', '11-20'),
     })
   })
 })

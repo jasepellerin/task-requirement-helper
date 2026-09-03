@@ -1,25 +1,23 @@
-import { useEffect, useId, useMemo, useState } from 'react'
+import { useEffect, useId, useMemo } from 'react'
 import { skillStats, type SkillStat } from '../data/skillLevels.ts'
+import { wikiPageUrl } from '../data/wiki.ts'
 import type { Tile } from '../domain/types.ts'
 
 type StatsWindowProps = {
   tiles: Tile[]
   onClose: () => void
-  onOpenTile: (id: string) => void
 }
 
-function SkillCell({
-  skill,
-  onOpenTile,
-  onHover,
-}: {
-  skill: SkillStat
-  onOpenTile: (id: string) => void
-  onHover: (skill: SkillStat | null) => void
-}) {
-  const tileId = skill.tileId
-  const body = (
-    <>
+function SkillCell({ skill }: { skill: SkillStat }) {
+  return (
+    <a
+      className="stats-cell"
+      href={wikiPageUrl(skill.name)}
+      target="_blank"
+      rel="noreferrer"
+      aria-label={`${skill.name} ${skill.level}`}
+      title={skill.name}
+    >
       <img
         className="stats-icon"
         src={`/skill-icons/${skill.id}.png`}
@@ -27,46 +25,14 @@ function SkillCell({
         width={25}
         height={25}
       />
-      <span className="stats-levels">
-        <span>{skill.level}</span>
-        <span>{skill.level}</span>
-      </span>
-    </>
-  )
-
-  if (!tileId) {
-    return (
-      <div
-        className="stats-cell"
-        aria-label={`${skill.name} ${skill.level}`}
-        onMouseEnter={() => onHover(skill)}
-        onMouseLeave={() => onHover(null)}
-      >
-        {body}
-      </div>
-    )
-  }
-
-  return (
-    <button
-      type="button"
-      className="stats-cell"
-      aria-label={`${skill.name} ${skill.level}`}
-      onClick={() => onOpenTile(tileId)}
-      onMouseEnter={() => onHover(skill)}
-      onMouseLeave={() => onHover(null)}
-      onFocus={() => onHover(skill)}
-      onBlur={() => onHover(null)}
-    >
-      {body}
-    </button>
+      <span className="stats-level">{skill.level}</span>
+    </a>
   )
 }
 
-export function StatsWindow({ tiles, onClose, onOpenTile }: StatsWindowProps) {
+export function StatsWindow({ tiles, onClose }: StatsWindowProps) {
   const titleId = useId()
   const stats = useMemo(() => skillStats(tiles), [tiles])
-  const [hovered, setHovered] = useState<SkillStat | null>(null)
 
   useEffect(() => {
     function onKey(event: KeyboardEvent) {
@@ -75,10 +41,6 @@ export function StatsWindow({ tiles, onClose, onOpenTile }: StatsWindowProps) {
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
   }, [onClose])
-
-  const hint = hovered
-    ? `${hovered.name} ${hovered.level}/${hovered.level}`
-    : 'Maximum level from unlocked and completed skill tiles.'
 
   return (
     <div className="modal-backdrop" onClick={onClose}>
@@ -97,15 +59,9 @@ export function StatsWindow({ tiles, onClose, onOpenTile }: StatsWindowProps) {
         </div>
         <div className="stats-grid">
           {stats.map((skill) => (
-            <SkillCell
-              key={skill.id}
-              skill={skill}
-              onOpenTile={onOpenTile}
-              onHover={setHovered}
-            />
+            <SkillCell key={skill.id} skill={skill} />
           ))}
         </div>
-        <p className="stats-hint">{hint}</p>
       </div>
     </div>
   )

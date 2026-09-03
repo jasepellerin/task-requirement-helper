@@ -121,7 +121,7 @@ export default function App() {
             title="Ready"
             tiles={board.ready}
             byId={byId}
-            empty="Nothing ready."
+            empty="No matching tiles."
             onOpen={openDetail}
             onStar={setStarred}
           />
@@ -129,7 +129,7 @@ export default function App() {
             title="Possible"
             tiles={board.possible}
             byId={byId}
-            empty="Nothing possible."
+            empty="No matching tiles."
             onOpen={openDetail}
             onStar={setStarred}
           />
@@ -137,7 +137,7 @@ export default function App() {
             title="Blocked"
             tiles={board.blocked}
             byId={byId}
-            empty="Nothing blocked."
+            empty="No matching tiles."
             onOpen={openDetail}
             onStar={setStarred}
           />
@@ -145,7 +145,7 @@ export default function App() {
             title="Unlocked"
             tiles={board.unlocked}
             byId={byId}
-            empty="Nothing unlocked."
+            empty="No matching tiles."
             onOpen={openDetail}
             onStar={setStarred}
           />
@@ -154,20 +154,14 @@ export default function App() {
 
       {overlay?.mode === 'completed' ? (
         <CompletedWindow
-          byId={byId}
           completed={groups.completed}
           onClose={closeOverlay}
           onOpen={openDetail}
-          onStar={setStarred}
         />
       ) : null}
 
       {overlay?.mode === 'stats' ? (
-        <StatsWindow
-          tiles={tiles}
-          onClose={closeOverlay}
-          onOpenTile={openDetail}
-        />
+        <StatsWindow tiles={tiles} onClose={closeOverlay} />
       ) : null}
 
       {overlay?.mode === 'find' ||

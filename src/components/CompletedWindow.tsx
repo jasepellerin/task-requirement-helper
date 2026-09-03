@@ -1,22 +1,52 @@
 import { useEffect, useId, useMemo } from 'react'
 import { partitionByKind } from '../data/osrsCatalog.ts'
 import type { Tile } from '../domain/types.ts'
-import { Columns, TileColumn } from './TileColumn.tsx'
 
 type CompletedWindowProps = {
-  byId: Map<string, Tile>
   completed: Tile[]
   onClose: () => void
   onOpen: (id: string) => void
-  onStar: (id: string, starred: boolean) => void
+}
+
+type CompletedListProps = {
+  title: string
+  tiles: Tile[]
+  empty: string
+  onOpen: (id: string) => void
+}
+
+function CompletedList({ title, tiles, empty, onOpen }: CompletedListProps) {
+  return (
+    <section className="completed-pane">
+      <header className="completed-pane-header">
+        <h3>{title}</h3>
+        <span>{tiles.length}</span>
+      </header>
+      {tiles.length === 0 ? (
+        <p className="empty">{empty}</p>
+      ) : (
+        <ul className="completed-list">
+          {tiles.map((tile) => (
+            <li key={tile.id}>
+              <button
+                type="button"
+                className="completed-item"
+                onClick={() => onOpen(tile.id)}
+              >
+                {tile.name}
+              </button>
+            </li>
+          ))}
+        </ul>
+      )}
+    </section>
+  )
 }
 
 export function CompletedWindow({
-  byId,
   completed,
   onClose,
   onOpen,
-  onStar,
 }: CompletedWindowProps) {
   const titleId = useId()
   const groups = useMemo(() => partitionByKind(completed), [completed])
@@ -44,32 +74,26 @@ export function CompletedWindow({
             Close
           </button>
         </div>
-        <Columns>
-          <TileColumn
+        <div className="completed-columns">
+          <CompletedList
             title="Skills"
             tiles={groups.skill}
-            byId={byId}
             empty="No completed skills."
             onOpen={onOpen}
-            onStar={onStar}
           />
-          <TileColumn
+          <CompletedList
             title="Diaries"
             tiles={groups.diary}
-            byId={byId}
             empty="No completed diaries."
             onOpen={onOpen}
-            onStar={onStar}
           />
-          <TileColumn
+          <CompletedList
             title="Quests"
             tiles={groups.quest}
-            byId={byId}
             empty="No completed quests."
             onOpen={onOpen}
-            onStar={onStar}
           />
-        </Columns>
+        </div>
       </div>
     </div>
   )

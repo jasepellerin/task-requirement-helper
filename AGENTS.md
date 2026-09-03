@@ -72,7 +72,7 @@ Persist/export `{ id, status, starred? }` for catalog tiles whose status is not 
 
 - **Board**: Ready / Possible / Blocked / Unlocked. Unseen and completed are hidden here. Starred tiles sort to the top of their column. Filter bar next to Skills / Diaries / Quests: name search (same folding as the finder) plus independent kind toggles.
 - **Completed**: separate window, split Skills / Diaries / Quests.
-- **Stats**: OSRS-style skill window. Tracked skills use the highest unlocked/completed bracket (else 1). Combat/Slayer always show 99. No total. Clicking a tracked skill opens its covering tile.
+- **Stats**: OSRS-style skill window. Tracked skills use the highest unlocked/completed bracket (else 1). Combat/Slayer always show 99. No total. Clicking a skill opens its wiki page.
 - **Detail card** (click a tile):
   - View-only. Header: catalog title, wiki infobox thumbnail on quests, live status icon (menu, saves immediately), star (on-board tiles), wiki (external-link icon), X to close.
   - Status icons: slashed eye = unseen, lock = locked, open lock = unlocked, check = completed. Marking unseen takes it off the board.

@@ -53,7 +53,7 @@ export function TileFinder({
           <input
             value={query}
             onChange={(event) => setQuery(event.target.value)}
-            placeholder="Agility 21–30"
+            placeholder="Filter tiles"
             autoFocus
           />
         </label>
