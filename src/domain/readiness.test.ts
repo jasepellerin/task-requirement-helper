@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest'
+import { osrsQuestTileId, osrsTileId } from '../data/osrsCatalog.ts'
 import {
   blockingParentCounts,
   groupTilesByReadiness,
@@ -175,6 +176,29 @@ describe('groupTilesByReadiness', () => {
       'Zed',
       'Alpha',
       'Beta',
+    ])
+  })
+
+  it('sorts priority-skill tiles after starred, then by name', () => {
+    const farming = osrsTileId('farming', '1-10')
+    const agility = osrsTileId('agility', '1-10')
+    const cooking = osrsTileId('cooking', '1-10')
+    const quest = osrsQuestTileId('enlightened-journey')
+    const tiles = [
+      tile(agility, 'locked', [], 'Agility 1–10'),
+      tile(farming, 'locked', [], 'Farming 1–10'),
+      tile(quest, 'locked', [], 'Enlightened Journey'),
+      tile(cooking, 'locked', [], 'Cooking 1–10', true),
+    ]
+    expect(
+      groupTilesByReadiness(tiles, new Set(['farming'])).ready.map(
+        (item) => item.name,
+      ),
+    ).toEqual([
+      'Cooking 1–10',
+      'Farming 1–10',
+      'Agility 1–10',
+      'Enlightened Journey',
     ])
   })
 })

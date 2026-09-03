@@ -7,9 +7,14 @@ import {
   storedTilesFromStatuses,
   tilesFromStatuses,
 } from '../data/osrsCatalog.ts'
+import {
+  prioritySkillsFromStored,
+  setStoredPrioritySkill,
+} from '../data/prioritySkills.ts'
 import { groupTilesByReadiness, tilesById } from '../domain/readiness.ts'
 import type { TileStatus } from '../domain/types.ts'
 import {
+  buildStore,
   downloadStore,
   loadStore,
   parseStoreJson,
@@ -17,39 +22,46 @@ import {
 } from '../storage/localStore.ts'
 
 function loadProgress() {
-  const tiles = loadStore().tiles
+  const store = loadStore()
   return {
-    statuses: statusesFromStored(tiles),
-    starred: starredFromStored(tiles),
+    statuses: statusesFromStored(store.tiles),
+    starred: starredFromStored(store.tiles),
+    prioritySkills: prioritySkillsFromStored(store.prioritySkills),
   }
 }
 
 export function useTiles() {
-  const [{ statuses, starred }, setProgress] = useState(loadProgress)
+  const [{ statuses, starred, prioritySkills }, setProgress] =
+    useState(loadProgress)
   const tiles = useMemo(
     () => tilesFromStatuses(statuses, starred),
     [starred, statuses],
   )
   const byId = useMemo(() => tilesById(tiles), [tiles])
-  const groups = useMemo(() => groupTilesByReadiness(tiles), [tiles])
+  const groups = useMemo(
+    () => groupTilesByReadiness(tiles, prioritySkills),
+    [prioritySkills, tiles],
+  )
+  const store = useMemo(
+    () =>
+      buildStore(storedTilesFromStatuses(statuses, starred), prioritySkills),
+    [prioritySkills, starred, statuses],
+  )
 
   useEffect(() => {
-    saveStore({
-      version: 1,
-      tiles: storedTilesFromStatuses(statuses, starred),
-    })
-  }, [starred, statuses])
+    saveStore(store)
+  }, [store])
 
   const setStatus = useCallback((id: string, status: TileStatus) => {
     setProgress((current) => {
       const nextStatuses = setStoredStatus(current.statuses, id, status)
       if (!nextStatuses) return current
       if (status !== 'unseen' || !current.starred.has(id)) {
-        return { statuses: nextStatuses, starred: current.starred }
+        return { ...current, statuses: nextStatuses }
       }
       const nextStarred = new Set(current.starred)
       nextStarred.delete(id)
-      return { statuses: nextStatuses, starred: nextStarred }
+      return { ...current, statuses: nextStatuses, starred: nextStarred }
     })
   }, [])
 
@@ -57,25 +69,35 @@ export function useTiles() {
     setProgress((current) => {
       const nextStarred = setStoredStarred(current.starred, id, value)
       if (!nextStarred) return current
-      return { statuses: current.statuses, starred: nextStarred }
+      return { ...current, starred: nextStarred }
+    })
+  }, [])
+
+  const setPrioritySkill = useCallback((skillId: string, value: boolean) => {
+    setProgress((current) => {
+      const next = setStoredPrioritySkill(
+        current.prioritySkills,
+        skillId,
+        value,
+      )
+      if (!next) return current
+      return { ...current, prioritySkills: next }
     })
   }, [])
 
   const exportStore = useCallback(() => {
-    downloadStore({
-      version: 1,
-      tiles: storedTilesFromStatuses(statuses, starred),
-    })
-  }, [starred, statuses])
+    downloadStore(store)
+  }, [store])
 
   const importStore = useCallback((text: string) => {
-    const store = parseStoreJson(text)
-    if (!store) {
+    const parsed = parseStoreJson(text)
+    if (!parsed) {
       return { ok: false as const, error: 'Invalid tiles JSON' }
     }
     setProgress({
-      statuses: statusesFromStored(store.tiles),
-      starred: starredFromStored(store.tiles),
+      statuses: statusesFromStored(parsed.tiles),
+      starred: starredFromStored(parsed.tiles),
+      prioritySkills: prioritySkillsFromStored(parsed.prioritySkills),
     })
     return { ok: true as const }
   }, [])
@@ -84,8 +106,10 @@ export function useTiles() {
     tiles,
     byId,
     groups,
+    prioritySkills,
     setStatus,
     setStarred,
+    setPrioritySkill,
     exportStore,
     importStore,
   }

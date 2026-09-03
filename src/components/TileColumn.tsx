@@ -7,6 +7,7 @@ type TileColumnProps = {
   tiles: Tile[]
   byId: Map<string, Tile>
   empty: string
+  isPriority?: (id: string) => boolean
   onOpen: (id: string) => void
   onStar: (id: string, starred: boolean) => void
 }
@@ -16,6 +17,7 @@ export function TileColumn({
   tiles,
   byId,
   empty,
+  isPriority,
   onOpen,
   onStar,
 }: TileColumnProps) {
@@ -36,6 +38,7 @@ export function TileColumn({
                 <TileCard
                   tile={tile}
                   byId={byId}
+                  priority={isPriority?.(tile.id) ?? false}
                   onOpen={() => onOpen(tile.id)}
                   onStar={(starred) => onStar(tile.id, starred)}
                 />

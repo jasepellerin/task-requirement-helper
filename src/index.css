@@ -426,6 +426,10 @@ p {
   gap: 4px;
 }
 
+.tile-card-priority .tile-card-hit {
+  padding-right: 64px;
+}
+
 .tile-card h3 {
   font-size: 1rem;
   overflow-wrap: anywhere;
@@ -477,11 +481,26 @@ p {
   border: 0;
 }
 
-.tile-card .star-btn {
+.tile-card-marks {
   position: absolute;
   top: 4px;
   right: 4px;
   z-index: 1;
+  display: flex;
+  align-items: center;
+}
+
+.tile-card-priority-mark {
+  display: grid;
+  place-items: center;
+  width: 36px;
+  height: 36px;
+  color: var(--star);
+  pointer-events: none;
+}
+
+.tile-card-priority-mark svg {
+  fill: currentColor;
 }
 
 .modal-title-row {
@@ -1125,6 +1144,33 @@ a.unlock-mark:focus-visible,
   background: #5a4c3a;
 }
 
+@keyframes stats-priority-pulse {
+  0%,
+  100% {
+    box-shadow:
+      inset 1px 1px 0 #8a7a4a,
+      0 0 0 1px #c9a227,
+      0 0 6px #c9a227;
+  }
+  50% {
+    box-shadow:
+      inset 1px 1px 0 #8a7a4a,
+      0 0 0 2px #ffd54a,
+      0 0 12px #ffd54a;
+  }
+}
+
+.stats-cell-priority {
+  border-color: #c9a227;
+  background: #5a4a2a;
+  animation: stats-priority-pulse 2s ease-in-out infinite;
+}
+
+.stats-cell-priority:hover,
+.stats-cell-priority:focus-visible {
+  background: #6a5830;
+}
+
 .stats-icon {
   width: 25px;
   height: 25px;
@@ -1140,4 +1186,16 @@ a.unlock-mark:focus-visible,
   font-weight: 700;
   font-size: 0.92rem;
   font-variant-numeric: tabular-nums;
+}
+
+.stats-priority-mark {
+  flex: none;
+  display: grid;
+  place-items: center;
+  color: #ffd54a;
+}
+
+.stats-priority-mark svg {
+  width: 14px;
+  height: 14px;
 }

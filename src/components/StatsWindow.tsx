@@ -1,23 +1,32 @@
 import { useEffect, useId, useMemo } from 'react'
-import { skillStats, type SkillStat } from '../data/skillLevels.ts'
+import {
+  isCombatSkill,
+  skillStats,
+  type SkillStat,
+} from '../data/skillLevels.ts'
 import { wikiPageUrl } from '../data/wiki.ts'
 import type { Tile } from '../domain/types.ts'
+import { PriorityIcon } from './StatusPicker.tsx'
 
 type StatsWindowProps = {
   tiles: Tile[]
+  prioritySkills: ReadonlySet<string>
+  onPriorityChange: (skillId: string, value: boolean) => void
   onClose: () => void
 }
 
-function SkillCell({ skill }: { skill: SkillStat }) {
-  return (
-    <a
-      className="stats-cell"
-      href={wikiPageUrl(skill.name)}
-      target="_blank"
-      rel="noreferrer"
-      aria-label={`${skill.name} ${skill.level}`}
-      title={skill.name}
-    >
+function SkillCell({
+  skill,
+  priority,
+  onPriorityChange,
+}: {
+  skill: SkillStat
+  priority: boolean
+  onPriorityChange?: (value: boolean) => void
+}) {
+  const label = `${skill.name} ${skill.level}`
+  const contents = (
+    <>
       <img
         className="stats-icon"
         src={`/skill-icons/${skill.id}.png`}
@@ -26,11 +35,49 @@ function SkillCell({ skill }: { skill: SkillStat }) {
         height={25}
       />
       <span className="stats-level">{skill.level}</span>
+      {priority ? (
+        <span className="stats-priority-mark" aria-hidden="true">
+          <PriorityIcon filled />
+        </span>
+      ) : null}
+    </>
+  )
+
+  if (onPriorityChange) {
+    return (
+      <button
+        type="button"
+        className={priority ? 'stats-cell stats-cell-priority' : 'stats-cell'}
+        aria-label={priority ? `Unpin ${skill.name}` : `Priority ${skill.name}`}
+        aria-pressed={priority}
+        title={skill.name}
+        onClick={() => onPriorityChange(!priority)}
+      >
+        {contents}
+      </button>
+    )
+  }
+
+  return (
+    <a
+      className="stats-cell"
+      href={wikiPageUrl(skill.name)}
+      target="_blank"
+      rel="noreferrer"
+      aria-label={label}
+      title={skill.name}
+    >
+      {contents}
     </a>
   )
 }
 
-export function StatsWindow({ tiles, onClose }: StatsWindowProps) {
+export function StatsWindow({
+  tiles,
+  prioritySkills,
+  onPriorityChange,
+  onClose,
+}: StatsWindowProps) {
   const titleId = useId()
   const stats = useMemo(() => skillStats(tiles), [tiles])
 
@@ -59,7 +106,16 @@ export function StatsWindow({ tiles, onClose }: StatsWindowProps) {
         </div>
         <div className="stats-grid">
           {stats.map((skill) => (
-            <SkillCell key={skill.id} skill={skill} />
+            <SkillCell
+              key={skill.id}
+              skill={skill}
+              priority={prioritySkills.has(skill.id)}
+              onPriorityChange={
+                isCombatSkill(skill.id)
+                  ? undefined
+                  : (value) => onPriorityChange(skill.id, value)
+              }
+            />
           ))}
         </div>
       </div>

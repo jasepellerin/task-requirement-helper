@@ -3,12 +3,18 @@ import { tileGp } from '../data/osrsCatalog.ts'
 import { formatGp } from '../data/questReqs.ts'
 import { blockingParentCounts } from '../domain/readiness.ts'
 import type { Tile } from '../domain/types.ts'
-import { LockIcon, StarButton, UnseenIcon } from './StatusPicker.tsx'
+import {
+  LockIcon,
+  PriorityIcon,
+  StarButton,
+  UnseenIcon,
+} from './StatusPicker.tsx'
 import { TileUnlockMarks } from './TileUnlockMarks.tsx'
 
 type TileCardProps = {
   tile: Tile
   byId: Map<string, Tile>
+  priority?: boolean
   onOpen: () => void
   onStar: (starred: boolean) => void
 }
@@ -34,12 +40,20 @@ function BlockerCount({
   )
 }
 
-export function TileCard({ tile, byId, onOpen, onStar }: TileCardProps) {
+export function TileCard({
+  tile,
+  byId,
+  priority = false,
+  onOpen,
+  onStar,
+}: TileCardProps) {
   const gp = tileGp(tile.id)
   const { locked, unseen } = blockingParentCounts(tile, byId)
 
   return (
-    <article className="tile-card">
+    <article
+      className={priority ? 'tile-card tile-card-priority' : 'tile-card'}
+    >
       <button type="button" className="tile-card-hit" onClick={onOpen}>
         <h3>
           <span>{tile.name}</span>
@@ -65,7 +79,14 @@ export function TileCard({ tile, byId, onOpen, onStar }: TileCardProps) {
           </p>
         ) : null}
       </button>
-      <StarButton starred={tile.starred} onChange={onStar} />
+      <div className="tile-card-marks">
+        {priority ? (
+          <span className="tile-card-priority-mark" aria-label="Priority skill">
+            <PriorityIcon filled />
+          </span>
+        ) : null}
+        <StarButton starred={tile.starred} onChange={onStar} />
+      </div>
     </article>
   )
 }

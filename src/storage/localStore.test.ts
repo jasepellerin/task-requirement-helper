@@ -44,6 +44,27 @@ describe('parseStore', () => {
     ).toEqual(slim)
   })
 
+  it('keeps priority skills and drops an empty list', () => {
+    expect(
+      parseStore({
+        version: 1,
+        tiles: slim.tiles,
+        prioritySkills: ['farming', 'agility', 'farming'],
+      }),
+    ).toEqual({
+      version: 1,
+      tiles: slim.tiles,
+      prioritySkills: ['agility', 'farming'],
+    })
+    expect(
+      parseStore({
+        version: 1,
+        tiles: slim.tiles,
+        prioritySkills: ['attack', 'nope'],
+      }),
+    ).toEqual(slim)
+  })
+
   it('rejects bad version, tiles, or fields', () => {
     expect(parseStore(null)).toBeNull()
     expect(parseStore({ version: 2, tiles: [] })).toBeNull()
@@ -58,6 +79,20 @@ describe('parseStore', () => {
       parseStore({
         version: 1,
         tiles: [{ id: '', status: 'locked' }],
+      }),
+    ).toBeNull()
+    expect(
+      parseStore({
+        version: 1,
+        tiles: [],
+        prioritySkills: 'farming',
+      }),
+    ).toBeNull()
+    expect(
+      parseStore({
+        version: 1,
+        tiles: [],
+        prioritySkills: [1],
       }),
     ).toBeNull()
   })

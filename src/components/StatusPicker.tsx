@@ -70,6 +70,15 @@ export function StarIcon({ filled }: { filled: boolean }) {
   )
 }
 
+export function PriorityIcon({ filled }: { filled: boolean }) {
+  return (
+    <Icon fill={filled ? 'currentColor' : 'none'}>
+      <path d="M12 19V6" />
+      <path d="m6 11 6-6 6 6" />
+    </Icon>
+  )
+}
+
 export function StarButton({
   starred,
   onChange,

@@ -1,3 +1,4 @@
+import { tileMatchesPrioritySkills } from '../data/prioritySkills.ts'
 import { compareTilesByStarThenName } from './search.ts'
 import type { Readiness, ReadinessGroups, Tile, TileStatus } from './types.ts'
 
@@ -40,7 +41,10 @@ export function tileReadiness(tile: Tile, byId: Map<string, Tile>): Readiness {
   return parentStatuses.every(parentIsOnBoard) ? 'possible' : 'blocked'
 }
 
-export function groupTilesByReadiness(tiles: Tile[]): ReadinessGroups {
+export function groupTilesByReadiness(
+  tiles: Tile[],
+  prioritySkills: ReadonlySet<string> = new Set(),
+): ReadinessGroups {
   const byId = tilesById(tiles)
   const groups: ReadinessGroups = {
     ready: [],
@@ -55,12 +59,16 @@ export function groupTilesByReadiness(tiles: Tile[]): ReadinessGroups {
     groups[tileReadiness(tile, byId)].push(tile)
   }
 
-  groups.ready.sort(compareTilesByStarThenName)
-  groups.possible.sort(compareTilesByStarThenName)
-  groups.blocked.sort(compareTilesByStarThenName)
-  groups.unseen.sort(compareTilesByStarThenName)
-  groups.unlocked.sort(compareTilesByStarThenName)
-  groups.completed.sort(compareTilesByStarThenName)
+  const compare = (a: Tile, b: Tile) =>
+    compareTilesByStarThenName(a, b, (tile) =>
+      tileMatchesPrioritySkills(tile.id, prioritySkills),
+    )
+  groups.ready.sort(compare)
+  groups.possible.sort(compare)
+  groups.blocked.sort(compare)
+  groups.unseen.sort(compare)
+  groups.unlocked.sort(compare)
+  groups.completed.sort(compare)
 
   return groups
 }

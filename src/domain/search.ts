@@ -22,8 +22,15 @@ export function compareTilesByName(a: Tile, b: Tile): number {
   return a.name.localeCompare(b.name)
 }
 
-export function compareTilesByStarThenName(a: Tile, b: Tile): number {
+export function compareTilesByStarThenName(
+  a: Tile,
+  b: Tile,
+  isPriority: (tile: Tile) => boolean = () => false,
+): number {
   if (a.starred !== b.starred) return a.starred ? -1 : 1
+  const aPriority = isPriority(a)
+  const bPriority = isPriority(b)
+  if (aPriority !== bPriority) return aPriority ? -1 : 1
   return compareTilesByName(a, b)
 }
 

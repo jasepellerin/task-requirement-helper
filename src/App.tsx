@@ -7,6 +7,7 @@ import { TileFinder } from './components/TileFinder.tsx'
 import { TileDetail } from './components/TileDetail.tsx'
 import { Toolbar } from './components/Toolbar.tsx'
 import { ALL_KINDS, filterTilesByKind } from './data/osrsCatalog.ts'
+import { tileMatchesPrioritySkills } from './data/prioritySkills.ts'
 import { filterTilesByQuery } from './domain/search.ts'
 import { useTiles } from './hooks/useTiles.ts'
 
@@ -21,8 +22,10 @@ export default function App() {
     tiles,
     byId,
     groups,
+    prioritySkills,
     setStatus,
     setStarred,
+    setPrioritySkill,
     exportStore,
     importStore,
   } = useTiles()
@@ -122,6 +125,7 @@ export default function App() {
             tiles={board.ready}
             byId={byId}
             empty="No matching tiles."
+            isPriority={(id) => tileMatchesPrioritySkills(id, prioritySkills)}
             onOpen={openDetail}
             onStar={setStarred}
           />
@@ -130,6 +134,7 @@ export default function App() {
             tiles={board.possible}
             byId={byId}
             empty="No matching tiles."
+            isPriority={(id) => tileMatchesPrioritySkills(id, prioritySkills)}
             onOpen={openDetail}
             onStar={setStarred}
           />
@@ -138,6 +143,7 @@ export default function App() {
             tiles={board.blocked}
             byId={byId}
             empty="No matching tiles."
+            isPriority={(id) => tileMatchesPrioritySkills(id, prioritySkills)}
             onOpen={openDetail}
             onStar={setStarred}
           />
@@ -146,6 +152,7 @@ export default function App() {
             tiles={board.unlocked}
             byId={byId}
             empty="No matching tiles."
+            isPriority={(id) => tileMatchesPrioritySkills(id, prioritySkills)}
             onOpen={openDetail}
             onStar={setStarred}
           />
@@ -161,7 +168,12 @@ export default function App() {
       ) : null}
 
       {overlay?.mode === 'stats' ? (
-        <StatsWindow tiles={tiles} onClose={closeOverlay} />
+        <StatsWindow
+          tiles={tiles}
+          prioritySkills={prioritySkills}
+          onPriorityChange={setPrioritySkill}
+          onClose={closeOverlay}
+        />
       ) : null}
 
       {overlay?.mode === 'find' ||

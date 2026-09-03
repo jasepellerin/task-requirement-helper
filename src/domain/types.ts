@@ -35,6 +35,7 @@ export type StoredTile = {
 export type StoreV1 = {
   version: 1
   tiles: StoredTile[]
+  prioritySkills?: string[]
 }
 
 export type Readiness =

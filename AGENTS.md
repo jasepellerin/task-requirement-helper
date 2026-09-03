@@ -66,13 +66,13 @@ Load/import overlays stored statuses onto the catalog.
 
 ### Persistence
 
-Persist/export `{ id, status, starred? }` for catalog tiles whose status is not `unseen`. Names, parents, and requirement display live in the catalog and are rebuilt on load/import. Old full-tile JSON still imports (name/`parentIds` ignored).
+Persist/export `{ id, status, starred? }` for catalog tiles whose status is not `unseen`, plus optional `prioritySkills` (catalog skill ids). Names, parents, and requirement display live in the catalog and are rebuilt on load/import. Old full-tile JSON still imports (name/`parentIds` ignored).
 
 ### UI
 
-- **Board**: Ready / Possible / Blocked / Unlocked. Unseen and completed are hidden here. Starred tiles sort to the top of their column. Cards show unmet parent counts as lock (locked) and slashed eye (unseen/missing); a zero count is omitted. Filter bar next to Skills / Diaries / Quests: name search (same folding as the finder) plus independent kind toggles.
+- **Board**: Ready / Possible / Blocked / Unlocked. Unseen and completed are hidden here. Starred tiles sort to the top of their column, then priority skill tiles, then name. Priority skill cards show a display-only up-arrow next to the star. Cards show unmet parent counts as lock (locked) and slashed eye (unseen/missing); a zero count is omitted. Filter bar next to Skills / Diaries / Quests: name search (same folding as the finder) plus independent kind toggles.
 - **Completed**: separate window, split Skills / Diaries / Quests.
-- **Stats**: OSRS-style skill window. Tracked skills use the highest unlocked/completed bracket (else 1). Combat/Slayer always show 99. No total. Clicking a skill opens its wiki page.
+- **Stats**: OSRS-style skill window. Tracked skills use the highest unlocked/completed bracket (else 1). Combat/Slayer always show 99. No total. Clicking a tracked skill toggles it as priority (gold outline; up-arrow when selected). Combat/Slayer still open the wiki. Priority floats that skill’s bracket tiles only.
 - **Detail card** (click a tile):
   - View-only. Header: catalog title, wiki infobox thumbnail on quests, live status icon (menu, saves immediately), star (on-board tiles), wiki (external-link icon), X to close.
   - Status icons: slashed eye = unseen, lock = locked, open lock = unlocked, check = completed. Marking unseen takes it off the board.
