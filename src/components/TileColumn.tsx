@@ -43,6 +43,16 @@ export function TileColumn({
   )
 }
 
-export function Columns({ children }: { children: ReactNode }) {
-  return <div className="columns">{children}</div>
+export function Columns({
+  children,
+  className,
+}: {
+  children: ReactNode
+  className?: string
+}) {
+  return (
+    <div className={className ? `columns ${className}` : 'columns'}>
+      {children}
+    </div>
+  )
 }

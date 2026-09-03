@@ -2,17 +2,31 @@ import { useRef } from 'react'
 
 type ToolbarProps = {
   onNew: () => void
+  onStats: () => void
+  onCompleted: () => void
   onExport: () => void
   onImport: (text: string) => { ok: true } | { ok: false; error: string }
 }
 
-export function Toolbar({ onNew, onExport, onImport }: ToolbarProps) {
+export function Toolbar({
+  onNew,
+  onStats,
+  onCompleted,
+  onExport,
+  onImport,
+}: ToolbarProps) {
   const fileRef = useRef<HTMLInputElement>(null)
 
   return (
     <header className="toolbar">
       <h1>Tiles</h1>
       <div className="toolbar-actions">
+        <button type="button" className="btn" onClick={onStats}>
+          Stats
+        </button>
+        <button type="button" className="btn" onClick={onCompleted}>
+          Completed
+        </button>
         <button type="button" className="btn primary" onClick={onNew}>
           New tile
         </button>

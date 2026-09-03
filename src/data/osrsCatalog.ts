@@ -54,6 +54,28 @@ export function isOsrsCatalogId(id: string): boolean {
   return id.startsWith('osrs:')
 }
 
+export type TileKind = 'skill' | 'diary' | 'quest' | 'custom'
+
+export function tileKind(id: string): TileKind {
+  if (id.startsWith('osrs:quest:')) return 'quest'
+  if (id.startsWith('osrs:diary:')) return 'diary'
+  if (id.startsWith('osrs:')) return 'skill'
+  return 'custom'
+}
+
+export function partitionByKind(tiles: Tile[]): Record<TileKind, Tile[]> {
+  const groups: Record<TileKind, Tile[]> = {
+    skill: [],
+    diary: [],
+    quest: [],
+    custom: [],
+  }
+  for (const tile of tiles) {
+    groups[tileKind(tile.id)].push(tile)
+  }
+  return groups
+}
+
 export function hideOsrsCatalogTile(tiles: Tile[], id: string): Tile[] | null {
   if (!isOsrsCatalogId(id)) return null
   return tiles.map((tile) =>

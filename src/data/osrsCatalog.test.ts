@@ -16,9 +16,11 @@ import {
   osrsQuestTileId,
   osrsTileId,
   osrsTileName,
+  partitionByKind,
   pruneRemovedOsrsTiles,
   resetLockedOsrsTilesToUnseen,
   SKILL_BRACKETS,
+  tileKind,
   userPersistedTiles,
 } from './osrsCatalog.ts'
 
@@ -197,6 +199,43 @@ describe('OSRS skill catalog', () => {
     expect(hidden?.find((tile) => tile.id === id)?.status).toBe('unseen')
     expect(hidden?.map((tile) => tile.id)).toEqual([id, 'custom'])
     expect(hideOsrsCatalogTile(tiles, 'custom')).toBeNull()
+  })
+
+  it('classifies catalog ids by kind', () => {
+    expect(tileKind(osrsTileId('agility', '21-30'))).toBe('skill')
+    expect(tileKind(osrsDiaryTileId('kandarin', 'easy'))).toBe('diary')
+    expect(tileKind(osrsQuestTileId('dragon-slayer-i'))).toBe('quest')
+    expect(tileKind('forest')).toBe('custom')
+    const grouped = partitionByKind([
+      {
+        id: osrsTileId('agility', '1-10'),
+        name: 'Agility 1–10',
+        status: 'completed',
+        parentIds: [],
+      },
+      {
+        id: osrsDiaryTileId('kandarin', 'easy'),
+        name: 'Kandarin Easy',
+        status: 'completed',
+        parentIds: [],
+      },
+      {
+        id: osrsQuestTileId('dragon-slayer-i'),
+        name: 'Dragon Slayer I',
+        status: 'completed',
+        parentIds: [],
+      },
+      {
+        id: 'forest',
+        name: 'Forest',
+        status: 'completed',
+        parentIds: [],
+      },
+    ])
+    expect(grouped.skill).toHaveLength(1)
+    expect(grouped.diary).toHaveLength(1)
+    expect(grouped.quest).toHaveLength(1)
+    expect(grouped.custom).toHaveLength(1)
   })
 })
 
