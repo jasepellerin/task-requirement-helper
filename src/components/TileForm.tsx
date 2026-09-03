@@ -1,5 +1,8 @@
 import { useEffect, useId, useMemo, useState } from 'react'
+import { formatGp, tileGp } from '../data/questReqs.ts'
+import { tileWikiUrl } from '../data/wiki.ts'
 import { wouldCreateCycle } from '../domain/graph.ts'
+import { parentIsSatisfied } from '../domain/readiness.ts'
 import { searchTiles } from '../domain/search.ts'
 import {
   isTileStatus,
@@ -17,9 +20,10 @@ type TileFormProps = {
   onSubmit: (input: TileInput) => void
   onCancel: () => void
   onDelete?: () => void
+  onOpenTile?: (id: string) => void
 }
 
-function tileName(tiles: Tile[], id: string): string {
+function parentLabel(tiles: Tile[], id: string): string {
   return tiles.find((candidate) => candidate.id === id)?.name ?? 'Missing'
 }
 
@@ -30,12 +34,15 @@ export function TileForm({
   onSubmit,
   onCancel,
   onDelete,
+  onOpenTile,
 }: TileFormProps) {
   const titleId = useId()
   const [name, setName] = useState(tile?.name ?? '')
   const [status, setStatus] = useState<TileStatus>(tile?.status ?? 'locked')
   const [parentIds, setParentIds] = useState(tile?.parentIds ?? [])
   const [parentQuery, setParentQuery] = useState('')
+  const wikiUrl = tile ? tileWikiUrl(tile.id) : undefined
+  const gp = tile ? tileGp(tile.id) : undefined
 
   const parentResults = useMemo(() => {
     const pool = tiles.filter((candidate) => {
@@ -75,7 +82,23 @@ export function TileForm({
           onSubmit({ name, status, parentIds })
         }}
       >
-        <h2 id={titleId}>{tile ? 'Edit tile' : 'New tile'}</h2>
+        <div className="modal-title-row">
+          <h2 id={titleId}>{tile ? tile.name : 'New tile'}</h2>
+          {wikiUrl ? (
+            <a
+              className="wiki-link"
+              href={wikiUrl}
+              target="_blank"
+              rel="noreferrer"
+            >
+              Wiki
+            </a>
+          ) : null}
+        </div>
+
+        {gp !== undefined ? (
+          <p className="tile-gold">Gold {formatGp(gp)}</p>
+        ) : null}
 
         <label className="field">
           Name
@@ -105,32 +128,54 @@ export function TileForm({
         </label>
 
         <fieldset className="rel-fieldset">
-          <legend>Parents</legend>
+          <legend>Required</legend>
           {parentIds.length === 0 ? (
-            <p className="empty">No parents yet.</p>
+            <p className="empty">No requirements.</p>
           ) : (
             <ul className="parent-list">
-              {parentIds.map((id) => (
-                <li key={id} className="parent-row">
-                  <span>{tileName(tiles, id)}</span>
-                  <button
-                    type="button"
-                    className="btn ghost"
-                    onClick={() =>
-                      setParentIds((current) =>
-                        current.filter((item) => item !== id),
-                      )
-                    }
-                  >
-                    Remove
-                  </button>
-                </li>
-              ))}
+              {parentIds.map((id) => {
+                const parent = tiles.find((candidate) => candidate.id === id)
+                const blocking = !parentIsSatisfied(parent?.status)
+                const label = parentLabel(tiles, id)
+                return (
+                  <li key={id} className="parent-row">
+                    <div className="req-main">
+                      {parent && onOpenTile ? (
+                        <button
+                          type="button"
+                          className="req-name"
+                          onClick={() => onOpenTile(id)}
+                        >
+                          {label}
+                        </button>
+                      ) : (
+                        <span>{label}</span>
+                      )}
+                      <span className={blocking ? 'req-blocking' : 'req-met'}>
+                        {parent
+                          ? `${STATUS_LABEL[parent.status]}${blocking ? ' · blocking' : ''}`
+                          : 'Missing · blocking'}
+                      </span>
+                    </div>
+                    <button
+                      type="button"
+                      className="btn ghost"
+                      onClick={() =>
+                        setParentIds((current) =>
+                          current.filter((item) => item !== id),
+                        )
+                      }
+                    >
+                      Remove
+                    </button>
+                  </li>
+                )
+              })}
             </ul>
           )}
 
           <label className="field">
-            Add parent
+            Add requirement
             <input
               value={parentQuery}
               onChange={(event) => setParentQuery(event.target.value)}

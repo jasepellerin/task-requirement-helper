@@ -1,25 +1,21 @@
 import type { ReactNode } from 'react'
-import type { Tile, TileStatus } from '../domain/types.ts'
+import type { Tile } from '../domain/types.ts'
 import { TileCard } from './TileCard.tsx'
 
 type TileColumnProps = {
   title: string
-  hint: string
   tiles: Tile[]
   allTiles: Tile[]
   empty: string
-  onEdit: (id: string) => void
-  onStatus: (id: string, status: TileStatus) => void
+  onOpen: (id: string) => void
 }
 
 export function TileColumn({
   title,
-  hint,
   tiles,
   allTiles,
   empty,
-  onEdit,
-  onStatus,
+  onOpen,
 }: TileColumnProps) {
   return (
     <section className="column">
@@ -27,7 +23,6 @@ export function TileColumn({
         <h2>
           {title} <span>{tiles.length}</span>
         </h2>
-        <p>{hint}</p>
       </header>
       {tiles.length === 0 ? (
         <p className="empty">{empty}</p>
@@ -38,8 +33,7 @@ export function TileColumn({
               <TileCard
                 tile={tile}
                 tiles={allTiles}
-                onEdit={() => onEdit(tile.id)}
-                onStatus={(status) => onStatus(tile.id, status)}
+                onOpen={() => onOpen(tile.id)}
               />
             </li>
           ))}

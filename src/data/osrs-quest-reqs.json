@@ -1,0 +1,2218 @@
+{
+  "animal-magnetism": {
+    "quests": ["ernest-the-chicken", "priest-in-peril", "the-restless-ghost"],
+    "skills": [
+      {
+        "skill": "crafting",
+        "level": 19
+      },
+      {
+        "skill": "woodcutting",
+        "level": 35
+      }
+    ]
+  },
+  "another-slice-of-h-a-m": {
+    "quests": ["death-to-the-dorgeshuun", "the-dig-site", "the-giant-dwarf"],
+    "skills": []
+  },
+  "the-ascent-of-arceuus": {
+    "quests": ["client-of-kourend"],
+    "skills": [
+      {
+        "skill": "hunter",
+        "level": 12
+      }
+    ]
+  },
+  "at-first-light": {
+    "quests": ["children-of-the-sun", "eagles-peak"],
+    "skills": [
+      {
+        "skill": "hunter",
+        "level": 46
+      },
+      {
+        "skill": "herblore",
+        "level": 30
+      },
+      {
+        "skill": "construction",
+        "level": 27
+      }
+    ]
+  },
+  "below-ice-mountain": {
+    "quests": [],
+    "skills": []
+  },
+  "between-a-rock": {
+    "quests": ["dwarf-cannon", "fishing-contest"],
+    "skills": [
+      {
+        "skill": "mining",
+        "level": 40
+      },
+      {
+        "skill": "smithing",
+        "level": 50
+      }
+    ]
+  },
+  "big-chompy-bird-hunting": {
+    "quests": [],
+    "skills": [
+      {
+        "skill": "cooking",
+        "level": 30
+      },
+      {
+        "skill": "fletching",
+        "level": 5
+      }
+    ]
+  },
+  "biohazard": {
+    "quests": ["plague-city"],
+    "skills": []
+  },
+  "black-knights-fortress": {
+    "quests": [],
+    "skills": []
+  },
+  "bone-voyage": {
+    "quests": ["the-dig-site"],
+    "skills": []
+  },
+  "cabin-fever": {
+    "quests": ["pirates-treasure", "rum-deal"],
+    "skills": [
+      {
+        "skill": "agility",
+        "level": 42
+      },
+      {
+        "skill": "crafting",
+        "level": 45
+      },
+      {
+        "skill": "smithing",
+        "level": 50
+      }
+    ]
+  },
+  "children-of-the-sun": {
+    "quests": [],
+    "skills": []
+  },
+  "client-of-kourend": {
+    "quests": ["x-marks-the-spot"],
+    "skills": []
+  },
+  "clock-tower": {
+    "quests": [],
+    "skills": []
+  },
+  "cold-war": {
+    "quests": [],
+    "skills": [
+      {
+        "skill": "agility",
+        "level": 30
+      },
+      {
+        "skill": "construction",
+        "level": 34
+      },
+      {
+        "skill": "crafting",
+        "level": 30
+      },
+      {
+        "skill": "hunter",
+        "level": 10
+      },
+      {
+        "skill": "thieving",
+        "level": 15
+      },
+      {
+        "skill": "woodcutting",
+        "level": 50,
+        "ironman": true
+      }
+    ]
+  },
+  "contact": {
+    "quests": ["prince-ali-rescue", "icthlarins-little-helper"],
+    "skills": []
+  },
+  "cooks-assistant": {
+    "quests": [],
+    "skills": []
+  },
+  "the-corsair-curse": {
+    "quests": [],
+    "skills": []
+  },
+  "creature-of-fenkenstrain": {
+    "quests": ["priest-in-peril", "the-restless-ghost"],
+    "skills": [
+      {
+        "skill": "crafting",
+        "level": 20
+      },
+      {
+        "skill": "smithing",
+        "level": 4,
+        "ironman": true
+      },
+      {
+        "skill": "thieving",
+        "level": 25
+      }
+    ]
+  },
+  "the-curse-of-arrav": {
+    "quests": ["defender-of-varrock", "troll-romance"],
+    "skills": [
+      {
+        "skill": "mining",
+        "level": 64
+      },
+      {
+        "skill": "thieving",
+        "level": 62
+      },
+      {
+        "skill": "agility",
+        "level": 61
+      }
+    ]
+  },
+  "darkness-of-hallowvale": {
+    "quests": ["in-aid-of-the-myreque"],
+    "skills": [
+      {
+        "skill": "agility",
+        "level": 26
+      },
+      {
+        "skill": "construction",
+        "level": 5
+      },
+      {
+        "skill": "crafting",
+        "level": 32
+      },
+      {
+        "skill": "mining",
+        "level": 20
+      },
+      {
+        "skill": "thieving",
+        "level": 22
+      }
+    ]
+  },
+  "death-on-the-isle": {
+    "quests": ["children-of-the-sun"],
+    "skills": [
+      {
+        "skill": "agility",
+        "level": 32
+      },
+      {
+        "skill": "thieving",
+        "level": 34
+      }
+    ]
+  },
+  "death-plateau": {
+    "quests": [],
+    "skills": []
+  },
+  "death-to-the-dorgeshuun": {
+    "quests": ["the-lost-tribe"],
+    "skills": [
+      {
+        "skill": "agility",
+        "level": 23
+      },
+      {
+        "skill": "thieving",
+        "level": 23
+      }
+    ]
+  },
+  "defender-of-varrock": {
+    "quests": [
+      "shield-of-arrav",
+      "temple-of-ikov",
+      "below-ice-mountain",
+      "family-crest",
+      "garden-of-tranquillity",
+      "what-lies-below",
+      "romeo-juliet",
+      "demon-slayer"
+    ],
+    "skills": [
+      {
+        "skill": "smithing",
+        "level": 55
+      },
+      {
+        "skill": "hunter",
+        "level": 52
+      }
+    ]
+  },
+  "demon-slayer": {
+    "quests": [],
+    "skills": []
+  },
+  "the-depths-of-despair": {
+    "quests": ["client-of-kourend"],
+    "skills": [
+      {
+        "skill": "agility",
+        "level": 18
+      }
+    ]
+  },
+  "desert-treasure-i": {
+    "quests": [
+      "the-dig-site",
+      "temple-of-ikov",
+      "the-tourist-trap",
+      "troll-stronghold",
+      "priest-in-peril",
+      "waterfall-quest"
+    ],
+    "skills": [
+      {
+        "skill": "firemaking",
+        "level": 50
+      },
+      {
+        "skill": "thieving",
+        "level": 53
+      }
+    ]
+  },
+  "desert-treasure-ii-the-fallen-empire": {
+    "quests": [
+      "desert-treasure-i",
+      "secrets-of-the-north",
+      "enakhras-lament",
+      "temple-of-the-eye",
+      "the-garden-of-death",
+      "below-ice-mountain",
+      "his-faithful-servants"
+    ],
+    "skills": [
+      {
+        "skill": "firemaking",
+        "level": 75
+      },
+      {
+        "skill": "herblore",
+        "level": 62
+      },
+      {
+        "skill": "thieving",
+        "level": 70
+      },
+      {
+        "skill": "runecraft",
+        "level": 60
+      },
+      {
+        "skill": "construction",
+        "level": 60
+      }
+    ]
+  },
+  "devious-minds": {
+    "quests": ["dorics-quest", "enter-the-abyss", "troll-stronghold", "wanted"],
+    "skills": [
+      {
+        "skill": "fletching",
+        "level": 50
+      },
+      {
+        "skill": "runecraft",
+        "level": 50
+      },
+      {
+        "skill": "smithing",
+        "level": 65
+      }
+    ]
+  },
+  "the-dig-site": {
+    "quests": ["druidic-ritual"],
+    "skills": [
+      {
+        "skill": "agility",
+        "level": 10
+      },
+      {
+        "skill": "herblore",
+        "level": 10
+      },
+      {
+        "skill": "thieving",
+        "level": 25
+      }
+    ]
+  },
+  "dorics-quest": {
+    "quests": [],
+    "skills": [
+      {
+        "skill": "mining",
+        "level": 15,
+        "ironman": true
+      }
+    ]
+  },
+  "dragon-slayer-i": {
+    "quests": [],
+    "skills": [
+      {
+        "skill": "crafting",
+        "level": 8,
+        "ironman": true
+      }
+    ]
+  },
+  "dragon-slayer-ii": {
+    "quests": [
+      "animal-magnetism",
+      "barbarian-firemaking",
+      "bone-voyage",
+      "client-of-kourend",
+      "dream-mentor",
+      "ghosts-ahoy",
+      "legends-quest",
+      "a-tail-of-two-cats"
+    ],
+    "skills": [
+      {
+        "skill": "agility",
+        "level": 60
+      },
+      {
+        "skill": "construction",
+        "level": 50
+      },
+      {
+        "skill": "crafting",
+        "level": 62
+      },
+      {
+        "skill": "mining",
+        "level": 68
+      },
+      {
+        "skill": "smithing",
+        "level": 70
+      },
+      {
+        "skill": "thieving",
+        "level": 60
+      }
+    ]
+  },
+  "dream-mentor": {
+    "quests": ["eadgars-ruse", "lunar-diplomacy"],
+    "skills": []
+  },
+  "druidic-ritual": {
+    "quests": [],
+    "skills": []
+  },
+  "dwarf-cannon": {
+    "quests": [],
+    "skills": []
+  },
+  "eadgars-ruse": {
+    "quests": ["druidic-ritual", "troll-stronghold"],
+    "skills": [
+      {
+        "skill": "herblore",
+        "level": 31
+      }
+    ]
+  },
+  "eagles-peak": {
+    "quests": [],
+    "skills": [
+      {
+        "skill": "hunter",
+        "level": 27
+      }
+    ]
+  },
+  "elemental-workshop-i": {
+    "quests": [],
+    "skills": [
+      {
+        "skill": "crafting",
+        "level": 20
+      },
+      {
+        "skill": "mining",
+        "level": 20
+      },
+      {
+        "skill": "mining",
+        "level": 30,
+        "ironman": true
+      },
+      {
+        "skill": "smithing",
+        "level": 20
+      }
+    ]
+  },
+  "elemental-workshop-ii": {
+    "quests": ["elemental-workshop-i"],
+    "skills": [
+      {
+        "skill": "smithing",
+        "level": 30
+      }
+    ]
+  },
+  "enakhras-lament": {
+    "quests": [],
+    "skills": [
+      {
+        "skill": "crafting",
+        "level": 50
+      },
+      {
+        "skill": "firemaking",
+        "level": 45
+      },
+      {
+        "skill": "mining",
+        "level": 45,
+        "ironman": true
+      }
+    ]
+  },
+  "enlightened-journey": {
+    "quests": [],
+    "skills": [
+      {
+        "skill": "firemaking",
+        "level": 20
+      },
+      {
+        "skill": "farming",
+        "level": 30
+      },
+      {
+        "skill": "crafting",
+        "level": 36
+      }
+    ]
+  },
+  "ernest-the-chicken": {
+    "quests": [],
+    "skills": []
+  },
+  "ethically-acquired-antiquities": {
+    "quests": ["children-of-the-sun", "shield-of-arrav"],
+    "skills": [
+      {
+        "skill": "thieving",
+        "level": 25
+      }
+    ]
+  },
+  "the-eyes-of-glouphrie": {
+    "quests": ["the-grand-tree"],
+    "skills": [
+      {
+        "skill": "construction",
+        "level": 5
+      },
+      {
+        "skill": "runecraft",
+        "level": 13,
+        "ironman": true
+      }
+    ]
+  },
+  "fairytale-i-growing-pains": {
+    "quests": ["lost-city", "nature-spirit"],
+    "skills": []
+  },
+  "fairytale-ii-cure-a-queen": {
+    "quests": ["druidic-ritual", "fairytale-i-growing-pains"],
+    "skills": [
+      {
+        "skill": "farming",
+        "level": 49
+      },
+      {
+        "skill": "herblore",
+        "level": 57
+      },
+      {
+        "skill": "thieving",
+        "level": 40
+      }
+    ]
+  },
+  "family-crest": {
+    "quests": [],
+    "skills": [
+      {
+        "skill": "crafting",
+        "level": 40
+      },
+      {
+        "skill": "mining",
+        "level": 40
+      },
+      {
+        "skill": "smithing",
+        "level": 40
+      }
+    ]
+  },
+  "the-feud": {
+    "quests": [],
+    "skills": [
+      {
+        "skill": "thieving",
+        "level": 30
+      }
+    ]
+  },
+  "fight-arena": {
+    "quests": [],
+    "skills": []
+  },
+  "fishing-contest": {
+    "quests": [],
+    "skills": [
+      {
+        "skill": "fishing",
+        "level": 10
+      }
+    ]
+  },
+  "forgettable-tale": {
+    "quests": ["the-giant-dwarf", "fishing-contest"],
+    "skills": [
+      {
+        "skill": "cooking",
+        "level": 22
+      },
+      {
+        "skill": "farming",
+        "level": 17
+      }
+    ]
+  },
+  "the-forsaken-tower": {
+    "quests": ["client-of-kourend"],
+    "skills": []
+  },
+  "the-fremennik-exiles": {
+    "quests": [
+      "the-fremennik-isles",
+      "lunar-diplomacy",
+      "mountain-daughter",
+      "heroes-quest"
+    ],
+    "skills": [
+      {
+        "skill": "crafting",
+        "level": 65
+      },
+      {
+        "skill": "fishing",
+        "level": 60
+      },
+      {
+        "skill": "runecraft",
+        "level": 55
+      },
+      {
+        "skill": "smithing",
+        "level": 60
+      }
+    ]
+  },
+  "the-fremennik-isles": {
+    "quests": ["the-fremennik-trials"],
+    "skills": [
+      {
+        "skill": "construction",
+        "level": 20
+      },
+      {
+        "skill": "crafting",
+        "level": 46,
+        "ironman": true
+      },
+      {
+        "skill": "woodcutting",
+        "level": 56,
+        "ironman": true
+      }
+    ]
+  },
+  "the-fremennik-trials": {
+    "quests": [],
+    "skills": []
+  },
+  "the-garden-of-death": {
+    "quests": [],
+    "skills": [
+      {
+        "skill": "farming",
+        "level": 20
+      }
+    ]
+  },
+  "garden-of-tranquillity": {
+    "quests": ["creature-of-fenkenstrain"],
+    "skills": [
+      {
+        "skill": "farming",
+        "level": 25
+      }
+    ]
+  },
+  "gertrudes-cat": {
+    "quests": [],
+    "skills": []
+  },
+  "getting-ahead": {
+    "quests": [],
+    "skills": [
+      {
+        "skill": "construction",
+        "level": 26
+      },
+      {
+        "skill": "crafting",
+        "level": 30
+      }
+    ]
+  },
+  "ghosts-ahoy": {
+    "quests": ["priest-in-peril", "the-restless-ghost"],
+    "skills": [
+      {
+        "skill": "agility",
+        "level": 25
+      },
+      {
+        "skill": "cooking",
+        "level": 20
+      }
+    ]
+  },
+  "the-giant-dwarf": {
+    "quests": [],
+    "skills": [
+      {
+        "skill": "crafting",
+        "level": 12
+      },
+      {
+        "skill": "firemaking",
+        "level": 16
+      },
+      {
+        "skill": "thieving",
+        "level": 14
+      }
+    ]
+  },
+  "goblin-diplomacy": {
+    "quests": [],
+    "skills": []
+  },
+  "the-golem": {
+    "quests": [],
+    "skills": [
+      {
+        "skill": "crafting",
+        "level": 20
+      },
+      {
+        "skill": "thieving",
+        "level": 25
+      }
+    ]
+  },
+  "the-grand-tree": {
+    "quests": [],
+    "skills": [
+      {
+        "skill": "agility",
+        "level": 25
+      }
+    ]
+  },
+  "the-great-brain-robbery": {
+    "quests": [
+      "cabin-fever",
+      "creature-of-fenkenstrain",
+      "recipe-for-disaster-freeing-pirate-pete"
+    ],
+    "skills": [
+      {
+        "skill": "crafting",
+        "level": 16
+      },
+      {
+        "skill": "construction",
+        "level": 30
+      }
+    ]
+  },
+  "grim-tales": {
+    "quests": ["druidic-ritual", "witchs-house"],
+    "skills": [
+      {
+        "skill": "agility",
+        "level": 59
+      },
+      {
+        "skill": "farming",
+        "level": 45
+      },
+      {
+        "skill": "herblore",
+        "level": 52
+      },
+      {
+        "skill": "thieving",
+        "level": 58
+      },
+      {
+        "skill": "woodcutting",
+        "level": 71
+      }
+    ]
+  },
+  "the-hand-in-the-sand": {
+    "quests": [],
+    "skills": [
+      {
+        "skill": "crafting",
+        "level": 49
+      },
+      {
+        "skill": "thieving",
+        "level": 17
+      }
+    ]
+  },
+  "haunted-mine": {
+    "quests": ["priest-in-peril"],
+    "skills": [
+      {
+        "skill": "crafting",
+        "level": 35
+      }
+    ]
+  },
+  "hazeel-cult": {
+    "quests": [],
+    "skills": []
+  },
+  "the-heart-of-darkness": {
+    "quests": ["twilights-promise"],
+    "skills": [
+      {
+        "skill": "mining",
+        "level": 55
+      },
+      {
+        "skill": "thieving",
+        "level": 48
+      },
+      {
+        "skill": "agility",
+        "level": 46
+      }
+    ]
+  },
+  "heroes-quest": {
+    "quests": [
+      "dragon-slayer-i",
+      "druidic-ritual",
+      "lost-city",
+      "merlins-crystal",
+      "shield-of-arrav"
+    ],
+    "skills": [
+      {
+        "skill": "cooking",
+        "level": 53
+      },
+      {
+        "skill": "fishing",
+        "level": 53
+      },
+      {
+        "skill": "herblore",
+        "level": 25
+      },
+      {
+        "skill": "mining",
+        "level": 50
+      }
+    ]
+  },
+  "holy-grail": {
+    "quests": ["merlins-crystal"],
+    "skills": []
+  },
+  "horror-from-the-deep": {
+    "quests": ["alfred-grimhands-barcrawl"],
+    "skills": [
+      {
+        "skill": "agility",
+        "level": 35
+      }
+    ]
+  },
+  "icthlarins-little-helper": {
+    "quests": ["gertrudes-cat"],
+    "skills": []
+  },
+  "imp-catcher": {
+    "quests": [],
+    "skills": []
+  },
+  "in-aid-of-the-myreque": {
+    "quests": ["in-search-of-the-myreque"],
+    "skills": [
+      {
+        "skill": "agility",
+        "level": 25
+      },
+      {
+        "skill": "crafting",
+        "level": 25
+      },
+      {
+        "skill": "fishing",
+        "level": 16,
+        "ironman": true
+      },
+      {
+        "skill": "mining",
+        "level": 15
+      },
+      {
+        "skill": "smithing",
+        "level": 50,
+        "ironman": true
+      }
+    ]
+  },
+  "in-search-of-the-myreque": {
+    "quests": ["nature-spirit"],
+    "skills": [
+      {
+        "skill": "agility",
+        "level": 25
+      }
+    ]
+  },
+  "jungle-potion": {
+    "quests": ["druidic-ritual"],
+    "skills": [
+      {
+        "skill": "herblore",
+        "level": 3
+      }
+    ]
+  },
+  "kings-ransom": {
+    "quests": [
+      "black-knights-fortress",
+      "holy-grail",
+      "murder-mystery",
+      "one-small-favour"
+    ],
+    "skills": []
+  },
+  "a-kingdom-divided": {
+    "quests": [
+      "the-ascent-of-arceuus",
+      "the-depths-of-despair",
+      "druidic-ritual",
+      "the-forsaken-tower",
+      "the-queen-of-thieves",
+      "tale-of-the-righteous"
+    ],
+    "skills": [
+      {
+        "skill": "agility",
+        "level": 54
+      },
+      {
+        "skill": "crafting",
+        "level": 38
+      },
+      {
+        "skill": "herblore",
+        "level": 50
+      },
+      {
+        "skill": "mining",
+        "level": 42
+      },
+      {
+        "skill": "thieving",
+        "level": 52
+      },
+      {
+        "skill": "woodcutting",
+        "level": 52
+      }
+    ]
+  },
+  "the-knights-sword": {
+    "quests": [],
+    "skills": [
+      {
+        "skill": "cooking",
+        "level": 10,
+        "ironman": true
+      },
+      {
+        "skill": "mining",
+        "level": 10
+      },
+      {
+        "skill": "mining",
+        "level": 15,
+        "ironman": true
+      },
+      {
+        "skill": "smithing",
+        "level": 15,
+        "ironman": true
+      }
+    ]
+  },
+  "legends-quest": {
+    "quests": [
+      "family-crest",
+      "heroes-quest",
+      "shilo-village",
+      "underground-pass",
+      "waterfall-quest"
+    ],
+    "skills": [
+      {
+        "skill": "agility",
+        "level": 50
+      },
+      {
+        "skill": "crafting",
+        "level": 50
+      },
+      {
+        "skill": "herblore",
+        "level": 45
+      },
+      {
+        "skill": "mining",
+        "level": 52
+      },
+      {
+        "skill": "smithing",
+        "level": 50
+      },
+      {
+        "skill": "thieving",
+        "level": 50
+      },
+      {
+        "skill": "woodcutting",
+        "level": 50
+      }
+    ]
+  },
+  "lost-city": {
+    "quests": [],
+    "skills": [
+      {
+        "skill": "crafting",
+        "level": 31
+      },
+      {
+        "skill": "woodcutting",
+        "level": 36
+      }
+    ]
+  },
+  "the-lost-tribe": {
+    "quests": ["goblin-diplomacy", "rune-mysteries"],
+    "skills": [
+      {
+        "skill": "agility",
+        "level": 13
+      },
+      {
+        "skill": "mining",
+        "level": 17
+      },
+      {
+        "skill": "thieving",
+        "level": 13
+      }
+    ]
+  },
+  "lunar-diplomacy": {
+    "quests": [
+      "the-fremennik-trials",
+      "lost-city",
+      "rune-mysteries",
+      "shilo-village"
+    ],
+    "skills": [
+      {
+        "skill": "crafting",
+        "level": 61
+      },
+      {
+        "skill": "firemaking",
+        "level": 49
+      },
+      {
+        "skill": "herblore",
+        "level": 5
+      },
+      {
+        "skill": "mining",
+        "level": 60
+      },
+      {
+        "skill": "woodcutting",
+        "level": 55
+      }
+    ]
+  },
+  "making-friends-with-my-arm": {
+    "quests": [
+      "cold-war",
+      "my-arms-big-adventure",
+      "romeo-juliet",
+      "swan-song"
+    ],
+    "skills": [
+      {
+        "skill": "agility",
+        "level": 68
+      },
+      {
+        "skill": "construction",
+        "level": 35
+      },
+      {
+        "skill": "firemaking",
+        "level": 66
+      },
+      {
+        "skill": "mining",
+        "level": 72
+      }
+    ]
+  },
+  "making-history": {
+    "quests": ["priest-in-peril", "the-restless-ghost"],
+    "skills": []
+  },
+  "meat-and-greet": {
+    "quests": ["children-of-the-sun"],
+    "skills": []
+  },
+  "merlins-crystal": {
+    "quests": [],
+    "skills": []
+  },
+  "misthalin-mystery": {
+    "quests": [],
+    "skills": []
+  },
+  "monks-friend": {
+    "quests": [],
+    "skills": []
+  },
+  "monkey-madness-i": {
+    "quests": ["the-grand-tree", "tree-gnome-village"],
+    "skills": []
+  },
+  "monkey-madness-ii": {
+    "quests": [
+      "enlightened-journey",
+      "the-eyes-of-glouphrie",
+      "recipe-for-disaster-freeing-king-awowogei",
+      "troll-stronghold",
+      "watchtower"
+    ],
+    "skills": [
+      {
+        "skill": "agility",
+        "level": 55
+      },
+      {
+        "skill": "crafting",
+        "level": 70
+      },
+      {
+        "skill": "firemaking",
+        "level": 60
+      },
+      {
+        "skill": "hunter",
+        "level": 60
+      },
+      {
+        "skill": "thieving",
+        "level": 55
+      }
+    ]
+  },
+  "mountain-daughter": {
+    "quests": [],
+    "skills": [
+      {
+        "skill": "agility",
+        "level": 20
+      }
+    ]
+  },
+  "mournings-end-part-i": {
+    "quests": ["big-chompy-bird-hunting", "roving-elves", "sheep-herder"],
+    "skills": [
+      {
+        "skill": "thieving",
+        "level": 50
+      }
+    ]
+  },
+  "mournings-end-part-ii": {
+    "quests": ["mournings-end-part-i"],
+    "skills": []
+  },
+  "murder-mystery": {
+    "quests": [],
+    "skills": []
+  },
+  "my-arms-big-adventure": {
+    "quests": ["eadgars-ruse", "the-feud", "jungle-potion"],
+    "skills": [
+      {
+        "skill": "farming",
+        "level": 29
+      },
+      {
+        "skill": "woodcutting",
+        "level": 10
+      }
+    ]
+  },
+  "nature-spirit": {
+    "quests": ["priest-in-peril", "the-restless-ghost"],
+    "skills": [
+      {
+        "skill": "crafting",
+        "level": 18,
+        "ironman": true
+      }
+    ]
+  },
+  "a-night-at-the-theatre": {
+    "quests": ["a-taste-of-hope"],
+    "skills": []
+  },
+  "observatory-quest": {
+    "quests": [],
+    "skills": []
+  },
+  "olafs-quest": {
+    "quests": ["the-fremennik-trials"],
+    "skills": [
+      {
+        "skill": "firemaking",
+        "level": 40
+      },
+      {
+        "skill": "woodcutting",
+        "level": 50
+      }
+    ]
+  },
+  "one-small-favour": {
+    "quests": ["rune-mysteries", "shilo-village"],
+    "skills": [
+      {
+        "skill": "agility",
+        "level": 36
+      },
+      {
+        "skill": "crafting",
+        "level": 25
+      },
+      {
+        "skill": "herblore",
+        "level": 18
+      },
+      {
+        "skill": "smithing",
+        "level": 30
+      }
+    ]
+  },
+  "the-path-of-glouphrie": {
+    "quests": [
+      "the-eyes-of-glouphrie",
+      "waterfall-quest",
+      "tree-gnome-village"
+    ],
+    "skills": [
+      {
+        "skill": "thieving",
+        "level": 56
+      },
+      {
+        "skill": "agility",
+        "level": 45
+      }
+    ]
+  },
+  "perilous-moons": {
+    "quests": ["twilights-promise"],
+    "skills": [
+      {
+        "skill": "hunter",
+        "level": 20
+      },
+      {
+        "skill": "fishing",
+        "level": 20
+      },
+      {
+        "skill": "runecraft",
+        "level": 20
+      },
+      {
+        "skill": "construction",
+        "level": 10
+      }
+    ]
+  },
+  "pirates-treasure": {
+    "quests": [],
+    "skills": []
+  },
+  "plague-city": {
+    "quests": [],
+    "skills": []
+  },
+  "a-porcine-of-interest": {
+    "quests": [],
+    "skills": []
+  },
+  "priest-in-peril": {
+    "quests": [],
+    "skills": []
+  },
+  "prince-ali-rescue": {
+    "quests": [],
+    "skills": []
+  },
+  "the-queen-of-thieves": {
+    "quests": ["client-of-kourend"],
+    "skills": [
+      {
+        "skill": "thieving",
+        "level": 20
+      }
+    ]
+  },
+  "rag-and-bone-man-i": {
+    "quests": [],
+    "skills": []
+  },
+  "rag-and-bone-man-ii": {
+    "quests": [
+      "the-fremennik-trials",
+      "horror-from-the-deep",
+      "rag-and-bone-man-i",
+      "skippy-and-the-mogres",
+      "creature-of-fenkenstrain",
+      "waterfall-quest",
+      "zogre-flesh-eaters"
+    ],
+    "skills": []
+  },
+  "ratcatchers": {
+    "quests": ["icthlarins-little-helper", "the-giant-dwarf"],
+    "skills": []
+  },
+  "recipe-for-disaster": {
+    "quests": ["recipe-for-disaster-defeating-the-culinaromancer"],
+    "skills": []
+  },
+  "recipe-for-disaster-another-cooks-quest": {
+    "quests": ["cooks-assistant"],
+    "skills": [
+      {
+        "skill": "cooking",
+        "level": 10
+      }
+    ]
+  },
+  "recipe-for-disaster-freeing-the-mountain-dwarf": {
+    "quests": ["fishing-contest", "recipe-for-disaster-another-cooks-quest"],
+    "skills": []
+  },
+  "recipe-for-disaster-freeing-the-goblin-generals": {
+    "quests": ["goblin-diplomacy", "recipe-for-disaster-another-cooks-quest"],
+    "skills": []
+  },
+  "recipe-for-disaster-freeing-pirate-pete": {
+    "quests": ["recipe-for-disaster-another-cooks-quest"],
+    "skills": [
+      {
+        "skill": "cooking",
+        "level": 31
+      },
+      {
+        "skill": "crafting",
+        "level": 42,
+        "ironman": true
+      },
+      {
+        "skill": "smithing",
+        "level": 31,
+        "ironman": true
+      }
+    ]
+  },
+  "recipe-for-disaster-freeing-the-lumbridge-guide": {
+    "quests": [
+      "big-chompy-bird-hunting",
+      "biohazard",
+      "demon-slayer",
+      "murder-mystery",
+      "nature-spirit",
+      "recipe-for-disaster-another-cooks-quest",
+      "witchs-house"
+    ],
+    "skills": [
+      {
+        "skill": "cooking",
+        "level": 40
+      }
+    ]
+  },
+  "recipe-for-disaster-freeing-evil-dave": {
+    "quests": [
+      "gertrudes-cat",
+      "recipe-for-disaster-another-cooks-quest",
+      "shadow-of-the-storm"
+    ],
+    "skills": [
+      {
+        "skill": "cooking",
+        "level": 25
+      }
+    ]
+  },
+  "recipe-for-disaster-freeing-skrach-uglogwee": {
+    "quests": [
+      "big-chompy-bird-hunting",
+      "recipe-for-disaster-another-cooks-quest"
+    ],
+    "skills": [
+      {
+        "skill": "cooking",
+        "level": 41
+      },
+      {
+        "skill": "firemaking",
+        "level": 20
+      }
+    ]
+  },
+  "recipe-for-disaster-freeing-sir-amik-varze": {
+    "quests": ["recipe-for-disaster-another-cooks-quest", "legends-quest"],
+    "skills": [
+      {
+        "skill": "farming",
+        "level": 20,
+        "ironman": true
+      }
+    ]
+  },
+  "recipe-for-disaster-freeing-king-awowogei": {
+    "quests": ["monkey-madness-i", "recipe-for-disaster-another-cooks-quest"],
+    "skills": [
+      {
+        "skill": "agility",
+        "level": 48
+      },
+      {
+        "skill": "cooking",
+        "level": 70
+      }
+    ]
+  },
+  "recipe-for-disaster-defeating-the-culinaromancer": {
+    "quests": [
+      "desert-treasure-i",
+      "horror-from-the-deep",
+      "recipe-for-disaster-freeing-the-mountain-dwarf",
+      "recipe-for-disaster-freeing-the-goblin-generals",
+      "recipe-for-disaster-freeing-pirate-pete",
+      "recipe-for-disaster-freeing-the-lumbridge-guide",
+      "recipe-for-disaster-freeing-evil-dave",
+      "recipe-for-disaster-freeing-skrach-uglogwee",
+      "recipe-for-disaster-freeing-sir-amik-varze",
+      "recipe-for-disaster-freeing-king-awowogei"
+    ],
+    "skills": []
+  },
+  "recruitment-drive": {
+    "quests": ["black-knights-fortress", "druidic-ritual"],
+    "skills": []
+  },
+  "regicide": {
+    "quests": ["underground-pass"],
+    "skills": [
+      {
+        "skill": "agility",
+        "level": 56
+      },
+      {
+        "skill": "crafting",
+        "level": 10
+      }
+    ]
+  },
+  "the-restless-ghost": {
+    "quests": [],
+    "skills": []
+  },
+  "the-ribbiting-tale-of-a-lily-pad-labour-dispute": {
+    "quests": ["children-of-the-sun"],
+    "skills": [
+      {
+        "skill": "woodcutting",
+        "level": 15
+      }
+    ]
+  },
+  "romeo-juliet": {
+    "quests": [],
+    "skills": []
+  },
+  "roving-elves": {
+    "quests": ["regicide", "waterfall-quest"],
+    "skills": [
+      {
+        "skill": "agility",
+        "level": 56
+      }
+    ]
+  },
+  "royal-trouble": {
+    "quests": ["throne-of-miscellania"],
+    "skills": [
+      {
+        "skill": "agility",
+        "level": 40
+      }
+    ]
+  },
+  "rum-deal": {
+    "quests": ["priest-in-peril", "zogre-flesh-eaters"],
+    "skills": [
+      {
+        "skill": "crafting",
+        "level": 42
+      },
+      {
+        "skill": "farming",
+        "level": 40
+      },
+      {
+        "skill": "fishing",
+        "level": 50
+      }
+    ]
+  },
+  "rune-mysteries": {
+    "quests": [],
+    "skills": []
+  },
+  "scorpion-catcher": {
+    "quests": ["alfred-grimhands-barcrawl"],
+    "skills": []
+  },
+  "sea-slug": {
+    "quests": [],
+    "skills": [
+      {
+        "skill": "firemaking",
+        "level": 30
+      }
+    ]
+  },
+  "secrets-of-the-north": {
+    "quests": [
+      "making-friends-with-my-arm",
+      "the-generals-shadow",
+      "devious-minds",
+      "hazeel-cult"
+    ],
+    "skills": [
+      {
+        "skill": "agility",
+        "level": 69
+      },
+      {
+        "skill": "thieving",
+        "level": 64
+      },
+      {
+        "skill": "hunter",
+        "level": 56
+      }
+    ]
+  },
+  "shades-of-mortton": {
+    "quests": ["druidic-ritual", "priest-in-peril"],
+    "skills": [
+      {
+        "skill": "crafting",
+        "level": 20
+      },
+      {
+        "skill": "firemaking",
+        "level": 5
+      },
+      {
+        "skill": "herblore",
+        "level": 15
+      }
+    ]
+  },
+  "shadow-of-the-storm": {
+    "quests": ["demon-slayer", "the-golem"],
+    "skills": [
+      {
+        "skill": "crafting",
+        "level": 30
+      }
+    ]
+  },
+  "sheep-herder": {
+    "quests": [],
+    "skills": []
+  },
+  "sheep-shearer": {
+    "quests": [],
+    "skills": []
+  },
+  "shield-of-arrav": {
+    "quests": [],
+    "skills": []
+  },
+  "shilo-village": {
+    "quests": ["jungle-potion"],
+    "skills": [
+      {
+        "skill": "agility",
+        "level": 32
+      },
+      {
+        "skill": "crafting",
+        "level": 20
+      },
+      {
+        "skill": "smithing",
+        "level": 4,
+        "ironman": true
+      }
+    ]
+  },
+  "sins-of-the-father": {
+    "quests": ["a-taste-of-hope", "vampyre-slayer"],
+    "skills": [
+      {
+        "skill": "agility",
+        "level": 52
+      },
+      {
+        "skill": "crafting",
+        "level": 56
+      },
+      {
+        "skill": "fletching",
+        "level": 60
+      },
+      {
+        "skill": "woodcutting",
+        "level": 62
+      }
+    ]
+  },
+  "the-slug-menace": {
+    "quests": ["sea-slug", "wanted"],
+    "skills": [
+      {
+        "skill": "crafting",
+        "level": 30
+      },
+      {
+        "skill": "runecraft",
+        "level": 30
+      },
+      {
+        "skill": "thieving",
+        "level": 30
+      }
+    ]
+  },
+  "song-of-the-elves": {
+    "quests": ["druidic-ritual", "making-history", "mournings-end-part-ii"],
+    "skills": [
+      {
+        "skill": "agility",
+        "level": 70
+      },
+      {
+        "skill": "construction",
+        "level": 70
+      },
+      {
+        "skill": "farming",
+        "level": 70
+      },
+      {
+        "skill": "herblore",
+        "level": 70
+      },
+      {
+        "skill": "hunter",
+        "level": 70
+      },
+      {
+        "skill": "mining",
+        "level": 70
+      },
+      {
+        "skill": "smithing",
+        "level": 70
+      },
+      {
+        "skill": "woodcutting",
+        "level": 70
+      }
+    ]
+  },
+  "a-souls-bane": {
+    "quests": [],
+    "skills": []
+  },
+  "spirits-of-the-elid": {
+    "quests": [],
+    "skills": [
+      {
+        "skill": "mining",
+        "level": 37
+      },
+      {
+        "skill": "thieving",
+        "level": 37
+      }
+    ]
+  },
+  "swan-song": {
+    "quests": ["garden-of-tranquillity", "one-small-favour"],
+    "skills": [
+      {
+        "skill": "cooking",
+        "level": 62
+      },
+      {
+        "skill": "crafting",
+        "level": 40
+      },
+      {
+        "skill": "firemaking",
+        "level": 42
+      },
+      {
+        "skill": "fishing",
+        "level": 62
+      },
+      {
+        "skill": "smithing",
+        "level": 45
+      }
+    ]
+  },
+  "tai-bwo-wannai-trio": {
+    "quests": ["jungle-potion"],
+    "skills": [
+      {
+        "skill": "agility",
+        "level": 15
+      },
+      {
+        "skill": "cooking",
+        "level": 30
+      },
+      {
+        "skill": "fishing",
+        "level": 5
+      },
+      {
+        "skill": "fishing",
+        "level": 65,
+        "ironman": true
+      },
+      {
+        "skill": "herblore",
+        "level": 34,
+        "ironman": true
+      }
+    ]
+  },
+  "a-tail-of-two-cats": {
+    "quests": ["icthlarins-little-helper"],
+    "skills": []
+  },
+  "tale-of-the-righteous": {
+    "quests": ["client-of-kourend"],
+    "skills": [
+      {
+        "skill": "mining",
+        "level": 10
+      }
+    ]
+  },
+  "a-taste-of-hope": {
+    "quests": ["darkness-of-hallowvale", "druidic-ritual"],
+    "skills": [
+      {
+        "skill": "agility",
+        "level": 45
+      },
+      {
+        "skill": "crafting",
+        "level": 48
+      },
+      {
+        "skill": "herblore",
+        "level": 40
+      }
+    ]
+  },
+  "tears-of-guthix": {
+    "quests": [],
+    "skills": [
+      {
+        "skill": "crafting",
+        "level": 20
+      },
+      {
+        "skill": "firemaking",
+        "level": 49
+      },
+      {
+        "skill": "mining",
+        "level": 20
+      }
+    ]
+  },
+  "temple-of-ikov": {
+    "quests": [],
+    "skills": [
+      {
+        "skill": "thieving",
+        "level": 42
+      }
+    ]
+  },
+  "temple-of-the-eye": {
+    "quests": ["enter-the-abyss"],
+    "skills": [
+      {
+        "skill": "runecraft",
+        "level": 10
+      }
+    ]
+  },
+  "throne-of-miscellania": {
+    "quests": ["the-fremennik-trials", "heroes-quest"],
+    "skills": []
+  },
+  "the-tourist-trap": {
+    "quests": [],
+    "skills": [
+      {
+        "skill": "fletching",
+        "level": 10
+      },
+      {
+        "skill": "smithing",
+        "level": 20
+      }
+    ]
+  },
+  "tower-of-life": {
+    "quests": [],
+    "skills": [
+      {
+        "skill": "construction",
+        "level": 10
+      }
+    ]
+  },
+  "tree-gnome-village": {
+    "quests": [],
+    "skills": []
+  },
+  "tribal-totem": {
+    "quests": [],
+    "skills": [
+      {
+        "skill": "thieving",
+        "level": 21
+      }
+    ]
+  },
+  "troll-romance": {
+    "quests": ["troll-stronghold"],
+    "skills": [
+      {
+        "skill": "agility",
+        "level": 28
+      },
+      {
+        "skill": "woodcutting",
+        "level": 45,
+        "ironman": true
+      }
+    ]
+  },
+  "troll-stronghold": {
+    "quests": ["death-plateau"],
+    "skills": [
+      {
+        "skill": "agility",
+        "level": 15
+      }
+    ]
+  },
+  "twilights-promise": {
+    "quests": ["children-of-the-sun"],
+    "skills": []
+  },
+  "underground-pass": {
+    "quests": ["biohazard"],
+    "skills": []
+  },
+  "vampyre-slayer": {
+    "quests": [],
+    "skills": []
+  },
+  "wanted": {
+    "quests": [
+      "the-lost-tribe",
+      "priest-in-peril",
+      "recruitment-drive",
+      "enter-the-abyss"
+    ],
+    "skills": []
+  },
+  "watchtower": {
+    "quests": ["druidic-ritual"],
+    "skills": [
+      {
+        "skill": "agility",
+        "level": 25
+      },
+      {
+        "skill": "herblore",
+        "level": 14
+      },
+      {
+        "skill": "mining",
+        "level": 40
+      },
+      {
+        "skill": "thieving",
+        "level": 15
+      }
+    ]
+  },
+  "waterfall-quest": {
+    "quests": [],
+    "skills": []
+  },
+  "what-lies-below": {
+    "quests": ["rune-mysteries"],
+    "skills": [
+      {
+        "skill": "runecraft",
+        "level": 35
+      }
+    ]
+  },
+  "while-guthix-sleeps": {
+    "quests": [
+      "defender-of-varrock",
+      "the-path-of-glouphrie",
+      "fight-arena",
+      "dream-mentor",
+      "the-hand-in-the-sand",
+      "wanted",
+      "temple-of-the-eye",
+      "tears-of-guthix",
+      "nature-spirit",
+      "a-tail-of-two-cats"
+    ],
+    "skills": [
+      {
+        "skill": "thieving",
+        "level": 72
+      },
+      {
+        "skill": "agility",
+        "level": 66
+      },
+      {
+        "skill": "farming",
+        "level": 65
+      },
+      {
+        "skill": "herblore",
+        "level": 65
+      },
+      {
+        "skill": "hunter",
+        "level": 62
+      }
+    ]
+  },
+  "witchs-potion": {
+    "quests": [],
+    "skills": []
+  },
+  "witchs-house": {
+    "quests": [],
+    "skills": []
+  },
+  "x-marks-the-spot": {
+    "quests": [],
+    "skills": []
+  },
+  "zogre-flesh-eaters": {
+    "quests": ["big-chompy-bird-hunting", "jungle-potion"],
+    "skills": [
+      {
+        "skill": "herblore",
+        "level": 8
+      },
+      {
+        "skill": "smithing",
+        "level": 4
+      }
+    ]
+  },
+  "alfred-grimhands-barcrawl": {
+    "quests": [],
+    "skills": []
+  },
+  "barbarian-training": {
+    "quests": [
+      "barbarian-firemaking",
+      "barbarian-fishing",
+      "barbarian-herblore",
+      "barbarian-smithing",
+      "barbarian-farming"
+    ],
+    "skills": []
+  },
+  "bear-your-soul": {
+    "quests": [],
+    "skills": []
+  },
+  "curse-of-the-empty-lord": {
+    "quests": ["desert-treasure-i", "the-restless-ghost"],
+    "skills": [
+      {
+        "skill": "thieving",
+        "level": 53
+      }
+    ]
+  },
+  "daddys-home": {
+    "quests": [],
+    "skills": []
+  },
+  "the-enchanted-key": {
+    "quests": ["making-history"],
+    "skills": []
+  },
+  "enter-the-abyss": {
+    "quests": ["rune-mysteries"],
+    "skills": []
+  },
+  "family-pest": {
+    "quests": ["family-crest"],
+    "skills": []
+  },
+  "the-frozen-door": {
+    "quests": ["desert-treasure-i"],
+    "skills": [
+      {
+        "skill": "agility",
+        "level": 70
+      }
+    ]
+  },
+  "the-generals-shadow": {
+    "quests": ["curse-of-the-empty-lord", "fight-arena"],
+    "skills": []
+  },
+  "his-faithful-servants": {
+    "quests": ["priest-in-peril"],
+    "skills": []
+  },
+  "hopespears-will": {
+    "quests": [
+      "the-restless-ghost",
+      "desert-treasure-i",
+      "fairytale-ii-cure-a-queen"
+    ],
+    "skills": []
+  },
+  "in-search-of-knowledge": {
+    "quests": [],
+    "skills": []
+  },
+  "into-the-tombs": {
+    "quests": [],
+    "skills": []
+  },
+  "lair-of-tarn-razorlor": {
+    "quests": ["haunted-mine"],
+    "skills": []
+  },
+  "mage-arena-i": {
+    "quests": [],
+    "skills": []
+  },
+  "mage-arena-ii": {
+    "quests": ["mage-arena-i"],
+    "skills": []
+  },
+  "skippy-and-the-mogres": {
+    "quests": [],
+    "skills": [
+      {
+        "skill": "cooking",
+        "level": 20
+      }
+    ]
+  },
+  "barbarian-firemaking": {
+    "quests": [],
+    "skills": [
+      {
+        "skill": "crafting",
+        "level": 11
+      },
+      {
+        "skill": "firemaking",
+        "level": 35
+      }
+    ]
+  },
+  "barbarian-farming": {
+    "quests": [],
+    "skills": [
+      {
+        "skill": "farming",
+        "level": 15
+      }
+    ]
+  },
+  "barbarian-fishing": {
+    "quests": [],
+    "skills": [
+      {
+        "skill": "agility",
+        "level": 15
+      },
+      {
+        "skill": "fishing",
+        "level": 55
+      }
+    ]
+  },
+  "barbarian-herblore": {
+    "quests": ["druidic-ritual"],
+    "skills": [
+      {
+        "skill": "herblore",
+        "level": 4
+      }
+    ]
+  },
+  "barbarian-smithing": {
+    "quests": [
+      "tai-bwo-wannai-trio",
+      "barbarian-firemaking",
+      "barbarian-fishing"
+    ],
+    "skills": [
+      {
+        "skill": "smithing",
+        "level": 5
+      }
+    ]
+  },
+  "knight-waves-training-grounds": {
+    "quests": ["kings-ransom"],
+    "skills": []
+  },
+  "natural-history-quiz": {
+    "quests": [],
+    "skills": []
+  },
+  "rogue-trader": {
+    "quests": ["the-feud", "rune-mysteries", "icthlarins-little-helper"],
+    "skills": []
+  },
+  "sacred-bone-burner-restoration": {
+    "quests": [],
+    "skills": []
+  }
+}

@@ -1,5 +1,10 @@
 import { describe, expect, it } from 'vitest'
-import { groupTilesByReadiness, tileReadiness, tilesById } from './readiness.ts'
+import {
+  blockingParentCount,
+  groupTilesByReadiness,
+  tileReadiness,
+  tilesById,
+} from './readiness.ts'
 import type { Tile } from './types.ts'
 
 function tile(
@@ -67,6 +72,23 @@ describe('tileReadiness', () => {
   it('is blocked when a parent id is missing', () => {
     const child = tile('c', 'locked', ['missing'])
     expect(tileReadiness(child, tilesById([child]))).toBe('blocked')
+  })
+})
+
+describe('blockingParentCount', () => {
+  it('counts unmet and missing parents', () => {
+    const a = tile('a', 'unlocked')
+    const b = tile('b', 'locked')
+    const c = tile('c', 'completed')
+    const child = tile('d', 'locked', ['a', 'b', 'c', 'missing'])
+    expect(blockingParentCount(child, tilesById([a, b, c, child]))).toBe(2)
+  })
+
+  it('is zero when every parent is unlocked or completed', () => {
+    const a = tile('a', 'unlocked')
+    const b = tile('b', 'completed')
+    const child = tile('c', 'locked', ['a', 'b'])
+    expect(blockingParentCount(child, tilesById([a, b, child]))).toBe(0)
   })
 })
 

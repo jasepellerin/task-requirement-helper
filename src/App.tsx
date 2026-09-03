@@ -86,39 +86,31 @@ export default function App() {
         <Columns>
           <TileColumn
             title="Ready"
-            hint="Seen, every parent unlocked or completed"
             tiles={groups.ready}
             allTiles={tiles}
             empty="Nothing ready."
-            onEdit={openEdit}
-            onStatus={setStatus}
+            onOpen={openEdit}
           />
           <TileColumn
             title="Blocked"
-            hint="Seen, still missing a prerequisite"
             tiles={groups.blocked}
             allTiles={tiles}
             empty="Nothing blocked."
-            onEdit={openEdit}
-            onStatus={setStatus}
+            onOpen={openEdit}
           />
           <TileColumn
             title="Unlocked"
-            hint="You have these, not finished yet"
             tiles={groups.unlocked}
             allTiles={tiles}
             empty="Nothing unlocked."
-            onEdit={openEdit}
-            onStatus={setStatus}
+            onOpen={openEdit}
           />
           <TileColumn
             title="Completed"
-            hint="Done with these"
             tiles={groups.completed}
             allTiles={tiles}
             empty="Nothing completed."
-            onEdit={openEdit}
-            onStatus={setStatus}
+            onOpen={openEdit}
           />
         </Columns>
       )}
@@ -146,6 +138,7 @@ export default function App() {
           onSubmit={submit}
           onCancel={closeEditor}
           onDelete={editor.mode === 'edit' ? confirmDelete : undefined}
+          onOpenTile={editor.mode === 'edit' ? openEdit : undefined}
         />
       ) : null}
     </div>

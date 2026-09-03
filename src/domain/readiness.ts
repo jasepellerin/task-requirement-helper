@@ -8,6 +8,15 @@ export function parentIsSatisfied(status: TileStatus | undefined): boolean {
   return status === 'unlocked' || status === 'completed'
 }
 
+export function blockingParentCount(
+  tile: Tile,
+  byId: Map<string, Tile>,
+): number {
+  return tile.parentIds.filter(
+    (parentId) => !parentIsSatisfied(byId.get(parentId)?.status),
+  ).length
+}
+
 export function tileReadiness(tile: Tile, byId: Map<string, Tile>): Readiness {
   if (tile.status === 'completed') return 'completed'
   if (tile.status === 'unlocked') return 'unlocked'

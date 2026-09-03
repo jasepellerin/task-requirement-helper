@@ -11,10 +11,7 @@ export function Toolbar({ onNew, onExport, onImport }: ToolbarProps) {
 
   return (
     <header className="toolbar">
-      <div className="toolbar-title">
-        <h1>Tiles</h1>
-        <p>What you have, what you can unlock, what you still need to find.</p>
-      </div>
+      <h1>Tiles</h1>
       <div className="toolbar-actions">
         <button type="button" className="btn primary" onClick={onNew}>
           New tile
