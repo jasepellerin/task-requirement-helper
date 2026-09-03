@@ -71,7 +71,7 @@ export function Toolbar({
   return (
     <header className="toolbar">
       <div className="toolbar-start">
-        <h1>SlayerScape</h1>
+        <h1>Tile Requirements Helper</h1>
         <nav className="toolbar-nav" aria-label="Views">
           <button
             type="button"
