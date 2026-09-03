@@ -54,13 +54,13 @@ export function isOsrsCatalogId(id: string): boolean {
   return id.startsWith('osrs:')
 }
 
-export type TileKind = 'skill' | 'diary' | 'quest' | 'custom'
+export type TileKind = 'skill' | 'diary' | 'quest'
 
-export function tileKind(id: string): TileKind {
+export function tileKind(id: string): TileKind | null {
   if (id.startsWith('osrs:quest:')) return 'quest'
   if (id.startsWith('osrs:diary:')) return 'diary'
   if (id.startsWith('osrs:')) return 'skill'
-  return 'custom'
+  return null
 }
 
 export function partitionByKind(tiles: Tile[]): Record<TileKind, Tile[]> {
@@ -68,24 +68,18 @@ export function partitionByKind(tiles: Tile[]): Record<TileKind, Tile[]> {
     skill: [],
     diary: [],
     quest: [],
-    custom: [],
   }
   for (const tile of tiles) {
-    groups[tileKind(tile.id)].push(tile)
+    const kind = tileKind(tile.id)
+    if (!kind) continue
+    groups[kind].push(tile)
   }
   return groups
 }
 
-export function hideOsrsCatalogTile(tiles: Tile[], id: string): Tile[] | null {
-  if (!isOsrsCatalogId(id)) return null
-  return tiles.map((tile) =>
-    tile.id === id ? { ...tile, status: 'unseen' } : tile,
-  )
-}
-
 export function userPersistedTiles(tiles: Tile[]): Tile[] {
   return tiles.filter(
-    (tile) => !isOsrsCatalogId(tile.id) || tile.status !== 'unseen',
+    (tile) => isOsrsCatalogId(tile.id) && tile.status !== 'unseen',
   )
 }
 
@@ -147,46 +141,20 @@ export function buildOsrsCatalogTiles(status: TileStatus = 'unseen'): Tile[] {
   ]
 }
 
-export function pruneRemovedOsrsTiles(tiles: Tile[]): Tile[] {
-  const catalogIds = new Set(buildOsrsCatalogTiles().map((tile) => tile.id))
-  const removed = new Set(
-    tiles
-      .filter((tile) => isOsrsCatalogId(tile.id) && !catalogIds.has(tile.id))
-      .map((tile) => tile.id),
-  )
-  if (removed.size === 0) return tiles
-  return tiles
-    .filter((tile) => !removed.has(tile.id))
-    .map((tile) => ({
-      ...tile,
-      parentIds: tile.parentIds.filter((id) => !removed.has(id)),
-    }))
-}
-
-function syncOsrsCatalogParents(tiles: Tile[]): Tile[] {
-  const catalog = new Map(
-    buildOsrsCatalogTiles().map((tile) => [tile.id, tile]),
-  )
-  return tiles.map((tile) => {
-    const canon = catalog.get(tile.id)
-    if (!canon) return tile
-    return { ...tile, parentIds: canon.parentIds }
-  })
-}
-
 export function mergeOsrsSkillTiles(tiles: Tile[]): Tile[] {
-  const pruned = pruneRemovedOsrsTiles(tiles)
-  const existingIds = new Set(pruned.map((tile) => tile.id))
-  const missing = buildOsrsCatalogTiles().filter(
-    (tile) => !existingIds.has(tile.id),
-  )
-  return syncOsrsCatalogParents([...pruned, ...missing])
-}
-
-export function resetLockedOsrsTilesToUnseen(tiles: Tile[]): Tile[] {
-  return tiles.map((tile) =>
-    isOsrsCatalogId(tile.id) && tile.status === 'locked'
-      ? { ...tile, status: 'unseen' }
-      : tile,
-  )
+  const catalog = buildOsrsCatalogTiles()
+  const catalogIds = new Set(catalog.map((tile) => tile.id))
+  const overlay = new Map<string, Tile>()
+  for (const tile of tiles) {
+    if (!catalogIds.has(tile.id)) continue
+    overlay.set(tile.id, tile)
+  }
+  return catalog.map((canon) => {
+    const existing = overlay.get(canon.id)
+    if (!existing) return canon
+    return {
+      ...canon,
+      status: existing.status,
+    }
+  })
 }

@@ -20,13 +20,13 @@ describe('wiki links', () => {
       'Kandarin Diary',
     )
     expect(tileWikiTitle(osrsTileId('agility', '21-30'))).toBe('Agility')
-    expect(tileWikiTitle('custom')).toBeUndefined()
+    expect(tileWikiTitle('not-a-tile')).toBeUndefined()
   })
 
   it('returns a wiki url for catalog tiles only', () => {
     expect(tileWikiUrl(osrsQuestTileId('dragon-slayer-i'))).toBe(
       'https://oldschool.runescape.wiki/w/Dragon_Slayer_I',
     )
-    expect(tileWikiUrl('custom')).toBeUndefined()
+    expect(tileWikiUrl('not-a-tile')).toBeUndefined()
   })
 })

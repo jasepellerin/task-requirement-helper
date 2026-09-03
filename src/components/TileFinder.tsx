@@ -1,32 +1,17 @@
 import { useEffect, useId, useMemo, useState } from 'react'
-import { formatGp, tileGp } from '../data/questReqs.ts'
-import { requirementSummary } from '../data/requirementViews.ts'
 import { searchTiles } from '../domain/search.ts'
-import { STATUS_LABEL, type Tile } from '../domain/types.ts'
+import { type Tile } from '../domain/types.ts'
 
 type TileFinderProps = {
   tiles: Tile[]
   onSelect: (tile: Tile) => void
-  onCreateCustom: () => void
   onCancel: () => void
 }
 
-function resultMeta(tile: Tile, tiles: Tile[]): string {
-  const gp = tileGp(tile.id)
-  const gold = gp !== undefined ? formatGp(gp) : null
-  const parents = requirementSummary(tile, tiles)
-  return gold ? `${gold} · ${parents}` : parents
-}
-
-export function TileFinder({
-  tiles,
-  onSelect,
-  onCreateCustom,
-  onCancel,
-}: TileFinderProps) {
+export function TileFinder({ tiles, onSelect, onCancel }: TileFinderProps) {
   const titleId = useId()
   const [query, setQuery] = useState('')
-  const results = useMemo(() => searchTiles(tiles, query), [tiles, query])
+  const results = useMemo(() => searchTiles(tiles, query), [query, tiles])
 
   useEffect(() => {
     function onKey(event: KeyboardEvent) {
@@ -68,13 +53,7 @@ export function TileFinder({
                     className="search-result"
                     onClick={() => onSelect(tile)}
                   >
-                    <span className="search-result-top">
-                      <strong>{tile.name}</strong>
-                      <span>{STATUS_LABEL[tile.status]}</span>
-                    </span>
-                    <span className="search-result-meta">
-                      {resultMeta(tile, tiles)}
-                    </span>
+                    <strong>{tile.name}</strong>
                   </button>
                 </li>
               ))}
@@ -85,15 +64,9 @@ export function TileFinder({
         )}
 
         <div className="modal-actions">
+          <span />
           <button type="button" className="btn" onClick={onCancel}>
             Cancel
-          </button>
-          <button
-            type="button"
-            className="btn primary"
-            onClick={onCreateCustom}
-          >
-            Create custom tile
           </button>
         </div>
       </div>

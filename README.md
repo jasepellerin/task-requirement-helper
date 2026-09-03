@@ -1,6 +1,6 @@
 # Tiles
 
-Local unlock tracker for a tile-based game. Track tiles as unseen, locked, unlocked, or completed, wire parent/child prerequisites, and see what is ready right now. Data stays in the browser (`localStorage`) and can be exported as JSON.
+Local OSRS unlock tracker for skills, diaries, and quests. Mark tiles unseen / locked / unlocked / completed and see what is ready versus blocked. Data stays in the browser (`localStorage`) and can be exported as JSON.
 
 ```bash
 yarn
@@ -17,4 +17,4 @@ yarn typecheck
 yarn build
 ```
 
-Product rules: [docs/GOAL.md](docs/GOAL.md) and [AGENTS.md](AGENTS.md).
+Product rules: [AGENTS.md](AGENTS.md) and [docs/GOAL.md](docs/GOAL.md).

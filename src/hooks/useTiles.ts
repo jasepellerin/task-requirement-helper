@@ -1,18 +1,8 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
+import { mergeOsrsSkillTiles, userPersistedTiles } from '../data/osrsCatalog.ts'
 import { groupTilesByReadiness } from '../domain/readiness.ts'
-import {
-  createTile,
-  deleteTile,
-  setTileStatus,
-  updateTile,
-} from '../domain/store.ts'
-import {
-  hideOsrsCatalogTile,
-  mergeOsrsSkillTiles,
-  resetLockedOsrsTilesToUnseen,
-  userPersistedTiles,
-} from '../data/osrsCatalog.ts'
-import type { TileInput, TileStatus } from '../domain/types.ts'
+import { setTileStatus } from '../domain/store.ts'
+import type { TileStatus } from '../domain/types.ts'
 import {
   downloadStore,
   loadStore,
@@ -20,15 +10,8 @@ import {
   saveStore,
 } from '../storage/localStore.ts'
 
-const OSRS_UNSEEN_MIGRATION_KEY = 'tiles:osrs-default-unseen-v1'
-
 function loadTiles() {
-  const merged = mergeOsrsSkillTiles(loadStore().tiles)
-  if (localStorage.getItem(OSRS_UNSEEN_MIGRATION_KEY) === '1') {
-    return merged
-  }
-  localStorage.setItem(OSRS_UNSEEN_MIGRATION_KEY, '1')
-  return resetLockedOsrsTilesToUnseen(merged)
+  return mergeOsrsSkillTiles(loadStore().tiles)
 }
 
 export function useTiles() {
@@ -40,40 +23,12 @@ export function useTiles() {
 
   const groups = useMemo(() => groupTilesByReadiness(tiles), [tiles])
 
-  const create = useCallback(
-    (input: TileInput) => {
-      const result = createTile(tiles, input)
-      if (!result.ok) return result
-      setTiles(result.tiles)
-      return result
-    },
-    [tiles],
-  )
-
-  const update = useCallback(
-    (id: string, input: Partial<TileInput>) => {
-      const result = updateTile(tiles, id, input)
-      if (!result.ok) return result
-      setTiles(result.tiles)
-      return result
-    },
-    [tiles],
-  )
-
   const setStatus = useCallback(
     (id: string, status: TileStatus) => {
       const result = setTileStatus(tiles, id, status)
       if (!result.ok) return result
       setTiles(result.tiles)
       return result
-    },
-    [tiles],
-  )
-
-  const remove = useCallback(
-    (id: string) => {
-      const hidden = hideOsrsCatalogTile(tiles, id)
-      setTiles(hidden ?? deleteTile(tiles, id))
     },
     [tiles],
   )
@@ -94,10 +49,7 @@ export function useTiles() {
   return {
     tiles,
     groups,
-    create,
-    update,
     setStatus,
-    remove,
     exportStore,
     importStore,
   }

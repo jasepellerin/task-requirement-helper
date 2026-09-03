@@ -64,15 +64,6 @@ export function CompletedWindow({
             empty="No completed quests."
             onOpen={onOpen}
           />
-          {groups.custom.length > 0 ? (
-            <TileColumn
-              title="Other"
-              tiles={groups.custom}
-              allTiles={tiles}
-              empty="No completed tiles."
-              onOpen={onOpen}
-            />
-          ) : null}
         </Columns>
       </div>
     </div>

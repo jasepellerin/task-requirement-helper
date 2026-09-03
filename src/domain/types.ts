@@ -41,12 +41,5 @@ export type ReadinessGroups = {
   completed: Tile[]
 }
 
-export type TileInput = {
-  name: string
-  status: TileStatus
-  parentIds: string[]
-  dependentIds?: string[]
-}
-
 export type MutationResult =
   { ok: true; tiles: Tile[] } | { ok: false; error: string }

@@ -22,8 +22,6 @@ export type RequirementView = {
   key: string
   parentId: string
   title: string
-  coverLabel?: string
-  catalog: boolean
 }
 
 function skillName(skillId: string): string {
@@ -62,22 +60,15 @@ function skillRows(reqs: readonly DiarySkillReq[]): RequirementView[] {
       key: `skill:${req.skill}:${req.level}:${req.ironman ? 'im' : 'main'}`,
       parentId: cover.id,
       title: skillReqTitle(req.skill, req.level, req.ironman),
-      coverLabel: cover.name,
-      catalog: true,
     }
   })
 }
 
-function parentRow(
-  parentId: string,
-  title: string,
-  catalog: boolean,
-): RequirementView {
+function parentRow(parentId: string, title: string): RequirementView {
   return {
     key: `parent:${parentId}`,
     parentId,
     title,
-    catalog,
   }
 }
 
@@ -86,7 +77,7 @@ function questCatalogRows(questId: string): RequirementView[] | null {
   if (!reqs) return null
   const quests = reqs.quests.map((id) => {
     const name = OSRS_QUESTS.find((quest) => quest.id === id)?.name ?? id
-    return parentRow(osrsQuestTileId(id), name, true)
+    return parentRow(osrsQuestTileId(id), name)
   })
   return [...quests, ...skillRows(reqs.skills)]
 }
@@ -99,7 +90,6 @@ function previousDiaryRows(diaryId: string, tierId: string): RequirementView[] {
     parentRow(
       osrsDiaryTileId(diaryId, tier.id),
       osrsDiaryTileName(diary?.name ?? diaryId, tier),
-      true,
     ),
   )
 }
@@ -124,7 +114,6 @@ function parseDiaryTileId(
 function catalogRows(tile: Tile): RequirementView[] | null {
   const kind = tileKind(tile.id)
   if (kind === 'quest') {
-    if (!tile.id.startsWith('osrs:quest:')) return null
     return questCatalogRows(tile.id.slice('osrs:quest:'.length))
   }
   if (kind === 'diary') {
@@ -140,29 +129,10 @@ function fallbackRows(tile: Tile, tiles: Tile[]): RequirementView[] {
     parentRow(
       id,
       tiles.find((candidate) => candidate.id === id)?.name ?? 'Missing',
-      false,
     ),
   )
 }
 
 export function requirementViews(tile: Tile, tiles: Tile[]): RequirementView[] {
-  const catalog = catalogRows(tile)
-  if (!catalog) return fallbackRows(tile, tiles)
-  const catalogIds = new Set(catalog.map((row) => row.parentId))
-  const extras = tile.parentIds
-    .filter((id) => !catalogIds.has(id))
-    .map((id) =>
-      parentRow(
-        id,
-        tiles.find((candidate) => candidate.id === id)?.name ?? 'Missing',
-        false,
-      ),
-    )
-  return [...catalog, ...extras]
-}
-
-export function requirementSummary(tile: Tile, tiles: Tile[]): string {
-  const views = requirementViews(tile, tiles)
-  if (views.length === 0) return 'No prerequisites'
-  return views.map((row) => row.title).join(', ')
+  return catalogRows(tile) ?? fallbackRows(tile, tiles)
 }

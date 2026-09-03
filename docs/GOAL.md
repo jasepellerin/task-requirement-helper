@@ -1,30 +1,27 @@
 # Goal
 
-Keep track of tiles in a tile-based game: what exists, what you've seen, what you already have, and what you can unlock right now versus what still needs prerequisites or still needs to be found.
-
-No server. The graph is yours — you add tiles as you discover names and edges.
+Local OSRS unlock tracker for skills, diaries, and quests. No server. Mark tiles as you find, unlock, and complete them, and see what is ready versus still blocked.
 
 ## Why
 
 Unlock trees are easy to lose in your head. You want to know:
 
-- What is **ready** to unlock (seen, every parent already unlocked or completed)
-- What is **blocked** (seen, but missing a prerequisite unlock)
-- What is **unseen** (you haven't found it yet, even if you know the name)
+- What is **ready** to unlock (on the board, every parent already unlocked or completed)
+- What is **blocked** (on the board, but a prerequisite is not done)
+- What is **unseen** (in the catalog, not on the board yet)
 - What you already **unlocked** (have it, not finished)
 - What you **completed**
 
-## v1
+## Current product
 
-- Create / edit / delete tiles
-- Status: unseen, locked, unlocked, completed (default new tile: locked; order not enforced)
-- Parent and dependent relationships, edited from either side
-- Four board lists (Ready / Blocked / Unlocked / Completed). Unseen tiles are hidden until found via search.
-- Persist in `localStorage` (user overlay only: custom tiles + catalog tiles with a non-default status)
-- Export and replace-import JSON (`StoreV1`); catalog defaults are omitted and merged back on import
-- Reject cyclic relationships
-- Seed OSRS catalogs from data files: non-combat skills (16 × 10 brackets), achievement diaries (12 × Easy/Medium/Hard/Elite), and quests (wiki quest + skill reqs, coin costs on the card), chained parents, unseen by default
+- Catalog-only tiles: non-combat skills, achievement diaries, quests
+- Status: unseen, locked, unlocked, completed (order not enforced)
+- Catalog AND prerequisites; skill wiki levels display as the exact level and store as the covering bracket tile
+- Board: Ready / Blocked / Unlocked. Completed is a separate view. Unseen is off the board until found via search (or hidden again by marking unseen)
+- Detail cards are view-only: catalog title, live status, wiki link, exact colored requirements
+- Stats window derived from unlocked/completed skill brackets (combat/Slayer fixed at 99)
+- Persist in `localStorage`: only catalog tiles whose status is not `unseen`. JSON export/import. Catalog names and parents are merged back on load/import
 
-## Not v1
+## Out of scope
 
-Graph canvas, notes, tags, merge-on-import, undo history, backend.
+Custom tiles, graph canvas, notes, tags, undo history, backend.

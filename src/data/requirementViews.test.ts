@@ -1,7 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import {
   coveringSkillTile,
-  requirementSummary,
   requirementViews,
   skillReqTitle,
 } from './requirementViews.ts'
@@ -43,16 +42,8 @@ describe('requirementViews', () => {
       '19 Crafting',
       '35 Woodcutting',
     ])
-    expect(views.at(-2)).toMatchObject({
-      parentId: osrsTileId('crafting', '11-20'),
-      coverLabel: 'Crafting 11–20',
-      catalog: true,
-    })
-    expect(views.at(-1)).toMatchObject({
-      parentId: osrsTileId('woodcutting', '31-40'),
-      coverLabel: 'Woodcutting 31–40',
-      catalog: true,
-    })
+    expect(views.at(-2)?.parentId).toBe(osrsTileId('crafting', '11-20'))
+    expect(views.at(-1)?.parentId).toBe(osrsTileId('woodcutting', '31-40'))
   })
 
   it('tags ironman skill reqs and still points at the covering tile', () => {
@@ -63,9 +54,7 @@ describe('requirementViews', () => {
     expect(views).toContainEqual(
       expect.objectContaining({
         title: '49 Crafting (Ironman)',
-        coverLabel: 'Crafting 41–50',
         parentId: osrsTileId('crafting', '41-50'),
-        catalog: true,
       }),
     )
   })
@@ -77,14 +66,13 @@ describe('requirementViews', () => {
       parentId: osrsDiaryTileId('kandarin', 'easy'),
       title: 'Kandarin Easy',
     })
-    expect(views[0]?.coverLabel).toBeUndefined()
     expect(views.some((row) => row.title === '26 Farming')).toBe(true)
-    expect(views.find((row) => row.title === '26 Farming')?.coverLabel).toBe(
-      'Farming 21–30',
+    expect(views.find((row) => row.title === '26 Farming')?.parentId).toBe(
+      osrsTileId('farming', '21-30'),
     )
   })
 
-  it('falls back to parent tile names for skills and custom tiles', () => {
+  it('falls back to parent tile names for skill tiles', () => {
     const parent = tile(osrsTileId('farming', '31-40'), [], 'Farming 31–40')
     const child = tile(osrsTileId('farming', '41-50'), [parent.id])
     expect(requirementViews(child, [parent, child])).toEqual([
@@ -92,29 +80,7 @@ describe('requirementViews', () => {
         key: `parent:${parent.id}`,
         parentId: parent.id,
         title: 'Farming 31–40',
-        catalog: false,
       },
     ])
-  })
-
-  it('appends extra parentIds that are not part of the catalog recipe', () => {
-    const extra = tile('custom-a', [], 'Custom A')
-    const quest = tile(osrsQuestTileId('garden-of-tranquillity'), [extra.id])
-    const views = requirementViews(quest, [extra, quest])
-    expect(views.map((row) => row.title)).toEqual([
-      'Creature of Fenkenstrain',
-      '25 Farming',
-      'Custom A',
-    ])
-    expect(views.at(-1)?.catalog).toBe(false)
-  })
-})
-
-describe('requirementSummary', () => {
-  it('joins exact req titles for finder meta', () => {
-    const id = osrsQuestTileId('garden-of-tranquillity')
-    expect(requirementSummary(tile(id, []), [])).toBe(
-      'Creature of Fenkenstrain, 25 Farming',
-    )
   })
 })

@@ -5,17 +5,14 @@ import { StatsWindow } from './components/StatsWindow.tsx'
 import { TileFinder } from './components/TileFinder.tsx'
 import { TileForm } from './components/TileForm.tsx'
 import { Toolbar } from './components/Toolbar.tsx'
-import type { Tile, TileInput } from './domain/types.ts'
+import type { Tile } from './domain/types.ts'
 import { useTiles } from './hooks/useTiles.ts'
 
-type Editor =
-  { mode: 'find' } | { mode: 'create' } | { mode: 'edit'; id: string }
+type Editor = { mode: 'find' } | { mode: 'edit'; id: string }
 
 export default function App() {
-  const { tiles, groups, create, update, setStatus, exportStore, importStore } =
-    useTiles()
+  const { tiles, groups, setStatus, exportStore, importStore } = useTiles()
   const [editor, setEditor] = useState<Editor | null>(null)
-  const [formError, setFormError] = useState<string | null>(null)
   const [showStats, setShowStats] = useState(false)
   const [showCompleted, setShowCompleted] = useState(false)
 
@@ -29,44 +26,29 @@ export default function App() {
   function openFind() {
     setShowStats(false)
     setShowCompleted(false)
-    setFormError(null)
     setEditor({ mode: 'find' })
   }
 
   function openEdit(id: string) {
     setShowStats(false)
     setShowCompleted(false)
-    setFormError(null)
     setEditor({ mode: 'edit', id })
   }
 
   function closeEditor() {
     setEditor(null)
-    setFormError(null)
   }
 
   function openStats() {
     setEditor(null)
-    setFormError(null)
     setShowCompleted(false)
     setShowStats(true)
   }
 
   function openCompleted() {
     setEditor(null)
-    setFormError(null)
     setShowStats(false)
     setShowCompleted(true)
-  }
-
-  function submit(input: TileInput) {
-    const result =
-      editor?.mode === 'edit' ? update(editor.id, input) : create(input)
-    if (!result.ok) {
-      setFormError(result.error)
-      return
-    }
-    closeEditor()
   }
 
   function selectFound(tile: Tile) {
@@ -89,9 +71,7 @@ export default function App() {
       />
 
       {visibleCount === 0 ? (
-        <p className="hero-empty">
-          Find a tile you’ve just seen, or create a custom one.
-        </p>
+        <p className="hero-empty">Find a tile you’ve just seen.</p>
       ) : (
         <Columns className="board-columns">
           <TileColumn
@@ -139,30 +119,18 @@ export default function App() {
         <TileFinder
           tiles={tiles}
           onSelect={selectFound}
-          onCreateCustom={() => {
-            setFormError(null)
-            setEditor({ mode: 'create' })
-          }}
           onCancel={closeEditor}
         />
       ) : null}
 
-      {(editor?.mode === 'create' ||
-        (editor?.mode === 'edit' && editingTile)) &&
-      editor ? (
+      {editor?.mode === 'edit' && editingTile ? (
         <TileForm
-          key={editor.mode === 'edit' ? editor.id : 'create'}
+          key={editor.id}
           tiles={tiles}
           tile={editingTile}
-          error={formError}
-          onSubmit={submit}
           onCancel={closeEditor}
-          onOpenTile={editor.mode === 'edit' ? openEdit : undefined}
-          onStatusChange={
-            editor.mode === 'edit'
-              ? (status) => setStatus(editor.id, status)
-              : undefined
-          }
+          onOpenTile={openEdit}
+          onStatusChange={(status) => setStatus(editor.id, status)}
         />
       ) : null}
     </div>

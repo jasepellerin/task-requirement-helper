@@ -6,7 +6,6 @@ import {
   buildOsrsQuestTiles,
   buildOsrsSkillTiles,
   DIARY_TIERS,
-  hideOsrsCatalogTile,
   mergeOsrsSkillTiles,
   OSRS_DIARIES,
   OSRS_QUESTS,
@@ -17,8 +16,6 @@ import {
   osrsTileId,
   osrsTileName,
   partitionByKind,
-  pruneRemovedOsrsTiles,
-  resetLockedOsrsTilesToUnseen,
   SKILL_BRACKETS,
   tileKind,
   userPersistedTiles,
@@ -68,13 +65,13 @@ describe('OSRS skill catalog', () => {
     expect(cape?.parentIds.at(-1)).toBe(osrsTileId('woodcutting', '81-90'))
   })
 
-  it('keeps catalog status and syncs parentIds on merge', () => {
+  it('keeps catalog status and name, and syncs parentIds on merge', () => {
     const skillId = osrsTileId('woodcutting', '1-10')
     const diaryId = osrsDiaryTileId('kandarin', 'easy')
     const existing = [
       {
         id: skillId,
-        name: 'custom',
+        name: 'Chop trees',
         status: 'completed' as const,
         parentIds: ['stale'],
       },
@@ -88,6 +85,7 @@ describe('OSRS skill catalog', () => {
     const merged = mergeOsrsSkillTiles(existing)
     const skill = merged.find((tile) => tile.id === skillId)
     const diary = merged.find((tile) => tile.id === diaryId)
+    expect(skill?.name).toBe('Woodcutting 1–10')
     expect(skill?.status).toBe('completed')
     expect(skill?.parentIds).toEqual([])
     expect(diary?.status).toBe('locked')
@@ -100,57 +98,37 @@ describe('OSRS skill catalog', () => {
     expect(merged).toHaveLength(412)
   })
 
-  it('prunes removed combat skill tiles and dangling parents', () => {
-    const stale = osrsTileId('attack', '1-10')
-    const next = pruneRemovedOsrsTiles([
+  it('ignores unknown ids on merge', () => {
+    const skillId = osrsTileId('woodcutting', '1-10')
+    const merged = mergeOsrsSkillTiles([
       {
-        id: stale,
-        name: 'Attack 1–10',
-        status: 'unseen',
-        parentIds: [],
-      },
-      {
-        id: 'custom',
-        name: 'Forest',
-        status: 'locked',
-        parentIds: [stale],
-      },
-    ])
-    expect(next.map((tile) => tile.id)).toEqual(['custom'])
-    expect(next[0]?.parentIds).toEqual([])
-  })
-
-  it('resets only locked catalog tiles to unseen', () => {
-    const id = osrsTileId('woodcutting', '1-10')
-    const tiles = [
-      {
-        id,
+        id: skillId,
         name: 'Woodcutting 1–10',
-        status: 'locked' as const,
-        parentIds: [],
+        status: 'completed',
+        parentIds: ['forest'],
       },
       {
-        id: 'custom',
+        id: 'forest',
         name: 'Forest',
-        status: 'locked' as const,
+        status: 'completed',
         parentIds: [],
       },
       {
         id: osrsTileId('attack', '1-10'),
         name: 'Attack 1–10',
-        status: 'completed' as const,
+        status: 'completed',
         parentIds: [],
       },
-    ]
-    const next = resetLockedOsrsTilesToUnseen(tiles)
-    expect(next.find((tile) => tile.id === id)?.status).toBe('unseen')
-    expect(next.find((tile) => tile.id === 'custom')?.status).toBe('locked')
+    ])
+    expect(merged).toHaveLength(412)
+    expect(merged.find((tile) => tile.id === 'forest')).toBeUndefined()
     expect(
-      next.find((tile) => tile.id === osrsTileId('attack', '1-10'))?.status,
-    ).toBe('completed')
+      merged.find((tile) => tile.id === osrsTileId('attack', '1-10')),
+    ).toBeUndefined()
+    expect(merged.find((tile) => tile.id === skillId)?.parentIds).toEqual([])
   })
 
-  it('persists custom tiles and catalog status changes only', () => {
+  it('persists catalog status changes only', () => {
     const unseen = osrsTileId('woodcutting', '1-10')
     const locked = osrsTileId('agility', '21-30')
     const tiles = [
@@ -166,46 +144,15 @@ describe('OSRS skill catalog', () => {
         status: 'locked' as const,
         parentIds: [],
       },
-      {
-        id: 'custom',
-        name: 'Water',
-        status: 'unseen' as const,
-        parentIds: [],
-      },
     ]
-    expect(userPersistedTiles(tiles).map((tile) => tile.id)).toEqual([
-      locked,
-      'custom',
-    ])
-  })
-
-  it('hides catalog tiles instead of deleting them', () => {
-    const id = osrsTileId('agility', '21-30')
-    const tiles = [
-      {
-        id,
-        name: 'Agility 21–30',
-        status: 'locked' as const,
-        parentIds: [],
-      },
-      {
-        id: 'custom',
-        name: 'Forest',
-        status: 'completed' as const,
-        parentIds: [],
-      },
-    ]
-    const hidden = hideOsrsCatalogTile(tiles, id)
-    expect(hidden?.find((tile) => tile.id === id)?.status).toBe('unseen')
-    expect(hidden?.map((tile) => tile.id)).toEqual([id, 'custom'])
-    expect(hideOsrsCatalogTile(tiles, 'custom')).toBeNull()
+    expect(userPersistedTiles(tiles).map((tile) => tile.id)).toEqual([locked])
   })
 
   it('classifies catalog ids by kind', () => {
     expect(tileKind(osrsTileId('agility', '21-30'))).toBe('skill')
     expect(tileKind(osrsDiaryTileId('kandarin', 'easy'))).toBe('diary')
     expect(tileKind(osrsQuestTileId('dragon-slayer-i'))).toBe('quest')
-    expect(tileKind('forest')).toBe('custom')
+    expect(tileKind('forest')).toBeNull()
     const grouped = partitionByKind([
       {
         id: osrsTileId('agility', '1-10'),
@@ -235,7 +182,6 @@ describe('OSRS skill catalog', () => {
     expect(grouped.skill).toHaveLength(1)
     expect(grouped.diary).toHaveLength(1)
     expect(grouped.quest).toHaveLength(1)
-    expect(grouped.custom).toHaveLength(1)
   })
 })
 

@@ -84,8 +84,7 @@ p {
 .toolbar-start,
 .toolbar-end,
 .toolbar-nav,
-.toolbar-actions,
-.modal-actions-end {
+.toolbar-actions {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -316,26 +315,13 @@ p {
   gap: 12px;
 }
 
-.modal-title-row h2,
-.modal-title-input {
+.modal-title-row h2 {
   flex: 1;
   min-width: 0;
   font-size: 1.4rem;
   font-weight: 700;
   letter-spacing: -0.03em;
   overflow-wrap: anywhere;
-}
-
-.modal-title-input {
-  font: inherit;
-  font-size: 1.4rem;
-  font-weight: 700;
-  letter-spacing: -0.03em;
-  color: inherit;
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 4px 8px;
 }
 
 .modal-title-actions {
@@ -436,10 +422,6 @@ p {
   font-weight: 600;
 }
 
-.req-main {
-  min-width: 0;
-}
-
 .req-name {
   appearance: none;
   font: inherit;
@@ -513,6 +495,10 @@ button.req-name:focus-visible {
   width: min(1100px, 100%);
 }
 
+.tile-modal {
+  min-height: 18rem;
+}
+
 .field {
   display: flex;
   flex-direction: column;
@@ -539,15 +525,7 @@ button.req-name:focus-visible {
 }
 
 .parent-row {
-  display: flex;
-  align-items: flex-start;
-  justify-content: space-between;
-  gap: 8px;
   font-weight: 400;
-}
-
-.form-error {
-  color: var(--danger);
 }
 
 .modal-actions {
@@ -586,19 +564,6 @@ button.req-name:focus-visible {
 
 .search-result:hover {
   border-color: var(--primary);
-}
-
-.search-result-top {
-  display: flex;
-  justify-content: space-between;
-  gap: 8px;
-  align-items: baseline;
-}
-
-.search-result-top span,
-.search-result-meta {
-  color: var(--muted);
-  font-size: 0.88rem;
 }
 
 .stats-frame {
