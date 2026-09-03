@@ -24,6 +24,7 @@
   --req-unlocked: #ca8a04;
   --req-completed: #16a34a;
   --star: #ca8a04;
+  --gold: #b45309;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -46,6 +47,7 @@
     --req-unlocked: #facc15;
     --req-completed: #4ade80;
     --star: #facc15;
+    --gold: #fbbf24;
   }
 }
 
@@ -350,6 +352,10 @@ p {
   margin: 0;
   font-size: 0.88rem;
   color: var(--muted);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.35em 0.7em;
+  align-items: baseline;
 }
 
 .tile-card .star-btn {
@@ -510,7 +516,12 @@ p {
 .tile-gold {
   margin: 0;
   font-size: 0.92rem;
-  font-weight: 600;
+  font-weight: 700;
+  color: var(--gold);
+}
+
+.tile-card-stats .tile-gold {
+  font-size: inherit;
 }
 
 .tile-pills {
@@ -764,14 +775,17 @@ button.req-name:focus-visible {
   overflow-wrap: anywhere;
 }
 
-.slayer-icon {
+.slayer-icon,
+.unlock-icon {
   width: 20px;
   height: 20px;
+  object-fit: contain;
   image-rendering: pixelated;
   flex-shrink: 0;
 }
 
-.slayer-mark {
+.slayer-mark,
+.unlock-mark {
   display: inline-flex;
   align-items: center;
   gap: 6px;
@@ -781,7 +795,8 @@ button.req-name:focus-visible {
   font-weight: 600;
 }
 
-.slayer-mark a {
+.slayer-mark a,
+.unlock-mark a {
   color: inherit;
   text-decoration: none;
 }
@@ -789,7 +804,11 @@ button.req-name:focus-visible {
 a.slayer-mark:hover,
 a.slayer-mark:focus-visible,
 .slayer-mark a:hover,
-.slayer-mark a:focus-visible {
+.slayer-mark a:focus-visible,
+a.unlock-mark:hover,
+a.unlock-mark:focus-visible,
+.unlock-mark a:hover,
+.unlock-mark a:focus-visible {
   text-decoration: underline;
 }
 

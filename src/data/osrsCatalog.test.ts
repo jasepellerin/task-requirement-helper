@@ -30,6 +30,9 @@ import {
   tileRewards,
   tileSlayerMaster,
   tileSlayerMonsters,
+  tileTeleportItems,
+  tileTeleports,
+  tileTransport,
   tilesFromStatuses,
 } from './osrsCatalog.ts'
 
@@ -364,6 +367,15 @@ describe('OSRS quests', () => {
     expect(milk && parentIdsFor(milk)).toEqual([])
   })
 
+  it('applies quest req overrides after the wiki dump', () => {
+    const fremennik = CATALOG_BY_ID.get(osrsQuestTileId('the-fremennik-trials'))
+    expect(fremennik && parentIdsFor(fremennik)).toEqual([
+      osrsTileId('fletching', '21-30'),
+      osrsTileId('woodcutting', '31-40'),
+      osrsTileId('crafting', '31-40'),
+    ])
+  })
+
   it('marks quests that unlock slayer masters', () => {
     expect(tileSlayerMaster(osrsQuestTileId('a-porcine-of-interest'))).toEqual({
       name: 'Spria',
@@ -412,6 +424,119 @@ describe('OSRS quests', () => {
       (def) => (def.slayerMonsters?.length ?? 0) > 0,
     )
     expect(marked.length).toBeGreaterThan(20)
+    expect(marked.every((def) => def.kind === 'quest')).toBe(true)
+  })
+
+  it('marks quests that unlock transportation', () => {
+    expect(tileTransport(osrsQuestTileId('fairytale-ii-cure-a-queen'))).toEqual(
+      [{ name: 'Fairy rings', wikiTitle: 'Fairy rings' }],
+    )
+    expect(tileTransport(osrsQuestTileId('tree-gnome-village'))).toEqual([
+      { name: 'Spirit trees', wikiTitle: 'Spirit tree' },
+    ])
+    expect(tileTransport(osrsQuestTileId('enlightened-journey'))).toEqual([
+      { name: 'Balloon transport', wikiTitle: 'Balloon transport system' },
+    ])
+    expect(
+      tileTransport(osrsQuestTileId('the-grand-tree')).map(
+        (method) => method.name,
+      ),
+    ).toEqual(['Gnome gliders', 'Spirit trees (Stronghold)'])
+    expect(tileTransport(osrsQuestTileId('cooks-assistant'))).toEqual([])
+    expect(tileTransport(osrsTileId('agility', '1-10'))).toEqual([])
+    const marked = CATALOG.filter((def) => (def.transport?.length ?? 0) > 0)
+    expect(marked).toHaveLength(14)
+    expect(marked.every((def) => def.kind === 'quest')).toBe(true)
+  })
+
+  it('marks quests that unlock teleport spells', () => {
+    expect(tileTeleports(osrsQuestTileId('plague-city'))).toEqual([
+      { name: 'Ardougne Teleport', wikiTitle: 'Ardougne Teleport' },
+    ])
+    expect(tileTeleports(osrsQuestTileId('watchtower'))).toEqual([
+      { name: 'Watchtower Teleport', wikiTitle: 'Watchtower Teleport' },
+    ])
+    expect(tileTeleports(osrsQuestTileId('desert-treasure-i'))).toEqual([
+      { name: 'Ancient Magicks teleports', wikiTitle: 'Ancient Magicks' },
+    ])
+    expect(tileTeleports(osrsQuestTileId('lunar-diplomacy'))).toEqual([
+      { name: 'Lunar teleports', wikiTitle: 'Lunar spells' },
+    ])
+    expect(tileTeleports(osrsQuestTileId('cooks-assistant'))).toEqual([])
+    expect(tileTeleports(osrsTileId('agility', '1-10'))).toEqual([])
+    const marked = CATALOG.filter((def) => (def.teleports?.length ?? 0) > 0)
+    expect(marked).toHaveLength(12)
+    expect(marked.every((def) => def.kind === 'quest')).toBe(true)
+  })
+
+  it('marks quests that reward teleport items', () => {
+    expect(tileTeleportItems(osrsQuestTileId('ghosts-ahoy'))).toEqual([
+      { name: 'Ectophial', wikiTitle: 'Ectophial', icon: 'ectophial.png' },
+    ])
+    expect(tileTeleportItems(osrsQuestTileId('monkey-madness-ii'))).toEqual([
+      {
+        name: 'Royal seed pod',
+        wikiTitle: 'Royal seed pod',
+        icon: 'royal-seed-pod.png',
+      },
+    ])
+    expect(tileTeleportItems(osrsQuestTileId('mournings-end-part-i'))).toEqual([
+      {
+        name: 'Teleport crystal',
+        wikiTitle: 'Teleport crystal',
+        icon: 'teleport-crystal.png',
+      },
+    ])
+    expect(
+      tileTeleportItems(osrsQuestTileId('making-friends-with-my-arm')).map(
+        (item) => item.name,
+      ),
+    ).toEqual(['Stony basalt', 'Icy basalt'])
+    expect(tileTeleportItems(osrsQuestTileId('the-depths-of-despair'))).toEqual(
+      [
+        {
+          name: 'Lunch by the Lancalliums',
+          wikiTitle: 'Lunch by the Lancalliums',
+          icon: 'lunch-by-the-lancalliums.png',
+        },
+      ],
+    )
+    expect(tileTeleportItems(osrsQuestTileId('the-queen-of-thieves'))).toEqual([
+      {
+        name: "The Fisher's Flute",
+        wikiTitle: "The Fisher's Flute",
+        icon: 'the-fishers-flute.png',
+      },
+    ])
+    expect(tileTeleportItems(osrsQuestTileId('tale-of-the-righteous'))).toEqual(
+      [
+        {
+          name: 'History and Hearsay',
+          wikiTitle: 'History and Hearsay',
+          icon: 'history-and-hearsay.png',
+        },
+      ],
+    )
+    expect(tileTeleportItems(osrsQuestTileId('the-forsaken-tower'))).toEqual([
+      {
+        name: 'Jewellery of Jubilation',
+        wikiTitle: 'Jewellery of Jubilation',
+        icon: 'jewellery-of-jubilation.png',
+      },
+    ])
+    expect(tileTeleportItems(osrsQuestTileId('the-ascent-of-arceuus'))).toEqual(
+      [
+        {
+          name: 'A Dark Disposition',
+          wikiTitle: 'A Dark Disposition',
+          icon: 'a-dark-disposition.png',
+        },
+      ],
+    )
+    expect(tileTeleportItems(osrsQuestTileId('cooks-assistant'))).toEqual([])
+    expect(tileTeleportItems(osrsTileId('agility', '1-10'))).toEqual([])
+    const marked = CATALOG.filter((def) => (def.teleportItems?.length ?? 0) > 0)
+    expect(marked).toHaveLength(18)
     expect(marked.every((def) => def.kind === 'quest')).toBe(true)
   })
 })

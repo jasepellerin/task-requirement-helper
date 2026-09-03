@@ -1,0 +1,49 @@
+{
+  "another-slice-of-h-a-m": [
+    {
+      "name": "Dorgesh-Kaan–Keldagrim train",
+      "wikiTitle": "Dorgesh-Kaan–Keldagrim train system"
+    }
+  ],
+  "bone-voyage": [
+    { "name": "Fossil Island barge", "wikiTitle": "Fossil Island" },
+    { "name": "Magic Mushtrees", "wikiTitle": "Mycelium Transportation System" }
+  ],
+  "eagles-peak": [
+    { "name": "Eagle transport", "wikiTitle": "Eagle transport system" }
+  ],
+  "enlightened-journey": [
+    { "name": "Balloon transport", "wikiTitle": "Balloon transport system" }
+  ],
+  "fairytale-ii-cure-a-queen": [
+    { "name": "Fairy rings", "wikiTitle": "Fairy rings" }
+  ],
+  "monkey-madness-ii": [
+    { "name": "Gnome gliders (Ape Atoll)", "wikiTitle": "Gnome glider" }
+  ],
+  "one-small-favour": [
+    { "name": "Gnome gliders (Feldip Hills)", "wikiTitle": "Gnome glider" }
+  ],
+  "shilo-village": [
+    { "name": "Shilo Village cart", "wikiTitle": "Shilo Village cart system" }
+  ],
+  "song-of-the-elves": [
+    { "name": "Spirit trees (Prifddinas)", "wikiTitle": "Spirit tree" }
+  ],
+  "the-giant-dwarf": [
+    { "name": "Keldagrim minecarts", "wikiTitle": "Keldagrim minecart system" }
+  ],
+  "the-grand-tree": [
+    { "name": "Gnome gliders", "wikiTitle": "Gnome glider" },
+    { "name": "Spirit trees (Stronghold)", "wikiTitle": "Spirit tree" }
+  ],
+  "the-path-of-glouphrie": [
+    { "name": "Spirit trees (Poison Waste)", "wikiTitle": "Spirit tree" }
+  ],
+  "tree-gnome-village": [
+    { "name": "Spirit trees", "wikiTitle": "Spirit tree" }
+  ],
+  "twilights-promise": [
+    { "name": "Quetzal transport", "wikiTitle": "Quetzal Transport System" }
+  ]
+}

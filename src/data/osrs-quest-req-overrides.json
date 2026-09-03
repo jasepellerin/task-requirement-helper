@@ -1,0 +1,18 @@
+{
+  "the-fremennik-trials": {
+    "skills": [
+      {
+        "skill": "fletching",
+        "level": 25
+      },
+      {
+        "skill": "woodcutting",
+        "level": 40
+      },
+      {
+        "skill": "crafting",
+        "level": 40
+      }
+    ]
+  }
+}

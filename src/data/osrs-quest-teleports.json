@@ -1,0 +1,50 @@
+{
+  "biohazard": [
+    { "name": "West Ardougne Teleport", "wikiTitle": "West Ardougne Teleport" }
+  ],
+  "client-of-kourend": [
+    {
+      "name": "Kourend Castle Teleport",
+      "wikiTitle": "Kourend Castle Teleport"
+    }
+  ],
+  "desert-treasure-i": [
+    { "name": "Ancient Magicks teleports", "wikiTitle": "Ancient Magicks" }
+  ],
+  "eadgars-ruse": [
+    { "name": "Trollheim Teleport", "wikiTitle": "Trollheim Teleport" }
+  ],
+  "lunar-diplomacy": [
+    { "name": "Lunar teleports", "wikiTitle": "Lunar spells" }
+  ],
+  "monkey-madness-i": [
+    {
+      "name": "Ape Atoll Teleport (Arceuus)",
+      "wikiTitle": "Ape Atoll Teleport (Arceuus)"
+    }
+  ],
+  "pandemonium": [
+    { "name": "Teleport to Boat", "wikiTitle": "Teleport to Boat" }
+  ],
+  "plague-city": [
+    { "name": "Ardougne Teleport", "wikiTitle": "Ardougne Teleport" }
+  ],
+  "recipe-for-disaster": [
+    { "name": "Ape Atoll Teleport", "wikiTitle": "Ape Atoll Teleport" }
+  ],
+  "the-great-brain-robbery": [
+    {
+      "name": "Harmony Island Teleport",
+      "wikiTitle": "Harmony Island Teleport"
+    }
+  ],
+  "twilights-promise": [
+    {
+      "name": "Civitas illa Fortis Teleport",
+      "wikiTitle": "Civitas illa Fortis Teleport"
+    }
+  ],
+  "watchtower": [
+    { "name": "Watchtower Teleport", "wikiTitle": "Watchtower Teleport" }
+  ]
+}

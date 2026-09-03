@@ -1,0 +1,125 @@
+{
+  "a-kingdom-divided": [
+    {
+      "name": "Book of the Dead",
+      "wikiTitle": "Book of the Dead",
+      "icon": "book-of-the-dead.png"
+    }
+  ],
+  "a-taste-of-hope": [
+    {
+      "name": "Drakan's medallion",
+      "wikiTitle": "Drakan's medallion",
+      "icon": "drakans-medallion.png"
+    }
+  ],
+  "client-of-kourend": [
+    {
+      "name": "Kharedst's memoirs",
+      "wikiTitle": "Kharedst's memoirs",
+      "icon": "kharedsts-memoirs.png"
+    }
+  ],
+  "desert-treasure-ii-the-fallen-empire": [
+    {
+      "name": "Ring of shadows",
+      "wikiTitle": "Ring of shadows",
+      "icon": "ring-of-shadows.png"
+    }
+  ],
+  "dragon-slayer-ii": [
+    {
+      "name": "Mythical cape",
+      "wikiTitle": "Mythical cape",
+      "icon": "mythical-cape.png"
+    }
+  ],
+  "enakhras-lament": [
+    { "name": "Camulet", "wikiTitle": "Camulet", "icon": "camulet.png" }
+  ],
+  "ghosts-ahoy": [
+    { "name": "Ectophial", "wikiTitle": "Ectophial", "icon": "ectophial.png" }
+  ],
+  "making-friends-with-my-arm": [
+    {
+      "name": "Stony basalt",
+      "wikiTitle": "Stony basalt",
+      "icon": "stony-basalt.png"
+    },
+    {
+      "name": "Icy basalt",
+      "wikiTitle": "Icy basalt",
+      "icon": "icy-basalt.png"
+    }
+  ],
+  "monkey-madness-ii": [
+    {
+      "name": "Royal seed pod",
+      "wikiTitle": "Royal seed pod",
+      "icon": "royal-seed-pod.png"
+    }
+  ],
+  "mournings-end-part-i": [
+    {
+      "name": "Teleport crystal",
+      "wikiTitle": "Teleport crystal",
+      "icon": "teleport-crystal.png"
+    }
+  ],
+  "sins-of-the-father": [
+    {
+      "name": "Drakan's medallion",
+      "wikiTitle": "Drakan's medallion",
+      "icon": "drakans-medallion.png"
+    }
+  ],
+  "song-of-the-elves": [
+    {
+      "name": "Eternal teleport crystal",
+      "wikiTitle": "Eternal teleport crystal",
+      "icon": "eternal-teleport-crystal.png"
+    }
+  ],
+  "tale-of-the-righteous": [
+    {
+      "name": "History and Hearsay",
+      "wikiTitle": "History and Hearsay",
+      "icon": "history-and-hearsay.png"
+    }
+  ],
+  "the-ascent-of-arceuus": [
+    {
+      "name": "A Dark Disposition",
+      "wikiTitle": "A Dark Disposition",
+      "icon": "a-dark-disposition.png"
+    }
+  ],
+  "the-depths-of-despair": [
+    {
+      "name": "Lunch by the Lancalliums",
+      "wikiTitle": "Lunch by the Lancalliums",
+      "icon": "lunch-by-the-lancalliums.png"
+    }
+  ],
+  "the-forsaken-tower": [
+    {
+      "name": "Jewellery of Jubilation",
+      "wikiTitle": "Jewellery of Jubilation",
+      "icon": "jewellery-of-jubilation.png"
+    }
+  ],
+  "the-fremennik-trials": [
+    {
+      "name": "Enchanted lyre",
+      "wikiTitle": "Enchanted lyre",
+      "icon": "enchanted-lyre.png"
+    }
+  ],
+  "the-queen-of-thieves": [
+    {
+      "name": "The Fisher's Flute",
+      "wikiTitle": "The Fisher's Flute",
+      "icon": "the-fishers-flute.png"
+    }
+  ]
+}

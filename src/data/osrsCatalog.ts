@@ -14,6 +14,9 @@ import bracketsData from './skill-brackets.json'
 import skillsData from './osrs-skills.json'
 import slayerMastersData from './osrs-quest-slayer-masters.json'
 import slayerMonstersData from './osrs-quest-slayer-monsters.json'
+import transportData from './osrs-quest-transport.json'
+import teleportsData from './osrs-quest-teleports.json'
+import teleportItemsData from './osrs-quest-teleport-items.json'
 
 export type OsrsSkill = {
   id: string
@@ -52,6 +55,22 @@ export type SlayerMonsterUnlock = {
   wikiTitle: string
 }
 
+export type TransportUnlock = {
+  name: string
+  wikiTitle: string
+}
+
+export type TeleportUnlock = {
+  name: string
+  wikiTitle: string
+}
+
+export type TeleportItemUnlock = {
+  name: string
+  wikiTitle: string
+  icon: string
+}
+
 export type CatalogDef = {
   id: string
   name: string
@@ -65,6 +84,9 @@ export type CatalogDef = {
   image?: string
   slayerMaster?: SlayerMasterUnlock
   slayerMonsters?: SlayerMonsterUnlock[]
+  transport?: TransportUnlock[]
+  teleports?: TeleportUnlock[]
+  teleportItems?: TeleportItemUnlock[]
   reqs: CatalogReq[]
 }
 
@@ -79,6 +101,12 @@ const QUEST_SLAYER_MASTERS = slayerMastersData as Record<
 const QUEST_SLAYER_MONSTERS = slayerMonstersData as Record<
   string,
   SlayerMonsterUnlock[]
+>
+const QUEST_TRANSPORT = transportData as Record<string, TransportUnlock[]>
+const QUEST_TELEPORTS = teleportsData as Record<string, TeleportUnlock[]>
+const QUEST_TELEPORT_ITEMS = teleportItemsData as Record<
+  string,
+  TeleportItemUnlock[]
 >
 export { OSRS_QUESTS, osrsQuestTileId } from './questReqs.ts'
 export type { OsrsQuest } from './questReqs.ts'
@@ -171,6 +199,9 @@ function buildQuestDefs(): CatalogDef[] {
     const details = questDetailsFor(quest.id)
     const slayerMaster = QUEST_SLAYER_MASTERS[quest.id]
     const slayerMonsters = QUEST_SLAYER_MONSTERS[quest.id]
+    const transport = QUEST_TRANSPORT[quest.id]
+    const teleports = QUEST_TELEPORTS[quest.id]
+    const teleportItems = QUEST_TELEPORT_ITEMS[quest.id]
     return {
       id: osrsQuestTileId(quest.id),
       name: quest.name,
@@ -186,6 +217,9 @@ function buildQuestDefs(): CatalogDef[] {
       ...(slayerMonsters && slayerMonsters.length > 0
         ? { slayerMonsters }
         : {}),
+      ...(transport && transport.length > 0 ? { transport } : {}),
+      ...(teleports && teleports.length > 0 ? { teleports } : {}),
+      ...(teleportItems && teleportItems.length > 0 ? { teleportItems } : {}),
       reqs: [
         ...(reqs?.quests ?? []).map((id) => ({
           type: 'tile' as const,
@@ -244,6 +278,18 @@ export function tileSlayerMaster(
 
 export function tileSlayerMonsters(tileId: string): SlayerMonsterUnlock[] {
   return CATALOG_BY_ID.get(tileId)?.slayerMonsters ?? []
+}
+
+export function tileTransport(tileId: string): TransportUnlock[] {
+  return CATALOG_BY_ID.get(tileId)?.transport ?? []
+}
+
+export function tileTeleports(tileId: string): TeleportUnlock[] {
+  return CATALOG_BY_ID.get(tileId)?.teleports ?? []
+}
+
+export function tileTeleportItems(tileId: string): TeleportItemUnlock[] {
+  return CATALOG_BY_ID.get(tileId)?.teleportItems ?? []
 }
 
 export type KindFilter = Record<TileKind, boolean>

@@ -45,6 +45,14 @@ describe('requirementViews', () => {
     expect(views.at(-1)?.parentId).toBe(osrsTileId('woodcutting', '31-40'))
   })
 
+  it('shows Fremennik Trials lyre-craft override skills', () => {
+    expect(
+      requirementViews(tile(osrsQuestTileId('the-fremennik-trials'))).map(
+        (row) => row.title,
+      ),
+    ).toEqual(['25 Fletching', '40 Woodcutting', '40 Crafting'])
+  })
+
   it('tags ironman skill reqs and still points at the covering tile', () => {
     const views = requirementViews(tile(osrsDiaryTileId('ardougne', 'medium')))
     expect(views).toContainEqual(

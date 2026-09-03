@@ -1,16 +1,10 @@
 import { useEffect, useId, useMemo, useState } from 'react'
-import {
-  ALL_KINDS,
-  filterTilesByKind,
-  tileSlayerMaster,
-  tileSlayerMonsters,
-} from '../data/osrsCatalog.ts'
+import { ALL_KINDS, filterTilesByKind } from '../data/osrsCatalog.ts'
 import { searchTiles } from '../domain/search.ts'
 import { type Tile, type TileStatus } from '../domain/types.ts'
 import { KindFilters } from './KindFilters.tsx'
-import { SlayerMasterMark } from './SlayerMasterMark.tsx'
-import { SlayerMonsterMark } from './SlayerMonsterMark.tsx'
 import { StatusButtons } from './StatusPicker.tsx'
+import { TileUnlockMarks } from './TileUnlockMarks.tsx'
 
 type TileFinderProps = {
   tiles: Tile[]
@@ -69,32 +63,23 @@ export function TileFinder({
           <p className="empty">No matching tiles.</p>
         ) : (
           <ul className="search-results">
-            {results.map((tile) => {
-              const slayerMaster = tileSlayerMaster(tile.id)
-              const slayerMonsters = tileSlayerMonsters(tile.id)
-              return (
-                <li key={tile.id} className="search-result">
-                  <button
-                    type="button"
-                    className="search-result-name"
-                    onClick={() => onOpen(tile.id)}
-                  >
-                    <span>{tile.name}</span>
-                    {slayerMaster ? (
-                      <SlayerMasterMark master={slayerMaster} />
-                    ) : null}
-                    {slayerMonsters.length > 0 ? (
-                      <SlayerMonsterMark monsters={slayerMonsters} />
-                    ) : null}
-                  </button>
-                  <StatusButtons
-                    value={tile.status}
-                    name={tile.name}
-                    onChange={(status) => onStatusChange(tile.id, status)}
-                  />
-                </li>
-              )
-            })}
+            {results.map((tile) => (
+              <li key={tile.id} className="search-result">
+                <button
+                  type="button"
+                  className="search-result-name"
+                  onClick={() => onOpen(tile.id)}
+                >
+                  <span>{tile.name}</span>
+                  <TileUnlockMarks tileId={tile.id} />
+                </button>
+                <StatusButtons
+                  value={tile.status}
+                  name={tile.name}
+                  onChange={(status) => onStatusChange(tile.id, status)}
+                />
+              </li>
+            ))}
           </ul>
         )}
 

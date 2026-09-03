@@ -6,15 +6,12 @@ import {
   tileItems,
   tileLength,
   tileRewards,
-  tileSlayerMaster,
-  tileSlayerMonsters,
 } from '../data/osrsCatalog.ts'
 import { formatGp } from '../data/questReqs.ts'
 import { requirementViews } from '../data/requirementViews.ts'
 import { tileWikiUrl, wikiFileUrl } from '../data/wiki.ts'
 import { STATUS_LABEL, type Tile, type TileStatus } from '../domain/types.ts'
-import { SlayerMasterMark } from './SlayerMasterMark.tsx'
-import { SlayerMonsterMark } from './SlayerMonsterMark.tsx'
+import { TileUnlockMarks } from './TileUnlockMarks.tsx'
 import {
   CloseIcon,
   ExternalLinkIcon,
@@ -63,8 +60,6 @@ export function TileDetail({
   const rewards = tileRewards(tile.id)
   const image = tileImage(tile.id)
   const showImage = Boolean(image) && failedImageTileId !== tile.id
-  const slayerMaster = tileSlayerMaster(tile.id)
-  const slayerMonsters = tileSlayerMonsters(tile.id)
   const reqViews = useMemo(() => requirementViews(tile), [tile])
 
   useEffect(() => {
@@ -147,12 +142,7 @@ export function TileDetail({
           </div>
         ) : null}
 
-        {slayerMaster ? (
-          <SlayerMasterMark master={slayerMaster} linked />
-        ) : null}
-        {slayerMonsters.length > 0 ? (
-          <SlayerMonsterMark monsters={slayerMonsters} linked />
-        ) : null}
+        <TileUnlockMarks tileId={tile.id} linked />
 
         {gp !== undefined ? (
           <p className="tile-gold">Gold {formatGp(gp)}</p>
