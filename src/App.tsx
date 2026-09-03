@@ -182,6 +182,11 @@ export default function App() {
           deleteLabel={editingCatalog ? 'Remove from board' : 'Delete'}
           deleteDanger={!editingCatalog}
           onOpenTile={editor.mode === 'edit' ? openEdit : undefined}
+          onStatusChange={
+            editor.mode === 'edit'
+              ? (status) => setStatus(editor.id, status)
+              : undefined
+          }
         />
       ) : null}
     </div>

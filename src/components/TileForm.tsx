@@ -6,13 +6,12 @@ import { wouldCreateCycle } from '../domain/graph.ts'
 import { parentIsSatisfied } from '../domain/readiness.ts'
 import { searchTiles } from '../domain/search.ts'
 import {
-  isTileStatus,
   STATUS_LABEL,
-  TILE_STATUSES,
   type Tile,
   type TileInput,
   type TileStatus,
 } from '../domain/types.ts'
+import { PencilIcon, StatusPicker } from './StatusPicker.tsx'
 
 type TileFormProps = {
   tiles: Tile[]
@@ -24,6 +23,7 @@ type TileFormProps = {
   deleteLabel?: string
   deleteDanger?: boolean
   onOpenTile?: (id: string) => void
+  onStatusChange?: (status: TileStatus) => void
 }
 
 function parentStatusText(parent: Tile | undefined, blocking: boolean): string {
@@ -41,8 +41,11 @@ export function TileForm({
   deleteLabel = 'Delete',
   deleteDanger = true,
   onOpenTile,
+  onStatusChange,
 }: TileFormProps) {
   const titleId = useId()
+  const [editing, setEditing] = useState(!tile)
+  const [statusMenuOpen, setStatusMenuOpen] = useState(false)
   const [name, setName] = useState(tile?.name ?? '')
   const [status, setStatus] = useState<TileStatus>(tile?.status ?? 'locked')
   const [parentIds, setParentIds] = useState(tile?.parentIds ?? [])
@@ -69,17 +72,41 @@ export function TileForm({
 
   useEffect(() => {
     function onKey(event: KeyboardEvent) {
-      if (event.key === 'Escape') onCancel()
+      if (event.key !== 'Escape') return
+      if (statusMenuOpen) {
+        setStatusMenuOpen(false)
+        return
+      }
+      if (editing && tile) {
+        setName(tile.name)
+        setParentIds(tile.parentIds)
+        setParentQuery('')
+        setEditing(false)
+        return
+      }
+      onCancel()
     }
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
-  }, [onCancel])
+  }, [editing, onCancel, statusMenuOpen, tile])
 
   function addParent(id: string) {
     setParentIds((current) =>
       current.includes(id) ? current : [...current, id],
     )
     setParentQuery('')
+  }
+
+  function revertEdit() {
+    setName(tile?.name ?? '')
+    setParentIds(tile?.parentIds ?? [])
+    setParentQuery('')
+    setEditing(false)
+  }
+
+  function changeStatus(next: TileStatus) {
+    setStatus(next)
+    onStatusChange?.(next)
   }
 
   return (
@@ -92,53 +119,58 @@ export function TileForm({
         onClick={(event) => event.stopPropagation()}
         onSubmit={(event) => {
           event.preventDefault()
+          if (!editing) return
           onSubmit({ name, status, parentIds })
         }}
       >
         <div className="modal-title-row">
-          <h2 id={titleId}>{tile ? tile.name : 'New tile'}</h2>
-          {wikiUrl ? (
-            <a
-              className="wiki-link"
-              href={wikiUrl}
-              target="_blank"
-              rel="noreferrer"
-            >
-              Wiki
-            </a>
-          ) : null}
+          {editing ? (
+            <input
+              id={titleId}
+              className="modal-title-input"
+              value={name}
+              onChange={(event) => setName(event.target.value)}
+              autoFocus
+              required
+              placeholder="Tile name"
+            />
+          ) : (
+            <h2 id={titleId}>{name}</h2>
+          )}
+          <div className="modal-title-actions">
+            <StatusPicker
+              value={status}
+              open={statusMenuOpen}
+              onOpenChange={setStatusMenuOpen}
+              onChange={changeStatus}
+            />
+            {tile && !editing ? (
+              <button
+                type="button"
+                className="btn icon-ghost"
+                aria-label="Edit tile"
+                title="Edit"
+                onClick={() => setEditing(true)}
+              >
+                <PencilIcon />
+              </button>
+            ) : null}
+            {wikiUrl ? (
+              <a
+                className="wiki-link"
+                href={wikiUrl}
+                target="_blank"
+                rel="noreferrer"
+              >
+                Wiki
+              </a>
+            ) : null}
+          </div>
         </div>
 
         {gp !== undefined ? (
           <p className="tile-gold">Gold {formatGp(gp)}</p>
         ) : null}
-
-        <label className="field">
-          Name
-          <input
-            value={name}
-            onChange={(event) => setName(event.target.value)}
-            autoFocus
-            required
-          />
-        </label>
-
-        <label className="field">
-          Status
-          <select
-            value={status}
-            onChange={(event) => {
-              const value = event.target.value
-              if (isTileStatus(value)) setStatus(value)
-            }}
-          >
-            {TILE_STATUSES.map((value) => (
-              <option key={value} value={value}>
-                {STATUS_LABEL[value]}
-              </option>
-            ))}
-          </select>
-        </label>
 
         <fieldset className="rel-fieldset">
           <legend>Required</legend>
@@ -197,7 +229,7 @@ export function TileForm({
                         </>
                       )}
                     </div>
-                    {row.catalog ? null : (
+                    {editing && !row.catalog ? (
                       <button
                         type="button"
                         className="btn ghost"
@@ -209,43 +241,47 @@ export function TileForm({
                       >
                         Remove
                       </button>
-                    )}
+                    ) : null}
                   </li>
                 )
               })}
             </ul>
           )}
 
-          <label className="field">
-            Add requirement
-            <input
-              value={parentQuery}
-              onChange={(event) => setParentQuery(event.target.value)}
-              placeholder="Agility 11–20"
-            />
-          </label>
+          {editing ? (
+            <>
+              <label className="field">
+                Add requirement
+                <input
+                  value={parentQuery}
+                  onChange={(event) => setParentQuery(event.target.value)}
+                  placeholder="Agility 11–20"
+                />
+              </label>
 
-          {parentQuery.trim() ? (
-            parentResults.length === 0 ? (
-              <p className="empty">No matching tiles.</p>
-            ) : (
-              <ul className="search-results">
-                {parentResults.map((candidate) => (
-                  <li key={candidate.id}>
-                    <button
-                      type="button"
-                      className="search-result"
-                      onClick={() => addParent(candidate.id)}
-                    >
-                      <span className="search-result-top">
-                        <strong>{candidate.name}</strong>
-                        <span>{STATUS_LABEL[candidate.status]}</span>
-                      </span>
-                    </button>
-                  </li>
-                ))}
-              </ul>
-            )
+              {parentQuery.trim() ? (
+                parentResults.length === 0 ? (
+                  <p className="empty">No matching tiles.</p>
+                ) : (
+                  <ul className="search-results">
+                    {parentResults.map((candidate) => (
+                      <li key={candidate.id}>
+                        <button
+                          type="button"
+                          className="search-result"
+                          onClick={() => addParent(candidate.id)}
+                        >
+                          <span className="search-result-top">
+                            <strong>{candidate.name}</strong>
+                            <span>{STATUS_LABEL[candidate.status]}</span>
+                          </span>
+                        </button>
+                      </li>
+                    ))}
+                  </ul>
+                )
+              ) : null}
+            </>
           ) : null}
         </fieldset>
 
@@ -264,12 +300,24 @@ export function TileForm({
             <span />
           )}
           <div className="modal-actions-end">
-            <button type="button" className="btn" onClick={onCancel}>
-              Cancel
-            </button>
-            <button type="submit" className="btn primary">
-              Save
-            </button>
+            {editing ? (
+              <>
+                <button
+                  type="button"
+                  className="btn"
+                  onClick={tile ? revertEdit : onCancel}
+                >
+                  Cancel
+                </button>
+                <button type="submit" className="btn primary">
+                  Save
+                </button>
+              </>
+            ) : (
+              <button type="button" className="btn" onClick={onCancel}>
+                Close
+              </button>
+            )}
           </div>
         </div>
       </form>
