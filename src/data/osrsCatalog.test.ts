@@ -498,7 +498,7 @@ describe('OSRS quests', () => {
         {
           name: 'Lunch by the Lancalliums',
           wikiTitle: 'Lunch by the Lancalliums',
-          icon: 'lunch-by-the-lancalliums.png',
+          icon: 'kharedsts-memoirs.png',
         },
       ],
     )
@@ -506,7 +506,7 @@ describe('OSRS quests', () => {
       {
         name: "The Fisher's Flute",
         wikiTitle: "The Fisher's Flute",
-        icon: 'the-fishers-flute.png',
+        icon: 'kharedsts-memoirs.png',
       },
     ])
     expect(tileTeleportItems(osrsQuestTileId('tale-of-the-righteous'))).toEqual(
@@ -514,7 +514,7 @@ describe('OSRS quests', () => {
         {
           name: 'History and Hearsay',
           wikiTitle: 'History and Hearsay',
-          icon: 'history-and-hearsay.png',
+          icon: 'kharedsts-memoirs.png',
         },
       ],
     )
@@ -522,7 +522,7 @@ describe('OSRS quests', () => {
       {
         name: 'Jewellery of Jubilation',
         wikiTitle: 'Jewellery of Jubilation',
-        icon: 'jewellery-of-jubilation.png',
+        icon: 'kharedsts-memoirs.png',
       },
     ])
     expect(tileTeleportItems(osrsQuestTileId('the-ascent-of-arceuus'))).toEqual(
@@ -530,7 +530,7 @@ describe('OSRS quests', () => {
         {
           name: 'A Dark Disposition',
           wikiTitle: 'A Dark Disposition',
-          icon: 'a-dark-disposition.png',
+          icon: 'kharedsts-memoirs.png',
         },
       ],
     )

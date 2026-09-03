@@ -84,28 +84,28 @@
     {
       "name": "History and Hearsay",
       "wikiTitle": "History and Hearsay",
-      "icon": "history-and-hearsay.png"
+      "icon": "kharedsts-memoirs.png"
     }
   ],
   "the-ascent-of-arceuus": [
     {
       "name": "A Dark Disposition",
       "wikiTitle": "A Dark Disposition",
-      "icon": "a-dark-disposition.png"
+      "icon": "kharedsts-memoirs.png"
     }
   ],
   "the-depths-of-despair": [
     {
       "name": "Lunch by the Lancalliums",
       "wikiTitle": "Lunch by the Lancalliums",
-      "icon": "lunch-by-the-lancalliums.png"
+      "icon": "kharedsts-memoirs.png"
     }
   ],
   "the-forsaken-tower": [
     {
       "name": "Jewellery of Jubilation",
       "wikiTitle": "Jewellery of Jubilation",
-      "icon": "jewellery-of-jubilation.png"
+      "icon": "kharedsts-memoirs.png"
     }
   ],
   "the-fremennik-trials": [
@@ -119,7 +119,7 @@
     {
       "name": "The Fisher's Flute",
       "wikiTitle": "The Fisher's Flute",
-      "icon": "the-fishers-flute.png"
+      "icon": "kharedsts-memoirs.png"
     }
   ]
 }
