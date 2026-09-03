@@ -7,8 +7,8 @@ import {
 import { osrsDiaryTileId, osrsQuestTileId, osrsTileId } from './osrsCatalog.ts'
 import type { Tile } from '../domain/types.ts'
 
-function tile(id: string, parentIds: string[] = [], name = id): Tile {
-  return { id, name, status: 'locked', parentIds }
+function tile(id: string): Tile {
+  return { id, name: id, status: 'locked', parentIds: [] }
 }
 
 describe('skillReqTitle', () => {
@@ -32,8 +32,7 @@ describe('coveringSkillTile', () => {
 
 describe('requirementViews', () => {
   it('shows exact quest skill levels pointing at covering tiles', () => {
-    const id = osrsQuestTileId('animal-magnetism')
-    const views = requirementViews(tile(id, []), [])
+    const views = requirementViews(tile(osrsQuestTileId('animal-magnetism')))
 
     expect(views.map((row) => row.title)).toEqual([
       'Ernest the Chicken',
@@ -47,10 +46,7 @@ describe('requirementViews', () => {
   })
 
   it('tags ironman skill reqs and still points at the covering tile', () => {
-    const views = requirementViews(
-      tile(osrsDiaryTileId('ardougne', 'medium'), []),
-      [],
-    )
+    const views = requirementViews(tile(osrsDiaryTileId('ardougne', 'medium')))
     expect(views).toContainEqual(
       expect.objectContaining({
         title: '49 Crafting (Ironman)',
@@ -60,8 +56,7 @@ describe('requirementViews', () => {
   })
 
   it('lists previous diary tiers then exact skill levels', () => {
-    const id = osrsDiaryTileId('kandarin', 'medium')
-    const views = requirementViews(tile(id, []), [])
+    const views = requirementViews(tile(osrsDiaryTileId('kandarin', 'medium')))
     expect(views[0]).toMatchObject({
       parentId: osrsDiaryTileId('kandarin', 'easy'),
       title: 'Kandarin Easy',
@@ -72,15 +67,16 @@ describe('requirementViews', () => {
     )
   })
 
-  it('falls back to parent tile names for skill tiles', () => {
-    const parent = tile(osrsTileId('farming', '31-40'), [], 'Farming 31–40')
-    const child = tile(osrsTileId('farming', '41-50'), [parent.id])
-    expect(requirementViews(child, [parent, child])).toEqual([
-      {
-        key: `parent:${parent.id}`,
-        parentId: parent.id,
-        title: 'Farming 31–40',
-      },
+  it('lists earlier skill brackets as requirements', () => {
+    expect(
+      requirementViews(tile(osrsTileId('farming', '41-50'))).map(
+        (row) => row.title,
+      ),
+    ).toEqual([
+      'Farming 1–10',
+      'Farming 11–20',
+      'Farming 21–30',
+      'Farming 31–40',
     ])
   })
 })

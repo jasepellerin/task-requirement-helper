@@ -1,7 +1,11 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
-import { mergeOsrsSkillTiles, userPersistedTiles } from '../data/osrsCatalog.ts'
-import { groupTilesByReadiness } from '../domain/readiness.ts'
-import { setTileStatus } from '../domain/store.ts'
+import {
+  setStoredStatus,
+  statusesFromStored,
+  storedTilesFromStatuses,
+  tilesFromStatuses,
+} from '../data/osrsCatalog.ts'
+import { groupTilesByReadiness, tilesById } from '../domain/readiness.ts'
 import type { TileStatus } from '../domain/types.ts'
 import {
   downloadStore,
@@ -10,44 +14,40 @@ import {
   saveStore,
 } from '../storage/localStore.ts'
 
-function loadTiles() {
-  return mergeOsrsSkillTiles(loadStore().tiles)
+function loadStatuses() {
+  return statusesFromStored(loadStore().tiles)
 }
 
 export function useTiles() {
-  const [tiles, setTiles] = useState(loadTiles)
-
-  useEffect(() => {
-    saveStore({ version: 1, tiles: userPersistedTiles(tiles) })
-  }, [tiles])
-
+  const [statuses, setStatuses] = useState(loadStatuses)
+  const tiles = useMemo(() => tilesFromStatuses(statuses), [statuses])
+  const byId = useMemo(() => tilesById(tiles), [tiles])
   const groups = useMemo(() => groupTilesByReadiness(tiles), [tiles])
 
-  const setStatus = useCallback(
-    (id: string, status: TileStatus) => {
-      const result = setTileStatus(tiles, id, status)
-      if (!result.ok) return result
-      setTiles(result.tiles)
-      return result
-    },
-    [tiles],
-  )
+  useEffect(() => {
+    saveStore({ version: 1, tiles: storedTilesFromStatuses(statuses) })
+  }, [statuses])
+
+  const setStatus = useCallback((id: string, status: TileStatus) => {
+    setStatuses((current) => setStoredStatus(current, id, status) ?? current)
+  }, [])
 
   const exportStore = useCallback(() => {
-    downloadStore({ version: 1, tiles: userPersistedTiles(tiles) })
-  }, [tiles])
+    downloadStore({ version: 1, tiles: storedTilesFromStatuses(statuses) })
+  }, [statuses])
 
   const importStore = useCallback((text: string) => {
     const store = parseStoreJson(text)
     if (!store) {
       return { ok: false as const, error: 'Invalid tiles JSON' }
     }
-    setTiles(mergeOsrsSkillTiles(store.tiles))
+    setStatuses(statusesFromStored(store.tiles))
     return { ok: true as const }
   }, [])
 
   return {
     tiles,
+    byId,
     groups,
     setStatus,
     exportStore,

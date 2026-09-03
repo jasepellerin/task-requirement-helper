@@ -1,17 +1,19 @@
 import reqsData from './osrs-diary-skill-reqs.json'
 import bracketsData from './skill-brackets.json'
-import type {
-  DiarySkillReq,
-  DiarySkillReqsFile,
-  DiarySkillTier,
-} from './parseDiaryWikitext.ts'
 
-export type {
-  DiarySkillReq,
-  DiarySkillReqsFile,
-  DiarySkillTier,
-} from './parseDiaryWikitext.ts'
-export { parseDiarySkillStats } from './parseDiaryWikitext.ts'
+export const DIARY_SKILL_TIERS = ['easy', 'medium', 'hard', 'elite'] as const
+
+export type DiarySkillTier = (typeof DIARY_SKILL_TIERS)[number]
+
+export type DiarySkillReq = {
+  skill: string
+  level: number
+  ironman?: boolean
+}
+
+export type DiaryTierSkillReqs = Record<DiarySkillTier, DiarySkillReq[]>
+
+export type DiarySkillReqsFile = Record<string, DiaryTierSkillReqs>
 
 type SkillBracket = {
   id: string
@@ -34,11 +36,4 @@ export function diarySkillReqsFor(
   tierId: string,
 ): DiarySkillReq[] {
   return DIARY_SKILL_REQS[diaryId]?.[tierId as DiarySkillTier] ?? []
-}
-
-export function skillParentsFor(diaryId: string, tierId: string): string[] {
-  const ids = diarySkillReqsFor(diaryId, tierId).map(
-    (req) => `osrs:${req.skill}:${coveringBracketId(req.level)}`,
-  )
-  return [...new Set(ids)]
 }

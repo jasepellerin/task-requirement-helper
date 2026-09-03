@@ -1,30 +1,31 @@
 import { useEffect, useId, useMemo, useState } from 'react'
-import { formatGp, tileGp } from '../data/questReqs.ts'
+import { tileGp } from '../data/osrsCatalog.ts'
+import { formatGp } from '../data/questReqs.ts'
 import { requirementViews } from '../data/requirementViews.ts'
 import { tileWikiUrl } from '../data/wiki.ts'
 import { STATUS_LABEL, type Tile, type TileStatus } from '../domain/types.ts'
 import { CloseIcon, ExternalLinkIcon, StatusPicker } from './StatusPicker.tsx'
 
-type TileFormProps = {
-  tiles: Tile[]
+type TileDetailProps = {
+  byId: Map<string, Tile>
   tile: Tile
   onCancel: () => void
   onOpenTile?: (id: string) => void
   onStatusChange?: (status: TileStatus) => void
 }
 
-export function TileForm({
-  tiles,
+export function TileDetail({
+  byId,
   tile,
   onCancel,
   onOpenTile,
   onStatusChange,
-}: TileFormProps) {
+}: TileDetailProps) {
   const titleId = useId()
   const [statusMenuOpen, setStatusMenuOpen] = useState(false)
   const wikiUrl = tileWikiUrl(tile.id)
   const gp = tileGp(tile.id)
-  const reqViews = useMemo(() => requirementViews(tile, tiles), [tile, tiles])
+  const reqViews = useMemo(() => requirementViews(tile), [tile])
 
   useEffect(() => {
     function onKey(event: KeyboardEvent) {
@@ -92,9 +93,7 @@ export function TileForm({
           ) : (
             <ul className="parent-list">
               {reqViews.map((row) => {
-                const parent = tiles.find(
-                  (candidate) => candidate.id === row.parentId,
-                )
+                const parent = byId.get(row.parentId)
                 const parentStatus = parent?.status ?? 'unseen'
                 const open = Boolean(parent && onOpenTile)
                 const className = `req-name req-${parentStatus}`

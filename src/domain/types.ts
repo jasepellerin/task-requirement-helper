@@ -25,9 +25,14 @@ export type Tile = {
   parentIds: string[]
 }
 
+export type StoredTile = {
+  id: string
+  status: TileStatus
+}
+
 export type StoreV1 = {
   version: 1
-  tiles: Tile[]
+  tiles: StoredTile[]
 }
 
 export type Readiness =
@@ -40,6 +45,3 @@ export type ReadinessGroups = {
   unlocked: Tile[]
   completed: Tile[]
 }
-
-export type MutationResult =
-  { ok: true; tiles: Tile[] } | { ok: false; error: string }

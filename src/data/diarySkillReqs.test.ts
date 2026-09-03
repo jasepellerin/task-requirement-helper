@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest'
-import { coveringBracketId, skillParentsFor } from './diarySkillReqs.ts'
+import { coveringBracketId } from './diarySkillReqs.ts'
 import { parseDiarySkillStats } from './parseDiaryWikitext.ts'
-import { OSRS_SKILLS, osrsTileId } from './osrsCatalog.ts'
+import { OSRS_SKILLS } from './osrsCatalog.ts'
 
 const KANDARIN_FIXTURE = `
 ==Overview==
@@ -75,17 +75,5 @@ describe('parseDiarySkillStats', () => {
     expect(skills).not.toContain('strength')
     expect(skills).not.toContain('ranged')
     expect(skills).not.toContain('total')
-  })
-})
-
-describe('skillParentsFor', () => {
-  it('maps req levels to covering skill tiles', () => {
-    const parents = skillParentsFor('kandarin', 'easy')
-    expect(parents).toEqual([
-      osrsTileId('agility', '11-20'),
-      osrsTileId('fishing', '11-20'),
-      osrsTileId('crafting', '41-50'),
-      osrsTileId('farming', '11-20'),
-    ])
   })
 })

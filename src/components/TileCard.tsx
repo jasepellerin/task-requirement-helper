@@ -1,16 +1,17 @@
-import { formatGp, tileGp } from '../data/questReqs.ts'
-import { blockingParentCount, tilesById } from '../domain/readiness.ts'
+import { tileGp } from '../data/osrsCatalog.ts'
+import { formatGp } from '../data/questReqs.ts'
+import { blockingParentCount } from '../domain/readiness.ts'
 import type { Tile } from '../domain/types.ts'
 
 type TileCardProps = {
   tile: Tile
-  tiles: Tile[]
+  byId: Map<string, Tile>
   onOpen: () => void
 }
 
-function cardStats(tile: Tile, tiles: Tile[]): string | null {
+function cardStats(tile: Tile, byId: Map<string, Tile>): string | null {
   const gp = tileGp(tile.id)
-  const blocking = blockingParentCount(tile, tilesById(tiles))
+  const blocking = blockingParentCount(tile, byId)
   const parts: string[] = []
   if (gp !== undefined) parts.push(formatGp(gp))
   if (blocking > 0) {
@@ -19,8 +20,8 @@ function cardStats(tile: Tile, tiles: Tile[]): string | null {
   return parts.length > 0 ? parts.join(' · ') : null
 }
 
-export function TileCard({ tile, tiles, onOpen }: TileCardProps) {
-  const stats = cardStats(tile, tiles)
+export function TileCard({ tile, byId, onOpen }: TileCardProps) {
+  const stats = cardStats(tile, byId)
 
   return (
     <article className="tile-card">

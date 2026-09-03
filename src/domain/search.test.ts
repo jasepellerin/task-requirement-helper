@@ -27,6 +27,13 @@ describe('searchSortKey', () => {
       'another slice of h.a.m.',
     )
   })
+
+  it('sorts skill capes as that skill at 99', () => {
+    expect(searchSortKey('Get the Agility skill cape')).toBe('agility 99')
+    expect(searchSortKey('Get the Woodcutting skill cape')).toBe(
+      'woodcutting 99',
+    )
+  })
 })
 
 describe('searchTiles', () => {
@@ -63,10 +70,14 @@ describe('searchTiles', () => {
   })
 
   it('keeps name order regardless of status', () => {
-    const results = searchTiles(tiles, 'agility')
+    const results = searchTiles(
+      [...tiles, tile('cape', 'Get the Agility skill cape')],
+      'agility',
+    )
     expect(results.map((item) => item.name)).toEqual([
       'Agility 1–10',
       'Agility 21–30',
+      'Get the Agility skill cape',
     ])
   })
 

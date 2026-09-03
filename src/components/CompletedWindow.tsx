@@ -4,14 +4,14 @@ import type { Tile } from '../domain/types.ts'
 import { Columns, TileColumn } from './TileColumn.tsx'
 
 type CompletedWindowProps = {
-  tiles: Tile[]
+  byId: Map<string, Tile>
   completed: Tile[]
   onClose: () => void
   onOpen: (id: string) => void
 }
 
 export function CompletedWindow({
-  tiles,
+  byId,
   completed,
   onClose,
   onOpen,
@@ -46,21 +46,21 @@ export function CompletedWindow({
           <TileColumn
             title="Skills"
             tiles={groups.skill}
-            allTiles={tiles}
+            byId={byId}
             empty="No completed skills."
             onOpen={onOpen}
           />
           <TileColumn
             title="Diaries"
             tiles={groups.diary}
-            allTiles={tiles}
+            byId={byId}
             empty="No completed diaries."
             onOpen={onOpen}
           />
           <TileColumn
             title="Quests"
             tiles={groups.quest}
-            allTiles={tiles}
+            byId={byId}
             empty="No completed quests."
             onOpen={onOpen}
           />

@@ -3,9 +3,11 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import {
   DIARY_SKILL_TIERS,
+  type DiarySkillReqsFile,
+} from '../src/data/diarySkillReqs.ts'
+import {
   parseDiarySkillStats,
   type CatalogSkill,
-  type DiarySkillReqsFile,
 } from '../src/data/parseDiaryWikitext.ts'
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), '..')

@@ -1,20 +1,17 @@
-import { isTileStatus, type StoreV1, type Tile } from '../domain/types.ts'
+import { isTileStatus, type StoreV1, type StoredTile } from '../domain/types.ts'
 
 export const STORAGE_KEY = 'tiles:v1'
 
 const emptyStore = (): StoreV1 => ({ version: 1, tiles: [] })
 
-function isTile(value: unknown): value is Tile {
+function isStoredTile(value: unknown): value is StoredTile {
   if (typeof value !== 'object' || value === null) return false
   const tile = value as Record<string, unknown>
   return (
     typeof tile.id === 'string' &&
     tile.id.length > 0 &&
-    typeof tile.name === 'string' &&
     typeof tile.status === 'string' &&
-    isTileStatus(tile.status) &&
-    Array.isArray(tile.parentIds) &&
-    tile.parentIds.every((id) => typeof id === 'string')
+    isTileStatus(tile.status)
   )
 }
 
@@ -22,14 +19,12 @@ export function parseStore(value: unknown): StoreV1 | null {
   if (typeof value !== 'object' || value === null) return null
   const record = value as Record<string, unknown>
   if (record.version !== 1 || !Array.isArray(record.tiles)) return null
-  if (!record.tiles.every(isTile)) return null
+  if (!record.tiles.every(isStoredTile)) return null
   return {
     version: 1,
     tiles: record.tiles.map((tile) => ({
       id: tile.id,
-      name: tile.name,
       status: tile.status,
-      parentIds: [...new Set(tile.parentIds)],
     })),
   }
 }

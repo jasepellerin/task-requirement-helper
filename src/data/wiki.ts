@@ -1,5 +1,4 @@
-import { OSRS_DIARIES, OSRS_SKILLS } from './osrsCatalog.ts'
-import { OSRS_QUESTS, osrsQuestTileId } from './questReqs.ts'
+import { CATALOG_BY_ID } from './osrsCatalog.ts'
 
 const WIKI_ORIGIN = 'https://oldschool.runescape.wiki/w/'
 
@@ -12,19 +11,7 @@ export function wikiPageUrl(wikiTitle: string): string {
 }
 
 export function tileWikiTitle(tileId: string): string | undefined {
-  if (tileId.startsWith('osrs:quest:')) {
-    return OSRS_QUESTS.find((quest) => osrsQuestTileId(quest.id) === tileId)
-      ?.wikiTitle
-  }
-  if (tileId.startsWith('osrs:diary:')) {
-    const diaryId = tileId.slice('osrs:diary:'.length).split(':')[0]
-    return OSRS_DIARIES.find((diary) => diary.id === diaryId)?.wikiTitle
-  }
-  if (tileId.startsWith('osrs:')) {
-    const skillId = tileId.slice('osrs:'.length).split(':')[0]
-    return OSRS_SKILLS.find((skill) => skill.id === skillId)?.name
-  }
-  return undefined
+  return CATALOG_BY_ID.get(tileId)?.wikiTitle
 }
 
 export function tileWikiUrl(tileId: string): string | undefined {

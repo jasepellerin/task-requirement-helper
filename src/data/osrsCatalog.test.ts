@@ -1,12 +1,9 @@
 import { describe, expect, it } from 'vitest'
-import { formatGp, tileGp } from './questReqs.ts'
+import { formatGp } from './questReqs.ts'
 import {
-  buildOsrsCatalogTiles,
-  buildOsrsDiaryTiles,
-  buildOsrsQuestTiles,
-  buildOsrsSkillTiles,
+  CATALOG,
+  CATALOG_BY_ID,
   DIARY_TIERS,
-  mergeOsrsSkillTiles,
   OSRS_DIARIES,
   OSRS_QUESTS,
   OSRS_SKILLS,
@@ -15,10 +12,15 @@ import {
   osrsQuestTileId,
   osrsTileId,
   osrsTileName,
+  parentIdsFor,
   partitionByKind,
+  setStoredStatus,
   SKILL_BRACKETS,
+  statusesFromStored,
+  storedTilesFromStatuses,
+  tileGp,
   tileKind,
-  userPersistedTiles,
+  tilesFromStatuses,
 } from './osrsCatalog.ts'
 
 function catalogSize(): number {
@@ -29,13 +31,17 @@ function catalogSize(): number {
   )
 }
 
+function unseenTiles() {
+  return tilesFromStatuses(new Map())
+}
+
 describe('OSRS skill catalog', () => {
   it('covers non-combat skills and 10 brackets', () => {
     expect(OSRS_SKILLS).toHaveLength(16)
     expect(SKILL_BRACKETS).toHaveLength(10)
-    const catalog = buildOsrsSkillTiles()
-    expect(catalog).toHaveLength(160)
-    expect(catalog.every((tile) => tile.status === 'unseen')).toBe(true)
+    const skills = CATALOG.filter((def) => def.kind === 'skill')
+    expect(skills).toHaveLength(160)
+    expect(unseenTiles().every((tile) => tile.status === 'unseen')).toBe(true)
     expect(OSRS_SKILLS.map((skill) => skill.id)).toContain('sailing')
     expect(OSRS_SKILLS.map((skill) => skill.name)).toContain('Woodcutting')
     expect(OSRS_SKILLS.map((skill) => skill.id)).not.toContain('attack')
@@ -56,43 +62,33 @@ describe('OSRS skill catalog', () => {
   })
 
   it('chains every earlier bracket as a parent', () => {
-    const tiles = buildOsrsSkillTiles()
-    const byId = new Map(tiles.map((tile) => [tile.id, tile]))
+    const first = CATALOG_BY_ID.get(osrsTileId('woodcutting', '1-10'))
+    expect(first && parentIdsFor(first)).toEqual([])
 
-    const first = byId.get(osrsTileId('woodcutting', '1-10'))
-    expect(first?.parentIds).toEqual([])
-
-    const mid = byId.get(osrsTileId('woodcutting', '21-30'))
-    expect(mid?.parentIds).toEqual([
+    const mid = CATALOG_BY_ID.get(osrsTileId('woodcutting', '21-30'))
+    expect(mid && parentIdsFor(mid)).toEqual([
       osrsTileId('woodcutting', '1-10'),
       osrsTileId('woodcutting', '11-20'),
     ])
 
-    const cape = byId.get(osrsTileId('woodcutting', '91-99'))
-    expect(cape?.parentIds).toHaveLength(9)
-    expect(cape?.parentIds.at(-1)).toBe(osrsTileId('woodcutting', '81-90'))
+    const cape = CATALOG_BY_ID.get(osrsTileId('woodcutting', '91-99'))
+    expect(cape && parentIdsFor(cape)).toHaveLength(9)
+    expect(cape && parentIdsFor(cape).at(-1)).toBe(
+      osrsTileId('woodcutting', '81-90'),
+    )
   })
 
-  it('keeps catalog status and name, and syncs parentIds on merge', () => {
+  it('overlays stored status and keeps catalog names and parents', () => {
     const skillId = osrsTileId('woodcutting', '1-10')
     const diaryId = osrsDiaryTileId('kandarin', 'easy')
-    const existing = [
-      {
-        id: skillId,
-        name: 'Chop trees',
-        status: 'completed' as const,
-        parentIds: ['stale'],
-      },
-      {
-        id: diaryId,
-        name: 'Kandarin Easy',
-        status: 'locked' as const,
-        parentIds: [],
-      },
-    ]
-    const merged = mergeOsrsSkillTiles(existing)
-    const skill = merged.find((tile) => tile.id === skillId)
-    const diary = merged.find((tile) => tile.id === diaryId)
+    const tiles = tilesFromStatuses(
+      statusesFromStored([
+        { id: skillId, status: 'completed' },
+        { id: diaryId, status: 'locked' },
+      ]),
+    )
+    const skill = tiles.find((tile) => tile.id === skillId)
+    const diary = tiles.find((tile) => tile.id === diaryId)
     expect(skill?.name).toBe('Woodcutting 1–10')
     expect(skill?.status).toBe('completed')
     expect(skill?.parentIds).toEqual([])
@@ -103,57 +99,47 @@ describe('OSRS skill catalog', () => {
       osrsTileId('crafting', '41-50'),
       osrsTileId('farming', '11-20'),
     ])
-    expect(merged).toHaveLength(catalogSize())
+    expect(tiles).toHaveLength(catalogSize())
   })
 
-  it('ignores unknown ids on merge', () => {
+  it('ignores unknown ids when overlaying statuses', () => {
     const skillId = osrsTileId('woodcutting', '1-10')
-    const merged = mergeOsrsSkillTiles([
-      {
-        id: skillId,
-        name: 'Woodcutting 1–10',
-        status: 'completed',
-        parentIds: ['forest'],
-      },
-      {
-        id: 'forest',
-        name: 'Forest',
-        status: 'completed',
-        parentIds: [],
-      },
-      {
-        id: osrsTileId('attack', '1-10'),
-        name: 'Attack 1–10',
-        status: 'completed',
-        parentIds: [],
-      },
-    ])
-    expect(merged).toHaveLength(catalogSize())
-    expect(merged.find((tile) => tile.id === 'forest')).toBeUndefined()
+    const tiles = tilesFromStatuses(
+      statusesFromStored([
+        { id: skillId, status: 'completed' },
+        { id: 'forest', status: 'completed' },
+        { id: osrsTileId('attack', '1-10'), status: 'completed' },
+      ]),
+    )
+    expect(tiles).toHaveLength(catalogSize())
+    expect(tiles.find((tile) => tile.id === 'forest')).toBeUndefined()
     expect(
-      merged.find((tile) => tile.id === osrsTileId('attack', '1-10')),
+      tiles.find((tile) => tile.id === osrsTileId('attack', '1-10')),
     ).toBeUndefined()
-    expect(merged.find((tile) => tile.id === skillId)?.parentIds).toEqual([])
+    expect(tiles.find((tile) => tile.id === skillId)?.status).toBe('completed')
+    expect(tiles.find((tile) => tile.id === skillId)?.parentIds).toEqual([])
   })
 
   it('persists catalog status changes only', () => {
     const unseen = osrsTileId('woodcutting', '1-10')
     const locked = osrsTileId('agility', '21-30')
-    const tiles = [
-      {
-        id: unseen,
-        name: 'Woodcutting 1–10',
-        status: 'unseen' as const,
-        parentIds: [],
-      },
-      {
-        id: locked,
-        name: 'Agility 21–30',
-        status: 'locked' as const,
-        parentIds: [],
-      },
-    ]
-    expect(userPersistedTiles(tiles).map((tile) => tile.id)).toEqual([locked])
+    const statuses = statusesFromStored([
+      { id: unseen, status: 'unseen' },
+      { id: locked, status: 'locked' },
+    ])
+    expect(storedTilesFromStatuses(statuses).map((tile) => tile.id)).toEqual([
+      locked,
+    ])
+  })
+
+  it('rejects unknown ids when setting status', () => {
+    const id = osrsTileId('woodcutting', '1-10')
+    const statuses = new Map([[id, 'locked' as const]])
+    expect(setStoredStatus(statuses, 'forest', 'completed')).toBeNull()
+    const unseen = setStoredStatus(statuses, id, 'unseen')
+    expect(unseen?.has(id)).toBe(false)
+    const completed = setStoredStatus(statuses, id, 'completed')
+    expect(completed?.get(id)).toBe('completed')
   })
 
   it('classifies catalog ids by kind', () => {
@@ -202,38 +188,38 @@ describe('OSRS achievement diaries', () => {
       'hard',
       'elite',
     ])
-    const tiles = buildOsrsDiaryTiles()
-    expect(tiles).toHaveLength(48)
-    expect(tiles.every((tile) => tile.status === 'unseen')).toBe(true)
+    const diaries = CATALOG.filter((def) => def.kind === 'diary')
+    expect(diaries).toHaveLength(48)
     expect(OSRS_DIARIES.map((diary) => diary.name)).toContain('Karamja')
     expect(OSRS_DIARIES.every((diary) => diary.wikiTitle.length > 0)).toBe(true)
-    expect(buildOsrsCatalogTiles()).toHaveLength(catalogSize())
+    expect(CATALOG).toHaveLength(catalogSize())
   })
 
   it('names tiers and chains harder tiers before skill parents', () => {
     expect(osrsDiaryTileName('Karamja', { id: 'easy', name: 'Easy' })).toBe(
       'Karamja Easy',
     )
-    const tiles = buildOsrsDiaryTiles()
-    const byId = new Map(tiles.map((tile) => [tile.id, tile]))
     const isSkillParent = (id: string) =>
       id.startsWith('osrs:') && !id.startsWith('osrs:diary:')
 
-    const easy = byId.get(osrsDiaryTileId('karamja', 'easy'))
-    expect(easy?.parentIds.every(isSkillParent)).toBe(true)
-    expect(easy?.parentIds.length).toBeGreaterThan(0)
+    const easy = CATALOG_BY_ID.get(osrsDiaryTileId('karamja', 'easy'))
+    const easyParents = easy ? parentIdsFor(easy) : []
+    expect(easyParents.every(isSkillParent)).toBe(true)
+    expect(easyParents.length).toBeGreaterThan(0)
 
-    const medium = byId.get(osrsDiaryTileId('karamja', 'medium'))
-    expect(medium?.parentIds[0]).toBe(osrsDiaryTileId('karamja', 'easy'))
-    expect(medium?.parentIds.slice(1).every(isSkillParent)).toBe(true)
+    const medium = CATALOG_BY_ID.get(osrsDiaryTileId('karamja', 'medium'))
+    const mediumParents = medium ? parentIdsFor(medium) : []
+    expect(mediumParents[0]).toBe(osrsDiaryTileId('karamja', 'easy'))
+    expect(mediumParents.slice(1).every(isSkillParent)).toBe(true)
 
-    const elite = byId.get(osrsDiaryTileId('karamja', 'elite'))
-    expect(elite?.parentIds.slice(0, 3)).toEqual([
+    const elite = CATALOG_BY_ID.get(osrsDiaryTileId('karamja', 'elite'))
+    const eliteParents = elite ? parentIdsFor(elite) : []
+    expect(eliteParents.slice(0, 3)).toEqual([
       osrsDiaryTileId('karamja', 'easy'),
       osrsDiaryTileId('karamja', 'medium'),
       osrsDiaryTileId('karamja', 'hard'),
     ])
-    expect(elite?.parentIds.slice(3).every(isSkillParent)).toBe(true)
+    expect(eliteParents.slice(3).every(isSkillParent)).toBe(true)
   })
 })
 
@@ -247,20 +233,17 @@ describe('OSRS quests', () => {
         'animal-magnetism',
       ]),
     )
-    const tiles = buildOsrsQuestTiles()
-    expect(tiles).toHaveLength(OSRS_QUESTS.length)
+    const quests = CATALOG.filter((def) => def.kind === 'quest')
+    expect(quests).toHaveLength(OSRS_QUESTS.length)
     expect(OSRS_QUESTS.some((quest) => quest.id === 'enter-the-abyss')).toBe(
       false,
     )
     expect(
       OSRS_QUESTS.some((quest) => quest.id === 'alfred-grimhands-barcrawl'),
     ).toBe(false)
-    expect(tiles.every((tile) => tile.status === 'unseen')).toBe(true)
 
-    const animal = tiles.find(
-      (tile) => tile.id === osrsQuestTileId('animal-magnetism'),
-    )
-    expect(animal?.parentIds).toEqual([
+    const animal = CATALOG_BY_ID.get(osrsQuestTileId('animal-magnetism'))
+    expect(animal && parentIdsFor(animal)).toEqual([
       osrsQuestTileId('ernest-the-chicken'),
       osrsQuestTileId('priest-in-peril'),
       osrsQuestTileId('the-restless-ghost'),
@@ -271,17 +254,13 @@ describe('OSRS quests', () => {
     expect(formatGp(10000)).toBe('10,000 gp')
     expect(tileGp(osrsQuestTileId('cooks-assistant'))).toBeUndefined()
 
-    const current = tiles.find(
-      (tile) => tile.id === osrsQuestTileId('current-affairs'),
-    )
-    expect(current?.parentIds).toEqual([
+    const current = CATALOG_BY_ID.get(osrsQuestTileId('current-affairs'))
+    expect(current && parentIdsFor(current)).toEqual([
       osrsQuestTileId('pandemonium'),
       osrsTileId('sailing', '21-30'),
       osrsTileId('fishing', '1-10'),
     ])
-    expect(
-      tiles.find((tile) => tile.id === osrsQuestTileId('the-ides-of-milk'))
-        ?.parentIds,
-    ).toEqual([])
+    const milk = CATALOG_BY_ID.get(osrsQuestTileId('the-ides-of-milk'))
+    expect(milk && parentIdsFor(milk)).toEqual([])
   })
 })

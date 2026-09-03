@@ -38,10 +38,10 @@ Typical flow is unseen → locked → unlocked → completed. The app does **not
 
 ### Prerequisites
 
-- **Parents** are AND prerequisites. Stored as `parentIds` on the child.
+- **Parents** are AND prerequisites. Derived as `parentIds` from catalog reqs.
 - **Dependents** are the inverse: derived, not shown or edited.
 - A parent counts as satisfied when its status is `unlocked` or `completed`.
-- Catalog names and `parentIds` are the source of truth and are synced on load/import. Status edits are kept.
+- Catalog names, parents, wiki, gold, and requirement display come from the catalog. Status edits are kept.
 
 ### Readiness (derived, never stored)
 
@@ -59,13 +59,13 @@ All catalog tiles seed as `unseen`.
 - **Diaries** — [src/data/osrs-diaries.json](src/data/osrs-diaries.json) + [src/data/diary-tiers.json](src/data/diary-tiers.json) (`osrs:diary:{diary}:{tier}`). Harder tiers parent easier tiers, then covering skill brackets from [src/data/osrs-diary-skill-reqs.json](src/data/osrs-diary-skill-reqs.json) (Ironman footnotes included; combat/Slayer skipped). Refresh with `yarn fetch-diary-reqs`.
 - **Quests** — [src/data/osrs-quests.json](src/data/osrs-quests.json) + [src/data/osrs-quest-reqs.json](src/data/osrs-quest-reqs.json) (`osrs:quest:{slug}`). List comes from wiki [[Quests/List]] categories (Free-to-play + Members'); keep Infobox Quest pages only. Miniquests excluded. Parents from `Module:Questreq/data` when present, otherwise Quest details (direct quests + covering skill brackets; Ironman tags included; combat/Slayer skipped). Required coins from wiki Quest details show as Gold. Refresh with `yarn fetch-quest-reqs`.
 
-A wiki skill level maps to the lowest covering bracket (e.g. 45 Farming → Farming 41–50). That covering tile is the stored parent; the UI still shows the exact wiki level.
+A wiki skill level maps to the lowest covering bracket (e.g. 45 Farming → Farming 41–50). That covering tile is the derived parent; the UI still shows the exact wiki level.
 
-Load/import merges any missing catalog tiles back in.
+Load/import overlays stored statuses onto the catalog.
 
 ### Persistence
 
-Persist/export only catalog tiles whose status is not `unseen`. Import/load merge the catalog back in and resync catalog names and `parentIds`.
+Persist/export `{ id, status }` for catalog tiles whose status is not `unseen`. Names, parents, and requirement display live in the catalog and are rebuilt on load/import. Old full-tile JSON still imports (name/`parentIds` ignored).
 
 ### UI
 
@@ -77,6 +77,6 @@ Persist/export only catalog tiles whose status is not `unseen`. Import/load merg
   - Status icons: slashed eye = unseen, lock = locked, open lock = unlocked, check = completed. Marking unseen takes it off the board.
   - **Required**: one line per parent. Quest/diary parents use the tile name. Skill reqs use the exact wiki level (`45 Farming`, `42 Crafting (Ironman)`). Color is the covering/parent tile status: red unseen, orange locked, yellow unlocked, green completed. Click opens that tile.
   - Quest cards also show Gold when the wiki lists required coins.
-- **Finder** (`+`): search skills, diaries, and quests. Independent Skills / Diaries / Quests toggles. Empty search lists all alphabetized tiles for the active filters. Leading A / An / The is ignored for prefix and A–Z. Each result has all four status icons with the current one highlighted. Stays open for batch edits.
+- **Finder** (`+`): search skills, diaries, and quests. Independent Skills / Diaries / Quests toggles. Empty search lists all alphabetized tiles for the active filters. Leading A / An / The is ignored for prefix and A–Z. Skill cape tiles sort as `{skill} 99`. Each result has all four status icons with the current one highlighted. Stays open for batch edits.
 
 See [docs/GOAL.md](docs/GOAL.md) for the high-level goal.

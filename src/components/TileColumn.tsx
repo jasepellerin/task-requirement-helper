@@ -5,7 +5,7 @@ import { TileCard } from './TileCard.tsx'
 type TileColumnProps = {
   title: string
   tiles: Tile[]
-  allTiles: Tile[]
+  byId: Map<string, Tile>
   empty: string
   onOpen: (id: string) => void
 }
@@ -13,7 +13,7 @@ type TileColumnProps = {
 export function TileColumn({
   title,
   tiles,
-  allTiles,
+  byId,
   empty,
   onOpen,
 }: TileColumnProps) {
@@ -32,7 +32,7 @@ export function TileColumn({
             <li key={tile.id}>
               <TileCard
                 tile={tile}
-                tiles={allTiles}
+                byId={byId}
                 onOpen={() => onOpen(tile.id)}
               />
             </li>

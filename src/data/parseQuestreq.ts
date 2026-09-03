@@ -1,4 +1,5 @@
-import type { CatalogSkill, DiarySkillReq } from './parseDiaryWikitext.ts'
+import type { DiarySkillReq } from './diarySkillReqs.ts'
+import type { CatalogSkill } from './parseDiaryWikitext.ts'
 
 export type ParsedQuestSkills = DiarySkillReq
 

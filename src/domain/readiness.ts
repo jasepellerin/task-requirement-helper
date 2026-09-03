@@ -1,3 +1,4 @@
+import { compareTilesByName } from './search.ts'
 import type { Readiness, ReadinessGroups, Tile, TileStatus } from './types.ts'
 
 export function tilesById(tiles: Tile[]): Map<string, Tile> {
@@ -29,10 +30,6 @@ export function tileReadiness(tile: Tile, byId: Map<string, Tile>): Readiness {
   return allParentsSatisfied ? 'ready' : 'blocked'
 }
 
-function byName(a: Tile, b: Tile): number {
-  return a.name.localeCompare(b.name)
-}
-
 export function groupTilesByReadiness(tiles: Tile[]): ReadinessGroups {
   const byId = tilesById(tiles)
   const groups: ReadinessGroups = {
@@ -47,11 +44,11 @@ export function groupTilesByReadiness(tiles: Tile[]): ReadinessGroups {
     groups[tileReadiness(tile, byId)].push(tile)
   }
 
-  groups.ready.sort(byName)
-  groups.blocked.sort(byName)
-  groups.unseen.sort(byName)
-  groups.unlocked.sort(byName)
-  groups.completed.sort(byName)
+  groups.ready.sort(compareTilesByName)
+  groups.blocked.sort(compareTilesByName)
+  groups.unseen.sort(compareTilesByName)
+  groups.unlocked.sort(compareTilesByName)
+  groups.completed.sort(compareTilesByName)
 
   return groups
 }

@@ -13,7 +13,6 @@
   --muted: #78716c;
   --primary: #1d4ed8;
   --primary-text: #fff;
-  --danger: #b91c1c;
   --ready: #166534;
   --blocked: #9a3412;
   --unseen: #57534e;
@@ -34,7 +33,6 @@
     --muted: #a8a29e;
     --primary: #60a5fa;
     --primary-text: #0c0a09;
-    --danger: #f87171;
     --ready: #86efac;
     --blocked: #fdba74;
     --unseen: #d6d3d1;
@@ -83,8 +81,7 @@ p {
 
 .toolbar-start,
 .toolbar-end,
-.toolbar-nav,
-.toolbar-actions {
+.toolbar-nav {
   display: flex;
   align-items: center;
   gap: 8px;
@@ -180,15 +177,6 @@ p {
   background: var(--primary);
   border-color: var(--primary);
   color: var(--primary-text);
-}
-
-.btn.ghost {
-  width: auto;
-}
-
-.btn.danger {
-  color: var(--danger);
-  border-color: var(--danger);
 }
 
 .hero-empty {
@@ -476,8 +464,7 @@ button.req-name:focus-visible {
   color: var(--req-completed);
 }
 
-.field input,
-.field select {
+.field input {
   font: inherit;
   color: inherit;
   background: var(--card);

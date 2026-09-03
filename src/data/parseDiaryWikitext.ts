@@ -1,16 +1,8 @@
-export const DIARY_SKILL_TIERS = ['easy', 'medium', 'hard', 'elite'] as const
-
-export type DiarySkillTier = (typeof DIARY_SKILL_TIERS)[number]
-
-export type DiarySkillReq = {
-  skill: string
-  level: number
-  ironman?: boolean
-}
-
-export type DiaryTierSkillReqs = Record<DiarySkillTier, DiarySkillReq[]>
-
-export type DiarySkillReqsFile = Record<string, DiaryTierSkillReqs>
+import type {
+  DiarySkillReq,
+  DiarySkillTier,
+  DiaryTierSkillReqs,
+} from './diarySkillReqs.ts'
 
 export type CatalogSkill = {
   id: string

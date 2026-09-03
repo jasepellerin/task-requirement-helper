@@ -3,51 +3,44 @@ import { CompletedWindow } from './components/CompletedWindow.tsx'
 import { Columns, TileColumn } from './components/TileColumn.tsx'
 import { StatsWindow } from './components/StatsWindow.tsx'
 import { TileFinder } from './components/TileFinder.tsx'
-import { TileForm } from './components/TileForm.tsx'
+import { TileDetail } from './components/TileDetail.tsx'
 import { Toolbar } from './components/Toolbar.tsx'
 import { useTiles } from './hooks/useTiles.ts'
 
-type Editor = { mode: 'find' } | { mode: 'edit'; id: string }
+type Overlay =
+  | { mode: 'find' }
+  | { mode: 'detail'; id: string }
+  | { mode: 'stats' }
+  | { mode: 'completed' }
 
 export default function App() {
-  const { tiles, groups, setStatus, exportStore, importStore } = useTiles()
-  const [editor, setEditor] = useState<Editor | null>(null)
-  const [showStats, setShowStats] = useState(false)
-  const [showCompleted, setShowCompleted] = useState(false)
+  const { tiles, byId, groups, setStatus, exportStore, importStore } =
+    useTiles()
+  const [overlay, setOverlay] = useState<Overlay | null>(null)
 
-  const editingTile =
-    editor?.mode === 'edit'
-      ? tiles.find((tile) => tile.id === editor.id)
-      : undefined
+  const detailTile =
+    overlay?.mode === 'detail' ? byId.get(overlay.id) : undefined
   const visibleCount =
     groups.ready.length + groups.blocked.length + groups.unlocked.length
 
   function openFind() {
-    setShowStats(false)
-    setShowCompleted(false)
-    setEditor({ mode: 'find' })
+    setOverlay({ mode: 'find' })
   }
 
-  function openEdit(id: string) {
-    setShowStats(false)
-    setShowCompleted(false)
-    setEditor({ mode: 'edit', id })
+  function openDetail(id: string) {
+    setOverlay({ mode: 'detail', id })
   }
 
-  function closeEditor() {
-    setEditor(null)
+  function closeOverlay() {
+    setOverlay(null)
   }
 
   function openStats() {
-    setEditor(null)
-    setShowCompleted(false)
-    setShowStats(true)
+    setOverlay({ mode: 'stats' })
   }
 
   function openCompleted() {
-    setEditor(null)
-    setShowStats(false)
-    setShowCompleted(true)
+    setOverlay({ mode: 'completed' })
   }
 
   return (
@@ -67,62 +60,62 @@ export default function App() {
           <TileColumn
             title="Ready"
             tiles={groups.ready}
-            allTiles={tiles}
+            byId={byId}
             empty="Nothing ready."
-            onOpen={openEdit}
+            onOpen={openDetail}
           />
           <TileColumn
             title="Blocked"
             tiles={groups.blocked}
-            allTiles={tiles}
+            byId={byId}
             empty="Nothing blocked."
-            onOpen={openEdit}
+            onOpen={openDetail}
           />
           <TileColumn
             title="Unlocked"
             tiles={groups.unlocked}
-            allTiles={tiles}
+            byId={byId}
             empty="Nothing unlocked."
-            onOpen={openEdit}
+            onOpen={openDetail}
           />
         </Columns>
       )}
 
-      {showCompleted ? (
+      {overlay?.mode === 'completed' ? (
         <CompletedWindow
-          tiles={tiles}
+          byId={byId}
           completed={groups.completed}
-          onClose={() => setShowCompleted(false)}
-          onOpen={openEdit}
+          onClose={closeOverlay}
+          onOpen={openDetail}
         />
       ) : null}
 
-      {showStats ? (
+      {overlay?.mode === 'stats' ? (
         <StatsWindow
           tiles={tiles}
-          onClose={() => setShowStats(false)}
-          onOpenTile={openEdit}
+          onClose={closeOverlay}
+          onOpenTile={openDetail}
         />
       ) : null}
 
-      {editor?.mode === 'find' ? (
+      {overlay?.mode === 'find' ? (
         <TileFinder
           tiles={tiles}
           onStatusChange={setStatus}
-          onCancel={closeEditor}
+          onCancel={closeOverlay}
         />
       ) : null}
 
-      {editor?.mode === 'edit' && editingTile ? (
-        <TileForm
-          key={editor.id}
-          tiles={tiles}
-          tile={editingTile}
-          onCancel={closeEditor}
-          onOpenTile={openEdit}
+      {overlay?.mode === 'detail' && detailTile ? (
+        <TileDetail
+          key={overlay.id}
+          byId={byId}
+          tile={detailTile}
+          onCancel={closeOverlay}
+          onOpenTile={openDetail}
           onStatusChange={(status) => {
-            setStatus(editor.id, status)
-            if (status === 'unseen') closeEditor()
+            setStatus(overlay.id, status)
+            if (status === 'unseen') closeOverlay()
           }}
         />
       ) : null}

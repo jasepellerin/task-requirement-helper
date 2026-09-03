@@ -109,4 +109,19 @@ describe('groupTilesByReadiness', () => {
     expect(groups.unlocked.map((t) => t.name)).toEqual(['Zed'])
     expect(groups.completed.map((t) => t.name)).toEqual(['Done'])
   })
+
+  it('sorts skill capes as that skill at 99', () => {
+    const tiles = [
+      tile('cape', 'locked', [], 'Get the Agility skill cape'),
+      tile('high', 'locked', [], 'Agility 81–90'),
+      tile('low', 'locked', [], 'Agility 1–10'),
+      tile('quest', 'locked', [], 'Animal Magnetism'),
+    ]
+    expect(groupTilesByReadiness(tiles).ready.map((t) => t.name)).toEqual([
+      'Agility 1–10',
+      'Agility 81–90',
+      'Get the Agility skill cape',
+      'Animal Magnetism',
+    ])
+  })
 })

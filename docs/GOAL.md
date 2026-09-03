@@ -20,7 +20,7 @@ Unlock trees are easy to lose in your head. You want to know:
 - Board: Ready / Blocked / Unlocked. Completed is a separate view. Unseen is off the board until added from search (or hidden again by marking unseen). Finder stays open for batch status edits.
 - Detail cards are view-only: catalog title, live status, wiki link, exact colored requirements
 - Stats window derived from unlocked/completed skill brackets (combat/Slayer fixed at 99)
-- Persist in `localStorage`: only catalog tiles whose status is not `unseen`. JSON export/import. Catalog names and parents are merged back on load/import
+- Persist in `localStorage`: `{ id, status }` for catalog tiles whose status is not `unseen`. JSON export/import. Names, parents, and requirement display are rebuilt from the catalog on load/import.
 
 ## Out of scope
 
