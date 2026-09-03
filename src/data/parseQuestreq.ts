@@ -39,6 +39,10 @@ export function isWikiQuestPage(wikitext: string): boolean {
   return /\{\{\s*Infobox Quest\b/i.test(wikitext)
 }
 
+export function isUnreleasedQuestPage(wikitext: string): boolean {
+  return /\{\{\s*Future Content\b/i.test(wikitext)
+}
+
 export const QUEST_LIST_CATEGORIES = [
   'Category:Free-to-play quests',
   "Category:Members' quests",

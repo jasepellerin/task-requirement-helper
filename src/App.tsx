@@ -7,11 +7,12 @@ import { TileFinder } from './components/TileFinder.tsx'
 import { TileDetail } from './components/TileDetail.tsx'
 import { Toolbar } from './components/Toolbar.tsx'
 import { ALL_KINDS, filterTilesByKind } from './data/osrsCatalog.ts'
+import { filterTilesByQuery } from './domain/search.ts'
 import { useTiles } from './hooks/useTiles.ts'
 
 type Overlay =
   | { mode: 'find' }
-  | { mode: 'detail'; id: string }
+  | { mode: 'detail'; id: string; from?: 'find' }
   | { mode: 'stats' }
   | { mode: 'completed' }
 
@@ -27,18 +28,21 @@ export default function App() {
   } = useTiles()
   const [overlay, setOverlay] = useState<Overlay | null>(null)
   const [kinds, setKinds] = useState(ALL_KINDS)
+  const [query, setQuery] = useState('')
 
   const detailTile =
     overlay?.mode === 'detail' ? byId.get(overlay.id) : undefined
-  const board = useMemo(
-    () => ({
-      ready: filterTilesByKind(groups.ready, kinds),
-      possible: filterTilesByKind(groups.possible, kinds),
-      blocked: filterTilesByKind(groups.blocked, kinds),
-      unlocked: filterTilesByKind(groups.unlocked, kinds),
-    }),
-    [groups, kinds],
-  )
+  const board = useMemo(() => {
+    function filterBoard(tiles: typeof groups.ready) {
+      return filterTilesByQuery(filterTilesByKind(tiles, kinds), query)
+    }
+    return {
+      ready: filterBoard(groups.ready),
+      possible: filterBoard(groups.possible),
+      blocked: filterBoard(groups.blocked),
+      unlocked: filterBoard(groups.unlocked),
+    }
+  }, [groups, kinds, query])
   const boardCount =
     groups.ready.length +
     groups.possible.length +
@@ -55,11 +59,20 @@ export default function App() {
   }
 
   function openDetail(id: string) {
-    setOverlay({ mode: 'detail', id })
+    setOverlay((prev) => {
+      const fromFind =
+        prev?.mode === 'find' ||
+        (prev?.mode === 'detail' && prev.from === 'find')
+      return fromFind
+        ? { mode: 'detail', id, from: 'find' }
+        : { mode: 'detail', id }
+    })
   }
 
   function closeOverlay() {
-    setOverlay(null)
+    setOverlay((prev) =>
+      prev?.mode === 'detail' && prev.from === 'find' ? { mode: 'find' } : null,
+    )
   }
 
   function openStats() {
@@ -81,7 +94,17 @@ export default function App() {
       />
 
       {boardCount > 0 ? (
-        <KindFilters kinds={kinds} onChange={setKinds} label="Filter board" />
+        <div className="board-filters">
+          <input
+            className="board-search"
+            type="search"
+            value={query}
+            onChange={(event) => setQuery(event.target.value)}
+            placeholder="Filter tiles"
+            aria-label="Filter tiles"
+          />
+          <KindFilters kinds={kinds} onChange={setKinds} label="Filter board" />
+        </div>
       ) : null}
 
       {boardCount === 0 ? (
@@ -143,10 +166,13 @@ export default function App() {
         />
       ) : null}
 
-      {overlay?.mode === 'find' ? (
+      {overlay?.mode === 'find' ||
+      (overlay?.mode === 'detail' && overlay.from === 'find') ? (
         <TileFinder
           tiles={tiles}
+          paused={overlay.mode === 'detail'}
           onStatusChange={setStatus}
+          onOpen={openDetail}
           onCancel={closeOverlay}
         />
       ) : null}

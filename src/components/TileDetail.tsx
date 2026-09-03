@@ -2,6 +2,7 @@ import { useEffect, useId, useMemo, useState } from 'react'
 import {
   tileDifficulty,
   tileGp,
+  tileImage,
   tileItems,
   tileLength,
   tileRewards,
@@ -10,7 +11,7 @@ import {
 } from '../data/osrsCatalog.ts'
 import { formatGp } from '../data/questReqs.ts'
 import { requirementViews } from '../data/requirementViews.ts'
-import { tileWikiUrl } from '../data/wiki.ts'
+import { tileWikiUrl, wikiFileUrl } from '../data/wiki.ts'
 import { STATUS_LABEL, type Tile, type TileStatus } from '../domain/types.ts'
 import { SlayerMasterMark } from './SlayerMasterMark.tsx'
 import { SlayerMonsterMark } from './SlayerMonsterMark.tsx'
@@ -51,12 +52,17 @@ export function TileDetail({
 }: TileDetailProps) {
   const titleId = useId()
   const [statusMenuOpen, setStatusMenuOpen] = useState(false)
+  const [failedImageTileId, setFailedImageTileId] = useState<string | null>(
+    null,
+  )
   const wikiUrl = tileWikiUrl(tile.id)
   const gp = tileGp(tile.id)
   const difficulty = tileDifficulty(tile.id)
   const length = tileLength(tile.id)
   const items = tileItems(tile.id)
   const rewards = tileRewards(tile.id)
+  const image = tileImage(tile.id)
+  const showImage = Boolean(image) && failedImageTileId !== tile.id
   const slayerMaster = tileSlayerMaster(tile.id)
   const slayerMonsters = tileSlayerMonsters(tile.id)
   const reqViews = useMemo(() => requirementViews(tile), [tile])
@@ -84,6 +90,14 @@ export function TileDetail({
         onClick={(event) => event.stopPropagation()}
       >
         <div className="modal-title-row">
+          {showImage && image ? (
+            <img
+              className="tile-thumb"
+              src={wikiFileUrl(image)}
+              alt=""
+              onError={() => setFailedImageTileId(tile.id)}
+            />
+          ) : null}
           <h2 id={titleId}>{tile.name}</h2>
           <div className="modal-title-actions">
             {tile.status !== 'unseen' ? (

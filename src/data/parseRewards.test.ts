@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import {
   parseDiaryRewards,
+  parseInfoboxQuestImage,
   parseQuestCardDetails,
   parseQuestRewards,
   plainWiki,
@@ -181,6 +182,54 @@ describe('parseDiaryRewards', () => {
       hard: ['Karamja gloves 3'],
       elite: ['Karamja gloves 4'],
     })
+  })
+})
+
+describe('parseInfoboxQuestImage', () => {
+  it('reads the Infobox Quest file and ignores reward-scroll images', () => {
+    expect(
+      parseInfoboxQuestImage(`
+{{Infobox Quest
+|name = Cook's Assistant
+|image = [[File:Cook's Assistant.png|300px]]
+}}
+{{Quest details
+|difficulty = Novice
+|image = [[File:Cook's Assistant reward scroll.png|centre]]
+}}
+{{Quest rewards
+|name = Cook's Assistant
+|image=[[File:Cook's Assistant reward scroll.png|centre]]
+|qp = 1
+}}
+`),
+    ).toBe("Cook's Assistant.png")
+  })
+
+  it('accepts Image and Media prefixes and drops size junk', () => {
+    expect(
+      parseInfoboxQuestImage(`
+{{Infobox Quest
+|image = [[Image:Dragon Slayer I.png|300px|centre]]
+}}
+`),
+    ).toBe('Dragon Slayer I.png')
+    expect(
+      parseInfoboxQuestImage(`
+{{Infobox Quest
+|image = [[Media:A Kingdom Divided.png]]
+}}
+`),
+    ).toBe('A Kingdom Divided.png')
+  })
+
+  it('returns undefined when the infobox has no file', () => {
+    expect(
+      parseInfoboxQuestImage('{{Infobox Quest\n|name = Test\n}}'),
+    ).toBeUndefined()
+    expect(
+      parseInfoboxQuestImage('{{Quest rewards|image=[[File:Nope.png]]}}'),
+    ).toBeUndefined()
   })
 })
 

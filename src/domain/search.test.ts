@@ -1,5 +1,10 @@
 import { describe, expect, it } from 'vitest'
-import { foldSearch, searchSortKey, searchTiles } from './search.ts'
+import {
+  filterTilesByQuery,
+  foldSearch,
+  searchSortKey,
+  searchTiles,
+} from './search.ts'
 import type { Tile } from './types.ts'
 
 function tile(
@@ -33,6 +38,31 @@ describe('searchSortKey', () => {
     expect(searchSortKey('Get the Woodcutting skill cape')).toBe(
       'woodcutting 99',
     )
+  })
+})
+
+describe('filterTilesByQuery', () => {
+  const tiles = [
+    tile('a', 'Agility 1–10', 'locked'),
+    tile('b', 'Agility 21–30'),
+    tile('c', 'Attack 21–30'),
+    tile('d', 'Karamja Easy'),
+  ]
+
+  it('keeps original order', () => {
+    expect(filterTilesByQuery(tiles, '21').map((item) => item.id)).toEqual([
+      'b',
+      'c',
+    ])
+  })
+
+  it('returns every tile for a blank query', () => {
+    expect(filterTilesByQuery(tiles, '  ').map((item) => item.id)).toEqual([
+      'a',
+      'b',
+      'c',
+      'd',
+    ])
   })
 })
 

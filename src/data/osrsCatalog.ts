@@ -62,6 +62,7 @@ export type CatalogDef = {
   difficulty?: string
   length?: string
   items?: string[]
+  image?: string
   slayerMaster?: SlayerMasterUnlock
   slayerMonsters?: SlayerMonsterUnlock[]
   reqs: CatalogReq[]
@@ -180,6 +181,7 @@ function buildQuestDefs(): CatalogDef[] {
       ...(details.difficulty ? { difficulty: details.difficulty } : {}),
       ...(details.length ? { length: details.length } : {}),
       ...(details.items.length > 0 ? { items: details.items } : {}),
+      ...(details.image ? { image: details.image } : {}),
       ...(slayerMaster ? { slayerMaster } : {}),
       ...(slayerMonsters && slayerMonsters.length > 0
         ? { slayerMonsters }
@@ -228,6 +230,10 @@ export function tileLength(tileId: string): string | undefined {
 
 export function tileItems(tileId: string): string[] {
   return CATALOG_BY_ID.get(tileId)?.items ?? []
+}
+
+export function tileImage(tileId: string): string | undefined {
+  return CATALOG_BY_ID.get(tileId)?.image
 }
 
 export function tileSlayerMaster(

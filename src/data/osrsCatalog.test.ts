@@ -23,6 +23,7 @@ import {
   storedTilesFromStatuses,
   tileDifficulty,
   tileGp,
+  tileImage,
   tileItems,
   tileKind,
   tileLength,
@@ -343,6 +344,13 @@ describe('OSRS quests', () => {
     expect(tileDifficulty(osrsQuestTileId('cooks-assistant'))).toBe('Novice')
     expect(tileLength(osrsQuestTileId('cooks-assistant'))).toBe('Very Short')
     expect(tileItems(osrsQuestTileId('cooks-assistant'))[0]).toMatch(/Egg/i)
+    expect(tileImage(osrsQuestTileId('cooks-assistant'))).toBe(
+      "Cook's Assistant.png",
+    )
+    expect(
+      OSRS_QUESTS.every((quest) => tileImage(osrsQuestTileId(quest.id))),
+    ).toBe(true)
+    expect(tileImage(osrsTileId('agility', '1-10'))).toBeUndefined()
     expect(tileDifficulty(osrsTileId('agility', '1-10'))).toBeUndefined()
     expect(tileItems(osrsDiaryTileId('kandarin', 'easy'))).toEqual([])
 

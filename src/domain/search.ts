@@ -33,15 +33,22 @@ function isPrefixMatch(name: string, query: string): boolean {
   )
 }
 
+export function filterTilesByQuery(
+  tiles: readonly Tile[],
+  query: string,
+): Tile[] {
+  const folded = foldSearch(query)
+  if (!folded) return [...tiles]
+  return tiles.filter((tile) => foldSearch(tile.name).includes(folded))
+}
+
 export function searchTiles(tiles: Tile[], query: string): Tile[] {
   const folded = foldSearch(query)
 
-  return tiles
-    .filter((tile) => !folded || foldSearch(tile.name).includes(folded))
-    .sort((a, b) => {
-      const aPrefix = isPrefixMatch(a.name, folded)
-      const bPrefix = isPrefixMatch(b.name, folded)
-      if (aPrefix !== bPrefix) return aPrefix ? -1 : 1
-      return compareTilesByName(a, b)
-    })
+  return filterTilesByQuery(tiles, query).sort((a, b) => {
+    const aPrefix = isPrefixMatch(a.name, folded)
+    const bPrefix = isPrefixMatch(b.name, folded)
+    if (aPrefix !== bPrefix) return aPrefix ? -1 : 1
+    return compareTilesByName(a, b)
+  })
 }

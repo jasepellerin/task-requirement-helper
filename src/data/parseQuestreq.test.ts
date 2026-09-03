@@ -4,6 +4,7 @@ import {
   extractRequiredGp,
   isQuestCatalogName,
   isQuestIndexTitle,
+  isUnreleasedQuestPage,
   isWikiQuestPage,
   parseQuestDetailsReqs,
   parseQuestreqLua,
@@ -96,6 +97,21 @@ describe('isWikiQuestPage', () => {
     expect(isWikiQuestPage('#REDIRECT [[Barbarian_Training#Farming]]')).toBe(
       false,
     )
+  })
+})
+
+describe('isUnreleasedQuestPage', () => {
+  it('detects Future Content and ignores released quest pages', () => {
+    expect(
+      isUnreleasedQuestPage(`{{Future Content}}
+{{Infobox Quest
+|name = Crab Quest
+|image =
+}}`),
+    ).toBe(true)
+    expect(
+      isUnreleasedQuestPage("{{Infobox Quest\n|name = Cook's Assistant\n}}"),
+    ).toBe(false)
   })
 })
 

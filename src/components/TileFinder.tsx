@@ -14,13 +14,17 @@ import { StatusButtons } from './StatusPicker.tsx'
 
 type TileFinderProps = {
   tiles: Tile[]
+  paused?: boolean
   onStatusChange: (id: string, status: TileStatus) => void
+  onOpen: (id: string) => void
   onCancel: () => void
 }
 
 export function TileFinder({
   tiles,
+  paused = false,
   onStatusChange,
+  onOpen,
   onCancel,
 }: TileFinderProps) {
   const titleId = useId()
@@ -30,12 +34,15 @@ export function TileFinder({
   const results = useMemo(() => searchTiles(catalog, query), [catalog, query])
 
   useEffect(() => {
+    if (paused) return
     function onKey(event: KeyboardEvent) {
       if (event.key === 'Escape') onCancel()
     }
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
-  }, [onCancel])
+  }, [onCancel, paused])
+
+  if (paused) return null
 
   return (
     <div className="modal-backdrop" onClick={onCancel}>
@@ -67,7 +74,11 @@ export function TileFinder({
               const slayerMonsters = tileSlayerMonsters(tile.id)
               return (
                 <li key={tile.id} className="search-result">
-                  <span className="search-result-name">
+                  <button
+                    type="button"
+                    className="search-result-name"
+                    onClick={() => onOpen(tile.id)}
+                  >
                     <span>{tile.name}</span>
                     {slayerMaster ? (
                       <SlayerMasterMark master={slayerMaster} />
@@ -75,7 +86,7 @@ export function TileFinder({
                     {slayerMonsters.length > 0 ? (
                       <SlayerMonsterMark monsters={slayerMonsters} />
                     ) : null}
-                  </span>
+                  </button>
                   <StatusButtons
                     value={tile.status}
                     name={tile.name}

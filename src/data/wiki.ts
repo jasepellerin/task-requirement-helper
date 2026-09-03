@@ -10,6 +10,11 @@ export function wikiPageUrl(wikiTitle: string): string {
   return `${WIKI_ORIGIN}${path}`
 }
 
+export function wikiFileUrl(filename: string): string {
+  const name = encodeURIComponent(filename.replaceAll(' ', '_'))
+  return `${WIKI_ORIGIN}Special:FilePath/${name}`
+}
+
 export function tileWikiTitle(tileId: string): string | undefined {
   return CATALOG_BY_ID.get(tileId)?.wikiTitle
 }

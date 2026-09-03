@@ -9,7 +9,8 @@
       "Volcanic sulphur",
       "Molten glass",
       "A dark essence block or a pickaxe and chisel to obtain one"
-    ]
+    ],
+    "image": "A Kingdom Divided.png"
   },
   "a-night-at-the-theatre": {
     "difficulty": "Master",
@@ -19,20 +20,20 @@
       "Saw",
       "Ghostspeak amulet",
       "Any axe besides the blessed axe"
-    ]
+    ],
+    "image": "A Night at the Theatre.png"
   },
   "a-porcine-of-interest": {
     "difficulty": "Novice",
     "length": "Very Short",
-    "items": ["Rope", "Knife or a slash weapon"]
-  },
-  "a-ruff-situation": {
-    "difficulty": "Novice"
+    "items": ["Rope", "Knife or a slash weapon"],
+    "image": "A Porcine of Interest.png"
   },
   "a-souls-bane": {
     "difficulty": "Intermediate",
     "length": "Short",
-    "items": ["Rope", "A weapon"]
+    "items": ["Rope", "A weapon"],
+    "image": "A Soul's Bane.png"
   },
   "a-tail-of-two-cats": {
     "difficulty": "Intermediate",
@@ -52,7 +53,8 @@
       "Vial of water",
       "Desert shirt or druid's robe top",
       "Desert robe or druid's robe"
-    ]
+    ],
+    "image": "A Tail of Two Cats.png"
   },
   "a-taste-of-hope": {
     "difficulty": "Experienced",
@@ -69,7 +71,8 @@
       "Pestle and mortar",
       "Vial of water",
       "Weapons and armour"
-    ]
+    ],
+    "image": "A Taste of Hope.png"
   },
   "animal-magnetism": {
     "difficulty": "Intermediate",
@@ -83,7 +86,8 @@
       "Hard leather",
       "Holy symbol",
       "Polished buttons"
-    ]
+    ],
+    "image": "Animal Magnetism.png"
   },
   "another-slice-of-h-a-m": {
     "difficulty": "Intermediate",
@@ -93,7 +97,8 @@
       "Trowel",
       "Specimen brush",
       "Magic or Ranged gear for enemy fight"
-    ]
+    ],
+    "image": "Another Slice Of H.A.M.png"
   },
   "at-first-light": {
     "difficulty": "Intermediate",
@@ -103,7 +108,8 @@
       "Hammer or Imcando hammer",
       "2 jerboa tails",
       "– or a Box trap"
-    ]
+    ],
+    "image": "At First Light.png"
   },
   "below-ice-mountain": {
     "difficulty": "Novice",
@@ -114,7 +120,8 @@
       "Knife",
       "Beer",
       "– Alternatively Asgarnian ale, Dwarven stout, or a Wizard's mind bomb"
-    ]
+    ],
+    "image": "Below Ice Mountain.png"
   },
   "beneath-cursed-sands": {
     "difficulty": "Master",
@@ -125,7 +132,8 @@
       "Tinderbox",
       "Spade",
       "Any cooked or raw meat"
-    ]
+    ],
+    "image": "Beneath Cursed Sands.png"
   },
   "between-a-rock": {
     "difficulty": "Experienced",
@@ -136,7 +144,8 @@
       "A hammer",
       "An ammo mould or a double ammo mould",
       "~830 coins"
-    ]
+    ],
+    "image": "Between a Rock....png"
   },
   "big-chompy-bird-hunting": {
     "difficulty": "Intermediate",
@@ -153,12 +162,14 @@
       "Potato",
       "Equa leaves",
       "Doogle leaves"
-    ]
+    ],
+    "image": "Big Chompy Bird Hunting.png"
   },
   "biohazard": {
     "difficulty": "Novice",
     "length": "Short",
-    "items": ["Priest gown top and bottom", "Gas mask"]
+    "items": ["Priest gown top and bottom", "Gas mask"],
+    "image": "Biohazard.png"
   },
   "black-knights-fortress": {
     "difficulty": "Intermediate",
@@ -167,28 +178,33 @@
       "Cabbage",
       "Iron chainbody",
       "Bronze med helm. Alternatively, a Black full helm, Black platebody and Black platelegs/black plateskirt can be used in place of the Iron chainbody and Bronze med helm"
-    ]
+    ],
+    "image": "Black Knights' Fortress.png"
   },
   "bone-voyage": {
     "difficulty": "Intermediate",
     "length": "Short",
-    "items": ["2 vodka", "Marrentill potion (unf)"]
+    "items": ["2 vodka", "Marrentill potion (unf)"],
+    "image": "Bone Voyage.png"
   },
   "cabin-fever": {
     "difficulty": "Experienced",
     "length": "Short",
     "items": [
       "You don't need to bring any items yourself. However, make sure that you have at least 11 open inventory spaces for items you will obtain during the quest. A higher amount, like 14 open spaces, is recommended however"
-    ]
+    ],
+    "image": "Cabin Fever.png"
   },
   "children-of-the-sun": {
     "difficulty": "Novice",
-    "length": "Very Short"
+    "length": "Very Short",
+    "image": "Children of the Sun.png"
   },
   "client-of-kourend": {
     "difficulty": "Novice",
     "length": "Short",
-    "items": ["Feather"]
+    "items": ["Feather"],
+    "image": "Client of Kourend.png"
   },
   "clock-tower": {
     "difficulty": "Novice",
@@ -196,7 +212,8 @@
     "items": [
       "Bucket of water",
       "– Alternatively, a Jug of water, Ice gloves, or Smiths gloves (i)"
-    ]
+    ],
+    "image": "Clock Tower.png"
   },
   "cold-war": {
     "difficulty": "Intermediate",
@@ -215,21 +232,20 @@
       "Mahogany plank",
       "Leather",
       "Cowbells"
-    ]
+    ],
+    "image": "Cold War.png"
   },
   "contact": {
     "difficulty": "Experienced",
     "length": "Short",
-    "items": ["A light source", "A tinderbox"]
+    "items": ["A light source", "A tinderbox"],
+    "image": "Contact!.png"
   },
   "cooks-assistant": {
     "difficulty": "Novice",
     "length": "Very Short",
-    "items": ["Egg", "Bucket of milk", "– A bucket", "Pot of flour", "– A pot"]
-  },
-  "crab-quest": {
-    "difficulty": "Intermediate",
-    "length": "Short"
+    "items": ["Egg", "Bucket of milk", "– A bucket", "Pot of flour", "– A pot"],
+    "image": "Cook's Assistant.png"
   },
   "creature-of-fenkenstrain": {
     "difficulty": "Intermediate",
@@ -242,12 +258,14 @@
       "5 thread",
       "Spade",
       "50 coins OR 1 law & 1 air rune for Telekinetic Grab"
-    ]
+    ],
+    "image": "Creature of Fenkenstrain.png"
   },
   "current-affairs": {
     "difficulty": "Novice",
     "length": "Short",
-    "items": ["Charcoal", "50 Coins"]
+    "items": ["Charcoal", "50 Coins"],
+    "image": "Current Affairs.png"
   },
   "darkness-of-hallowvale": {
     "difficulty": "Experienced",
@@ -258,11 +276,13 @@
       "Hammer",
       "Knife or a sickle",
       "Means to cast Telekinetic Grab"
-    ]
+    ],
+    "image": "Darkness of Hallowvale.png"
   },
   "death-on-the-isle": {
     "difficulty": "Intermediate",
-    "length": "Medium"
+    "length": "Medium",
+    "image": "Death on the Isle.png"
   },
   "death-plateau": {
     "difficulty": "Novice",
@@ -273,17 +293,20 @@
       "10 unnoted cooked trout",
       "Iron bar",
       "Asgarnian ale"
-    ]
+    ],
+    "image": "Death Plateau.png"
   },
   "death-to-the-dorgeshuun": {
     "difficulty": "Intermediate",
     "length": "Medium",
-    "items": ["Any light source", "2 full sets of H.A.M. robes", "Pickaxe"]
+    "items": ["Any light source", "2 full sets of H.A.M. robes", "Pickaxe"],
+    "image": "Death to the Dorgeshuun.png"
   },
   "defender-of-varrock": {
     "difficulty": "Experienced",
     "length": "Medium",
-    "items": ["Chaos core", "Barronite deposit or a pickaxe to mine one"]
+    "items": ["Chaos core", "Barronite deposit or a pickaxe to mine one"],
+    "image": "Defender of Varrock.png"
   },
   "demon-slayer": {
     "difficulty": "Novice",
@@ -292,7 +315,8 @@
       "A water container, such as a bucket of water",
       "25 bones",
       "1 coin"
-    ]
+    ],
+    "image": "Demon Slayer.png"
   },
   "desert-treasure-i": {
     "difficulty": "Master",
@@ -316,7 +340,8 @@
       "A facemask, slayer helmet, or gas mask",
       "A tinderbox",
       "20-50+ lockpicks"
-    ]
+    ],
+    "image": "Desert Treasure I.png"
   },
   "desert-treasure-ii-the-fallen-empire": {
     "difficulty": "Grandmaster",
@@ -336,7 +361,8 @@
       "Pestle and mortar",
       "Pickaxe",
       "Facemask or Slayer helm"
-    ]
+    ],
+    "image": "Desert Treasure II - The Fallen Empire.png"
   },
   "devious-minds": {
     "difficulty": "Experienced",
@@ -346,12 +372,14 @@
       "A bow string",
       "A non-degraded large or colossal pouch",
       ": unless a colossal pouch is used"
-    ]
+    ],
+    "image": "Devious Minds.png"
   },
   "dorics-quest": {
     "difficulty": "Novice",
     "length": "Very Short",
-    "items": ["6 clay", "4 copper ores", "2 iron ores"]
+    "items": ["6 clay", "4 copper ores", "2 iron ores"],
+    "image": "Doric's Quest.png"
   },
   "dragon-slayer-i": {
     "difficulty": "Experienced",
@@ -367,7 +395,8 @@
       "90 steel nails",
       "3 planks",
       "2,000 coins"
-    ]
+    ],
+    "image": "Dragon Slayer.png"
   },
   "dragon-slayer-ii": {
     "difficulty": "Grandmaster",
@@ -393,7 +422,8 @@
       "Tinderbox",
       "Pestle and mortar",
       "Runes for 3 Fire Wave spells or 3 Fire Surge spells"
-    ]
+    ],
+    "image": "Dragon Slayer II.png"
   },
   "dream-mentor": {
     "difficulty": "Master",
@@ -407,17 +437,20 @@
       "A hammer or Imcando hammer",
       "A pestle and mortar",
       "A good weapon, good armour, good food such as sharks, and super potion sets"
-    ]
+    ],
+    "image": "Dream Mentor.png"
   },
   "druidic-ritual": {
     "difficulty": "Novice",
     "length": "Very Short",
-    "items": ["Raw bear meat", "Raw rat meat", "Raw beef", "Raw chicken"]
+    "items": ["Raw bear meat", "Raw rat meat", "Raw beef", "Raw chicken"],
+    "image": "Druidic Ritual.png"
   },
   "dwarf-cannon": {
     "difficulty": "Novice",
     "length": "Short",
-    "items": ["Hammer"]
+    "items": ["Hammer"],
+    "image": "Dwarf Cannon.png"
   },
   "eadgars-ruse": {
     "difficulty": "Intermediate",
@@ -431,12 +464,14 @@
       "5 Raw chicken",
       "Pestle and mortar",
       "Ranarr potion (unf)"
-    ]
+    ],
+    "image": "Eadgar's Ruse.png"
   },
   "eagles-peak": {
     "difficulty": "Novice",
     "length": "Short",
-    "items": ["Yellow dye", "Swamp tar", "50 Coins"]
+    "items": ["Yellow dye", "Swamp tar", "50 Coins"],
+    "image": "Eagles' Peak.png"
   },
   "elemental-workshop-i": {
     "difficulty": "Novice",
@@ -449,7 +484,8 @@
       "Leather",
       "Hammer",
       "4 coal"
-    ]
+    ],
+    "image": "Elemental Workshop I.png"
   },
   "elemental-workshop-ii": {
     "difficulty": "Intermediate",
@@ -461,7 +497,8 @@
       "– 2 Elemental ore",
       "– 8 Coal",
       "The battered key from Elemental Workshop I"
-    ]
+    ],
+    "image": "Elemental Workshop II.png"
   },
   "enakhras-lament": {
     "difficulty": "Experienced",
@@ -484,7 +521,8 @@
       "Runes to cast Wind Bolt, Wind Blast or Wind Wave",
       "Runes to cast Crumble Undead",
       "Enough remaining Prayer points to maintain Protect from Melee for about five seconds"
-    ]
+    ],
+    "image": "Enakhra's Lament.png"
   },
   "enlightened-journey": {
     "difficulty": "Intermediate",
@@ -507,16 +545,19 @@
       "– – Secateurs",
       "– – A rake",
       "– – A spade"
-    ]
+    ],
+    "image": "Enlightened Journey.png"
   },
   "ernest-the-chicken": {
     "difficulty": "Novice",
     "length": "Very Short",
-    "items": ["Spade", "Fish food", "Poison"]
+    "items": ["Spade", "Fish food", "Poison"],
+    "image": "Ernest the Chicken.png"
   },
   "ethically-acquired-antiquities": {
     "difficulty": "Novice",
-    "length": "Short"
+    "length": "Short",
+    "image": "Ethically Acquired Antiquities.png"
   },
   "fairytale-i-growing-pains": {
     "difficulty": "Intermediate",
@@ -528,7 +569,8 @@
       "Dramen staff",
       "Draynor skull",
       "A combination of three items picked for you at random, see list of potential items"
-    ]
+    ],
+    "image": "Fairytale I - Growing Pains.png"
   },
   "fairytale-ii-cure-a-queen": {
     "difficulty": "Experienced",
@@ -538,7 +580,8 @@
       "Vial of water",
       "Pestle and mortar",
       "Nuff's certificate"
-    ]
+    ],
+    "image": "Fairytale II - Cure a Queen.png"
   },
   "fallen-from-grace": {
     "difficulty": "Experienced",
@@ -548,7 +591,8 @@
       "A pickaxe",
       "A chisel",
       "Combat equipment and supplies to defeat the Mad Angel, weak to Crush"
-    ]
+    ],
+    "image": "Fallen from Grace.png"
   },
   "family-crest": {
     "difficulty": "Experienced",
@@ -565,12 +609,14 @@
       "Necklace mould",
       "Any poison cure. Does not need to contain full doses",
       "Means to cast all 4 Blast spells"
-    ]
+    ],
+    "image": "Family Crest.png"
   },
   "fight-arena": {
     "difficulty": "Intermediate",
     "length": "Short",
-    "items": ["5 coins"]
+    "items": ["5 coins"],
+    "image": "Fight Arena - Fighting General Khazard.png"
   },
   "fishing-contest": {
     "difficulty": "Novice",
@@ -581,7 +627,8 @@
       "Garlic",
       "Fishing rod or Pearl fishing rod",
       "Red vine worm"
-    ]
+    ],
+    "image": "Fishing Contest.png"
   },
   "forgettable-tale": {
     "difficulty": "Intermediate",
@@ -597,7 +644,8 @@
       "2 beers",
       "Beer glass",
       "A random item from the list below"
-    ]
+    ],
+    "image": "Forgettable Tale....png"
   },
   "garden-of-tranquillity": {
     "difficulty": "Intermediate",
@@ -620,7 +668,8 @@
       "A pestle and mortar",
       "A filled plant pot",
       "2 ultracompost/supercompost/compost"
-    ]
+    ],
+    "image": "Garden of Tranquillity.png"
   },
   "gertrudes-cat": {
     "difficulty": "Novice",
@@ -631,7 +680,8 @@
       "Seasoned sardine or alternatively",
       "– Raw sardine",
       "– Doogle leaves"
-    ]
+    ],
+    "image": "Gertrude's Cat.png"
   },
   "getting-ahead": {
     "difficulty": "Intermediate",
@@ -648,7 +698,8 @@
       "Pot of flour",
       "Needle or Costume needle",
       "Thread unless you're using the Costume needle"
-    ]
+    ],
+    "image": "Getting Ahead.png"
   },
   "ghosts-ahoy": {
     "difficulty": "Intermediate",
@@ -673,7 +724,8 @@
       "– Gloves",
       "– Nettles",
       "– Bowl of water"
-    ]
+    ],
+    "image": "Ghosts Ahoy.png"
   },
   "goblin-diplomacy": {
     "difficulty": "Novice",
@@ -684,7 +736,8 @@
       "1 Orange dye – created by combining red dye with yellow dye",
       "– 1 Red dye",
       "– 1 Yellow dye"
-    ]
+    ],
+    "image": "Goblin Diplomacy.png"
   },
   "grim-tales": {
     "difficulty": "Master",
@@ -697,16 +750,19 @@
       "Leather gloves",
       "High healing food",
       "Good armour and a weapon"
-    ]
+    ],
+    "image": "Grim Tales.png"
   },
   "haunted-mine": {
     "difficulty": "Experienced",
     "length": "Short",
-    "items": ["A chisel"]
+    "items": ["A chisel"],
+    "image": "Haunted Mine.png"
   },
   "hazeel-cult": {
     "difficulty": "Novice",
-    "length": "Very Short"
+    "length": "Very Short",
+    "image": "Hazeel Cult.png"
   },
   "heroes-quest": {
     "difficulty": "Experienced",
@@ -724,12 +780,14 @@
       "Black platelegs",
       "If you are a Phoenix Gang member",
       "Some form of Ranged or Magic attack method"
-    ]
+    ],
+    "image": "Heroes' Quest.png"
   },
   "holy-grail": {
     "difficulty": "Intermediate",
     "length": "Short",
-    "items": ["Excalibur"]
+    "items": ["Excalibur"],
+    "image": "Holy Grail.png"
   },
   "horror-from-the-deep": {
     "difficulty": "Intermediate",
@@ -748,7 +806,8 @@
       "2 regular planks",
       "Swamp tar",
       "At least one combat style to defeat the Dagannoth Mother - she cycles every 18 seconds between only being vulnerable to one of six different types of attack"
-    ]
+    ],
+    "image": "Horror from the Deep.png"
   },
   "icthlarins-little-helper": {
     "difficulty": "Intermediate",
@@ -762,12 +821,14 @@
       "Full waterskin to give away",
       "Linen",
       "Means to enter the desert."
-    ]
+    ],
+    "image": "Icthlarin's Little Helper.png"
   },
   "imp-catcher": {
     "difficulty": "Novice",
     "length": "Short",
-    "items": ["Black bead", "Yellow bead", "Red bead", "White bead"]
+    "items": ["Black bead", "Yellow bead", "Red bead", "White bead"],
+    "image": "Imp Catcher.png"
   },
   "in-aid-of-the-myreque": {
     "difficulty": "Intermediate",
@@ -807,7 +868,8 @@
       "– Steel platelegs",
       "– A silver sickle",
       "– 15 stew, salmon, snails, or slimy eels"
-    ]
+    ],
+    "image": "In Aid of the Myreque.png"
   },
   "in-search-of-the-myreque": {
     "difficulty": "Intermediate",
@@ -825,11 +887,13 @@
       "A hammer or Imcando hammer",
       "6 normal planks",
       "10 coins or a Ring of Charos(a)"
-    ]
+    ],
+    "image": "In Search of the Myreque.png"
   },
   "jungle-potion": {
     "difficulty": "Novice",
-    "length": "Short"
+    "length": "Short",
+    "image": "Jungle Potion.png"
   },
   "kings-ransom": {
     "difficulty": "Experienced",
@@ -841,7 +905,8 @@
       "A bronze med helm",
       "An iron chainbody",
       "Animate rock scroll"
-    ]
+    ],
+    "image": "King's Ransom.png"
   },
   "land-of-the-goblins": {
     "difficulty": "Experienced",
@@ -859,11 +924,13 @@
       "Fishing rod",
       "Raw slimy eel",
       "5 coins"
-    ]
+    ],
+    "image": "Land of the Goblins.png"
   },
   "learning-the-ropes": {
     "difficulty": "Novice",
-    "length": "Very Short"
+    "length": "Very Short",
+    "image": "Tutorial Island.png"
   },
   "legends-quest": {
     "difficulty": "Master",
@@ -894,12 +961,14 @@
       "Unpowered orb and runes to cast any Charge Orb once",
       "Charcoal",
       "3 Papyrus"
-    ]
+    ],
+    "image": "Legends' Quest - Fighting Nezikchened.png"
   },
   "lost-city": {
     "difficulty": "Intermediate",
     "length": "Short",
-    "items": ["Knife", "Woodcutting axe"]
+    "items": ["Knife", "Woodcutting axe"],
+    "image": "Lost City.png"
   },
   "lunar-diplomacy": {
     "difficulty": "Experienced",
@@ -919,7 +988,8 @@
       "All elemental talismans or their respective tiaras, or access to the Abyss or the Guardians of the Rift minigame",
       "A dramen staff",
       "Combat equipment"
-    ]
+    ],
+    "image": "Lunar Diplomacy.png"
   },
   "making-friends-with-my-arm": {
     "difficulty": "Master",
@@ -935,7 +1005,8 @@
       "Hammer",
       "Combat equipment",
       "Climbing boots"
-    ]
+    ],
+    "image": "Making Friends with My Arm.png"
   },
   "making-history": {
     "difficulty": "Intermediate",
@@ -949,26 +1020,31 @@
       "– 2 ecto-token or",
       "– 1 bone, 1 pot and 1 bucket to earn 5 ecto-tokens or",
       "– 5,200 gold for a Charter ship to Port Phasmatys (cheaper depending upon where you travel from and if you use Ring of Charos(a))"
-    ]
+    ],
+    "image": "Outpost.png"
   },
   "meat-and-greet": {
     "difficulty": "Experienced",
-    "length": "Short"
+    "length": "Short",
+    "image": "Meat and Greet.png"
   },
   "merlins-crystal": {
     "difficulty": "Intermediate",
     "length": "Short",
-    "items": ["Bread", "Tinderbox", "Bucket of wax", "Bat bones"]
+    "items": ["Bread", "Tinderbox", "Bucket of wax", "Bat bones"],
+    "image": "Merlin's Crystal.png"
   },
   "misthalin-mystery": {
     "difficulty": "Novice",
     "length": "Short",
-    "items": ["Bucket", "Tinderbox", "Knife"]
+    "items": ["Bucket", "Tinderbox", "Knife"],
+    "image": "Misthalin Mystery.png"
   },
   "monks-friend": {
     "difficulty": "Novice",
     "length": "Very Short",
-    "items": ["Jug of water", "Regular logs or a regular plank"]
+    "items": ["Jug of water", "Regular logs or a regular plank"],
+    "image": "Monk's Friend.png"
   },
   "monkey-madness-i": {
     "difficulty": "Master",
@@ -979,7 +1055,8 @@
       "A ball of wool",
       "Monkey bones or corpse from Karamja",
       "Five bananas"
-    ]
+    ],
+    "image": "Monkey Madness I.png"
   },
   "monkey-madness-ii": {
     "difficulty": "Grandmaster",
@@ -998,12 +1075,14 @@
       "A ninja monkey greegree",
       "A slash weapon",
       "The Translation book from The Grand Tree"
-    ]
+    ],
+    "image": "Monkey Madness II.png"
   },
   "mountain-daughter": {
     "difficulty": "Intermediate",
     "length": "Medium",
-    "items": ["Rope", "Pickaxe", "Axe", "Plank", "Staff or a pole", "Gloves"]
+    "items": ["Rope", "Pickaxe", "Axe", "Plank", "Staff or a pole", "Gloves"],
+    "image": "Mountain Daughter.png"
   },
   "mournings-end-part-i": {
     "difficulty": "Master",
@@ -1021,7 +1100,8 @@
       "Ogre bellows",
       "Barrel of naphtha, or 5-9 coal to make one",
       "7 empty inventory spaces for the Mourner gear"
-    ]
+    ],
+    "image": "Mourning's End Part I.png"
   },
   "mournings-end-part-ii": {
     "difficulty": "Master",
@@ -1031,12 +1111,14 @@
       "A chisel",
       "A death talisman/tiara, catalytic talisman/tiara, Runecraft cape or 50 junk items",
       "Rope"
-    ]
+    ],
+    "image": "Mourning's End Part II.png"
   },
   "murder-mystery": {
     "difficulty": "Novice",
     "length": "Short",
-    "items": ["Pot or Pot of flour"]
+    "items": ["Pot or Pot of flour"],
+    "image": "Murder Mystery.png"
   },
   "my-arms-big-adventure": {
     "difficulty": "Experienced",
@@ -1054,17 +1136,20 @@
       "– Seed dibber",
       "– Plant cure",
       "Climbing boots"
-    ]
+    ],
+    "image": "My Arm's Big Adventure.png"
   },
   "nature-spirit": {
     "difficulty": "Intermediate",
     "length": "Short",
-    "items": ["Silver sickle", "Ghostspeak amulet", "6 empty inventory spaces"]
+    "items": ["Silver sickle", "Ghostspeak amulet", "6 empty inventory spaces"],
+    "image": "Nature Spirit.png"
   },
   "observatory-quest": {
     "difficulty": "Intermediate",
     "length": "Short",
-    "items": ["3 normal planks", "Bronze bar", "Molten glass"]
+    "items": ["3 normal planks", "Bronze bar", "Molten glass"],
+    "image": "Observatory Quest.png"
   },
   "olafs-quest": {
     "difficulty": "Intermediate",
@@ -1075,7 +1160,8 @@
       "Spade",
       "6 Ropes",
       "4 free inventory slots"
-    ]
+    ],
+    "image": "Olaf's Quest.png"
   },
   "one-small-favour": {
     "difficulty": "Experienced",
@@ -1098,12 +1184,14 @@
       "– Jade",
       "– Red topaz",
       "– Sapphire"
-    ]
+    ],
+    "image": "One Small Favour.png"
   },
   "pandemonium": {
     "difficulty": "Novice",
     "length": "Short",
-    "items": ["Hammer", "Saw"]
+    "items": ["Hammer", "Saw"],
+    "image": "Pandemonium.png"
   },
   "perilous-moons": {
     "difficulty": "Master",
@@ -1114,7 +1202,8 @@
       "Rope",
       "Pestle and mortar",
       "Combat equipment for multiple PvM encounters"
-    ]
+    ],
+    "image": "Perilous Moons.png"
   },
   "pirates-treasure": {
     "difficulty": "Novice",
@@ -1125,7 +1214,8 @@
       "60 coins (only 30 are needed if using the Ring of Charos(a))",
       "10 bananas",
       "Spade"
-    ]
+    ],
+    "image": "Pirate's Treasure.png"
   },
   "plague-city": {
     "difficulty": "Novice",
@@ -1142,12 +1232,14 @@
       "– Bucket of milk",
       "– Snape grass",
       "Picture of Elena"
-    ]
+    ],
+    "image": "Plague City.png"
   },
   "priest-in-peril": {
     "difficulty": "Novice",
     "length": "Short",
-    "items": ["50 unnoted rune essence or pure essence", "Bucket"]
+    "items": ["50 unnoted rune essence or pure essence", "Bucket"],
+    "image": "Priest in Peril.png"
   },
   "prince-ali-rescue": {
     "difficulty": "Novice",
@@ -1165,7 +1257,8 @@
       "3 beers",
       "Rope",
       "30-40 coins for the Al Kharid toll gate if not using teleports to and from Al Kharid"
-    ]
+    ],
+    "image": "Prince Ali Rescue.png"
   },
   "prying-times": {
     "difficulty": "Intermediate",
@@ -1175,7 +1268,8 @@
       "Steel bar",
       "Redberry pie",
       "Captain's log"
-    ]
+    ],
+    "image": "Prying Times.png"
   },
   "rag-and-bone-man-i": {
     "difficulty": "Novice",
@@ -1185,7 +1279,8 @@
       "8 pots",
       "8 logs of any type",
       "Tinderbox"
-    ]
+    ],
+    "image": "Rag and Bone Man.png"
   },
   "rag-and-bone-man-ii": {
     "difficulty": "Experienced",
@@ -1203,7 +1298,8 @@
       "Ice coolers",
       "Fishing explosives",
       "Mirror shield or V's shield"
-    ]
+    ],
+    "image": "Rag and Bone Man.png"
   },
   "ratcatchers": {
     "difficulty": "Intermediate",
@@ -1224,7 +1320,8 @@
       "101 coins (or 51 coins with a Ring of Charos(a))",
       "Snake charm",
       "1 free inventory space"
-    ]
+    ],
+    "image": "Ratcatchers.png"
   },
   "recipe-for-disaster": {
     "difficulty": "Special",
@@ -1279,7 +1376,8 @@
       "Gorilla, ninja and zombie greegree",
       "Monkey nuts",
       "Rope"
-    ]
+    ],
+    "image": "Recipe for Disaster.png"
   },
   "recipe-for-disaster-another-cooks-quest": {
     "difficulty": "Special",
@@ -1290,7 +1388,8 @@
       "Rotten tomato",
       "Any fruit blast excluding a premade fr' blast",
       "Ashes"
-    ]
+    ],
+    "image": "Recipe for Disaster.png"
   },
   "recipe-for-disaster-defeating-the-culinaromancer": {
     "difficulty": "Special",
@@ -1300,12 +1399,14 @@
       "Menaphite remedy or restore potions since Karamel will lower your stats",
       "Certain armour and weapons for each boss",
       "Good healing food, such as sharks"
-    ]
+    ],
+    "image": "Culinaromancer unfrozen.png"
   },
   "recipe-for-disaster-freeing-evil-dave": {
     "difficulty": "Special",
     "length": "Medium",
-    "items": ["Any cat except an overgrown cat", "Several bowls of stew"]
+    "items": ["Any cat except an overgrown cat", "Several bowls of stew"],
+    "image": "Recipe for Disaster - Freeing Evil Dave.png"
   },
   "recipe-for-disaster-freeing-king-awowogei": {
     "difficulty": "Special",
@@ -1319,7 +1420,8 @@
       "Rope",
       "Knife or slashing weapon",
       "Pestle and mortar"
-    ]
+    ],
+    "image": "Recipe for Disaster - Freeing King Awowogei.png"
   },
   "recipe-for-disaster-freeing-pirate-pete": {
     "difficulty": "Special",
@@ -1332,7 +1434,8 @@
       "A fishbowl",
       "A needle",
       "3 bronze wire"
-    ]
+    ],
+    "image": "Recipe for Disaster - Freeing Pirate Pete.png"
   },
   "recipe-for-disaster-freeing-sir-amik-varze": {
     "difficulty": "Special",
@@ -1350,7 +1453,8 @@
       "Pestle and mortar",
       "Ice gloves (only required if wanting to take no damage from the flambé. Anti-dragon shield will mitigate most of the damage.",
       "Raw chicken"
-    ]
+    ],
+    "image": "Recipe for Disaster.png"
   },
   "recipe-for-disaster-freeing-skrach-uglogwee": {
     "difficulty": "Special",
@@ -1366,7 +1470,8 @@
       "Ball of wool",
       "Ogre bow or comp ogre bow",
       "Ogre arrows Chisel, knife, wolf bones, and feathers if you are making your own ogre arrows"
-    ]
+    ],
+    "image": "Recipe for Disaster - Freeing Skrach Uglogwee.png"
   },
   "recipe-for-disaster-freeing-the-goblin-generals": {
     "difficulty": "Special",
@@ -1379,7 +1484,8 @@
       "Fishing bait",
       "Bucket of water",
       "Charcoal or ground charcoal"
-    ]
+    ],
+    "image": "Recipe for Disaster - Freeing the Goblin generals.png"
   },
   "recipe-for-disaster-freeing-the-lumbridge-guide": {
     "difficulty": "Special",
@@ -1391,7 +1497,8 @@
       "A cake tin",
       "Minigame Teleport to Guardians of the Rift",
       "Necklace of passage or access to fairy rings and a Lunar/Dramen staff"
-    ]
+    ],
+    "image": "Recipe for Disaster.png"
   },
   "recipe-for-disaster-freeing-the-mountain-dwarf": {
     "difficulty": "Special",
@@ -1404,11 +1511,13 @@
       "4 Asgarnian ales",
       "306 coins (300 + 1 coin per ale, 100 instead of 300 if you choose to bring a Ring of Charos(a), 150 instead of 300 if you choose to bring a chocolate bar)",
       "Gloves, If not using gloves make sure to bring Telekinetic Grab spell runes"
-    ]
+    ],
+    "image": "Recipe for Disaster - Freeing the Mountain Dwarf.png"
   },
   "recruitment-drive": {
     "difficulty": "Novice",
-    "length": "Short"
+    "length": "Short",
+    "image": "Recruitment Drive.png"
   },
   "regicide": {
     "difficulty": "Experienced",
@@ -1425,22 +1534,26 @@
       "Gloves, the list on Quicklime shows all gloves that work",
       "Pot",
       "Cooked rabbit or roast rabbit"
-    ]
+    ],
+    "image": "Regicide.png"
   },
   "romeo-juliet": {
     "difficulty": "Novice",
     "length": "Short",
-    "items": ["Cadava berries"]
+    "items": ["Cadava berries"],
+    "image": "Romeo & Juliet.png"
   },
   "roving-elves": {
     "difficulty": "Experienced",
     "length": "Short",
-    "items": ["Glarial's pebble", "Key", "Spade", "Rope"]
+    "items": ["Glarial's pebble", "Key", "Spade", "Rope"],
+    "image": "Roving Elves.png"
   },
   "royal-trouble": {
     "difficulty": "Experienced",
     "length": "Medium",
-    "items": ["5 coal", "2 rope", "1 plank"]
+    "items": ["5 coal", "2 rope", "1 plank"],
+    "image": "Royal Trouble.png"
   },
   "rum-deal": {
     "difficulty": "Experienced",
@@ -1450,17 +1563,20 @@
       "Seed dibber or partial completion of the Farming portion of the Barbarian Training miniquest",
       "Bucket",
       "At least 47 prayer points for the Evil spirits part of the quest"
-    ]
+    ],
+    "image": "Rum Deal.png"
   },
   "rune-mysteries": {
     "difficulty": "Novice",
     "length": "Short",
-    "items": ["Air talisman"]
+    "items": ["Air talisman"],
+    "image": "Rune Mysteries.png"
   },
   "scorpion-catcher": {
     "difficulty": "Intermediate",
     "length": "Short",
-    "items": ["Dusty key or 70 Agility"]
+    "items": ["Dusty key or 70 Agility"],
+    "image": "Scorpion Catcher.png"
   },
   "scrambled": {
     "difficulty": "Intermediate",
@@ -1471,17 +1587,20 @@
       "6 nails",
       "Saw or Amy's saw",
       "Hammer or Imcando hammer"
-    ]
+    ],
+    "image": "Scrambled!.png"
   },
   "sea-slug": {
     "difficulty": "Intermediate",
     "length": "Short",
-    "items": ["Swamp paste"]
+    "items": ["Swamp paste"],
+    "image": "Sea Slug.png"
   },
   "secrets-of-the-north": {
     "difficulty": "Master",
     "length": "Medium",
-    "items": ["100 Coins", "Lockpick", "Tinderbox"]
+    "items": ["100 Coins", "Lockpick", "Tinderbox"],
+    "image": "Secrets of the North.png"
   },
   "shades-of-mortton": {
     "difficulty": "Intermediate",
@@ -1493,7 +1612,8 @@
       "Tinderbox",
       "Logs OR an axe to obtain some",
       "1 hammer"
-    ]
+    ],
+    "image": "Shades of Mor'ton.png"
   },
   "shadow-of-the-storm": {
     "difficulty": "Intermediate",
@@ -1505,17 +1625,20 @@
       "Black dye",
       "Silver bar",
       "Means to enter the desert"
-    ]
+    ],
+    "image": "Shadow of the Storm.png"
   },
   "shadows-of-custodia": {
     "difficulty": "Experienced",
     "length": "Short",
-    "items": ["4 willow longbows", "4 maple logs", "Fishing rod", "Hammer"]
+    "items": ["4 willow longbows", "4 maple logs", "Fishing rod", "Hammer"],
+    "image": "Shadows of Custodia.png"
   },
   "sheep-herder": {
     "difficulty": "Novice",
     "length": "Short",
-    "items": ["100 coins"]
+    "items": ["100 coins"],
+    "image": "Sheep Herder.png"
   },
   "sheep-shearer": {
     "difficulty": "Novice",
@@ -1523,12 +1646,14 @@
     "items": [
       "20 balls of wool",
       "– Shears if obtaining wool to spin into balls of wool"
-    ]
+    ],
+    "image": "Sheep Shearer.png"
   },
   "shield-of-arrav": {
     "difficulty": "Novice",
     "length": "Short",
-    "items": ["Phoenix Gang: 20 coins", "Black Arm Gang: 2 Phoenix crossbows"]
+    "items": ["Phoenix Gang: 20 coins", "Black Arm Gang: 2 Phoenix crossbows"],
+    "image": "Shield of Arrav.png"
   },
   "shilo-village": {
     "difficulty": "Intermediate",
@@ -1541,7 +1666,8 @@
       "– Bronze bar and hammer to create one",
       "Chisel",
       "3 regular bones"
-    ]
+    ],
+    "image": "Shilo Village.png"
   },
   "sins-of-the-father": {
     "difficulty": "Master",
@@ -1554,7 +1680,8 @@
       "Knife",
       "Chisel",
       "Runes for Lvl-3 Enchant or an enchant ruby or topaz tablet"
-    ]
+    ],
+    "image": "Sins of the Father.png"
   },
   "sleeping-giants": {
     "difficulty": "Intermediate",
@@ -1566,7 +1693,8 @@
       "Hammer or Imcando hammer",
       "Chisel",
       "1 bucket of water or ice gloves"
-    ]
+    ],
+    "image": "Sleeping Giants.png"
   },
   "song-of-the-elves": {
     "difficulty": "Grandmaster",
@@ -1598,7 +1726,8 @@
       "Pickaxe",
       "Axe",
       "Spade"
-    ]
+    ],
+    "image": "Song of the Elves.png"
   },
   "spirits-of-the-elid": {
     "difficulty": "Intermediate",
@@ -1615,7 +1744,8 @@
       "Rope",
       "Any pickaxe that you have the Mining level to use",
       "Some form of Ranged or Magic attack method,"
-    ]
+    ],
+    "image": "Spirits of the Elid.png"
   },
   "swan-song": {
     "difficulty": "Master",
@@ -1635,7 +1765,8 @@
       "A hammer or Imcando hammer",
       "A small fishing net",
       "A brown apron"
-    ]
+    ],
+    "image": "Swan Song.png"
   },
   "tai-bwo-wannai-trio": {
     "difficulty": "Intermediate",
@@ -1653,7 +1784,8 @@
       "Jogre bones",
       "Seaweed",
       "Karamjan rum or 30 coins to purchase"
-    ]
+    ],
+    "image": "Tai Bwo Wannai Trio.png"
   },
   "tale-of-the-righteous": {
     "difficulty": "Intermediate",
@@ -1664,7 +1796,8 @@
       "Runes for 2-3 casts of any magic combat spell",
       "A melee weapon of any kind",
       "Rope"
-    ]
+    ],
+    "image": "Tale of the Righteous.png"
   },
   "tears-of-guthix": {
     "difficulty": "Intermediate",
@@ -1677,7 +1810,8 @@
       "Chisel",
       "Pickaxe",
       "Rope"
-    ]
+    ],
+    "image": "Tears of Guthix.png"
   },
   "temple-of-ikov": {
     "difficulty": "Intermediate",
@@ -1688,16 +1822,19 @@
       "A method of reducing your weight to at least -1kg temporarily",
       "– Boots of lightness",
       "– Other forms of weight-reducing clothing such as the graceful outfit"
-    ]
+    ],
+    "image": "Temple of Ikov.png"
   },
   "temple-of-the-eye": {
     "difficulty": "Intermediate",
     "length": "Short",
-    "items": ["Bucket of water", "Chisel", "Pickaxe"]
+    "items": ["Bucket of water", "Chisel", "Pickaxe"],
+    "image": "Temple of the Eye.png"
   },
   "the-ascent-of-arceuus": {
     "difficulty": "Intermediate",
-    "length": "Short"
+    "length": "Short",
+    "image": "The Ascent of Arceuus.png"
   },
   "the-blood-moon-rises": {
     "difficulty": "Grandmaster",
@@ -1712,12 +1849,14 @@
       "Knife",
       "Chisel",
       "Blisterwood logs"
-    ]
+    ],
+    "image": "The Blood Moon Rises.png"
   },
   "the-corsair-curse": {
     "difficulty": "Intermediate",
     "length": "Short",
-    "items": ["Spade", "Tinderbox"]
+    "items": ["Spade", "Tinderbox"],
+    "image": "The Corsair Curse.png"
   },
   "the-curse-of-arrav": {
     "difficulty": "Master",
@@ -1729,11 +1868,13 @@
       "Any crossbow",
       "Mith grapple",
       "Insulated boots"
-    ]
+    ],
+    "image": "The Curse of Arrav.png"
   },
   "the-depths-of-despair": {
     "difficulty": "Intermediate",
-    "length": "Short"
+    "length": "Short",
+    "image": "The Depths of Despair.png"
   },
   "the-dig-site": {
     "difficulty": "Intermediate",
@@ -1750,7 +1891,8 @@
       "Specimen jar",
       "Panning tray",
       "Trowel"
-    ]
+    ],
+    "image": "The Dig Site.png"
   },
   "the-eyes-of-glouphrie": {
     "difficulty": "Intermediate",
@@ -1763,7 +1905,8 @@
       "Hammer",
       "Saw",
       "Pestle and mortar"
-    ]
+    ],
+    "image": "The Eyes of Glouphrie.png"
   },
   "the-feud": {
     "difficulty": "Intermediate",
@@ -1777,7 +1920,8 @@
       "Bucket or Ugthanki dung. One more might be needed for Forgettable Tale...",
       "Snake charm",
       "Snake basket"
-    ]
+    ],
+    "image": "The Feud.png"
   },
   "the-final-dawn": {
     "difficulty": "Master",
@@ -1787,12 +1931,14 @@
       "Any kind of bones or raw meat/cooked meat",
       "A knife",
       "A beer"
-    ]
+    ],
+    "image": "The Final Dawn.png"
   },
   "the-forsaken-tower": {
     "difficulty": "Intermediate",
     "length": "Short",
-    "items": ["Tinderbox"]
+    "items": ["Tinderbox"],
+    "image": "The Forsaken Tower.png"
   },
   "the-fremennik-exiles": {
     "difficulty": "Master",
@@ -1812,7 +1958,8 @@
       "3 Lunar bars",
       "– Or a pickaxe to obtain 3 ores to turn into Lunar bars",
       "Seal of Passage"
-    ]
+    ],
+    "image": "The Fremennik Exiles.png"
   },
   "the-fremennik-isles": {
     "difficulty": "Experienced",
@@ -1828,7 +1975,8 @@
       "Yak-hide armour top and legs",
       "5000 coins",
       "Silly jester costume"
-    ]
+    ],
+    "image": "The Fremennik Isles.png"
   },
   "the-fremennik-trials": {
     "difficulty": "Intermediate",
@@ -1845,12 +1993,14 @@
       "– Potato",
       "– Onion",
       "– Cabbage"
-    ]
+    ],
+    "image": "The Fremennik Trials.png"
   },
   "the-garden-of-death": {
     "difficulty": "Intermediate",
     "length": "Short",
-    "items": ["Secateurs"]
+    "items": ["Secateurs"],
+    "image": "The Garden of Death.png"
   },
   "the-giant-dwarf": {
     "difficulty": "Intermediate",
@@ -1865,7 +2015,8 @@
       "3 cut sapphires",
       "Various ores and bars",
       "Redberry pie"
-    ]
+    ],
+    "image": "The Giant Dwarf.png"
   },
   "the-golem": {
     "difficulty": "Intermediate",
@@ -1877,17 +2028,16 @@
       "4 soft clay",
       "Phoenix feather",
       "Means to enter the desert"
-    ]
+    ],
+    "image": "The Golem.png"
   },
   "the-grand-tree": {
     "difficulty": "Intermediate",
     "length": "Medium",
     "items": [
       "1,000 coins if you previously chose not to help Femi on your first entry to the Tree Gnome Stronghold"
-    ]
-  },
-  "the-graveyard": {
-    "difficulty": "Master"
+    ],
+    "image": "The Grand Tree.png"
   },
   "the-great-brain-robbery": {
     "difficulty": "Experienced",
@@ -1905,7 +2055,8 @@
       "8 normal planks",
       "Holy symbol",
       "Ring of Charos"
-    ]
+    ],
+    "image": "The Great Brain Robbery.png"
   },
   "the-hand-in-the-sand": {
     "difficulty": "Intermediate",
@@ -1919,16 +2070,19 @@
       "Lantern lens",
       "5 earth runes",
       "Bucket of sand"
-    ]
+    ],
+    "image": "The Hand in the Sand.png"
   },
   "the-heart-of-darkness": {
     "difficulty": "Experienced",
     "length": "Medium",
-    "items": ["30 coins", "Pickaxe", "Up to 4 empty inventory slots"]
+    "items": ["30 coins", "Pickaxe", "Up to 4 empty inventory slots"],
+    "image": "The Heart of Darkness.png"
   },
   "the-ides-of-milk": {
     "difficulty": "Novice",
-    "length": "Short"
+    "length": "Short",
+    "image": "The Ides of Milk.png"
   },
   "the-knights-sword": {
     "difficulty": "Intermediate",
@@ -1938,12 +2092,14 @@
       "2 or 4 iron bars",
       "1-3 Blurite ore - optionally an additional ore each for your own blurite sword and the Falador easy diary",
       "Any pickaxe"
-    ]
+    ],
+    "image": "The Knight's Sword.png"
   },
   "the-lost-tribe": {
     "difficulty": "Intermediate",
     "length": "Short",
-    "items": ["Pickaxe", "Light source"]
+    "items": ["Pickaxe", "Light source"],
+    "image": "The Lost Tribe.png"
   },
   "the-path-of-glouphrie": {
     "difficulty": "Experienced",
@@ -1953,12 +2109,14 @@
       "Combat equipment and some food",
       "Mith Grapple",
       "Any crossbow"
-    ]
+    ],
+    "image": "The Path of Glouphrie.png"
   },
   "the-queen-of-thieves": {
     "difficulty": "Intermediate",
     "length": "Very Short",
-    "items": ["Stew"]
+    "items": ["Stew"],
+    "image": "The Queen of Thieves.png"
   },
   "the-red-reef": {
     "difficulty": "Experienced",
@@ -1966,16 +2124,19 @@
     "items": [
       "A boat",
       "Cannons on your boat for ship combat, or Magic/Ranged gear to skip it"
-    ]
+    ],
+    "image": "The Red Reef.png"
   },
   "the-restless-ghost": {
     "difficulty": "Novice",
-    "length": "Short"
+    "length": "Short",
+    "image": "The Restless Ghost.png"
   },
   "the-ribbiting-tale-of-a-lily-pad-labour-dispute": {
     "difficulty": "Novice",
     "length": "Very Short",
-    "items": ["Any axe"]
+    "items": ["Any axe"],
+    "image": "The Ribbiting Tale of a Lily Pad Labour Dispute.png"
   },
   "the-slug-menace": {
     "difficulty": "Intermediate",
@@ -1994,7 +2155,8 @@
       "– Travelling through the Abyss or using a Runecraft cape",
       ":OR",
       "– Access to Guardians of the Rift"
-    ]
+    ],
+    "image": "Witchaven.png"
   },
   "the-tourist-trap": {
     "difficulty": "Intermediate",
@@ -2005,7 +2167,8 @@
       "One bronze bar",
       "Ten feathers",
       "Means to enter the desert, such as the Shantay pass, desert amulet 2, teleport tablets or scrolls, fairy rings or the pharaoh's sceptre"
-    ]
+    ],
+    "image": "The Tourist Trap.png"
   },
   "throne-of-miscellania": {
     "difficulty": "Experienced",
@@ -2020,21 +2183,25 @@
       "– A pickaxe and 35 Mining to mine coal",
       "– A harpoon or lobster pot and 35 Fishing to fish tuna, lobsters or swordfish",
       "Logs"
-    ]
+    ],
+    "image": "Throne of Miscellania.png"
   },
   "tower-of-life": {
     "difficulty": "Novice",
     "length": "Medium",
-    "items": ["Hammer", "Saw", "Beer"]
+    "items": ["Hammer", "Saw", "Beer"],
+    "image": "Tower of Life.png"
   },
   "tree-gnome-village": {
     "difficulty": "Intermediate",
     "length": "Short",
-    "items": ["6 normal logs", "Combat equipment", "Food"]
+    "items": ["6 normal logs", "Combat equipment", "Food"],
+    "image": "Tree Gnome Village.png"
   },
   "tribal-totem": {
     "difficulty": "Intermediate",
-    "length": "Very Short"
+    "length": "Very Short",
+    "image": "Tribal Totem.png"
   },
   "troll-romance": {
     "difficulty": "Intermediate",
@@ -2048,32 +2215,38 @@
       "– A bucket of wax",
       "– A cake tin",
       "– Swamp tar"
-    ]
+    ],
+    "image": "Troll Romance.png"
   },
   "troll-stronghold": {
     "difficulty": "Intermediate",
     "length": "Short",
-    "items": ["Climbing boots or 12 coins to buy them"]
+    "items": ["Climbing boots or 12 coins to buy them"],
+    "image": "Troll Stronghold.png"
   },
   "troubled-tortugans": {
     "difficulty": "Experienced",
     "length": "Medium",
-    "items": ["Any axe", "Hammer or Imcando hammer", "Saw or Amy's saw"]
+    "items": ["Any axe", "Hammer or Imcando hammer", "Saw or Amy's saw"],
+    "image": "Troubled Tortugans.png"
   },
   "twilights-promise": {
     "difficulty": "Intermediate",
     "length": "Short",
-    "items": ["Items for two different combat classes or a poisoned weapon"]
+    "items": ["Items for two different combat classes or a poisoned weapon"],
+    "image": "Twilight's Promise.png"
   },
   "underground-pass": {
     "difficulty": "Experienced",
     "length": "Long",
-    "items": ["Rope", "Bow", "1-5 arrows", "Spade", "Bucket", "Tinderbox"]
+    "items": ["Rope", "Bow", "1-5 arrows", "Spade", "Bucket", "Tinderbox"],
+    "image": "Underground Pass.png"
   },
   "vampyre-slayer": {
     "difficulty": "Intermediate",
     "length": "Very Short",
-    "items": ["Hammer", "Beer", "Stake"]
+    "items": ["Hammer", "Beer", "Stake"],
+    "image": "Vampyre Slayer.png"
   },
   "wanted": {
     "difficulty": "Intermediate",
@@ -2085,7 +2258,8 @@
       "– Molten glass",
       "20 un-noted Rune essence or pure essence",
       "Light source"
-    ]
+    ],
+    "image": "Wanted!.png"
   },
   "watchtower": {
     "difficulty": "Intermediate",
@@ -2104,17 +2278,20 @@
       "Pestle and mortar",
       "Bat bones",
       "Jangerberries"
-    ]
+    ],
+    "image": "Watchtower.png"
   },
   "waterfall-quest": {
     "difficulty": "Intermediate",
     "length": "Short",
-    "items": ["6 Air runes", "6 Earth runes", "6 Water runes", "Rope"]
+    "items": ["6 Air runes", "6 Earth runes", "6 Water runes", "Rope"],
+    "image": "Waterfall Quest.png"
   },
   "what-lies-below": {
     "difficulty": "Intermediate",
     "length": "Short",
-    "items": ["Empty bowl", "15 chaos runes", "Access to the Chaos Altar"]
+    "items": ["Empty bowl", "15 chaos runes", "Access to the Chaos Altar"],
+    "image": "What Lies Below.png"
   },
   "while-guthix-sleeps": {
     "difficulty": "Grandmaster",
@@ -2140,22 +2317,26 @@
       "Papyrus and charcoal",
       "Restore potion",
       "One of each of the following runes: air, water, earth, fire, mind, law, death"
-    ]
+    ],
+    "image": "While Guthix Sleeps.png"
   },
   "witchs-house": {
     "difficulty": "Intermediate",
     "length": "Very Short",
-    "items": ["Cheese", "Leather gloves or any of the gloves listed here"]
+    "items": ["Cheese", "Leather gloves or any of the gloves listed here"],
+    "image": "Witch's House.png"
   },
   "witchs-potion": {
     "difficulty": "Novice",
     "length": "Very Short",
-    "items": ["Burnt meat", "Eye of newt", "Onion", "Rat's tail"]
+    "items": ["Burnt meat", "Eye of newt", "Onion", "Rat's tail"],
+    "image": "Witch's Potion.png"
   },
   "x-marks-the-spot": {
     "difficulty": "Novice",
     "length": "Very Short",
-    "items": ["Spade"]
+    "items": ["Spade"],
+    "image": "X Marks the Spot.png"
   },
   "zogre-flesh-eaters": {
     "difficulty": "Intermediate",
@@ -2166,6 +2347,7 @@
       "Combat equipment to defeat Slash Bash, who takes reduced damage from all sources other than",
       "– Any tier of brutal arrows with a comp ogre bow, which deals full damage",
       "– Crumble Undead, which deals half damage"
-    ]
+    ],
+    "image": "Zogre Flesh Eaters.png"
   }
 }

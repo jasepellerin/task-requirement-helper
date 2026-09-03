@@ -5,6 +5,7 @@ import type { CatalogSkill } from '../src/data/parseDiaryWikitext.ts'
 import {
   extractRequiredGp,
   isQuestIndexTitle,
+  isUnreleasedQuestPage,
   isWikiQuestPage,
   parseQuestDetailsReqs,
   parseQuestreqLua,
@@ -15,6 +16,7 @@ import type { OsrsQuest, QuestReqs } from '../src/data/questReqs.ts'
 import {
   parseQuestCardDetails,
   parseQuestRewards,
+  parseInfoboxQuestImage,
 } from '../src/data/parseRewards.ts'
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), '..')
@@ -161,6 +163,7 @@ async function main(): Promise<void> {
     difficulty?: string
     length?: string
     items: string[]
+    image?: string
   }[] = []
 
   for (const title of listTitles) {
@@ -171,6 +174,10 @@ async function main(): Promise<void> {
     }
     if (!isWikiQuestPage(page)) {
       console.log(`skip ${questSlug(title)} (not a quest)`)
+      continue
+    }
+    if (isUnreleasedQuestPage(page)) {
+      console.log(`skip ${questSlug(title)} (unreleased)`)
       continue
     }
     const luaEntry = luaByName.get(title)
@@ -185,6 +192,7 @@ async function main(): Promise<void> {
       difficulty: card.difficulty,
       length: card.length,
       items: card.items,
+      image: parseInfoboxQuestImage(page),
     })
   }
 
@@ -194,7 +202,7 @@ async function main(): Promise<void> {
   const rewards: Record<string, string[]> = {}
   const cardDetails: Record<
     string,
-    { difficulty?: string; length?: string; items?: string[] }
+    { difficulty?: string; length?: string; items?: string[]; image?: string }
   > = {}
 
   for (const entry of kept) {
@@ -217,10 +225,12 @@ async function main(): Promise<void> {
       difficulty?: string
       length?: string
       items?: string[]
+      image?: string
     } = {}
     if (entry.difficulty) stored.difficulty = entry.difficulty
     if (entry.length) stored.length = entry.length
     if (entry.items.length > 0) stored.items = entry.items
+    if (entry.image) stored.image = entry.image
     if (Object.keys(stored).length > 0) cardDetails[id] = stored
     console.log(
       `${id} quests:${reqs[id].quests.length} skills:${reqs[id].skills.length} gp:${entry.gp || 0} rewards:${entry.rewards.length} items:${entry.items.length}`,

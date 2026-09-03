@@ -15,11 +15,6 @@
     "wikiTitle": "A Porcine of Interest"
   },
   {
-    "id": "a-ruff-situation",
-    "name": "A Ruff Situation",
-    "wikiTitle": "A Ruff Situation"
-  },
-  {
     "id": "a-souls-bane",
     "name": "A Soul's Bane",
     "wikiTitle": "A Soul's Bane"
@@ -122,11 +117,6 @@
     "id": "cooks-assistant",
     "name": "Cook's Assistant",
     "wikiTitle": "Cook's Assistant"
-  },
-  {
-    "id": "crab-quest",
-    "name": "Crab Quest",
-    "wikiTitle": "Crab Quest"
   },
   {
     "id": "creature-of-fenkenstrain",
@@ -858,11 +848,6 @@
     "name": "The Grand Tree",
     "wikiTitle": "The Grand Tree",
     "gp": 1000
-  },
-  {
-    "id": "the-graveyard",
-    "name": "The Graveyard",
-    "wikiTitle": "The Graveyard"
   },
   {
     "id": "the-great-brain-robbery",

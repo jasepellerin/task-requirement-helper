@@ -196,6 +196,16 @@ export type QuestCardDetails = {
   items: string[]
 }
 
+export function parseInfoboxQuestImage(wikitext: string): string | undefined {
+  const template = extractTemplate(wikitext, 'Infobox Quest')
+  if (!template) return undefined
+  const image = parseWikiTemplateFields(template).image
+  if (!image) return undefined
+  const match = /\[\[\s*(?:File|Image|Media)\s*:\s*([^\]|]+)/i.exec(image)
+  const name = match?.[1]?.trim()
+  return name || undefined
+}
+
 export function parseQuestCardDetails(wikitext: string): QuestCardDetails {
   const template = extractTemplate(wikitext, 'Quest details')
   if (!template) return { items: [] }

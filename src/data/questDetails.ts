@@ -4,12 +4,14 @@ export type StoredQuestDetails = {
   difficulty?: string
   length?: string
   items?: string[]
+  image?: string
 }
 
 export type QuestDetails = {
   difficulty?: string
   length?: string
   items: string[]
+  image?: string
 }
 
 const QUEST_DETAILS = detailsData as Record<string, StoredQuestDetails>
@@ -20,5 +22,6 @@ export function questDetailsFor(questId: string): QuestDetails {
     ...(details?.difficulty ? { difficulty: details.difficulty } : {}),
     ...(details?.length ? { length: details.length } : {}),
     items: details?.items ?? [],
+    ...(details?.image ? { image: details.image } : {}),
   }
 }

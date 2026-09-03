@@ -43,15 +43,6 @@
     "quests": [],
     "skills": []
   },
-  "a-ruff-situation": {
-    "quests": [],
-    "skills": [
-      {
-        "skill": "crafting",
-        "level": 15
-      }
-    ]
-  },
   "a-souls-bane": {
     "quests": [],
     "skills": []
@@ -236,19 +227,6 @@
   "cooks-assistant": {
     "quests": [],
     "skills": []
-  },
-  "crab-quest": {
-    "quests": [],
-    "skills": [
-      {
-        "skill": "sailing",
-        "level": 40
-      },
-      {
-        "skill": "fishing",
-        "level": 30
-      }
-    ]
   },
   "creature-of-fenkenstrain": {
     "quests": ["priest-in-peril", "the-restless-ghost"],
@@ -1924,27 +1902,6 @@
       {
         "skill": "agility",
         "level": 25
-      }
-    ]
-  },
-  "the-graveyard": {
-    "quests": ["the-fremennik-exiles", "olafs-quest", "pandemonium"],
-    "skills": [
-      {
-        "skill": "sailing",
-        "level": 65
-      },
-      {
-        "skill": "agility",
-        "level": 65
-      },
-      {
-        "skill": "woodcutting",
-        "level": 56
-      },
-      {
-        "skill": "fletching",
-        "level": 54
       }
     ]
   },
