@@ -286,9 +286,19 @@ p {
   padding: 10px 12px;
 }
 
-.check {
+.parent-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.parent-row {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   gap: 8px;
   font-weight: 400;
 }

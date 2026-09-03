@@ -45,7 +45,7 @@ export type TileInput = {
   name: string
   status: TileStatus
   parentIds: string[]
-  dependentIds: string[]
+  dependentIds?: string[]
 }
 
 export type MutationResult =

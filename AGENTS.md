@@ -27,7 +27,7 @@ yarn build
   - **unlocked**: you have it, not finished yet
   - **completed**: done with it
 - Typical in-game flow is unseen → locked → unlocked → completed. The app does **not** enforce that order — any status is always settable.
-- **Parents** are prerequisites. **Dependents** are the inverse. Stored once as `parentIds` on the child; dependents are derived.
+- **Parents** are prerequisites. **Dependents** are the inverse. Stored once as `parentIds` on the child; dependents are derived and not shown or edited in the UI.
 - Prerequisites are **AND**: a tile needs _all_ parents `unlocked` or `completed`.
 - Derived **readiness** (never stored):
   - `completed` if status is completed
@@ -42,5 +42,6 @@ yarn build
   - Skills: [src/data/osrs-skills.json](src/data/osrs-skills.json) + [src/data/skill-brackets.json](src/data/skill-brackets.json) (`osrs:{skill}:{bracket}`). No combat skills (Attack, Strength, Defence, Hitpoints, Ranged, Prayer, Magic, Slayer).
   - Diaries: [src/data/osrs-diaries.json](src/data/osrs-diaries.json) + [src/data/diary-tiers.json](src/data/diary-tiers.json) (`osrs:diary:{diary}:{tier}`). Harder tiers parent easier tiers, then covering skill brackets from [src/data/osrs-diary-skill-reqs.json](src/data/osrs-diary-skill-reqs.json) (Ironman footnotes included; combat/Slayer skipped). Refresh with `yarn fetch-diary-reqs`.
   - Missing catalog tiles are merged on load; catalog `parentIds` are synced on load/import; later status edits are kept.
+  - Persist/export only custom tiles plus catalog tiles whose status is not `unseen`. Import/load merge the catalog back in.
 
 See [docs/GOAL.md](docs/GOAL.md) for the high-level goal and v1 scope.

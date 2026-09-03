@@ -1,5 +1,6 @@
-import { useEffect, useId, useState } from 'react'
-import { getDependentIds } from '../domain/graph.ts'
+import { useEffect, useId, useMemo, useState } from 'react'
+import { wouldCreateCycle } from '../domain/graph.ts'
+import { searchTiles } from '../domain/search.ts'
 import {
   isTileStatus,
   STATUS_LABEL,
@@ -18,8 +19,8 @@ type TileFormProps = {
   onDelete?: () => void
 }
 
-function toggleId(ids: string[], id: string): string[] {
-  return ids.includes(id) ? ids.filter((item) => item !== id) : [...ids, id]
+function tileName(tiles: Tile[], id: string): string {
+  return tiles.find((candidate) => candidate.id === id)?.name ?? 'Missing'
 }
 
 export function TileForm({
@@ -34,16 +35,17 @@ export function TileForm({
   const [name, setName] = useState(tile?.name ?? '')
   const [status, setStatus] = useState<TileStatus>(tile?.status ?? 'locked')
   const [parentIds, setParentIds] = useState(tile?.parentIds ?? [])
-  const [dependentIds, setDependentIds] = useState(
-    tile ? getDependentIds(tiles, tile.id) : [],
-  )
-  const others = tiles.filter((candidate) => {
-    if (candidate.id === tile?.id) return false
-    if (candidate.status !== 'unseen') return true
-    return (
-      parentIds.includes(candidate.id) || dependentIds.includes(candidate.id)
-    )
-  })
+  const [parentQuery, setParentQuery] = useState('')
+
+  const parentResults = useMemo(() => {
+    const pool = tiles.filter((candidate) => {
+      if (candidate.id === tile?.id) return false
+      if (parentIds.includes(candidate.id)) return false
+      if (tile && wouldCreateCycle(tiles, tile.id, candidate.id)) return false
+      return true
+    })
+    return searchTiles(pool, parentQuery)
+  }, [parentIds, parentQuery, tile, tiles])
 
   useEffect(() => {
     function onKey(event: KeyboardEvent) {
@@ -52,6 +54,13 @@ export function TileForm({
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
   }, [onCancel])
+
+  function addParent(id: string) {
+    setParentIds((current) =>
+      current.includes(id) ? current : [...current, id],
+    )
+    setParentQuery('')
+  }
 
   return (
     <div className="modal-backdrop" onClick={onCancel}>
@@ -63,7 +72,7 @@ export function TileForm({
         onClick={(event) => event.stopPropagation()}
         onSubmit={(event) => {
           event.preventDefault()
-          onSubmit({ name, status, parentIds, dependentIds })
+          onSubmit({ name, status, parentIds })
         }}
       >
         <h2 id={titleId}>{tile ? 'Edit tile' : 'New tile'}</h2>
@@ -96,47 +105,61 @@ export function TileForm({
         </label>
 
         <fieldset className="rel-fieldset">
-          <legend>Parents (prerequisites)</legend>
-          {others.length === 0 ? (
-            <p className="empty">No other tiles yet.</p>
+          <legend>Parents</legend>
+          {parentIds.length === 0 ? (
+            <p className="empty">No parents yet.</p>
           ) : (
-            others.map((candidate) => (
-              <label key={candidate.id} className="check">
-                <input
-                  type="checkbox"
-                  checked={parentIds.includes(candidate.id)}
-                  disabled={dependentIds.includes(candidate.id)}
-                  onChange={() =>
-                    setParentIds((current) => toggleId(current, candidate.id))
-                  }
-                />
-                {candidate.name}
-              </label>
-            ))
+            <ul className="parent-list">
+              {parentIds.map((id) => (
+                <li key={id} className="parent-row">
+                  <span>{tileName(tiles, id)}</span>
+                  <button
+                    type="button"
+                    className="btn ghost"
+                    onClick={() =>
+                      setParentIds((current) =>
+                        current.filter((item) => item !== id),
+                      )
+                    }
+                  >
+                    Remove
+                  </button>
+                </li>
+              ))}
+            </ul>
           )}
-        </fieldset>
 
-        <fieldset className="rel-fieldset">
-          <legend>Dependents (unlock after this)</legend>
-          {others.length === 0 ? (
-            <p className="empty">No other tiles yet.</p>
-          ) : (
-            others.map((candidate) => (
-              <label key={candidate.id} className="check">
-                <input
-                  type="checkbox"
-                  checked={dependentIds.includes(candidate.id)}
-                  disabled={parentIds.includes(candidate.id)}
-                  onChange={() =>
-                    setDependentIds((current) =>
-                      toggleId(current, candidate.id),
-                    )
-                  }
-                />
-                {candidate.name}
-              </label>
-            ))
-          )}
+          <label className="field">
+            Add parent
+            <input
+              value={parentQuery}
+              onChange={(event) => setParentQuery(event.target.value)}
+              placeholder="Agility 11–20"
+            />
+          </label>
+
+          {parentQuery.trim() ? (
+            parentResults.length === 0 ? (
+              <p className="empty">No matching tiles.</p>
+            ) : (
+              <ul className="search-results">
+                {parentResults.map((candidate) => (
+                  <li key={candidate.id}>
+                    <button
+                      type="button"
+                      className="search-result"
+                      onClick={() => addParent(candidate.id)}
+                    >
+                      <span className="search-result-top">
+                        <strong>{candidate.name}</strong>
+                        <span>{STATUS_LABEL[candidate.status]}</span>
+                      </span>
+                    </button>
+                  </li>
+                ))}
+              </ul>
+            )
+          ) : null}
         </fieldset>
 
         {error ? <p className="form-error">{error}</p> : null}

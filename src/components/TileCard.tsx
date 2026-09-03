@@ -1,4 +1,3 @@
-import { getDependents } from '../domain/graph.ts'
 import {
   isTileStatus,
   STATUS_LABEL,
@@ -18,9 +17,6 @@ export function TileCard({ tile, tiles, onEdit, onStatus }: TileCardProps) {
     .map(
       (id) => tiles.find((candidate) => candidate.id === id)?.name ?? 'Missing',
     )
-    .join(', ')
-  const dependents = getDependents(tiles, tile.id)
-    .map((dependent) => dependent.name)
     .join(', ')
 
   return (
@@ -47,10 +43,6 @@ export function TileCard({ tile, tiles, onEdit, onStatus }: TileCardProps) {
         <div>
           <dt>Parents</dt>
           <dd>{parents || 'None'}</dd>
-        </div>
-        <div>
-          <dt>Dependents</dt>
-          <dd>{dependents || 'None'}</dd>
         </div>
       </dl>
       <button type="button" className="btn ghost" onClick={onEdit}>

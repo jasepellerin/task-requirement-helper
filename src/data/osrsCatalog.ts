@@ -46,6 +46,12 @@ export function isOsrsCatalogId(id: string): boolean {
   return id.startsWith('osrs:')
 }
 
+export function userPersistedTiles(tiles: Tile[]): Tile[] {
+  return tiles.filter(
+    (tile) => !isOsrsCatalogId(tile.id) || tile.status !== 'unseen',
+  )
+}
+
 export function buildOsrsSkillTiles(status: TileStatus = 'unseen'): Tile[] {
   return OSRS_SKILLS.flatMap((skill) => {
     const ids = SKILL_BRACKETS.map((bracket) =>

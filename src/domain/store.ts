@@ -80,7 +80,7 @@ export function createTile(
     [...tiles, tile],
     id,
     input.parentIds,
-    input.dependentIds,
+    input.dependentIds ?? [],
   )
 }
 

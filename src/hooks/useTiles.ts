@@ -9,6 +9,7 @@ import {
 import {
   mergeOsrsSkillTiles,
   resetLockedOsrsTilesToUnseen,
+  userPersistedTiles,
 } from '../data/osrsCatalog.ts'
 import type { TileInput, TileStatus } from '../domain/types.ts'
 import {
@@ -33,7 +34,7 @@ export function useTiles() {
   const [tiles, setTiles] = useState(loadTiles)
 
   useEffect(() => {
-    saveStore({ version: 1, tiles })
+    saveStore({ version: 1, tiles: userPersistedTiles(tiles) })
   }, [tiles])
 
   const groups = useMemo(() => groupTilesByReadiness(tiles), [tiles])
@@ -76,7 +77,7 @@ export function useTiles() {
   )
 
   const exportStore = useCallback(() => {
-    downloadStore({ version: 1, tiles })
+    downloadStore({ version: 1, tiles: userPersistedTiles(tiles) })
   }, [tiles])
 
   const importStore = useCallback((text: string) => {

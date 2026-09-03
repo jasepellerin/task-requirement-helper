@@ -14,6 +14,7 @@ import {
   pruneRemovedOsrsTiles,
   resetLockedOsrsTilesToUnseen,
   SKILL_BRACKETS,
+  userPersistedTiles,
 } from './osrsCatalog.ts'
 
 describe('OSRS skill catalog', () => {
@@ -140,6 +141,35 @@ describe('OSRS skill catalog', () => {
     expect(
       next.find((tile) => tile.id === osrsTileId('attack', '1-10'))?.status,
     ).toBe('completed')
+  })
+
+  it('persists custom tiles and catalog status changes only', () => {
+    const unseen = osrsTileId('woodcutting', '1-10')
+    const locked = osrsTileId('agility', '21-30')
+    const tiles = [
+      {
+        id: unseen,
+        name: 'Woodcutting 1–10',
+        status: 'unseen' as const,
+        parentIds: [],
+      },
+      {
+        id: locked,
+        name: 'Agility 21–30',
+        status: 'locked' as const,
+        parentIds: [],
+      },
+      {
+        id: 'custom',
+        name: 'Water',
+        status: 'unseen' as const,
+        parentIds: [],
+      },
+    ]
+    expect(userPersistedTiles(tiles).map((tile) => tile.id)).toEqual([
+      locked,
+      'custom',
+    ])
   })
 })
 
