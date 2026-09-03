@@ -1,5 +1,11 @@
 import type { Tile, TileStatus } from '../domain/types.ts'
 import { skillParentsFor } from './diarySkillReqs.ts'
+import {
+  OSRS_QUESTS,
+  osrsQuestTileId,
+  questParentsFor,
+  type OsrsQuest,
+} from './questReqs.ts'
 import diariesData from './osrs-diaries.json'
 import diaryTiersData from './diary-tiers.json'
 import bracketsData from './skill-brackets.json'
@@ -32,6 +38,8 @@ export const OSRS_SKILLS = skillsData as OsrsSkill[]
 export const SKILL_BRACKETS = bracketsData as SkillBracket[]
 export const OSRS_DIARIES = diariesData as OsrsDiary[]
 export const DIARY_TIERS = diaryTiersData as DiaryTier[]
+export { OSRS_QUESTS, osrsQuestTileId } from './questReqs.ts'
+export type { OsrsQuest } from './questReqs.ts'
 
 export function osrsTileId(skillId: string, bracketId: string): string {
   return `osrs:${skillId}:${bracketId}`
@@ -89,8 +97,25 @@ export function buildOsrsDiaryTiles(status: TileStatus = 'unseen'): Tile[] {
   })
 }
 
+export function osrsQuestTileName(quest: OsrsQuest): string {
+  return quest.name
+}
+
+export function buildOsrsQuestTiles(status: TileStatus = 'unseen'): Tile[] {
+  return OSRS_QUESTS.map((quest) => ({
+    id: osrsQuestTileId(quest.id),
+    name: osrsQuestTileName(quest),
+    status,
+    parentIds: questParentsFor(quest.id),
+  }))
+}
+
 export function buildOsrsCatalogTiles(status: TileStatus = 'unseen'): Tile[] {
-  return [...buildOsrsSkillTiles(status), ...buildOsrsDiaryTiles(status)]
+  return [
+    ...buildOsrsSkillTiles(status),
+    ...buildOsrsDiaryTiles(status),
+    ...buildOsrsQuestTiles(status),
+  ]
 }
 
 export function pruneRemovedOsrsTiles(tiles: Tile[]): Tile[] {

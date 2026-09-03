@@ -23,7 +23,7 @@ Unlock trees are easy to lose in your head. You want to know:
 - Persist in `localStorage` (user overlay only: custom tiles + catalog tiles with a non-default status)
 - Export and replace-import JSON (`StoreV1`); catalog defaults are omitted and merged back on import
 - Reject cyclic relationships
-- Seed OSRS catalogs from data files: non-combat skills (16 × 10 brackets) and achievement diaries (12 × Easy/Medium/Hard/Elite), chained parents, unseen by default
+- Seed OSRS catalogs from data files: non-combat skills (16 × 10 brackets), achievement diaries (12 × Easy/Medium/Hard/Elite), and quests (wiki quest + skill reqs, coin costs on the card), chained parents, unseen by default
 
 ## Not v1
 

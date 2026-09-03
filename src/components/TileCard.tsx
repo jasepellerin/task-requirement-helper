@@ -1,3 +1,4 @@
+import { formatGp, tileGp } from '../data/questReqs.ts'
 import {
   isTileStatus,
   STATUS_LABEL,
@@ -18,6 +19,7 @@ export function TileCard({ tile, tiles, onEdit, onStatus }: TileCardProps) {
       (id) => tiles.find((candidate) => candidate.id === id)?.name ?? 'Missing',
     )
     .join(', ')
+  const gp = tileGp(tile.id)
 
   return (
     <article className="tile-card">
@@ -44,6 +46,12 @@ export function TileCard({ tile, tiles, onEdit, onStatus }: TileCardProps) {
           <dt>Parents</dt>
           <dd>{parents || 'None'}</dd>
         </div>
+        {gp !== undefined ? (
+          <div>
+            <dt>Gold</dt>
+            <dd>{formatGp(gp)}</dd>
+          </div>
+        ) : null}
       </dl>
       <button type="button" className="btn ghost" onClick={onEdit}>
         Edit

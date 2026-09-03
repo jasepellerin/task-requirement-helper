@@ -41,6 +41,7 @@ yarn build
 - OSRS catalogs seed as `unseen`:
   - Skills: [src/data/osrs-skills.json](src/data/osrs-skills.json) + [src/data/skill-brackets.json](src/data/skill-brackets.json) (`osrs:{skill}:{bracket}`). No combat skills (Attack, Strength, Defence, Hitpoints, Ranged, Prayer, Magic, Slayer).
   - Diaries: [src/data/osrs-diaries.json](src/data/osrs-diaries.json) + [src/data/diary-tiers.json](src/data/diary-tiers.json) (`osrs:diary:{diary}:{tier}`). Harder tiers parent easier tiers, then covering skill brackets from [src/data/osrs-diary-skill-reqs.json](src/data/osrs-diary-skill-reqs.json) (Ironman footnotes included; combat/Slayer skipped). Refresh with `yarn fetch-diary-reqs`.
+  - Quests: [src/data/osrs-quests.json](src/data/osrs-quests.json) + [src/data/osrs-quest-reqs.json](src/data/osrs-quest-reqs.json) (`osrs:quest:{slug}`). Parents are required quests plus covering skill brackets (Ironman skill tags included; combat/Slayer skipped). Required coins from wiki Quest details show as Gold on the card. Refresh with `yarn fetch-quest-reqs`.
   - Missing catalog tiles are merged on load; catalog `parentIds` are synced on load/import; later status edits are kept.
   - Persist/export only custom tiles plus catalog tiles whose status is not `unseen`. Import/load merge the catalog back in.
 

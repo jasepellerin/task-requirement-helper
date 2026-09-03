@@ -1,4 +1,5 @@
 import { useEffect, useId, useMemo, useState } from 'react'
+import { formatGp, tileGp } from '../data/questReqs.ts'
 import { searchTiles } from '../domain/search.ts'
 import { STATUS_LABEL, type Tile } from '../domain/types.ts'
 
@@ -9,13 +10,19 @@ type TileFinderProps = {
   onCancel: () => void
 }
 
-function parentNames(tile: Tile, tiles: Tile[]): string {
-  if (tile.parentIds.length === 0) return 'No prerequisites'
-  return tile.parentIds
-    .map(
-      (id) => tiles.find((candidate) => candidate.id === id)?.name ?? 'Missing',
-    )
-    .join(', ')
+function resultMeta(tile: Tile, tiles: Tile[]): string {
+  const gp = tileGp(tile.id)
+  const gold = gp !== undefined ? formatGp(gp) : null
+  const parents =
+    tile.parentIds.length === 0
+      ? 'No prerequisites'
+      : tile.parentIds
+          .map(
+            (id) =>
+              tiles.find((candidate) => candidate.id === id)?.name ?? 'Missing',
+          )
+          .join(', ')
+  return gold ? `${gold} · ${parents}` : parents
 }
 
 export function TileFinder({
@@ -73,7 +80,7 @@ export function TileFinder({
                       <span>{STATUS_LABEL[tile.status]}</span>
                     </span>
                     <span className="search-result-meta">
-                      {parentNames(tile, tiles)}
+                      {resultMeta(tile, tiles)}
                     </span>
                   </button>
                 </li>

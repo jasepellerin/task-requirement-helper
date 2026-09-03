@@ -1,14 +1,18 @@
 import { describe, expect, it } from 'vitest'
+import { formatGp, tileGp } from './questReqs.ts'
 import {
   buildOsrsCatalogTiles,
   buildOsrsDiaryTiles,
+  buildOsrsQuestTiles,
   buildOsrsSkillTiles,
   DIARY_TIERS,
   mergeOsrsSkillTiles,
   OSRS_DIARIES,
+  OSRS_QUESTS,
   OSRS_SKILLS,
   osrsDiaryTileId,
   osrsDiaryTileName,
+  osrsQuestTileId,
   osrsTileId,
   osrsTileName,
   pruneRemovedOsrsTiles,
@@ -90,7 +94,7 @@ describe('OSRS skill catalog', () => {
       osrsTileId('crafting', '41-50'),
       osrsTileId('farming', '11-20'),
     ])
-    expect(merged).toHaveLength(208)
+    expect(merged).toHaveLength(412)
   })
 
   it('prunes removed combat skill tiles and dangling parents', () => {
@@ -187,7 +191,7 @@ describe('OSRS achievement diaries', () => {
     expect(tiles.every((tile) => tile.status === 'unseen')).toBe(true)
     expect(OSRS_DIARIES.map((diary) => diary.name)).toContain('Karamja')
     expect(OSRS_DIARIES.every((diary) => diary.wikiTitle.length > 0)).toBe(true)
-    expect(buildOsrsCatalogTiles()).toHaveLength(208)
+    expect(buildOsrsCatalogTiles()).toHaveLength(412)
   })
 
   it('names tiers and chains harder tiers before skill parents', () => {
@@ -214,5 +218,28 @@ describe('OSRS achievement diaries', () => {
       osrsDiaryTileId('karamja', 'hard'),
     ])
     expect(elite?.parentIds.slice(3).every(isSkillParent)).toBe(true)
+  })
+})
+
+describe('OSRS quests', () => {
+  it('seeds quest tiles as unseen with quest and skill parents', () => {
+    expect(OSRS_QUESTS.length).toBe(204)
+    const tiles = buildOsrsQuestTiles()
+    expect(tiles).toHaveLength(204)
+    expect(tiles.every((tile) => tile.status === 'unseen')).toBe(true)
+
+    const animal = tiles.find(
+      (tile) => tile.id === osrsQuestTileId('animal-magnetism'),
+    )
+    expect(animal?.parentIds).toEqual([
+      osrsQuestTileId('ernest-the-chicken'),
+      osrsQuestTileId('priest-in-peril'),
+      osrsQuestTileId('the-restless-ghost'),
+      osrsTileId('crafting', '11-20'),
+      osrsTileId('woodcutting', '31-40'),
+    ])
+    expect(tileGp(osrsQuestTileId('dragon-slayer-i'))).toBe(10000)
+    expect(formatGp(10000)).toBe('10,000 gp')
+    expect(tileGp(osrsQuestTileId('cooks-assistant'))).toBeUndefined()
   })
 })

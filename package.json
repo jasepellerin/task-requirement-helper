@@ -13,7 +13,8 @@
     "test": "vitest run",
     "test:watch": "vitest",
     "preview": "vite preview",
-    "fetch-diary-reqs": "node --experimental-strip-types scripts/fetch-diary-reqs.ts"
+    "fetch-diary-reqs": "node --experimental-strip-types scripts/fetch-diary-reqs.ts",
+    "fetch-quest-reqs": "node --experimental-strip-types scripts/fetch-quest-reqs.ts"
   },
   "dependencies": {
     "react": "^19.2.8",
