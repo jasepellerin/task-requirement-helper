@@ -1,4 +1,4 @@
-# SlayerScape Requirements Helper
+# Tile Requirements Helper
 
 Tracker for SlayerScape board tiles. Keep track of your tiles and easily see what is ready versus blocked. Data stays in the browser (`localStorage`) and can be exported/re-imported for backup. No login or connection to your account.
 

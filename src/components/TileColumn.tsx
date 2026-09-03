@@ -2,8 +2,11 @@ import type { ReactNode } from 'react'
 import type { Tile } from '../domain/types.ts'
 import { TileCard } from './TileCard.tsx'
 
+type TileColumnTone = 'ready' | 'possible' | 'blocked' | 'unlocked'
+
 type TileColumnProps = {
   title: string
+  tone: TileColumnTone
   tiles: Tile[]
   byId: Map<string, Tile>
   empty: string
@@ -14,6 +17,7 @@ type TileColumnProps = {
 
 export function TileColumn({
   title,
+  tone,
   tiles,
   byId,
   empty,
@@ -22,7 +26,7 @@ export function TileColumn({
   onStar,
 }: TileColumnProps) {
   return (
-    <section className="column">
+    <section className={`column column-${tone}`}>
       <header className="column-header">
         <h2>
           {title} <span>{tiles.length}</span>

@@ -115,13 +115,24 @@ export default function App() {
       </Toolbar>
 
       {boardCount === 0 ? (
-        <p className="hero-empty">Find a tile you’ve just seen.</p>
+        <p className="hero-empty">Add your tiles with the + button above.</p>
       ) : visibleCount === 0 ? (
         <p className="hero-empty">No matching tiles.</p>
       ) : (
         <Columns className="board-columns">
           <TileColumn
+            title="Unlocked"
+            tone="unlocked"
+            tiles={board.unlocked}
+            byId={byId}
+            empty="No matching tiles."
+            isPriority={(id) => tileMatchesPrioritySkills(id, prioritySkills)}
+            onOpen={openDetail}
+            onStar={setStarred}
+          />
+          <TileColumn
             title="Ready"
+            tone="ready"
             tiles={board.ready}
             byId={byId}
             empty="No matching tiles."
@@ -131,6 +142,7 @@ export default function App() {
           />
           <TileColumn
             title="Possible"
+            tone="possible"
             tiles={board.possible}
             byId={byId}
             empty="No matching tiles."
@@ -140,16 +152,8 @@ export default function App() {
           />
           <TileColumn
             title="Blocked"
+            tone="blocked"
             tiles={board.blocked}
-            byId={byId}
-            empty="No matching tiles."
-            isPriority={(id) => tileMatchesPrioritySkills(id, prioritySkills)}
-            onOpen={openDetail}
-            onStar={setStarred}
-          />
-          <TileColumn
-            title="Unlocked"
-            tiles={board.unlocked}
             byId={byId}
             empty="No matching tiles."
             isPriority={(id) => tileMatchesPrioritySkills(id, prioritySkills)}

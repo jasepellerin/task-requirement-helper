@@ -1,4 +1,4 @@
-# SlayerScape Requirements Helper
+# Tile Requirements Helper
 
 Local OSRS unlock tracker. No backend. Catalog is skills, diaries, and quests only.
 
@@ -70,7 +70,7 @@ Persist/export `{ id, status, starred? }` for catalog tiles whose status is not 
 
 ### UI
 
-- **Board**: Ready / Possible / Blocked / Unlocked. Unseen and completed are hidden here. Starred tiles sort to the top of their column, then priority skill tiles, then name. Priority skill cards show a display-only up-arrow next to the star. Cards show unmet parent counts as lock (locked) and slashed eye (unseen/missing); a zero count is omitted. Filter bar next to Skills / Diaries / Quests: name search (same folding as the finder) plus independent kind toggles.
+- **Board**: Unlocked / Ready / Possible / Blocked. Unseen and completed are hidden here. Starred tiles sort to the top of their column, then priority skill tiles, then name. Priority skill cards show a display-only up-arrow next to the star. Cards show unmet parent counts as lock (locked) and slashed eye (unseen/missing); a zero count is omitted. Filter bar next to Skills / Diaries / Quests: name search (same folding as the finder) plus independent kind toggles.
 - **Completed**: separate window, split Skills / Diaries / Quests.
 - **Stats**: OSRS-style skill window. Tracked skills use the highest unlocked/completed bracket (else 1). Combat/Slayer always show 99. No total. Clicking a tracked skill toggles it as priority (gold outline; up-arrow when selected). Combat/Slayer still open the wiki. Priority floats that skill’s bracket tiles only.
 - **Detail card** (click a tile):
