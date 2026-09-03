@@ -48,6 +48,20 @@ export function CloseIcon() {
   )
 }
 
+export function CloseButton({ onClick }: { onClick: () => void }) {
+  return (
+    <button
+      type="button"
+      className="btn icon-ghost"
+      aria-label="Close"
+      title="Close"
+      onClick={onClick}
+    >
+      <CloseIcon />
+    </button>
+  )
+}
+
 export function StarIcon({ filled }: { filled: boolean }) {
   return (
     <Icon fill={filled ? 'currentColor' : 'none'}>
@@ -87,6 +101,17 @@ function LockGlyph() {
   )
 }
 
+function UnseenGlyph() {
+  return (
+    <>
+      <path d="M2.2 3.2 20.8 21.8" />
+      <path d="M6.6 6.7C4.5 8.2 3 10.2 2.2 12c1.4 2.8 5.3 7 9.8 7 1.6 0 3.1-.4 4.4-1.1" />
+      <path d="M10.6 6.2A9.5 9.5 0 0 1 12 6c4.8 0 8.2 4.2 9.8 6-.6 1-1.5 2.2-2.7 3.2" />
+      <circle cx="12" cy="12" r="3" />
+    </>
+  )
+}
+
 export function LockIcon() {
   return (
     <Icon>
@@ -95,18 +120,19 @@ export function LockIcon() {
   )
 }
 
+export function UnseenIcon() {
+  return (
+    <Icon>
+      <UnseenGlyph />
+    </Icon>
+  )
+}
+
 export function StatusIcon({ status }: { status: TileStatus }) {
   return (
     <span className={`status-glyph status-glyph-${status}`}>
       <Icon>
-        {status === 'unseen' ? (
-          <>
-            <path d="M2.2 3.2 20.8 21.8" />
-            <path d="M6.6 6.7C4.5 8.2 3 10.2 2.2 12c1.4 2.8 5.3 7 9.8 7 1.6 0 3.1-.4 4.4-1.1" />
-            <path d="M10.6 6.2A9.5 9.5 0 0 1 12 6c4.8 0 8.2 4.2 9.8 6-.6 1-1.5 2.2-2.7 3.2" />
-            <circle cx="12" cy="12" r="3" />
-          </>
-        ) : null}
+        {status === 'unseen' ? <UnseenGlyph /> : null}
         {status === 'locked' ? <LockGlyph /> : null}
         {status === 'unlocked' ? (
           <>

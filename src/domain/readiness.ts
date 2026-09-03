@@ -13,13 +13,19 @@ export function parentIsOnBoard(status: TileStatus | undefined): boolean {
   return status === 'locked' || status === 'unlocked' || status === 'completed'
 }
 
-export function blockingParentCount(
+export function blockingParentCounts(
   tile: Tile,
   byId: Map<string, Tile>,
-): number {
-  return tile.parentIds.filter(
-    (parentId) => !parentIsSatisfied(byId.get(parentId)?.status),
-  ).length
+): { locked: number; unseen: number } {
+  let locked = 0
+  let unseen = 0
+  for (const parentId of tile.parentIds) {
+    const status = byId.get(parentId)?.status
+    if (parentIsSatisfied(status)) continue
+    if (status === 'locked') locked += 1
+    else unseen += 1
+  }
+  return { locked, unseen }
 }
 
 export function tileReadiness(tile: Tile, byId: Map<string, Tile>): Readiness {

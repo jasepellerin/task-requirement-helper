@@ -3,7 +3,7 @@ import { ALL_KINDS, filterTilesByKind } from '../data/osrsCatalog.ts'
 import { searchTiles } from '../domain/search.ts'
 import { type Tile, type TileStatus } from '../domain/types.ts'
 import { KindFilters } from './KindFilters.tsx'
-import { StatusButtons } from './StatusPicker.tsx'
+import { CloseButton, StatusButtons } from './StatusPicker.tsx'
 import { TileUnlockMarks } from './TileUnlockMarks.tsx'
 
 type TileFinderProps = {
@@ -41,13 +41,18 @@ export function TileFinder({
   return (
     <div className="modal-backdrop" onClick={onCancel}>
       <div
-        className="modal"
+        className="modal finder-modal"
         role="dialog"
         aria-modal="true"
         aria-labelledby={titleId}
         onClick={(event) => event.stopPropagation()}
       >
-        <h2 id={titleId}>Find a tile</h2>
+        <div className="modal-title-row">
+          <h2 id={titleId}>Find a tile</h2>
+          <div className="modal-title-actions">
+            <CloseButton onClick={onCancel} />
+          </div>
+        </div>
         <label className="field">
           Search
           <input
@@ -82,13 +87,6 @@ export function TileFinder({
             ))}
           </ul>
         )}
-
-        <div className="modal-actions">
-          <span />
-          <button type="button" className="btn" onClick={onCancel}>
-            Done
-          </button>
-        </div>
       </div>
     </div>
   )

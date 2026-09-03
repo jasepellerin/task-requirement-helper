@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest'
 import {
-  blockingParentCount,
+  blockingParentCounts,
   groupTilesByReadiness,
   tileReadiness,
   tilesById,
@@ -97,20 +97,49 @@ describe('tileReadiness', () => {
   })
 })
 
-describe('blockingParentCount', () => {
-  it('counts unmet and missing parents', () => {
+describe('blockingParentCounts', () => {
+  it('splits unmet parents into locked vs unseen, including missing', () => {
     const a = tile('a', 'unlocked')
     const b = tile('b', 'locked')
     const c = tile('c', 'completed')
-    const child = tile('d', 'locked', ['a', 'b', 'c', 'missing'])
-    expect(blockingParentCount(child, tilesById([a, b, c, child]))).toBe(2)
+    const d = tile('d', 'unseen')
+    const child = tile('e', 'locked', ['a', 'b', 'c', 'd', 'missing'])
+    expect(blockingParentCounts(child, tilesById([a, b, c, d, child]))).toEqual(
+      {
+        locked: 1,
+        unseen: 2,
+      },
+    )
+  })
+
+  it('counts only locked when every unmet parent is on the board', () => {
+    const a = tile('a', 'unlocked')
+    const b = tile('b', 'locked')
+    const c = tile('c', 'locked')
+    const child = tile('d', 'locked', ['a', 'b', 'c'])
+    expect(blockingParentCounts(child, tilesById([a, b, c, child]))).toEqual({
+      locked: 2,
+      unseen: 0,
+    })
+  })
+
+  it('counts only unseen when no unmet parent is locked', () => {
+    const a = tile('a', 'unseen')
+    const child = tile('b', 'locked', ['a', 'missing'])
+    expect(blockingParentCounts(child, tilesById([a, child]))).toEqual({
+      locked: 0,
+      unseen: 2,
+    })
   })
 
   it('is zero when every parent is unlocked or completed', () => {
     const a = tile('a', 'unlocked')
     const b = tile('b', 'completed')
     const child = tile('c', 'locked', ['a', 'b'])
-    expect(blockingParentCount(child, tilesById([a, b, child]))).toBe(0)
+    expect(blockingParentCounts(child, tilesById([a, b, child]))).toEqual({
+      locked: 0,
+      unseen: 0,
+    })
   })
 })
 

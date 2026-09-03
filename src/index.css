@@ -354,6 +354,7 @@ p {
   display: flex;
   justify-content: space-between;
   gap: 8px;
+  letter-spacing: -0.02em;
 }
 
 .board-columns .column:nth-child(1) .column-header h2 {
@@ -418,7 +419,7 @@ p {
   color: inherit;
   background: transparent;
   border: 0;
-  padding: 8px 36px 8px 10px;
+  padding: 10px 36px 10px 12px;
   cursor: pointer;
   display: flex;
   flex-direction: column;
@@ -444,17 +445,24 @@ p {
   align-items: center;
 }
 
-.tile-card-blocked {
+.tile-card-blockers {
   display: inline-flex;
   align-items: center;
   gap: 0.2em;
   font-weight: 700;
-  color: var(--blocked);
 }
 
-.tile-card-blocked svg {
+.tile-card-blockers svg {
   width: 0.95em;
   height: 0.95em;
+}
+
+.tile-card-blockers-locked {
+  color: var(--req-locked);
+}
+
+.tile-card-blockers-unseen {
+  color: var(--req-unseen);
 }
 
 .sr-only {
@@ -479,8 +487,9 @@ p {
 .modal-title-row {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
   gap: 12px;
+  flex-shrink: 0;
 }
 
 .modal-title-row h2 {
@@ -739,12 +748,22 @@ button.req-name:focus-visible {
 }
 
 .field input {
+  width: 100%;
   font: inherit;
   color: inherit;
   background: var(--card);
   border: 1px solid var(--border);
-  border-radius: 6px;
-  padding: 4px 8px;
+  border-radius: 8px;
+  padding: 8px 12px;
+}
+
+.field input:hover {
+  border-color: var(--primary);
+}
+
+.field input:focus {
+  outline: 2px solid var(--primary);
+  outline-offset: 1px;
 }
 
 .modal-backdrop {
@@ -771,10 +790,14 @@ button.req-name:focus-visible {
   gap: 14px;
 }
 
+.finder-modal,
+.completed-modal {
+  overflow: hidden;
+}
+
 .completed-modal {
   width: min(1100px, 100%);
   height: min(90svh, 800px);
-  overflow: hidden;
 }
 
 .completed-columns {
@@ -791,6 +814,11 @@ button.req-name:focus-visible {
   flex-direction: column;
   min-width: 0;
   min-height: 0;
+  background: var(--column);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: var(--highlight);
 }
 
 .completed-pane-header {
@@ -798,10 +826,10 @@ button.req-name:focus-visible {
   align-items: baseline;
   justify-content: space-between;
   gap: 8px;
-  padding: 0 2px 10px;
-  margin-bottom: 4px;
-  border-bottom: 1px solid
-    color-mix(in srgb, var(--completed) 40%, var(--border));
+  flex-shrink: 0;
+  padding: 10px 12px;
+  margin: 0;
+  background: color-mix(in srgb, var(--completed) 12%, transparent);
 }
 
 .completed-pane-header h3 {
@@ -821,11 +849,14 @@ button.req-name:focus-visible {
 
 .completed-list {
   list-style: none;
-  margin: 0;
-  padding: 0;
+  margin: 0 6px 8px;
+  padding: 4px 2px 0;
   flex: 1;
   min-height: 0;
   overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
 }
 
 .completed-item {
@@ -838,21 +869,24 @@ button.req-name:focus-visible {
   font-weight: 500;
   line-height: 1.35;
   color: inherit;
-  background: none;
-  border: 0;
-  border-radius: 6px;
-  padding: 7px 8px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  padding: 8px 10px;
   cursor: pointer;
   overflow-wrap: anywhere;
+  box-shadow: var(--highlight);
 }
 
 .completed-item:hover,
 .completed-item:focus-visible {
-  background: color-mix(in srgb, var(--completed) 12%, transparent);
+  border-color: color-mix(in srgb, var(--completed) 50%, var(--border));
+  background: color-mix(in srgb, var(--completed) 12%, var(--card));
+  box-shadow: var(--shadow), var(--highlight);
 }
 
 .completed-pane .empty {
-  padding: 10px 8px 0;
+  padding: 12px;
 }
 
 @media (max-width: 1100px) {
@@ -871,11 +905,16 @@ button.req-name:focus-visible {
   min-height: 18rem;
 }
 
+.tile-modal .modal-title-row {
+  align-items: flex-start;
+}
+
 .field {
   display: flex;
   flex-direction: column;
   gap: 6px;
   font-weight: 600;
+  flex-shrink: 0;
 }
 
 .rel-fieldset {
@@ -900,17 +939,11 @@ button.req-name:focus-visible {
   font-weight: 400;
 }
 
-.modal-actions {
-  display: flex;
-  justify-content: space-between;
-  gap: 8px;
-  align-items: center;
-}
-
 .kind-filters {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
+  flex-shrink: 0;
 }
 
 .kind-filters .btn {
@@ -936,8 +969,9 @@ button.req-name:focus-visible {
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 8px;
-  max-height: 50svh;
+  gap: 6px;
+  flex: 1;
+  min-height: 0;
   overflow: auto;
 }
 
@@ -948,7 +982,8 @@ button.req-name:focus-visible {
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: 8px;
-  padding: 6px 6px 6px 12px;
+  padding: 8px 6px 8px 12px;
+  box-shadow: var(--highlight);
 }
 
 .search-result-name {
@@ -971,7 +1006,9 @@ button.req-name:focus-visible {
 
 .search-result:has(.search-result-name:hover),
 .search-result:has(.search-result-name:focus-visible) {
-  background: color-mix(in srgb, var(--primary) 8%, var(--card));
+  border-color: color-mix(in srgb, var(--primary) 50%, var(--border));
+  background: color-mix(in srgb, var(--primary) 10%, var(--card));
+  box-shadow: var(--shadow), var(--highlight);
 }
 
 .search-result-name > span:first-child {

@@ -13,7 +13,7 @@ import { tileWikiUrl, wikiFileUrl } from '../data/wiki.ts'
 import { STATUS_LABEL, type Tile, type TileStatus } from '../domain/types.ts'
 import { TileUnlockMarks } from './TileUnlockMarks.tsx'
 import {
-  CloseIcon,
+  CloseButton,
   ExternalLinkIcon,
   StarButton,
   StatusPicker,
@@ -119,15 +119,7 @@ export function TileDetail({
                 <ExternalLinkIcon />
               </a>
             ) : null}
-            <button
-              type="button"
-              className="btn icon-ghost"
-              aria-label="Close"
-              title="Close"
-              onClick={onCancel}
-            >
-              <CloseIcon />
-            </button>
+            <CloseButton onClick={onCancel} />
           </div>
         </div>
 

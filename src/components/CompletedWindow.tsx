@@ -1,6 +1,7 @@
 import { useEffect, useId, useMemo } from 'react'
 import { partitionByKind } from '../data/osrsCatalog.ts'
 import type { Tile } from '../domain/types.ts'
+import { CloseButton } from './StatusPicker.tsx'
 
 type CompletedWindowProps = {
   completed: Tile[]
@@ -70,9 +71,9 @@ export function CompletedWindow({
       >
         <div className="modal-title-row">
           <h2 id={titleId}>Completed</h2>
-          <button type="button" className="btn" onClick={onClose}>
-            Close
-          </button>
+          <div className="modal-title-actions">
+            <CloseButton onClick={onClose} />
+          </div>
         </div>
         <div className="completed-columns">
           <CompletedList
