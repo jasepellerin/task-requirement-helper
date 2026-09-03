@@ -31,13 +31,19 @@ export function TileForm({
   onDelete,
 }: TileFormProps) {
   const titleId = useId()
-  const others = tiles.filter((candidate) => candidate.id !== tile?.id)
   const [name, setName] = useState(tile?.name ?? '')
   const [status, setStatus] = useState<TileStatus>(tile?.status ?? 'locked')
   const [parentIds, setParentIds] = useState(tile?.parentIds ?? [])
   const [dependentIds, setDependentIds] = useState(
     tile ? getDependentIds(tiles, tile.id) : [],
   )
+  const others = tiles.filter((candidate) => {
+    if (candidate.id === tile?.id) return false
+    if (candidate.status !== 'unseen') return true
+    return (
+      parentIds.includes(candidate.id) || dependentIds.includes(candidate.id)
+    )
+  })
 
   useEffect(() => {
     function onKey(event: KeyboardEvent) {

@@ -1,11 +1,13 @@
 import { useState } from 'react'
 import { Columns, TileColumn } from './components/TileColumn.tsx'
+import { TileFinder } from './components/TileFinder.tsx'
 import { TileForm } from './components/TileForm.tsx'
 import { Toolbar } from './components/Toolbar.tsx'
-import type { TileInput } from './domain/types.ts'
+import type { Tile, TileInput } from './domain/types.ts'
 import { useTiles } from './hooks/useTiles.ts'
 
-type Editor = { mode: 'create' } | { mode: 'edit'; id: string }
+type Editor =
+  { mode: 'find' } | { mode: 'create' } | { mode: 'edit'; id: string }
 
 export default function App() {
   const {
@@ -25,8 +27,16 @@ export default function App() {
     editor?.mode === 'edit'
       ? tiles.find((tile) => tile.id === editor.id)
       : undefined
-  const showForm =
-    editor?.mode === 'create' || (editor?.mode === 'edit' && editingTile)
+  const visibleCount =
+    groups.ready.length +
+    groups.blocked.length +
+    groups.unlocked.length +
+    groups.completed.length
+
+  function openFind() {
+    setFormError(null)
+    setEditor({ mode: 'find' })
+  }
 
   function openEdit(id: string) {
     setFormError(null)
@@ -48,6 +58,15 @@ export default function App() {
     closeEditor()
   }
 
+  function selectFound(tile: Tile) {
+    if (tile.status === 'unseen') {
+      setStatus(tile.id, 'locked')
+      closeEditor()
+      return
+    }
+    openEdit(tile.id)
+  }
+
   function confirmDelete() {
     if (!editingTile) return
     if (!window.confirm(`Delete “${editingTile.name}”?`)) return
@@ -57,18 +76,11 @@ export default function App() {
 
   return (
     <div className="app">
-      <Toolbar
-        onNew={() => {
-          setFormError(null)
-          setEditor({ mode: 'create' })
-        }}
-        onExport={exportStore}
-        onImport={importStore}
-      />
+      <Toolbar onNew={openFind} onExport={exportStore} onImport={importStore} />
 
-      {tiles.length === 0 ? (
+      {visibleCount === 0 ? (
         <p className="hero-empty">
-          Add a tile to start tracking unlocks and prerequisites.
+          Find a tile you’ve just seen, or create a custom one.
         </p>
       ) : (
         <Columns>
@@ -87,15 +99,6 @@ export default function App() {
             tiles={groups.blocked}
             allTiles={tiles}
             empty="Nothing blocked."
-            onEdit={openEdit}
-            onStatus={setStatus}
-          />
-          <TileColumn
-            title="Unseen"
-            hint="You haven't found these yet"
-            tiles={groups.unseen}
-            allTiles={tiles}
-            empty="Nothing unseen."
             onEdit={openEdit}
             onStatus={setStatus}
           />
@@ -120,7 +123,21 @@ export default function App() {
         </Columns>
       )}
 
-      {showForm && editor ? (
+      {editor?.mode === 'find' ? (
+        <TileFinder
+          tiles={tiles}
+          onSelect={selectFound}
+          onCreateCustom={() => {
+            setFormError(null)
+            setEditor({ mode: 'create' })
+          }}
+          onCancel={closeEditor}
+        />
+      ) : null}
+
+      {(editor?.mode === 'create' ||
+        (editor?.mode === 'edit' && editingTile)) &&
+      editor ? (
         <TileForm
           key={editor.mode === 'edit' ? editor.id : 'create'}
           tiles={tiles}

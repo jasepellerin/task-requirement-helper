@@ -1,0 +1,14 @@
+[
+  { "id": "ardougne", "name": "Ardougne" },
+  { "id": "desert", "name": "Desert" },
+  { "id": "falador", "name": "Falador" },
+  { "id": "fremennik", "name": "Fremennik Province" },
+  { "id": "kandarin", "name": "Kandarin" },
+  { "id": "karamja", "name": "Karamja" },
+  { "id": "kourend", "name": "Kourend & Kebos" },
+  { "id": "lumbridge", "name": "Lumbridge & Draynor" },
+  { "id": "morytania", "name": "Morytania" },
+  { "id": "varrock", "name": "Varrock" },
+  { "id": "western", "name": "Western Provinces" },
+  { "id": "wilderness", "name": "Wilderness" }
+]

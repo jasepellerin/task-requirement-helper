@@ -1,4 +1,6 @@
 import type { Tile, TileStatus } from '../domain/types.ts'
+import diariesData from './osrs-diaries.json'
+import diaryTiersData from './diary-tiers.json'
 import bracketsData from './skill-brackets.json'
 import skillsData from './osrs-skills.json'
 
@@ -14,8 +16,20 @@ export type SkillBracket = {
   cape?: boolean
 }
 
+export type OsrsDiary = {
+  id: string
+  name: string
+}
+
+export type DiaryTier = {
+  id: string
+  name: string
+}
+
 export const OSRS_SKILLS = skillsData as OsrsSkill[]
 export const SKILL_BRACKETS = bracketsData as SkillBracket[]
+export const OSRS_DIARIES = diariesData as OsrsDiary[]
+export const DIARY_TIERS = diaryTiersData as DiaryTier[]
 
 export function osrsTileId(skillId: string, bracketId: string): string {
   return `osrs:${skillId}:${bracketId}`
@@ -44,13 +58,54 @@ export function buildOsrsSkillTiles(status: TileStatus = 'unseen'): Tile[] {
   })
 }
 
+export function osrsDiaryTileId(diaryId: string, tierId: string): string {
+  return `osrs:diary:${diaryId}:${tierId}`
+}
+
+export function osrsDiaryTileName(diaryName: string, tier: DiaryTier): string {
+  return `${diaryName} ${tier.name}`
+}
+
+export function buildOsrsDiaryTiles(status: TileStatus = 'unseen'): Tile[] {
+  return OSRS_DIARIES.flatMap((diary) => {
+    const ids = DIARY_TIERS.map((tier) => osrsDiaryTileId(diary.id, tier.id))
+    return DIARY_TIERS.map((tier, index) => ({
+      id: ids[index] ?? osrsDiaryTileId(diary.id, tier.id),
+      name: osrsDiaryTileName(diary.name, tier),
+      status,
+      parentIds: ids.slice(0, index),
+    }))
+  })
+}
+
+export function buildOsrsCatalogTiles(status: TileStatus = 'unseen'): Tile[] {
+  return [...buildOsrsSkillTiles(status), ...buildOsrsDiaryTiles(status)]
+}
+
+export function pruneRemovedOsrsTiles(tiles: Tile[]): Tile[] {
+  const catalogIds = new Set(buildOsrsCatalogTiles().map((tile) => tile.id))
+  const removed = new Set(
+    tiles
+      .filter((tile) => isOsrsCatalogId(tile.id) && !catalogIds.has(tile.id))
+      .map((tile) => tile.id),
+  )
+  if (removed.size === 0) return tiles
+  return tiles
+    .filter((tile) => !removed.has(tile.id))
+    .map((tile) => ({
+      ...tile,
+      parentIds: tile.parentIds.filter((id) => !removed.has(id)),
+    }))
+}
+
 export function mergeOsrsSkillTiles(tiles: Tile[]): Tile[] {
-  const existingIds = new Set(tiles.map((tile) => tile.id))
-  const missing = buildOsrsSkillTiles().filter(
+  const pruned = pruneRemovedOsrsTiles(tiles)
+  const existingIds = new Set(pruned.map((tile) => tile.id))
+  const missing = buildOsrsCatalogTiles().filter(
     (tile) => !existingIds.has(tile.id),
   )
-  if (missing.length === 0) return tiles
-  return [...tiles, ...missing]
+  if (missing.length === 0) return pruned
+  return [...pruned, ...missing]
 }
 
 export function resetLockedOsrsTilesToUnseen(tiles: Tile[]): Tile[] {

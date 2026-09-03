@@ -19,11 +19,11 @@ Unlock trees are easy to lose in your head. You want to know:
 - Create / edit / delete tiles
 - Status: unseen, locked, unlocked, completed (default new tile: locked; order not enforced)
 - Parent and dependent relationships, edited from either side
-- Five lists driven by derived readiness
+- Four board lists (Ready / Blocked / Unlocked / Completed). Unseen tiles are hidden until found via search.
 - Persist in `localStorage`
 - Export and replace-import JSON (`StoreV1`)
 - Reject cyclic relationships
-- Seed OSRS skill tiles (24 skills × 10 level brackets, chained parents) from data files
+- Seed OSRS catalogs from data files: non-combat skills (16 × 10 brackets) and achievement diaries (12 × Easy/Medium/Hard/Elite), chained parents, unseen by default
 
 ## Not v1
 

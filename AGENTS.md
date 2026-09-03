@@ -37,6 +37,10 @@ yarn build
   - `blocked` if locked and at least one parent is missing or not unlocked/completed
 - Cycles are rejected when adding an edge.
 - Default new-tile status: `locked`. Status is always editable.
-- OSRS skill catalog lives in [src/data/osrs-skills.json](src/data/osrs-skills.json) and [src/data/skill-brackets.json](src/data/skill-brackets.json). Catalog tiles seed as `unseen` (not ready). Missing catalog tiles are merged on load (stable ids `osrs:{skill}:{bracket}`); later status edits are kept.
+- Unseen tiles stay in the store but are hidden from the board. **New tile** searches the catalog (selecting an unseen tile marks it `locked`) or creates a custom tile.
+- OSRS catalogs seed as `unseen`:
+  - Skills: [src/data/osrs-skills.json](src/data/osrs-skills.json) + [src/data/skill-brackets.json](src/data/skill-brackets.json) (`osrs:{skill}:{bracket}`). No combat skills (Attack, Strength, Defence, Hitpoints, Ranged, Prayer, Magic, Slayer).
+  - Diaries: [src/data/osrs-diaries.json](src/data/osrs-diaries.json) + [src/data/diary-tiers.json](src/data/diary-tiers.json) (`osrs:diary:{diary}:{tier}`)
+  - Missing catalog tiles are merged on load; later status edits are kept.
 
 See [docs/GOAL.md](docs/GOAL.md) for the high-level goal and v1 scope.
