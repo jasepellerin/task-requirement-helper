@@ -1,4 +1,5 @@
 import { Fragment } from 'react'
+import { assetUrl } from '../assetUrl.ts'
 import type { TeleportUnlock } from '../data/osrsCatalog.ts'
 import { wikiPageUrl } from '../data/wiki.ts'
 
@@ -11,7 +12,7 @@ function TeleportIcon() {
   return (
     <img
       className="unlock-icon"
-      src="/icons/teleport.png"
+      src={assetUrl('/icons/teleport.png')}
       alt=""
       width={20}
       height={20}

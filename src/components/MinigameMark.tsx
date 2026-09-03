@@ -1,4 +1,5 @@
 import { Fragment } from 'react'
+import { assetUrl } from '../assetUrl.ts'
 import type { MinigameUnlock } from '../data/osrsCatalog.ts'
 import { wikiPageUrl } from '../data/wiki.ts'
 
@@ -11,7 +12,7 @@ function MinigameIcon() {
   return (
     <img
       className="unlock-icon"
-      src="/icons/minigame.png"
+      src={assetUrl('/icons/minigame.png')}
       alt=""
       width={20}
       height={20}

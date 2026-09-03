@@ -1,4 +1,5 @@
 import { useEffect, useId, useMemo } from 'react'
+import { assetUrl } from '../assetUrl.ts'
 import {
   isCombatSkill,
   skillStats,
@@ -29,7 +30,7 @@ function SkillCell({
     <>
       <img
         className="stats-icon"
-        src={`/skill-icons/${skill.id}.png`}
+        src={assetUrl(`/skill-icons/${skill.id}.png`)}
         alt=""
         width={25}
         height={25}

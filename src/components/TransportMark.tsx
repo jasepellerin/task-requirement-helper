@@ -1,4 +1,5 @@
 import { Fragment } from 'react'
+import { assetUrl } from '../assetUrl.ts'
 import type { TransportUnlock } from '../data/osrsCatalog.ts'
 import { wikiPageUrl } from '../data/wiki.ts'
 
@@ -11,7 +12,7 @@ function TransportIcon() {
   return (
     <img
       className="unlock-icon"
-      src="/icons/transport.png"
+      src={assetUrl('/icons/transport.png')}
       alt=""
       width={20}
       height={20}

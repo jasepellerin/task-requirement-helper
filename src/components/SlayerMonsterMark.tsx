@@ -1,4 +1,5 @@
 import { Fragment } from 'react'
+import { assetUrl } from '../assetUrl.ts'
 import type { SlayerMonsterUnlock } from '../data/osrsCatalog.ts'
 import { wikiPageUrl } from '../data/wiki.ts'
 
@@ -11,7 +12,7 @@ function SlayerMonsterIcon() {
   return (
     <img
       className="slayer-icon"
-      src="/icons/slayer.png"
+      src={assetUrl('/icons/slayer.png')}
       alt=""
       width={20}
       height={20}

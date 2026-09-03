@@ -1,4 +1,5 @@
 import { useEffect, useId, useRef, useState, type ReactNode } from 'react'
+import { assetUrl } from '../assetUrl.ts'
 
 type ToolbarProps = {
   onNew: () => void
@@ -73,6 +74,22 @@ export function Toolbar({
       <div className="toolbar-start">
         <h1>Tile Requirements Helper</h1>
         <nav className="toolbar-nav" aria-label="Views">
+          <a
+            href="https://www.slayerscape.io/"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn icon-only"
+            aria-label="SlayerScape"
+            title="SlayerScape"
+          >
+            <img
+              className="toolbar-slayerscape-icon"
+              src={assetUrl('/icons/slayer.png')}
+              alt=""
+              width={22}
+              height={22}
+            />
+          </a>
           <button
             type="button"
             className="btn icon-only"
@@ -82,7 +99,7 @@ export function Toolbar({
           >
             <img
               className="toolbar-wiki-icon"
-              src="/icons/skills.png"
+              src={assetUrl('/icons/skills.png')}
               alt=""
               width={22}
               height={22}
@@ -97,7 +114,7 @@ export function Toolbar({
           >
             <img
               className="toolbar-wiki-icon"
-              src="/icons/completed.png"
+              src={assetUrl('/icons/completed.png')}
               alt=""
               width={22}
               height={22}

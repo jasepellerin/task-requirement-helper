@@ -1,3 +1,4 @@
+import { assetUrl } from '../assetUrl.ts'
 import type { SlayerMasterUnlock } from '../data/osrsCatalog.ts'
 import { wikiPageUrl } from '../data/wiki.ts'
 
@@ -10,7 +11,7 @@ function SlayerMasterIcon() {
   return (
     <img
       className="slayer-icon"
-      src="/icons/slayer-master.png"
+      src={assetUrl('/icons/slayer-master.png')}
       alt=""
       width={20}
       height={20}
