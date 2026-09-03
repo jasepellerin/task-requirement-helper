@@ -1,8 +1,13 @@
 import { useEffect, useId, useMemo, useState } from 'react'
-import { ALL_KINDS, filterTilesByKind } from '../data/osrsCatalog.ts'
+import {
+  ALL_KINDS,
+  filterTilesByKind,
+  tileSlayerMaster,
+} from '../data/osrsCatalog.ts'
 import { searchTiles } from '../domain/search.ts'
 import { type Tile, type TileStatus } from '../domain/types.ts'
 import { KindFilters } from './KindFilters.tsx'
+import { SlayerMasterMark } from './SlayerMasterMark.tsx'
 import { StatusButtons } from './StatusPicker.tsx'
 
 type TileFinderProps = {
@@ -55,16 +60,24 @@ export function TileFinder({
           <p className="empty">No matching tiles.</p>
         ) : (
           <ul className="search-results">
-            {results.map((tile) => (
-              <li key={tile.id} className="search-result">
-                <span className="search-result-name">{tile.name}</span>
-                <StatusButtons
-                  value={tile.status}
-                  name={tile.name}
-                  onChange={(status) => onStatusChange(tile.id, status)}
-                />
-              </li>
-            ))}
+            {results.map((tile) => {
+              const slayerMaster = tileSlayerMaster(tile.id)
+              return (
+                <li key={tile.id} className="search-result">
+                  <span className="search-result-name">
+                    <span>{tile.name}</span>
+                    {slayerMaster ? (
+                      <SlayerMasterMark master={slayerMaster} />
+                    ) : null}
+                  </span>
+                  <StatusButtons
+                    value={tile.status}
+                    name={tile.name}
+                    onChange={(status) => onStatusChange(tile.id, status)}
+                  />
+                </li>
+              )
+            })}
           </ul>
         )}
 

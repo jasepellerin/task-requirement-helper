@@ -17,10 +17,31 @@ const slim = {
   ],
 }
 
+const starred = {
+  version: 1 as const,
+  tiles: [
+    { id: 'a', status: 'locked' as const, starred: true },
+    { id: 'b', status: 'completed' as const },
+  ],
+}
+
 describe('parseStore', () => {
   it('accepts slim v1 tiles and ignores leftover name or parentIds', () => {
     expect(parseStore(legacy)).toEqual(slim)
     expect(parseStore(slim)).toEqual(slim)
+  })
+
+  it('keeps starred flags and drops starred: false', () => {
+    expect(parseStore(starred)).toEqual(starred)
+    expect(
+      parseStore({
+        version: 1,
+        tiles: [
+          { id: 'a', status: 'locked', starred: false },
+          { id: 'b', status: 'completed' },
+        ],
+      }),
+    ).toEqual(slim)
   })
 
   it('rejects bad version, tiles, or fields', () => {

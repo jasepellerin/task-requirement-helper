@@ -23,6 +23,7 @@
   --req-locked: #ea580c;
   --req-unlocked: #ca8a04;
   --req-completed: #16a34a;
+  --star: #ca8a04;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -44,6 +45,7 @@
     --req-locked: #fb923c;
     --req-unlocked: #facc15;
     --req-completed: #4ade80;
+    --star: #facc15;
   }
 }
 
@@ -277,9 +279,11 @@ p {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  overflow-anchor: none;
 }
 
 .tile-card {
+  position: relative;
   border: 1px solid var(--border);
   border-radius: 10px;
   overflow: hidden;
@@ -293,7 +297,7 @@ p {
   color: inherit;
   background: transparent;
   border: 0;
-  padding: 12px;
+  padding: 12px 40px 12px 12px;
   cursor: pointer;
   display: flex;
   flex-direction: column;
@@ -308,12 +312,23 @@ p {
 .tile-card h3 {
   font-size: 1rem;
   overflow-wrap: anywhere;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  flex-wrap: wrap;
 }
 
 .tile-card-stats {
   margin: 0;
   font-size: 0.88rem;
   color: var(--muted);
+}
+
+.tile-card .star-btn {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  z-index: 1;
 }
 
 .modal-title-row {
@@ -357,6 +372,19 @@ p {
 .btn.icon-ghost[aria-checked='true'] {
   border-color: var(--border);
   background: color-mix(in srgb, var(--primary) 8%, transparent);
+}
+
+.btn.icon-ghost.star-btn[aria-pressed='true'] {
+  color: var(--star);
+}
+
+.btn.icon-ghost.star-btn[aria-pressed='true'] svg {
+  fill: currentColor;
+}
+
+.btn.icon-ghost.star-btn[aria-pressed='true']:hover,
+.btn.icon-ghost.star-btn[aria-pressed='true']:focus-visible {
+  color: var(--star);
 }
 
 .status-buttons {
@@ -676,6 +704,36 @@ button.req-name:focus-visible {
   min-width: 0;
   font-weight: 700;
   overflow-wrap: anywhere;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.search-result-name > span:first-child {
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+
+.slayer-master-icon {
+  width: 20px;
+  height: 20px;
+  image-rendering: pixelated;
+  flex-shrink: 0;
+}
+
+.slayer-master-mark {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: inherit;
+  text-decoration: none;
+  font-size: 0.92rem;
+  font-weight: 600;
+}
+
+a.slayer-master-mark:hover,
+a.slayer-master-mark:focus-visible {
+  text-decoration: underline;
 }
 
 .stats-frame {

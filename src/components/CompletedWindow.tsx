@@ -8,6 +8,7 @@ type CompletedWindowProps = {
   completed: Tile[]
   onClose: () => void
   onOpen: (id: string) => void
+  onStar: (id: string, starred: boolean) => void
 }
 
 export function CompletedWindow({
@@ -15,6 +16,7 @@ export function CompletedWindow({
   completed,
   onClose,
   onOpen,
+  onStar,
 }: CompletedWindowProps) {
   const titleId = useId()
   const groups = useMemo(() => partitionByKind(completed), [completed])
@@ -49,6 +51,7 @@ export function CompletedWindow({
             byId={byId}
             empty="No completed skills."
             onOpen={onOpen}
+            onStar={onStar}
           />
           <TileColumn
             title="Diaries"
@@ -56,6 +59,7 @@ export function CompletedWindow({
             byId={byId}
             empty="No completed diaries."
             onOpen={onOpen}
+            onStar={onStar}
           />
           <TileColumn
             title="Quests"
@@ -63,6 +67,7 @@ export function CompletedWindow({
             byId={byId}
             empty="No completed quests."
             onOpen={onOpen}
+            onStar={onStar}
           />
         </Columns>
       </div>

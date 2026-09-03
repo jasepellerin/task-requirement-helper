@@ -5,12 +5,19 @@ import {
   tileItems,
   tileLength,
   tileRewards,
+  tileSlayerMaster,
 } from '../data/osrsCatalog.ts'
 import { formatGp } from '../data/questReqs.ts'
 import { requirementViews } from '../data/requirementViews.ts'
 import { tileWikiUrl } from '../data/wiki.ts'
 import { STATUS_LABEL, type Tile, type TileStatus } from '../domain/types.ts'
-import { CloseIcon, ExternalLinkIcon, StatusPicker } from './StatusPicker.tsx'
+import { SlayerMasterMark } from './SlayerMasterMark.tsx'
+import {
+  CloseIcon,
+  ExternalLinkIcon,
+  StarButton,
+  StatusPicker,
+} from './StatusPicker.tsx'
 
 type TileDetailProps = {
   byId: Map<string, Tile>
@@ -18,6 +25,7 @@ type TileDetailProps = {
   onCancel: () => void
   onOpenTile?: (id: string) => void
   onStatusChange?: (status: TileStatus) => void
+  onStarChange?: (starred: boolean) => void
 }
 
 function difficultyPillClass(difficulty: string): string {
@@ -37,6 +45,7 @@ export function TileDetail({
   onCancel,
   onOpenTile,
   onStatusChange,
+  onStarChange,
 }: TileDetailProps) {
   const titleId = useId()
   const [statusMenuOpen, setStatusMenuOpen] = useState(false)
@@ -46,6 +55,7 @@ export function TileDetail({
   const length = tileLength(tile.id)
   const items = tileItems(tile.id)
   const rewards = tileRewards(tile.id)
+  const slayerMaster = tileSlayerMaster(tile.id)
   const reqViews = useMemo(() => requirementViews(tile), [tile])
 
   useEffect(() => {
@@ -73,6 +83,12 @@ export function TileDetail({
         <div className="modal-title-row">
           <h2 id={titleId}>{tile.name}</h2>
           <div className="modal-title-actions">
+            {tile.status !== 'unseen' ? (
+              <StarButton
+                starred={tile.starred}
+                onChange={(starred) => onStarChange?.(starred)}
+              />
+            ) : null}
             <StatusPicker
               value={tile.status}
               open={statusMenuOpen}
@@ -112,6 +128,10 @@ export function TileDetail({
             ) : null}
             {length ? <span className="pill pill-length">{length}</span> : null}
           </div>
+        ) : null}
+
+        {slayerMaster ? (
+          <SlayerMasterMark master={slayerMaster} linked />
         ) : null}
 
         {gp !== undefined ? (

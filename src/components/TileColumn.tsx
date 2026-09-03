@@ -8,6 +8,7 @@ type TileColumnProps = {
   byId: Map<string, Tile>
   empty: string
   onOpen: (id: string) => void
+  onStar: (id: string, starred: boolean) => void
 }
 
 export function TileColumn({
@@ -16,6 +17,7 @@ export function TileColumn({
   byId,
   empty,
   onOpen,
+  onStar,
 }: TileColumnProps) {
   return (
     <section className="column">
@@ -34,6 +36,7 @@ export function TileColumn({
                 tile={tile}
                 byId={byId}
                 onOpen={() => onOpen(tile.id)}
+                onStar={(starred) => onStar(tile.id, starred)}
               />
             </li>
           ))}

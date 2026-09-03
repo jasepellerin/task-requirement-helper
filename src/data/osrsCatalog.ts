@@ -12,6 +12,7 @@ import diariesData from './osrs-diaries.json'
 import diaryTiersData from './diary-tiers.json'
 import bracketsData from './skill-brackets.json'
 import skillsData from './osrs-skills.json'
+import slayerMastersData from './osrs-quest-slayer-masters.json'
 
 export type OsrsSkill = {
   id: string
@@ -40,6 +41,11 @@ export type CatalogReq =
   | { type: 'tile'; id: string }
   | { type: 'skill'; skill: string; level: number; ironman?: boolean }
 
+export type SlayerMasterUnlock = {
+  name: string
+  wikiTitle: string
+}
+
 export type CatalogDef = {
   id: string
   name: string
@@ -50,6 +56,7 @@ export type CatalogDef = {
   difficulty?: string
   length?: string
   items?: string[]
+  slayerMaster?: SlayerMasterUnlock
   reqs: CatalogReq[]
 }
 
@@ -57,6 +64,10 @@ export const OSRS_SKILLS = skillsData as OsrsSkill[]
 export const SKILL_BRACKETS = bracketsData as SkillBracket[]
 export const OSRS_DIARIES = diariesData as OsrsDiary[]
 export const DIARY_TIERS = diaryTiersData as DiaryTier[]
+const QUEST_SLAYER_MASTERS = slayerMastersData as Record<
+  string,
+  SlayerMasterUnlock
+>
 export { OSRS_QUESTS, osrsQuestTileId } from './questReqs.ts'
 export type { OsrsQuest } from './questReqs.ts'
 
@@ -146,6 +157,7 @@ function buildQuestDefs(): CatalogDef[] {
     const gp = quest.gp && quest.gp > 0 ? quest.gp : undefined
     const rewards = questRewardsFor(quest.id)
     const details = questDetailsFor(quest.id)
+    const slayerMaster = QUEST_SLAYER_MASTERS[quest.id]
     return {
       id: osrsQuestTileId(quest.id),
       name: quest.name,
@@ -156,6 +168,7 @@ function buildQuestDefs(): CatalogDef[] {
       ...(details.difficulty ? { difficulty: details.difficulty } : {}),
       ...(details.length ? { length: details.length } : {}),
       ...(details.items.length > 0 ? { items: details.items } : {}),
+      ...(slayerMaster ? { slayerMaster } : {}),
       reqs: [
         ...(reqs?.quests ?? []).map((id) => ({
           type: 'tile' as const,
@@ -200,6 +213,12 @@ export function tileLength(tileId: string): string | undefined {
 
 export function tileItems(tileId: string): string[] {
   return CATALOG_BY_ID.get(tileId)?.items ?? []
+}
+
+export function tileSlayerMaster(
+  tileId: string,
+): SlayerMasterUnlock | undefined {
+  return CATALOG_BY_ID.get(tileId)?.slayerMaster
 }
 
 export type KindFilter = Record<TileKind, boolean>

@@ -18,6 +18,7 @@ function tile(
     name: `${skillId} ${bracketId}`,
     status,
     parentIds: [],
+    starred: false,
   }
 }
 

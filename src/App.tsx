@@ -16,8 +16,15 @@ type Overlay =
   | { mode: 'completed' }
 
 export default function App() {
-  const { tiles, byId, groups, setStatus, exportStore, importStore } =
-    useTiles()
+  const {
+    tiles,
+    byId,
+    groups,
+    setStatus,
+    setStarred,
+    exportStore,
+    importStore,
+  } = useTiles()
   const [overlay, setOverlay] = useState<Overlay | null>(null)
   const [kinds, setKinds] = useState(ALL_KINDS)
 
@@ -89,6 +96,7 @@ export default function App() {
             byId={byId}
             empty="Nothing ready."
             onOpen={openDetail}
+            onStar={setStarred}
           />
           <TileColumn
             title="Possible"
@@ -96,6 +104,7 @@ export default function App() {
             byId={byId}
             empty="Nothing possible."
             onOpen={openDetail}
+            onStar={setStarred}
           />
           <TileColumn
             title="Blocked"
@@ -103,6 +112,7 @@ export default function App() {
             byId={byId}
             empty="Nothing blocked."
             onOpen={openDetail}
+            onStar={setStarred}
           />
           <TileColumn
             title="Unlocked"
@@ -110,6 +120,7 @@ export default function App() {
             byId={byId}
             empty="Nothing unlocked."
             onOpen={openDetail}
+            onStar={setStarred}
           />
         </Columns>
       )}
@@ -120,6 +131,7 @@ export default function App() {
           completed={groups.completed}
           onClose={closeOverlay}
           onOpen={openDetail}
+          onStar={setStarred}
         />
       ) : null}
 
@@ -150,6 +162,7 @@ export default function App() {
             setStatus(overlay.id, status)
             if (status === 'unseen') closeOverlay()
           }}
+          onStarChange={(starred) => setStarred(overlay.id, starred)}
         />
       ) : null}
     </div>

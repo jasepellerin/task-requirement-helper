@@ -15,8 +15,10 @@ import {
   parentIdsFor,
   filterTilesByKind,
   partitionByKind,
+  setStoredStarred,
   setStoredStatus,
   SKILL_BRACKETS,
+  starredFromStored,
   statusesFromStored,
   storedTilesFromStatuses,
   tileDifficulty,
@@ -25,6 +27,7 @@ import {
   tileKind,
   tileLength,
   tileRewards,
+  tileSlayerMaster,
   tilesFromStatuses,
 } from './osrsCatalog.ts'
 
@@ -114,6 +117,7 @@ describe('OSRS skill catalog', () => {
     expect(skill?.name).toBe('Woodcutting 1–10')
     expect(skill?.status).toBe('completed')
     expect(skill?.parentIds).toEqual([])
+    expect(skill?.starred).toBe(false)
     expect(diary?.status).toBe('locked')
     expect(diary?.parentIds).toEqual([
       osrsTileId('agility', '11-20'),
@@ -154,6 +158,30 @@ describe('OSRS skill catalog', () => {
     ])
   })
 
+  it('overlays and persists starred flags on stored tiles', () => {
+    const locked = osrsTileId('agility', '21-30')
+    const stored = statusesFromStored([{ id: locked, status: 'locked' }])
+    const starred = starredFromStored([
+      { id: locked, status: 'locked', starred: true },
+      {
+        id: osrsTileId('woodcutting', '1-10'),
+        status: 'unseen',
+        starred: true,
+      },
+      { id: 'forest', status: 'locked', starred: true },
+    ])
+    expect([...starred]).toEqual([locked])
+    expect(
+      tilesFromStatuses(stored, starred).find((tile) => tile.id === locked)
+        ?.starred,
+    ).toBe(true)
+    expect(storedTilesFromStatuses(stored, starred)).toEqual([
+      { id: locked, status: 'locked', starred: true },
+    ])
+    expect(setStoredStarred(starred, 'forest', true)).toBeNull()
+    expect(setStoredStarred(starred, locked, false)?.has(locked)).toBe(false)
+  })
+
   it('rejects unknown ids when setting status', () => {
     const id = osrsTileId('woodcutting', '1-10')
     const statuses = new Map([[id, 'locked' as const]])
@@ -175,24 +203,28 @@ describe('OSRS skill catalog', () => {
         name: 'Agility 1–10',
         status: 'completed',
         parentIds: [],
+        starred: false,
       },
       {
         id: osrsDiaryTileId('kandarin', 'easy'),
         name: 'Kandarin Easy',
         status: 'completed',
         parentIds: [],
+        starred: false,
       },
       {
         id: osrsQuestTileId('dragon-slayer-i'),
         name: 'Dragon Slayer I',
         status: 'completed',
         parentIds: [],
+        starred: false,
       },
       {
         id: 'forest',
         name: 'Forest',
         status: 'completed',
         parentIds: [],
+        starred: false,
       },
     ])
     expect(grouped.skill).toHaveLength(1)
@@ -209,6 +241,7 @@ describe('OSRS skill catalog', () => {
             name: 'Forest',
             status: 'locked',
             parentIds: [],
+            starred: false,
           },
         ],
         { skill: false, diary: true, quest: true },
@@ -320,5 +353,30 @@ describe('OSRS quests', () => {
     ])
     const milk = CATALOG_BY_ID.get(osrsQuestTileId('the-ides-of-milk'))
     expect(milk && parentIdsFor(milk)).toEqual([])
+  })
+
+  it('marks quests that unlock slayer masters', () => {
+    expect(tileSlayerMaster(osrsQuestTileId('a-porcine-of-interest'))).toEqual({
+      name: 'Spria',
+      wikiTitle: 'Spria',
+    })
+    expect(tileSlayerMaster(osrsQuestTileId('priest-in-peril'))).toEqual({
+      name: 'Mazchna',
+      wikiTitle: 'Mazchna',
+    })
+    expect(tileSlayerMaster(osrsQuestTileId('lost-city'))).toEqual({
+      name: 'Chaeldar',
+      wikiTitle: 'Chaeldar',
+    })
+    expect(tileSlayerMaster(osrsQuestTileId('shilo-village'))).toEqual({
+      name: 'Duradel',
+      wikiTitle: 'Duradel',
+    })
+    expect(tileSlayerMaster(osrsQuestTileId('fallen-from-grace'))).toEqual({
+      name: 'Mortimer',
+      wikiTitle: 'Mortimer',
+    })
+    expect(tileSlayerMaster(osrsQuestTileId('cooks-assistant'))).toBeUndefined()
+    expect(tileSlayerMaster(osrsTileId('agility', '1-10'))).toBeUndefined()
   })
 })

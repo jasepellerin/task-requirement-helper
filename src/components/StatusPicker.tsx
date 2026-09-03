@@ -5,13 +5,19 @@ import {
   type TileStatus,
 } from '../domain/types.ts'
 
-function Icon({ children }: { children: ReactNode }) {
+function Icon({
+  children,
+  fill = 'none',
+}: {
+  children: ReactNode
+  fill?: string
+}) {
   return (
     <svg
       viewBox="0 0 24 24"
       width="18"
       height="18"
-      fill="none"
+      fill={fill}
       stroke="currentColor"
       strokeWidth="1.75"
       strokeLinecap="round"
@@ -39,6 +45,36 @@ export function CloseIcon() {
       <path d="M18 6 6 18" />
       <path d="m6 6 12 12" />
     </Icon>
+  )
+}
+
+export function StarIcon({ filled }: { filled: boolean }) {
+  return (
+    <Icon fill={filled ? 'currentColor' : 'none'}>
+      <path d="m12 3.2 2.47 5.01 5.53.8-4 3.9.94 5.5L12 16.9 7.06 18.4l.94-5.5-4-3.9 5.53-.8z" />
+    </Icon>
+  )
+}
+
+export function StarButton({
+  starred,
+  onChange,
+}: {
+  starred: boolean
+  onChange: (starred: boolean) => void
+}) {
+  return (
+    <button
+      type="button"
+      className="btn icon-ghost star-btn"
+      aria-label={starred ? 'Unstar' : 'Star'}
+      aria-pressed={starred}
+      title={starred ? 'Unstar' : 'Star'}
+      onMouseDown={(event) => event.preventDefault()}
+      onClick={() => onChange(!starred)}
+    >
+      <StarIcon filled={starred} />
+    </button>
   )
 }
 
