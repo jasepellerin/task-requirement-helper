@@ -28,6 +28,7 @@ import {
   tileLength,
   tileRewards,
   tileSlayerMaster,
+  tileSlayerMonsters,
   tilesFromStatuses,
 } from './osrsCatalog.ts'
 
@@ -378,5 +379,31 @@ describe('OSRS quests', () => {
     })
     expect(tileSlayerMaster(osrsQuestTileId('cooks-assistant'))).toBeUndefined()
     expect(tileSlayerMaster(osrsTileId('agility', '1-10'))).toBeUndefined()
+  })
+
+  it('marks quests that unlock slayer monsters', () => {
+    expect(tileSlayerMonsters(osrsQuestTileId('horror-from-the-deep'))).toEqual(
+      [{ name: 'Dagannoth', wikiTitle: 'Dagannoth' }],
+    )
+    expect(
+      tileSlayerMonsters(osrsQuestTileId('priest-in-peril')).map(
+        (monster) => monster.name,
+      ),
+    ).toEqual(expect.arrayContaining(['Banshees', 'Bloodveld', 'Gargoyles']))
+    expect(
+      tileSlayerMonsters(osrsQuestTileId('a-porcine-of-interest')),
+    ).toEqual([{ name: 'Sourhogs', wikiTitle: 'Sourhog' }])
+    expect(
+      tileSlayerMonsters(osrsQuestTileId('dragon-slayer-i')).map(
+        (monster) => monster.name,
+      ),
+    ).toContain('Metal dragons')
+    expect(tileSlayerMonsters(osrsQuestTileId('cooks-assistant'))).toEqual([])
+    expect(tileSlayerMonsters(osrsTileId('agility', '1-10'))).toEqual([])
+    const marked = CATALOG.filter(
+      (def) => (def.slayerMonsters?.length ?? 0) > 0,
+    )
+    expect(marked.length).toBeGreaterThan(20)
+    expect(marked.every((def) => def.kind === 'quest')).toBe(true)
   })
 })

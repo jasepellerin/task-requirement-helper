@@ -69,7 +69,7 @@ export function Toolbar({
   return (
     <header className="toolbar">
       <div className="toolbar-start">
-        <h1>Tiles</h1>
+        <h1>SlayerScape Requirements Helper</h1>
         <nav className="toolbar-nav" aria-label="Views">
           <button type="button" className="btn toolbar-link" onClick={onStats}>
             <Icon>

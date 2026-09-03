@@ -1,4 +1,4 @@
-# Tiles
+# SlayerScape Requirements Helper
 
 Local OSRS unlock tracker for skills, diaries, and quests. Mark tiles unseen / locked / unlocked / completed and see what is ready versus blocked. Data stays in the browser (`localStorage`) and can be exported as JSON.
 

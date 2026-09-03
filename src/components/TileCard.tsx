@@ -1,8 +1,13 @@
-import { tileGp, tileSlayerMaster } from '../data/osrsCatalog.ts'
+import {
+  tileGp,
+  tileSlayerMaster,
+  tileSlayerMonsters,
+} from '../data/osrsCatalog.ts'
 import { formatGp } from '../data/questReqs.ts'
 import { blockingParentCount } from '../domain/readiness.ts'
 import type { Tile } from '../domain/types.ts'
 import { SlayerMasterMark } from './SlayerMasterMark.tsx'
+import { SlayerMonsterMark } from './SlayerMonsterMark.tsx'
 import { StarButton } from './StatusPicker.tsx'
 
 type TileCardProps = {
@@ -26,6 +31,7 @@ function cardStats(tile: Tile, byId: Map<string, Tile>): string | null {
 export function TileCard({ tile, byId, onOpen, onStar }: TileCardProps) {
   const stats = cardStats(tile, byId)
   const slayerMaster = tileSlayerMaster(tile.id)
+  const slayerMonsters = tileSlayerMonsters(tile.id)
 
   return (
     <article className="tile-card">
@@ -33,6 +39,9 @@ export function TileCard({ tile, byId, onOpen, onStar }: TileCardProps) {
         <h3>
           <span>{tile.name}</span>
           {slayerMaster ? <SlayerMasterMark master={slayerMaster} /> : null}
+          {slayerMonsters.length > 0 ? (
+            <SlayerMonsterMark monsters={slayerMonsters} />
+          ) : null}
         </h3>
         {stats ? <p className="tile-card-stats">{stats}</p> : null}
       </button>

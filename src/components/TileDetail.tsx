@@ -6,12 +6,14 @@ import {
   tileLength,
   tileRewards,
   tileSlayerMaster,
+  tileSlayerMonsters,
 } from '../data/osrsCatalog.ts'
 import { formatGp } from '../data/questReqs.ts'
 import { requirementViews } from '../data/requirementViews.ts'
 import { tileWikiUrl } from '../data/wiki.ts'
 import { STATUS_LABEL, type Tile, type TileStatus } from '../domain/types.ts'
 import { SlayerMasterMark } from './SlayerMasterMark.tsx'
+import { SlayerMonsterMark } from './SlayerMonsterMark.tsx'
 import {
   CloseIcon,
   ExternalLinkIcon,
@@ -56,6 +58,7 @@ export function TileDetail({
   const items = tileItems(tile.id)
   const rewards = tileRewards(tile.id)
   const slayerMaster = tileSlayerMaster(tile.id)
+  const slayerMonsters = tileSlayerMonsters(tile.id)
   const reqViews = useMemo(() => requirementViews(tile), [tile])
 
   useEffect(() => {
@@ -132,6 +135,9 @@ export function TileDetail({
 
         {slayerMaster ? (
           <SlayerMasterMark master={slayerMaster} linked />
+        ) : null}
+        {slayerMonsters.length > 0 ? (
+          <SlayerMonsterMark monsters={slayerMonsters} linked />
         ) : null}
 
         {gp !== undefined ? (

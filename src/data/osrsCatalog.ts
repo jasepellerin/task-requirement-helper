@@ -13,6 +13,7 @@ import diaryTiersData from './diary-tiers.json'
 import bracketsData from './skill-brackets.json'
 import skillsData from './osrs-skills.json'
 import slayerMastersData from './osrs-quest-slayer-masters.json'
+import slayerMonstersData from './osrs-quest-slayer-monsters.json'
 
 export type OsrsSkill = {
   id: string
@@ -46,6 +47,11 @@ export type SlayerMasterUnlock = {
   wikiTitle: string
 }
 
+export type SlayerMonsterUnlock = {
+  name: string
+  wikiTitle: string
+}
+
 export type CatalogDef = {
   id: string
   name: string
@@ -57,6 +63,7 @@ export type CatalogDef = {
   length?: string
   items?: string[]
   slayerMaster?: SlayerMasterUnlock
+  slayerMonsters?: SlayerMonsterUnlock[]
   reqs: CatalogReq[]
 }
 
@@ -67,6 +74,10 @@ export const DIARY_TIERS = diaryTiersData as DiaryTier[]
 const QUEST_SLAYER_MASTERS = slayerMastersData as Record<
   string,
   SlayerMasterUnlock
+>
+const QUEST_SLAYER_MONSTERS = slayerMonstersData as Record<
+  string,
+  SlayerMonsterUnlock[]
 >
 export { OSRS_QUESTS, osrsQuestTileId } from './questReqs.ts'
 export type { OsrsQuest } from './questReqs.ts'
@@ -158,6 +169,7 @@ function buildQuestDefs(): CatalogDef[] {
     const rewards = questRewardsFor(quest.id)
     const details = questDetailsFor(quest.id)
     const slayerMaster = QUEST_SLAYER_MASTERS[quest.id]
+    const slayerMonsters = QUEST_SLAYER_MONSTERS[quest.id]
     return {
       id: osrsQuestTileId(quest.id),
       name: quest.name,
@@ -169,6 +181,9 @@ function buildQuestDefs(): CatalogDef[] {
       ...(details.length ? { length: details.length } : {}),
       ...(details.items.length > 0 ? { items: details.items } : {}),
       ...(slayerMaster ? { slayerMaster } : {}),
+      ...(slayerMonsters && slayerMonsters.length > 0
+        ? { slayerMonsters }
+        : {}),
       reqs: [
         ...(reqs?.quests ?? []).map((id) => ({
           type: 'tile' as const,
@@ -219,6 +234,10 @@ export function tileSlayerMaster(
   tileId: string,
 ): SlayerMasterUnlock | undefined {
   return CATALOG_BY_ID.get(tileId)?.slayerMaster
+}
+
+export function tileSlayerMonsters(tileId: string): SlayerMonsterUnlock[] {
+  return CATALOG_BY_ID.get(tileId)?.slayerMonsters ?? []
 }
 
 export type KindFilter = Record<TileKind, boolean>

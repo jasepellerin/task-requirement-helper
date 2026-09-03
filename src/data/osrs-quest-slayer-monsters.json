@@ -1,0 +1,79 @@
+{
+  "a-porcine-of-interest": [{ "name": "Sourhogs", "wikiTitle": "Sourhog" }],
+  "bone-voyage": [
+    { "name": "Fossil Island wyverns", "wikiTitle": "Fossil Island wyvern" }
+  ],
+  "cabin-fever": [
+    { "name": "Cave horrors", "wikiTitle": "Cave horror" },
+    { "name": "Jungle horrors", "wikiTitle": "Jungle horror" }
+  ],
+  "contact": [{ "name": "Scabarites", "wikiTitle": "Scabarite" }],
+  "death-plateau": [
+    { "name": "Spiritual creatures", "wikiTitle": "Spiritual creature" }
+  ],
+  "death-to-the-dorgeshuun": [{ "name": "Molanisks", "wikiTitle": "Molanisk" }],
+  "desert-treasure-i": [{ "name": "Dust devils", "wikiTitle": "Dust devil" }],
+  "dragon-slayer-i": [
+    { "name": "Black dragons", "wikiTitle": "Black dragon" },
+    { "name": "Blue dragons", "wikiTitle": "Blue dragon" },
+    { "name": "Green dragons", "wikiTitle": "Green dragon" },
+    { "name": "Lava dragons", "wikiTitle": "Lava dragon" },
+    { "name": "Metal dragons", "wikiTitle": "Slayer task/Metal dragons" },
+    { "name": "Red dragons", "wikiTitle": "Red dragon" }
+  ],
+  "dragon-slayer-ii": [
+    { "name": "Adamant dragons", "wikiTitle": "Adamant dragon" },
+    { "name": "Rune dragons", "wikiTitle": "Rune dragon" },
+    { "name": "Vorkath", "wikiTitle": "Vorkath" }
+  ],
+  "elemental-workshop-i": [
+    { "name": "Fossil Island wyverns", "wikiTitle": "Fossil Island wyvern" },
+    { "name": "Skeletal wyverns", "wikiTitle": "Skeletal Wyvern" }
+  ],
+  "ernest-the-chicken": [{ "name": "Killerwatts", "wikiTitle": "Killerwatt" }],
+  "fairytale-ii-cure-a-queen": [
+    { "name": "Abyssal demons", "wikiTitle": "Abyssal demon" }
+  ],
+  "haunted-mine": [{ "name": "Terror dogs", "wikiTitle": "Terror dog" }],
+  "horror-from-the-deep": [{ "name": "Dagannoth", "wikiTitle": "Dagannoth" }],
+  "legends-quest": [
+    { "name": "Shadow warriors", "wikiTitle": "Shadow warrior" }
+  ],
+  "lost-city": [
+    { "name": "Mutated zygomites", "wikiTitle": "Mutated Zygomite" },
+    { "name": "Otherworldly beings", "wikiTitle": "Otherworldly being" }
+  ],
+  "lunar-diplomacy": [{ "name": "Suqahs", "wikiTitle": "Suqah" }],
+  "mournings-end-part-ii": [
+    { "name": "Dark beasts", "wikiTitle": "Dark beast" }
+  ],
+  "olafs-quest": [{ "name": "Brine rats", "wikiTitle": "Brine rat" }],
+  "perilous-moons": [{ "name": "Lesser nagua", "wikiTitle": "Lesser nagua" }],
+  "priest-in-peril": [
+    { "name": "Aberrant spectres", "wikiTitle": "Aberrant spectre" },
+    { "name": "Abyssal demons", "wikiTitle": "Abyssal demon" },
+    { "name": "Araxytes", "wikiTitle": "Araxyte" },
+    { "name": "Banshees", "wikiTitle": "Banshee" },
+    { "name": "Bloodveld", "wikiTitle": "Bloodveld" },
+    { "name": "Crawling Hands", "wikiTitle": "Crawling Hand" },
+    { "name": "Gargoyles", "wikiTitle": "Gargoyle" },
+    { "name": "Ghouls", "wikiTitle": "Ghoul" },
+    { "name": "Infernal Mages", "wikiTitle": "Infernal Mage" },
+    { "name": "Nechryael", "wikiTitle": "Nechryael" },
+    { "name": "Vampyres", "wikiTitle": "Vampyre" },
+    { "name": "Werewolves", "wikiTitle": "Werewolf" }
+  ],
+  "regicide": [{ "name": "Elves", "wikiTitle": "Elf" }],
+  "royal-trouble": [{ "name": "Sea snakes", "wikiTitle": "Sea snake" }],
+  "rum-deal": [{ "name": "Fever spiders", "wikiTitle": "Fever spider" }],
+  "shadows-of-custodia": [
+    { "name": "Custodian stalkers", "wikiTitle": "Custodian stalker" }
+  ],
+  "the-fremennik-exiles": [
+    { "name": "Basilisk Knights", "wikiTitle": "Basilisk Knight" }
+  ],
+  "the-path-of-glouphrie": [
+    { "name": "Warped creatures", "wikiTitle": "Warped creature" }
+  ],
+  "troubled-tortugans": [{ "name": "Gryphons", "wikiTitle": "Gryphon" }]
+}

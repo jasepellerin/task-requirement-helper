@@ -9,7 +9,7 @@ type SlayerMasterMarkProps = {
 function SlayerMasterIcon() {
   return (
     <img
-      className="slayer-master-icon"
+      className="slayer-icon"
       src="/icons/slayer-master.png"
       alt=""
       width={20}
@@ -23,7 +23,7 @@ export function SlayerMasterMark({ master, linked }: SlayerMasterMarkProps) {
   if (linked) {
     return (
       <a
-        className="slayer-master-mark"
+        className="slayer-mark"
         href={wikiPageUrl(master.wikiTitle)}
         target="_blank"
         rel="noreferrer"
@@ -35,7 +35,7 @@ export function SlayerMasterMark({ master, linked }: SlayerMasterMarkProps) {
     )
   }
   return (
-    <span className="slayer-master-mark" title={label} aria-label={label}>
+    <span className="slayer-mark" title={label} aria-label={label}>
       <SlayerMasterIcon />
     </span>
   )

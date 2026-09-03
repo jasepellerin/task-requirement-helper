@@ -1,4 +1,4 @@
-# Tiles
+# SlayerScape Requirements Helper
 
 Local OSRS unlock tracker. No backend. Catalog is skills, diaries, and quests only.
 
@@ -58,7 +58,7 @@ All catalog tiles seed as `unseen`.
 
 - **Skills** — [src/data/osrs-skills.json](src/data/osrs-skills.json) + [src/data/skill-brackets.json](src/data/skill-brackets.json) (`osrs:{skill}:{bracket}`). No combat skills (Attack, Strength, Defence, Hitpoints, Ranged, Prayer, Magic, Slayer). Each bracket parents every earlier bracket of the same skill. First-bracket quest unlocks from [src/data/osrs-skill-quest-reqs.json](src/data/osrs-skill-quest-reqs.json) (Herblore → Druidic Ritual, Sailing → Pandemonium).
 - **Diaries** — [src/data/osrs-diaries.json](src/data/osrs-diaries.json) + [src/data/diary-tiers.json](src/data/diary-tiers.json) (`osrs:diary:{diary}:{tier}`). Harder tiers parent easier tiers, then covering skill brackets from [src/data/osrs-diary-skill-reqs.json](src/data/osrs-diary-skill-reqs.json) (Ironman footnotes included; combat/Slayer skipped). Rewards from each diary page’s per-tier Rewards section. Refresh with `yarn fetch-diary-reqs`.
-- **Quests** — [src/data/osrs-quests.json](src/data/osrs-quests.json) + [src/data/osrs-quest-reqs.json](src/data/osrs-quest-reqs.json) (`osrs:quest:{slug}`). List comes from wiki [[Quests/List]] categories (Free-to-play + Members'); keep Infobox Quest pages only. Miniquests excluded. Parents from `Module:Questreq/data` when present, otherwise Quest details (direct quests + covering skill brackets; Ironman tags included; combat/Slayer skipped). Required coins from wiki Quest details show as Gold. Difficulty, length, and item requirements from Quest details. Rewards from `{{Quest rewards}}` (quest points + reward bullets). Refresh with `yarn fetch-quest-reqs`. Quests that unlock a Slayer Master (A Porcine of Interest → Spria, Priest in Peril → Mazchna, Lost City → Chaeldar, Shilo Village → Duradel, Fallen From Grace → Mortimer) show the wiki Slayer Master icon.
+- **Quests** — [src/data/osrs-quests.json](src/data/osrs-quests.json) + [src/data/osrs-quest-reqs.json](src/data/osrs-quest-reqs.json) (`osrs:quest:{slug}`). List comes from wiki [[Quests/List]] categories (Free-to-play + Members'); keep Infobox Quest pages only. Miniquests excluded. Parents from `Module:Questreq/data` when present, otherwise Quest details (direct quests + covering skill brackets; Ironman tags included; combat/Slayer skipped). Required coins from wiki Quest details show as Gold. Difficulty, length, and item requirements from Quest details. Rewards from `{{Quest rewards}}` (quest points + reward bullets). Refresh with `yarn fetch-quest-reqs`. Quests that unlock a Slayer Master (A Porcine of Interest → Spria, Priest in Peril → Mazchna, Lost City → Chaeldar, Shilo Village → Duradel, Fallen From Grace → Mortimer) show the wiki Slayer Master icon. Quests that unlock Slayer monsters (from wiki assignment tables) show the wiki Slayer skill icon.
 
 A wiki skill level maps to the lowest covering bracket (e.g. 45 Farming → Farming 41–50). That covering tile is the derived parent; the UI still shows the exact wiki level.
 
@@ -77,7 +77,7 @@ Persist/export `{ id, status, starred? }` for catalog tiles whose status is not 
   - View-only. Header: catalog title, live status icon (menu, saves immediately), star (on-board tiles), wiki (external-link icon), X to close.
   - Status icons: slashed eye = unseen, lock = locked, open lock = unlocked, check = completed. Marking unseen takes it off the board.
   - **Required**: one line per parent. Quest/diary parents use the tile name. Skill reqs use the exact wiki level (`45 Farming`, `42 Crafting (Ironman)`). Color is the covering/parent tile status: red unseen, orange locked, yellow unlocked, green completed. Click opens that tile.
-  - Quest cards show difficulty and length as pills, Gold when the wiki lists required coins, an Unlocks line with the Slayer Master icon when the quest unlocks a master, and an Items section for required items (wiki how-to-get notes are dropped).
+  - Quest cards show difficulty and length as pills, Gold when the wiki lists required coins, Unlocks lines with the Slayer Master icon and/or Slayer skill icon when the quest unlocks a master or Slayer monsters, and an Items section for required items (wiki how-to-get notes are dropped).
   - Quest and diary cards list completion rewards from the wiki.
 - **Finder** (`+`): search skills, diaries, and quests. Independent Skills / Diaries / Quests toggles. Empty search lists all alphabetized tiles for the active filters. Leading A / An / The is ignored for prefix and A–Z. Skill cape tiles sort as `{skill} 99`. Each result has all four status icons with the current one highlighted. Stays open for batch edits.
 

@@ -714,14 +714,14 @@ button.req-name:focus-visible {
   overflow-wrap: anywhere;
 }
 
-.slayer-master-icon {
+.slayer-icon {
   width: 20px;
   height: 20px;
   image-rendering: pixelated;
   flex-shrink: 0;
 }
 
-.slayer-master-mark {
+.slayer-mark {
   display: inline-flex;
   align-items: center;
   gap: 6px;
@@ -731,8 +731,15 @@ button.req-name:focus-visible {
   font-weight: 600;
 }
 
-a.slayer-master-mark:hover,
-a.slayer-master-mark:focus-visible {
+.slayer-mark a {
+  color: inherit;
+  text-decoration: none;
+}
+
+a.slayer-mark:hover,
+a.slayer-mark:focus-visible,
+.slayer-mark a:hover,
+.slayer-mark a:focus-visible {
   text-decoration: underline;
 }
 
