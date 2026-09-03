@@ -3,7 +3,6 @@ import { formatGp, tileGp } from '../data/questReqs.ts'
 import { requirementViews } from '../data/requirementViews.ts'
 import { tileWikiUrl } from '../data/wiki.ts'
 import { wouldCreateCycle } from '../domain/graph.ts'
-import { parentIsSatisfied } from '../domain/readiness.ts'
 import { searchTiles } from '../domain/search.ts'
 import {
   STATUS_LABEL,
@@ -11,7 +10,12 @@ import {
   type TileInput,
   type TileStatus,
 } from '../domain/types.ts'
-import { PencilIcon, StatusPicker } from './StatusPicker.tsx'
+import {
+  CloseIcon,
+  ExternalLinkIcon,
+  PencilIcon,
+  StatusPicker,
+} from './StatusPicker.tsx'
 
 type TileFormProps = {
   tiles: Tile[]
@@ -19,16 +23,8 @@ type TileFormProps = {
   error: string | null
   onSubmit: (input: TileInput) => void
   onCancel: () => void
-  onDelete?: () => void
-  deleteLabel?: string
-  deleteDanger?: boolean
   onOpenTile?: (id: string) => void
   onStatusChange?: (status: TileStatus) => void
-}
-
-function parentStatusText(parent: Tile | undefined, blocking: boolean): string {
-  if (!parent) return 'Missing · blocking'
-  return `${STATUS_LABEL[parent.status]}${blocking ? ' · blocking' : ''}`
 }
 
 export function TileForm({
@@ -37,9 +33,6 @@ export function TileForm({
   error,
   onSubmit,
   onCancel,
-  onDelete,
-  deleteLabel = 'Delete',
-  deleteDanger = true,
   onOpenTile,
   onStatusChange,
 }: TileFormProps) {
@@ -157,14 +150,25 @@ export function TileForm({
             ) : null}
             {wikiUrl ? (
               <a
-                className="wiki-link"
+                className="btn icon-ghost"
                 href={wikiUrl}
                 target="_blank"
                 rel="noreferrer"
+                aria-label="Open wiki"
+                title="Wiki"
               >
-                Wiki
+                <ExternalLinkIcon />
               </a>
             ) : null}
+            <button
+              type="button"
+              className="btn icon-ghost"
+              aria-label="Close"
+              title="Close"
+              onClick={onCancel}
+            >
+              <CloseIcon />
+            </button>
           </div>
         </div>
 
@@ -182,51 +186,26 @@ export function TileForm({
                 const parent = tiles.find(
                   (candidate) => candidate.id === row.parentId,
                 )
-                const blocking = !parentIsSatisfied(parent?.status)
-                const statusText = parentStatusText(parent, blocking)
+                const status = parent?.status ?? 'unseen'
                 const open = Boolean(parent && onOpenTile)
+                const className = `req-name req-${status}`
+                const label = `${row.title}, ${STATUS_LABEL[status]}`
                 return (
                   <li key={row.key} className="parent-row">
                     <div className="req-main">
-                      {row.coverLabel ? (
-                        <>
-                          <span className="req-title">{row.title}</span>
-                          <span
-                            className={blocking ? 'req-blocking' : 'req-met'}
-                          >
-                            {open ? (
-                              <button
-                                type="button"
-                                className="req-cover"
-                                onClick={() => onOpenTile?.(row.parentId)}
-                              >
-                                {row.coverLabel}
-                              </button>
-                            ) : (
-                              row.coverLabel
-                            )}
-                            {` · ${statusText}`}
-                          </span>
-                        </>
+                      {open ? (
+                        <button
+                          type="button"
+                          className={className}
+                          title={label}
+                          onClick={() => onOpenTile?.(row.parentId)}
+                        >
+                          {row.title}
+                        </button>
                       ) : (
-                        <>
-                          {open ? (
-                            <button
-                              type="button"
-                              className="req-name"
-                              onClick={() => onOpenTile?.(row.parentId)}
-                            >
-                              {row.title}
-                            </button>
-                          ) : (
-                            <span className="req-title">{row.title}</span>
-                          )}
-                          <span
-                            className={blocking ? 'req-blocking' : 'req-met'}
-                          >
-                            {statusText}
-                          </span>
-                        </>
+                        <span className={className} title={label}>
+                          {row.title}
+                        </span>
                       )}
                     </div>
                     {editing && !row.catalog ? (
@@ -287,39 +266,23 @@ export function TileForm({
 
         {error ? <p className="form-error">{error}</p> : null}
 
-        <div className="modal-actions">
-          {onDelete ? (
-            <button
-              type="button"
-              className={deleteDanger ? 'btn danger' : 'btn'}
-              onClick={onDelete}
-            >
-              {deleteLabel}
-            </button>
-          ) : (
+        {editing ? (
+          <div className="modal-actions">
             <span />
-          )}
-          <div className="modal-actions-end">
-            {editing ? (
-              <>
-                <button
-                  type="button"
-                  className="btn"
-                  onClick={tile ? revertEdit : onCancel}
-                >
-                  Cancel
-                </button>
-                <button type="submit" className="btn primary">
-                  Save
-                </button>
-              </>
-            ) : (
-              <button type="button" className="btn" onClick={onCancel}>
-                Close
+            <div className="modal-actions-end">
+              <button
+                type="button"
+                className="btn"
+                onClick={tile ? revertEdit : onCancel}
+              >
+                Cancel
               </button>
-            )}
+              <button type="submit" className="btn primary">
+                Save
+              </button>
+            </div>
           </div>
-        </div>
+        ) : null}
       </form>
     </div>
   )

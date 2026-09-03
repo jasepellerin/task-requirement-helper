@@ -5,7 +5,6 @@ import { StatsWindow } from './components/StatsWindow.tsx'
 import { TileFinder } from './components/TileFinder.tsx'
 import { TileForm } from './components/TileForm.tsx'
 import { Toolbar } from './components/Toolbar.tsx'
-import { isOsrsCatalogId } from './data/osrsCatalog.ts'
 import type { Tile, TileInput } from './domain/types.ts'
 import { useTiles } from './hooks/useTiles.ts'
 
@@ -13,16 +12,8 @@ type Editor =
   { mode: 'find' } | { mode: 'create' } | { mode: 'edit'; id: string }
 
 export default function App() {
-  const {
-    tiles,
-    groups,
-    create,
-    update,
-    setStatus,
-    remove,
-    exportStore,
-    importStore,
-  } = useTiles()
+  const { tiles, groups, create, update, setStatus, exportStore, importStore } =
+    useTiles()
   const [editor, setEditor] = useState<Editor | null>(null)
   const [formError, setFormError] = useState<string | null>(null)
   const [showStats, setShowStats] = useState(false)
@@ -85,18 +76,6 @@ export default function App() {
       return
     }
     openEdit(tile.id)
-  }
-
-  const editingCatalog =
-    editingTile !== undefined && isOsrsCatalogId(editingTile.id)
-
-  function confirmRemove() {
-    if (!editingTile) return
-    if (!editingCatalog && !window.confirm(`Delete “${editingTile.name}”?`)) {
-      return
-    }
-    remove(editingTile.id)
-    closeEditor()
   }
 
   return (
@@ -178,9 +157,6 @@ export default function App() {
           error={formError}
           onSubmit={submit}
           onCancel={closeEditor}
-          onDelete={editor.mode === 'edit' ? confirmRemove : undefined}
-          deleteLabel={editingCatalog ? 'Remove from board' : 'Delete'}
-          deleteDanger={!editingCatalog}
           onOpenTile={editor.mode === 'edit' ? openEdit : undefined}
           onStatusChange={
             editor.mode === 'edit'

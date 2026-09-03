@@ -32,7 +32,7 @@ describe('coveringSkillTile', () => {
 })
 
 describe('requirementViews', () => {
-  it('shows exact quest skill levels with covering tiles underneath', () => {
+  it('shows exact quest skill levels pointing at covering tiles', () => {
     const id = osrsQuestTileId('animal-magnetism')
     const views = requirementViews(tile(id, []), [])
 
