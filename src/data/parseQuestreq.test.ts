@@ -3,6 +3,9 @@ import { OSRS_SKILLS } from './osrsCatalog.ts'
 import {
   extractRequiredGp,
   isQuestCatalogName,
+  isQuestIndexTitle,
+  isWikiQuestPage,
+  parseQuestDetailsReqs,
   parseQuestreqLua,
   questSlug,
 } from './parseQuestreq.ts'
@@ -80,6 +83,22 @@ describe('questSlug / catalog names', () => {
   })
 })
 
+describe('isWikiQuestPage', () => {
+  it('keeps Infobox Quest and drops miniquests and redirects', () => {
+    expect(
+      isWikiQuestPage("{{Infobox Quest\n|name = Cook's Assistant\n}}"),
+    ).toBe(true)
+    expect(
+      isWikiQuestPage(
+        "{{Infobox Miniquest\n|name = Alfred Grimhand's Barcrawl\n}}",
+      ),
+    ).toBe(false)
+    expect(isWikiQuestPage('#REDIRECT [[Barbarian_Training#Farming]]')).toBe(
+      false,
+    )
+  })
+})
+
 describe('parseQuestreqLua', () => {
   it('keeps catalog skills and quest parents, drops combat and diaries', () => {
     const parsed = parseQuestreqLua(QUESTREQ_FIXTURE, OSRS_SKILLS)
@@ -96,6 +115,50 @@ describe('parseQuestreqLua', () => {
       { skill: 'crafting', level: 19 },
       { skill: 'woodcutting', level: 35 },
     ])
+  })
+})
+
+describe('quest list titles', () => {
+  it('skips Quests/ index pages', () => {
+    expect(isQuestIndexTitle('Quests/Free-to-play')).toBe(true)
+    expect(isQuestIndexTitle('Current Affairs')).toBe(false)
+    expect(isQuestIndexTitle('Recipe for Disaster/Full guide')).toBe(false)
+  })
+})
+
+describe('parseQuestDetailsReqs', () => {
+  it('takes direct quests and catalog skills, drops nested and combat', () => {
+    const parsed = parseQuestDetailsReqs(
+      `{{Quest details
+|requirements = * {{SCP|Sailing|22|link=yes}} {{Boostable|no}}
+* {{SCP|Fishing|10|link=yes}}
+* {{SCP|Magic|75|link=yes}}
+*Completion of [[Pandemonium]]
+** [[The Heart of Darkness]]
+*** [[Twilight's Promise]]
+}}`,
+      OSRS_SKILLS,
+    )
+    expect(parsed.quests).toEqual(['Pandemonium', 'The Heart of Darkness'])
+    expect(parsed.skills).toEqual([
+      { skill: 'sailing', level: 22 },
+      { skill: 'fishing', level: 10 },
+    ])
+  })
+
+  it('treats None and empty requirements as no reqs', () => {
+    expect(
+      parseQuestDetailsReqs(
+        '{{Quest details\n|requirements = None\n}}',
+        OSRS_SKILLS,
+      ),
+    ).toEqual({ quests: [], skills: [] })
+    expect(
+      parseQuestDetailsReqs(
+        '{{Quest details\n|requirements =\n|items =\n}}',
+        OSRS_SKILLS,
+      ),
+    ).toEqual({ quests: [], skills: [] })
   })
 })
 

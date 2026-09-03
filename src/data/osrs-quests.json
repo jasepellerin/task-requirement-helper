@@ -1,5 +1,41 @@
 [
   {
+    "id": "a-kingdom-divided",
+    "name": "A Kingdom Divided",
+    "wikiTitle": "A Kingdom Divided"
+  },
+  {
+    "id": "a-night-at-the-theatre",
+    "name": "A Night at the Theatre",
+    "wikiTitle": "A Night at the Theatre"
+  },
+  {
+    "id": "a-porcine-of-interest",
+    "name": "A Porcine of Interest",
+    "wikiTitle": "A Porcine of Interest"
+  },
+  {
+    "id": "a-ruff-situation",
+    "name": "A Ruff Situation",
+    "wikiTitle": "A Ruff Situation"
+  },
+  {
+    "id": "a-souls-bane",
+    "name": "A Soul's Bane",
+    "wikiTitle": "A Soul's Bane"
+  },
+  {
+    "id": "a-tail-of-two-cats",
+    "name": "A Tail of Two Cats",
+    "wikiTitle": "A Tail of Two Cats"
+  },
+  {
+    "id": "a-taste-of-hope",
+    "name": "A Taste of Hope",
+    "wikiTitle": "A Taste of Hope",
+    "gp": 1000
+  },
+  {
     "id": "animal-magnetism",
     "name": "Animal Magnetism",
     "wikiTitle": "Animal Magnetism"
@@ -10,11 +46,6 @@
     "wikiTitle": "Another Slice of H.A.M."
   },
   {
-    "id": "the-ascent-of-arceuus",
-    "name": "The Ascent of Arceuus",
-    "wikiTitle": "The Ascent of Arceuus"
-  },
-  {
     "id": "at-first-light",
     "name": "At First Light",
     "wikiTitle": "At First Light"
@@ -23,6 +54,11 @@
     "id": "below-ice-mountain",
     "name": "Below Ice Mountain",
     "wikiTitle": "Below Ice Mountain"
+  },
+  {
+    "id": "beneath-cursed-sands",
+    "name": "Beneath Cursed Sands",
+    "wikiTitle": "Beneath Cursed Sands"
   },
   {
     "id": "between-a-rock",
@@ -88,9 +124,9 @@
     "wikiTitle": "Cook's Assistant"
   },
   {
-    "id": "the-corsair-curse",
-    "name": "The Corsair Curse",
-    "wikiTitle": "The Corsair Curse"
+    "id": "crab-quest",
+    "name": "Crab Quest",
+    "wikiTitle": "Crab Quest"
   },
   {
     "id": "creature-of-fenkenstrain",
@@ -99,9 +135,10 @@
     "gp": 50
   },
   {
-    "id": "the-curse-of-arrav",
-    "name": "The Curse of Arrav",
-    "wikiTitle": "The Curse of Arrav"
+    "id": "current-affairs",
+    "name": "Current Affairs",
+    "wikiTitle": "Current Affairs",
+    "gp": 50
   },
   {
     "id": "darkness-of-hallowvale",
@@ -136,11 +173,6 @@
     "gp": 1
   },
   {
-    "id": "the-depths-of-despair",
-    "name": "The Depths of Despair",
-    "wikiTitle": "The Depths of Despair"
-  },
-  {
     "id": "desert-treasure-i",
     "name": "Desert Treasure I",
     "wikiTitle": "Desert Treasure I",
@@ -156,11 +188,6 @@
     "name": "Devious Minds",
     "wikiTitle": "Devious Minds",
     "gp": 2600
-  },
-  {
-    "id": "the-dig-site",
-    "name": "The Dig Site",
-    "wikiTitle": "The Dig Site"
   },
   {
     "id": "dorics-quest",
@@ -236,11 +263,6 @@
     "wikiTitle": "Ethically Acquired Antiquities"
   },
   {
-    "id": "the-eyes-of-glouphrie",
-    "name": "The Eyes of Glouphrie",
-    "wikiTitle": "The Eyes of Glouphrie"
-  },
-  {
     "id": "fairytale-i-growing-pains",
     "name": "Fairytale I - Growing Pains",
     "wikiTitle": "Fairytale I - Growing Pains",
@@ -252,15 +274,14 @@
     "wikiTitle": "Fairytale II - Cure a Queen"
   },
   {
+    "id": "fallen-from-grace",
+    "name": "Fallen From Grace",
+    "wikiTitle": "Fallen From Grace"
+  },
+  {
     "id": "family-crest",
     "name": "Family Crest",
     "wikiTitle": "Family Crest"
-  },
-  {
-    "id": "the-feud",
-    "name": "The Feud",
-    "wikiTitle": "The Feud",
-    "gp": 2
   },
   {
     "id": "fight-arena",
@@ -279,34 +300,6 @@
     "name": "Forgettable Tale...",
     "wikiTitle": "Forgettable Tale...",
     "gp": 400
-  },
-  {
-    "id": "the-forsaken-tower",
-    "name": "The Forsaken Tower",
-    "wikiTitle": "The Forsaken Tower"
-  },
-  {
-    "id": "the-fremennik-exiles",
-    "name": "The Fremennik Exiles",
-    "wikiTitle": "The Fremennik Exiles",
-    "gp": 150000
-  },
-  {
-    "id": "the-fremennik-isles",
-    "name": "The Fremennik Isles",
-    "wikiTitle": "The Fremennik Isles",
-    "gp": 5000
-  },
-  {
-    "id": "the-fremennik-trials",
-    "name": "The Fremennik Trials",
-    "wikiTitle": "The Fremennik Trials",
-    "gp": 5252
-  },
-  {
-    "id": "the-garden-of-death",
-    "name": "The Garden of Death",
-    "wikiTitle": "The Garden of Death"
   },
   {
     "id": "garden-of-tranquillity",
@@ -331,43 +324,15 @@
     "gp": 400
   },
   {
-    "id": "the-giant-dwarf",
-    "name": "The Giant Dwarf",
-    "wikiTitle": "The Giant Dwarf",
-    "gp": 200
-  },
-  {
     "id": "goblin-diplomacy",
     "name": "Goblin Diplomacy",
     "wikiTitle": "Goblin Diplomacy",
     "gp": 20
   },
   {
-    "id": "the-golem",
-    "name": "The Golem",
-    "wikiTitle": "The Golem"
-  },
-  {
-    "id": "the-grand-tree",
-    "name": "The Grand Tree",
-    "wikiTitle": "The Grand Tree",
-    "gp": 1000
-  },
-  {
-    "id": "the-great-brain-robbery",
-    "name": "The Great Brain Robbery",
-    "wikiTitle": "The Great Brain Robbery"
-  },
-  {
     "id": "grim-tales",
     "name": "Grim Tales",
     "wikiTitle": "Grim Tales"
-  },
-  {
-    "id": "the-hand-in-the-sand",
-    "name": "The Hand in the Sand",
-    "wikiTitle": "The Hand in the Sand",
-    "gp": 150
   },
   {
     "id": "haunted-mine",
@@ -378,12 +343,6 @@
     "id": "hazeel-cult",
     "name": "Hazeel Cult",
     "wikiTitle": "Hazeel Cult"
-  },
-  {
-    "id": "the-heart-of-darkness",
-    "name": "The Heart of Darkness",
-    "wikiTitle": "The Heart of Darkness",
-    "gp": 30
   },
   {
     "id": "heroes-quest",
@@ -434,14 +393,15 @@
     "gp": 2496
   },
   {
-    "id": "a-kingdom-divided",
-    "name": "A Kingdom Divided",
-    "wikiTitle": "A Kingdom Divided"
+    "id": "land-of-the-goblins",
+    "name": "Land of the Goblins",
+    "wikiTitle": "Land of the Goblins",
+    "gp": 5
   },
   {
-    "id": "the-knights-sword",
-    "name": "The Knight's Sword",
-    "wikiTitle": "The Knight's Sword"
+    "id": "learning-the-ropes",
+    "name": "Learning the Ropes",
+    "wikiTitle": "Learning the Ropes"
   },
   {
     "id": "legends-quest",
@@ -452,11 +412,6 @@
     "id": "lost-city",
     "name": "Lost City",
     "wikiTitle": "Lost City"
-  },
-  {
-    "id": "the-lost-tribe",
-    "name": "The Lost Tribe",
-    "wikiTitle": "The Lost Tribe"
   },
   {
     "id": "lunar-diplomacy",
@@ -535,11 +490,6 @@
     "wikiTitle": "Nature Spirit"
   },
   {
-    "id": "a-night-at-the-theatre",
-    "name": "A Night at the Theatre",
-    "wikiTitle": "A Night at the Theatre"
-  },
-  {
     "id": "observatory-quest",
     "name": "Observatory Quest",
     "wikiTitle": "Observatory Quest"
@@ -555,9 +505,9 @@
     "wikiTitle": "One Small Favour"
   },
   {
-    "id": "the-path-of-glouphrie",
-    "name": "The Path of Glouphrie",
-    "wikiTitle": "The Path of Glouphrie"
+    "id": "pandemonium",
+    "name": "Pandemonium",
+    "wikiTitle": "Pandemonium"
   },
   {
     "id": "perilous-moons",
@@ -576,11 +526,6 @@
     "wikiTitle": "Plague City"
   },
   {
-    "id": "a-porcine-of-interest",
-    "name": "A Porcine of Interest",
-    "wikiTitle": "A Porcine of Interest"
-  },
-  {
     "id": "priest-in-peril",
     "name": "Priest in Peril",
     "wikiTitle": "Priest in Peril",
@@ -593,10 +538,9 @@
     "gp": 40
   },
   {
-    "id": "the-queen-of-thieves",
-    "name": "The Queen of Thieves",
-    "wikiTitle": "The Queen of Thieves",
-    "gp": 6
+    "id": "prying-times",
+    "name": "Prying Times",
+    "wikiTitle": "Prying Times"
   },
   {
     "id": "rag-and-bone-man-i",
@@ -628,41 +572,14 @@
     "wikiTitle": "Recipe for Disaster/Another Cook's Quest"
   },
   {
-    "id": "recipe-for-disaster-freeing-the-mountain-dwarf",
-    "name": "Recipe for Disaster/Freeing the Mountain Dwarf",
-    "wikiTitle": "Recipe for Disaster/Freeing the Mountain Dwarf",
-    "gp": 306
-  },
-  {
-    "id": "recipe-for-disaster-freeing-the-goblin-generals",
-    "name": "Recipe for Disaster/Freeing the Goblin generals",
-    "wikiTitle": "Recipe for Disaster/Freeing the Goblin generals"
-  },
-  {
-    "id": "recipe-for-disaster-freeing-pirate-pete",
-    "name": "Recipe for Disaster/Freeing Pirate Pete",
-    "wikiTitle": "Recipe for Disaster/Freeing Pirate Pete"
-  },
-  {
-    "id": "recipe-for-disaster-freeing-the-lumbridge-guide",
-    "name": "Recipe for Disaster/Freeing the Lumbridge Guide",
-    "wikiTitle": "Recipe for Disaster/Freeing the Lumbridge Guide"
+    "id": "recipe-for-disaster-defeating-the-culinaromancer",
+    "name": "Recipe for Disaster/Defeating the Culinaromancer",
+    "wikiTitle": "Recipe for Disaster/Defeating the Culinaromancer"
   },
   {
     "id": "recipe-for-disaster-freeing-evil-dave",
     "name": "Recipe for Disaster/Freeing Evil Dave",
     "wikiTitle": "Recipe for Disaster/Freeing Evil Dave"
-  },
-  {
-    "id": "recipe-for-disaster-freeing-skrach-uglogwee",
-    "name": "Recipe for Disaster/Freeing Skrach Uglogwee",
-    "wikiTitle": "Recipe for Disaster/Freeing Skrach Uglogwee",
-    "gp": 600
-  },
-  {
-    "id": "recipe-for-disaster-freeing-sir-amik-varze",
-    "name": "Recipe for Disaster/Freeing Sir Amik Varze",
-    "wikiTitle": "Recipe for Disaster/Freeing Sir Amik Varze"
   },
   {
     "id": "recipe-for-disaster-freeing-king-awowogei",
@@ -671,9 +588,36 @@
     "gp": 3000
   },
   {
-    "id": "recipe-for-disaster-defeating-the-culinaromancer",
-    "name": "Recipe for Disaster/Defeating the Culinaromancer",
-    "wikiTitle": "Recipe for Disaster/Defeating the Culinaromancer"
+    "id": "recipe-for-disaster-freeing-pirate-pete",
+    "name": "Recipe for Disaster/Freeing Pirate Pete",
+    "wikiTitle": "Recipe for Disaster/Freeing Pirate Pete"
+  },
+  {
+    "id": "recipe-for-disaster-freeing-sir-amik-varze",
+    "name": "Recipe for Disaster/Freeing Sir Amik Varze",
+    "wikiTitle": "Recipe for Disaster/Freeing Sir Amik Varze"
+  },
+  {
+    "id": "recipe-for-disaster-freeing-skrach-uglogwee",
+    "name": "Recipe for Disaster/Freeing Skrach Uglogwee",
+    "wikiTitle": "Recipe for Disaster/Freeing Skrach Uglogwee",
+    "gp": 600
+  },
+  {
+    "id": "recipe-for-disaster-freeing-the-goblin-generals",
+    "name": "Recipe for Disaster/Freeing the Goblin generals",
+    "wikiTitle": "Recipe for Disaster/Freeing the Goblin generals"
+  },
+  {
+    "id": "recipe-for-disaster-freeing-the-lumbridge-guide",
+    "name": "Recipe for Disaster/Freeing the Lumbridge Guide",
+    "wikiTitle": "Recipe for Disaster/Freeing the Lumbridge Guide"
+  },
+  {
+    "id": "recipe-for-disaster-freeing-the-mountain-dwarf",
+    "name": "Recipe for Disaster/Freeing the Mountain Dwarf",
+    "wikiTitle": "Recipe for Disaster/Freeing the Mountain Dwarf",
+    "gp": 306
   },
   {
     "id": "recruitment-drive",
@@ -684,16 +628,6 @@
     "id": "regicide",
     "name": "Regicide",
     "wikiTitle": "Regicide"
-  },
-  {
-    "id": "the-restless-ghost",
-    "name": "The Restless Ghost",
-    "wikiTitle": "The Restless Ghost"
-  },
-  {
-    "id": "the-ribbiting-tale-of-a-lily-pad-labour-dispute",
-    "name": "The Ribbiting Tale of a Lily Pad Labour Dispute",
-    "wikiTitle": "The Ribbiting Tale of a Lily Pad Labour Dispute"
   },
   {
     "id": "romeo-juliet",
@@ -726,6 +660,11 @@
     "wikiTitle": "Scorpion Catcher"
   },
   {
+    "id": "scrambled",
+    "name": "Scrambled!",
+    "wikiTitle": "Scrambled!"
+  },
+  {
     "id": "sea-slug",
     "name": "Sea Slug",
     "wikiTitle": "Sea Slug",
@@ -747,6 +686,11 @@
     "id": "shadow-of-the-storm",
     "name": "Shadow of the Storm",
     "wikiTitle": "Shadow of the Storm"
+  },
+  {
+    "id": "shadows-of-custodia",
+    "name": "Shadows of Custodia",
+    "wikiTitle": "Shadows of Custodia"
   },
   {
     "id": "sheep-herder",
@@ -778,19 +722,14 @@
     "gp": 1950
   },
   {
-    "id": "the-slug-menace",
-    "name": "The Slug Menace",
-    "wikiTitle": "The Slug Menace"
+    "id": "sleeping-giants",
+    "name": "Sleeping Giants",
+    "wikiTitle": "Sleeping Giants"
   },
   {
     "id": "song-of-the-elves",
     "name": "Song of the Elves",
     "wikiTitle": "Song of the Elves"
-  },
-  {
-    "id": "a-souls-bane",
-    "name": "A Soul's Bane",
-    "wikiTitle": "A Soul's Bane"
   },
   {
     "id": "spirits-of-the-elid",
@@ -809,20 +748,9 @@
     "gp": 30
   },
   {
-    "id": "a-tail-of-two-cats",
-    "name": "A Tail of Two Cats",
-    "wikiTitle": "A Tail of Two Cats"
-  },
-  {
     "id": "tale-of-the-righteous",
     "name": "Tale of the Righteous",
     "wikiTitle": "Tale of the Righteous"
-  },
-  {
-    "id": "a-taste-of-hope",
-    "name": "A Taste of Hope",
-    "wikiTitle": "A Taste of Hope",
-    "gp": 1000
   },
   {
     "id": "tears-of-guthix",
@@ -840,15 +768,175 @@
     "wikiTitle": "Temple of the Eye"
   },
   {
-    "id": "throne-of-miscellania",
-    "name": "Throne of Miscellania",
-    "wikiTitle": "Throne of Miscellania",
-    "gp": 1875
+    "id": "the-ascent-of-arceuus",
+    "name": "The Ascent of Arceuus",
+    "wikiTitle": "The Ascent of Arceuus"
+  },
+  {
+    "id": "the-blood-moon-rises",
+    "name": "The Blood Moon Rises",
+    "wikiTitle": "The Blood Moon Rises",
+    "gp": 40000
+  },
+  {
+    "id": "the-corsair-curse",
+    "name": "The Corsair Curse",
+    "wikiTitle": "The Corsair Curse"
+  },
+  {
+    "id": "the-curse-of-arrav",
+    "name": "The Curse of Arrav",
+    "wikiTitle": "The Curse of Arrav"
+  },
+  {
+    "id": "the-depths-of-despair",
+    "name": "The Depths of Despair",
+    "wikiTitle": "The Depths of Despair"
+  },
+  {
+    "id": "the-dig-site",
+    "name": "The Dig Site",
+    "wikiTitle": "The Dig Site"
+  },
+  {
+    "id": "the-eyes-of-glouphrie",
+    "name": "The Eyes of Glouphrie",
+    "wikiTitle": "The Eyes of Glouphrie"
+  },
+  {
+    "id": "the-feud",
+    "name": "The Feud",
+    "wikiTitle": "The Feud",
+    "gp": 2
+  },
+  {
+    "id": "the-final-dawn",
+    "name": "The Final Dawn",
+    "wikiTitle": "The Final Dawn"
+  },
+  {
+    "id": "the-forsaken-tower",
+    "name": "The Forsaken Tower",
+    "wikiTitle": "The Forsaken Tower"
+  },
+  {
+    "id": "the-fremennik-exiles",
+    "name": "The Fremennik Exiles",
+    "wikiTitle": "The Fremennik Exiles",
+    "gp": 150000
+  },
+  {
+    "id": "the-fremennik-isles",
+    "name": "The Fremennik Isles",
+    "wikiTitle": "The Fremennik Isles",
+    "gp": 5000
+  },
+  {
+    "id": "the-fremennik-trials",
+    "name": "The Fremennik Trials",
+    "wikiTitle": "The Fremennik Trials",
+    "gp": 5252
+  },
+  {
+    "id": "the-garden-of-death",
+    "name": "The Garden of Death",
+    "wikiTitle": "The Garden of Death"
+  },
+  {
+    "id": "the-giant-dwarf",
+    "name": "The Giant Dwarf",
+    "wikiTitle": "The Giant Dwarf",
+    "gp": 200
+  },
+  {
+    "id": "the-golem",
+    "name": "The Golem",
+    "wikiTitle": "The Golem"
+  },
+  {
+    "id": "the-grand-tree",
+    "name": "The Grand Tree",
+    "wikiTitle": "The Grand Tree",
+    "gp": 1000
+  },
+  {
+    "id": "the-graveyard",
+    "name": "The Graveyard",
+    "wikiTitle": "The Graveyard"
+  },
+  {
+    "id": "the-great-brain-robbery",
+    "name": "The Great Brain Robbery",
+    "wikiTitle": "The Great Brain Robbery"
+  },
+  {
+    "id": "the-hand-in-the-sand",
+    "name": "The Hand in the Sand",
+    "wikiTitle": "The Hand in the Sand",
+    "gp": 150
+  },
+  {
+    "id": "the-heart-of-darkness",
+    "name": "The Heart of Darkness",
+    "wikiTitle": "The Heart of Darkness",
+    "gp": 30
+  },
+  {
+    "id": "the-ides-of-milk",
+    "name": "The Ides of Milk",
+    "wikiTitle": "The Ides of Milk"
+  },
+  {
+    "id": "the-knights-sword",
+    "name": "The Knight's Sword",
+    "wikiTitle": "The Knight's Sword"
+  },
+  {
+    "id": "the-lost-tribe",
+    "name": "The Lost Tribe",
+    "wikiTitle": "The Lost Tribe"
+  },
+  {
+    "id": "the-path-of-glouphrie",
+    "name": "The Path of Glouphrie",
+    "wikiTitle": "The Path of Glouphrie"
+  },
+  {
+    "id": "the-queen-of-thieves",
+    "name": "The Queen of Thieves",
+    "wikiTitle": "The Queen of Thieves",
+    "gp": 6
+  },
+  {
+    "id": "the-red-reef",
+    "name": "The Red Reef",
+    "wikiTitle": "The Red Reef"
+  },
+  {
+    "id": "the-restless-ghost",
+    "name": "The Restless Ghost",
+    "wikiTitle": "The Restless Ghost"
+  },
+  {
+    "id": "the-ribbiting-tale-of-a-lily-pad-labour-dispute",
+    "name": "The Ribbiting Tale of a Lily Pad Labour Dispute",
+    "wikiTitle": "The Ribbiting Tale of a Lily Pad Labour Dispute"
+  },
+  {
+    "id": "the-slug-menace",
+    "name": "The Slug Menace",
+    "wikiTitle": "The Slug Menace"
   },
   {
     "id": "the-tourist-trap",
     "name": "The Tourist Trap",
     "wikiTitle": "The Tourist Trap"
+  },
+  {
+    "id": "throne-of-miscellania",
+    "name": "Throne of Miscellania",
+    "wikiTitle": "Throne of Miscellania",
+    "gp": 1875
   },
   {
     "id": "tower-of-life",
@@ -875,6 +963,11 @@
     "name": "Troll Stronghold",
     "wikiTitle": "Troll Stronghold",
     "gp": 12
+  },
+  {
+    "id": "troubled-tortugans",
+    "name": "Troubled Tortugans",
+    "wikiTitle": "Troubled Tortugans"
   },
   {
     "id": "twilights-promise",
@@ -921,14 +1014,14 @@
     "gp": 500
   },
   {
-    "id": "witchs-potion",
-    "name": "Witch's Potion",
-    "wikiTitle": "Witch's Potion"
-  },
-  {
     "id": "witchs-house",
     "name": "Witch's House",
     "wikiTitle": "Witch's House"
+  },
+  {
+    "id": "witchs-potion",
+    "name": "Witch's Potion",
+    "wikiTitle": "Witch's Potion"
   },
   {
     "id": "x-marks-the-spot",
@@ -939,147 +1032,5 @@
     "id": "zogre-flesh-eaters",
     "name": "Zogre Flesh Eaters",
     "wikiTitle": "Zogre Flesh Eaters"
-  },
-  {
-    "id": "alfred-grimhands-barcrawl",
-    "name": "Alfred Grimhand's Barcrawl",
-    "wikiTitle": "Alfred Grimhand's Barcrawl",
-    "gp": 208
-  },
-  {
-    "id": "barbarian-training",
-    "name": "Barbarian Training",
-    "wikiTitle": "Barbarian Training",
-    "gp": 200
-  },
-  {
-    "id": "bear-your-soul",
-    "name": "Bear Your Soul",
-    "wikiTitle": "Bear Your Soul"
-  },
-  {
-    "id": "curse-of-the-empty-lord",
-    "name": "Curse of the Empty Lord",
-    "wikiTitle": "Curse of the Empty Lord"
-  },
-  {
-    "id": "daddys-home",
-    "name": "Daddy's Home",
-    "wikiTitle": "Daddy's Home",
-    "gp": 650
-  },
-  {
-    "id": "the-enchanted-key",
-    "name": "The Enchanted Key",
-    "wikiTitle": "The Enchanted Key"
-  },
-  {
-    "id": "enter-the-abyss",
-    "name": "Enter the Abyss",
-    "wikiTitle": "Enter the Abyss"
-  },
-  {
-    "id": "family-pest",
-    "name": "Family Pest",
-    "wikiTitle": "Family Pest",
-    "gp": 500000
-  },
-  {
-    "id": "the-frozen-door",
-    "name": "The Frozen Door",
-    "wikiTitle": "The Frozen Door"
-  },
-  {
-    "id": "the-generals-shadow",
-    "name": "The General's Shadow",
-    "wikiTitle": "The General's Shadow",
-    "gp": 70
-  },
-  {
-    "id": "his-faithful-servants",
-    "name": "His Faithful Servants",
-    "wikiTitle": "His Faithful Servants"
-  },
-  {
-    "id": "hopespears-will",
-    "name": "Hopespear's Will",
-    "wikiTitle": "Hopespear's Will"
-  },
-  {
-    "id": "in-search-of-knowledge",
-    "name": "In Search of Knowledge",
-    "wikiTitle": "In Search of Knowledge"
-  },
-  {
-    "id": "into-the-tombs",
-    "name": "Into the Tombs",
-    "wikiTitle": "Into the Tombs"
-  },
-  {
-    "id": "lair-of-tarn-razorlor",
-    "name": "Lair of Tarn Razorlor",
-    "wikiTitle": "Lair of Tarn Razorlor",
-    "gp": 100
-  },
-  {
-    "id": "mage-arena-i",
-    "name": "Mage Arena I",
-    "wikiTitle": "Mage Arena I"
-  },
-  {
-    "id": "mage-arena-ii",
-    "name": "Mage Arena II",
-    "wikiTitle": "Mage Arena II"
-  },
-  {
-    "id": "skippy-and-the-mogres",
-    "name": "Skippy and the Mogres",
-    "wikiTitle": "Skippy and the Mogres"
-  },
-  {
-    "id": "barbarian-firemaking",
-    "name": "Barbarian Firemaking",
-    "wikiTitle": "Barbarian Firemaking"
-  },
-  {
-    "id": "barbarian-farming",
-    "name": "Barbarian Farming",
-    "wikiTitle": "Barbarian Farming"
-  },
-  {
-    "id": "barbarian-fishing",
-    "name": "Barbarian Fishing",
-    "wikiTitle": "Barbarian Fishing"
-  },
-  {
-    "id": "barbarian-herblore",
-    "name": "Barbarian Herblore",
-    "wikiTitle": "Barbarian Herblore"
-  },
-  {
-    "id": "barbarian-smithing",
-    "name": "Barbarian Smithing",
-    "wikiTitle": "Barbarian Smithing"
-  },
-  {
-    "id": "knight-waves-training-grounds",
-    "name": "Knight Waves Training Grounds",
-    "wikiTitle": "Knight Waves Training Grounds"
-  },
-  {
-    "id": "natural-history-quiz",
-    "name": "Natural History Quiz",
-    "wikiTitle": "Natural History Quiz"
-  },
-  {
-    "id": "rogue-trader",
-    "name": "Rogue Trader",
-    "wikiTitle": "Rogue Trader",
-    "gp": 100
-  },
-  {
-    "id": "sacred-bone-burner-restoration",
-    "name": "Sacred Bone Burner restoration",
-    "wikiTitle": "Sacred Bone Burner restoration"
   }
 ]

@@ -31,6 +31,22 @@ export function isQuestCatalogName(name: string): boolean {
   return !/ diary$/i.test(trimmed)
 }
 
+export function isWikiQuestPage(wikitext: string): boolean {
+  const trimmed = wikitext.trim()
+  if (/^#REDIRECT/i.test(trimmed)) return false
+  if (/\{\{\s*Infobox Miniquest\b/i.test(wikitext)) return false
+  return /\{\{\s*Infobox Quest\b/i.test(wikitext)
+}
+
+export const QUEST_LIST_CATEGORIES = [
+  'Category:Free-to-play quests',
+  "Category:Members' quests",
+] as const
+
+export function isQuestIndexTitle(title: string): boolean {
+  return title.startsWith('Quests/')
+}
+
 function unescapeLuaString(value: string): string {
   return value.replace(/\\'/g, "'").replace(/\\"/g, '"')
 }
@@ -237,4 +253,79 @@ export function extractRequiredGp(wikitext: string): number {
     .join('\n')
   const amounts = parseCoinAmounts(required)
   return amounts.length === 0 ? 0 : Math.max(...amounts)
+}
+
+function leadingStars(line: string): number {
+  const match = /^(\*+)/.exec(line.trim())
+  return match?.[1]?.length ?? 0
+}
+
+function parseSkillReqsFromLine(
+  line: string,
+  catalogSkills: readonly CatalogSkill[],
+): ParsedQuestSkills[] {
+  const byName = new Map(
+    catalogSkills.map((skill) => [skill.name.toLowerCase(), skill]),
+  )
+  const ironman = /\bironman\b/i.test(line)
+  const reqs: ParsedQuestSkills[] = []
+  const scp = /\{\{\s*SCP\|([^|]+)\|(\d+)/gi
+  for (const match of line.matchAll(scp)) {
+    const skill = byName.get((match[1] ?? '').trim().toLowerCase())
+    const level = Number(match[2])
+    if (!skill || !Number.isInteger(level) || level <= 1) continue
+    const req: ParsedQuestSkills = { skill: skill.id, level }
+    if (ironman) req.ironman = true
+    reqs.push(req)
+  }
+  return reqs
+}
+
+function parseQuestNamesFromLine(line: string): string[] {
+  const names: string[] = []
+  const links = /\[\[([^\]|#]+)(?:\|[^\]]*)?\]\]/g
+  for (const match of line.matchAll(links)) {
+    const raw = match[1]?.trim() ?? ''
+    if (!raw || raw.includes(':')) continue
+    const name = normalizeQuestRef(raw)
+    if (name) names.push(name)
+  }
+  return names
+}
+
+export function parseQuestDetailsReqs(
+  wikitext: string,
+  catalogSkills: readonly CatalogSkill[],
+): Pick<ParsedQuestEntry, 'quests' | 'skills'> {
+  const template = extractTemplate(wikitext, 'Quest details')
+  if (!template) return { quests: [], skills: [] }
+  const requirements = parseWikiTemplateFields(template).requirements?.trim()
+  if (!requirements || /^none$/i.test(requirements)) {
+    return { quests: [], skills: [] }
+  }
+
+  const quests: string[] = []
+  const skills: ParsedQuestSkills[] = []
+  const seenQuests = new Set<string>()
+  const seenSkills = new Set<string>()
+
+  for (const line of requirements.split('\n')) {
+    const stars = leadingStars(line)
+    if (stars <= 1) {
+      for (const req of parseSkillReqsFromLine(line, catalogSkills)) {
+        const key = `${req.skill}:${req.level}:${req.ironman ? 'im' : ''}`
+        if (seenSkills.has(key)) continue
+        seenSkills.add(key)
+        skills.push(req)
+      }
+    }
+    if (stars > 2) continue
+    for (const name of parseQuestNamesFromLine(line)) {
+      if (seenQuests.has(name)) continue
+      seenQuests.add(name)
+      quests.push(name)
+    }
+  }
+
+  return { quests, skills }
 }

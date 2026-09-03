@@ -345,9 +345,27 @@ p {
 
 .btn.icon-ghost:hover,
 .btn.icon-ghost:focus-visible,
-.btn.icon-ghost[aria-expanded='true'] {
+.btn.icon-ghost[aria-expanded='true'],
+.btn.icon-ghost[aria-checked='true'] {
   border-color: var(--border);
   background: color-mix(in srgb, var(--primary) 8%, transparent);
+}
+
+.status-buttons {
+  display: flex;
+  flex-shrink: 0;
+}
+
+.status-buttons .btn.icon-ghost {
+  width: 32px;
+  height: 32px;
+  opacity: 0.38;
+}
+
+.status-buttons .btn.icon-ghost[aria-checked='true'],
+.status-buttons .btn.icon-ghost:hover,
+.status-buttons .btn.icon-ghost:focus-visible {
+  opacity: 1;
 }
 
 .status-picker {
@@ -535,6 +553,25 @@ button.req-name:focus-visible {
   align-items: center;
 }
 
+.kind-filters {
+  display: flex;
+  gap: 8px;
+}
+
+.kind-filters .btn {
+  flex: 1;
+  font-weight: 600;
+}
+
+.kind-filters .btn[aria-pressed='true'] {
+  border-color: var(--primary);
+  background: color-mix(in srgb, var(--primary) 14%, transparent);
+}
+
+.kind-filters .btn[aria-pressed='false'] {
+  color: var(--muted);
+}
+
 .search-results {
   list-style: none;
   margin: 0;
@@ -547,23 +584,20 @@ button.req-name:focus-visible {
 }
 
 .search-result {
-  appearance: none;
-  width: 100%;
-  text-align: left;
-  font: inherit;
-  color: inherit;
+  display: flex;
+  align-items: center;
+  gap: 8px;
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: 8px;
-  padding: 10px 12px;
-  cursor: pointer;
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
+  padding: 6px 6px 6px 12px;
 }
 
-.search-result:hover {
-  border-color: var(--primary);
+.search-result-name {
+  flex: 1;
+  min-width: 0;
+  font-weight: 700;
+  overflow-wrap: anywhere;
 }
 
 .stats-frame {

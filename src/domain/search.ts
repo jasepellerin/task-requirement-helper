@@ -9,21 +9,27 @@ export function foldSearch(value: string): string {
     .trim()
 }
 
-export function searchTiles(tiles: Tile[], query: string, limit = 20): Tile[] {
+export function searchSortKey(value: string): string {
+  return foldSearch(value).replace(/^(the|an|a)\s+/, '')
+}
+
+function isPrefixMatch(name: string, query: string): boolean {
+  return (
+    foldSearch(name).startsWith(query) || searchSortKey(name).startsWith(query)
+  )
+}
+
+export function searchTiles(tiles: Tile[], query: string): Tile[] {
   const folded = foldSearch(query)
-  if (!folded) return []
 
   return tiles
-    .filter((tile) => foldSearch(tile.name).includes(folded))
+    .filter((tile) => !folded || foldSearch(tile.name).includes(folded))
     .sort((a, b) => {
-      const aFolded = foldSearch(a.name)
-      const bFolded = foldSearch(b.name)
-      const aStarts = aFolded.startsWith(folded)
-      const bStarts = bFolded.startsWith(folded)
-      if (aStarts !== bStarts) return aStarts ? -1 : 1
-      if (a.status === 'unseen' && b.status !== 'unseen') return -1
-      if (b.status === 'unseen' && a.status !== 'unseen') return 1
+      const aPrefix = isPrefixMatch(a.name, folded)
+      const bPrefix = isPrefixMatch(b.name, folded)
+      if (aPrefix !== bPrefix) return aPrefix ? -1 : 1
+      const byKey = searchSortKey(a.name).localeCompare(searchSortKey(b.name))
+      if (byKey !== 0) return byKey
       return a.name.localeCompare(b.name)
     })
-    .slice(0, limit)
 }

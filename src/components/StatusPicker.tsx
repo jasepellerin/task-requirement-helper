@@ -72,6 +72,38 @@ export function StatusIcon({ status }: { status: TileStatus }) {
   )
 }
 
+type StatusButtonsProps = {
+  value: TileStatus
+  name: string
+  onChange: (status: TileStatus) => void
+}
+
+export function StatusButtons({ value, name, onChange }: StatusButtonsProps) {
+  return (
+    <div
+      className="status-buttons"
+      role="radiogroup"
+      aria-label={`${name} status`}
+    >
+      {TILE_STATUSES.map((status) => (
+        <button
+          key={status}
+          type="button"
+          className="btn icon-ghost"
+          role="radio"
+          aria-checked={status === value}
+          aria-label={STATUS_LABEL[status]}
+          title={STATUS_LABEL[status]}
+          onMouseDown={(event) => event.preventDefault()}
+          onClick={() => onChange(status)}
+        >
+          <StatusIcon status={status} />
+        </button>
+      ))}
+    </div>
+  )
+}
+
 type StatusPickerProps = {
   value: TileStatus
   open: boolean

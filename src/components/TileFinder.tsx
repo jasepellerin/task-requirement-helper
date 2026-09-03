@@ -1,17 +1,44 @@
 import { useEffect, useId, useMemo, useState } from 'react'
+import { tileKind, type TileKind } from '../data/osrsCatalog.ts'
 import { searchTiles } from '../domain/search.ts'
-import { type Tile } from '../domain/types.ts'
+import { type Tile, type TileStatus } from '../domain/types.ts'
+import { StatusButtons } from './StatusPicker.tsx'
+
+const KIND_FILTERS: { id: TileKind; label: string }[] = [
+  { id: 'skill', label: 'Skills' },
+  { id: 'diary', label: 'Diaries' },
+  { id: 'quest', label: 'Quests' },
+]
+
+const ALL_KINDS: Record<TileKind, boolean> = {
+  skill: true,
+  diary: true,
+  quest: true,
+}
 
 type TileFinderProps = {
   tiles: Tile[]
-  onSelect: (tile: Tile) => void
+  onStatusChange: (id: string, status: TileStatus) => void
   onCancel: () => void
 }
 
-export function TileFinder({ tiles, onSelect, onCancel }: TileFinderProps) {
+export function TileFinder({
+  tiles,
+  onStatusChange,
+  onCancel,
+}: TileFinderProps) {
   const titleId = useId()
   const [query, setQuery] = useState('')
-  const results = useMemo(() => searchTiles(tiles, query), [query, tiles])
+  const [kinds, setKinds] = useState(ALL_KINDS)
+  const catalog = useMemo(
+    () =>
+      tiles.filter((tile) => {
+        const kind = tileKind(tile.id)
+        return kind !== null && kinds[kind]
+      }),
+    [kinds, tiles],
+  )
+  const results = useMemo(() => searchTiles(catalog, query), [catalog, query])
 
   useEffect(() => {
     function onKey(event: KeyboardEvent) {
@@ -40,33 +67,44 @@ export function TileFinder({ tiles, onSelect, onCancel }: TileFinderProps) {
             autoFocus
           />
         </label>
+        <div className="kind-filters" role="group" aria-label="Catalog">
+          {KIND_FILTERS.map(({ id, label }) => (
+            <button
+              key={id}
+              type="button"
+              className="btn"
+              aria-pressed={kinds[id]}
+              onMouseDown={(event) => event.preventDefault()}
+              onClick={() =>
+                setKinds((current) => ({ ...current, [id]: !current[id] }))
+              }
+            >
+              {label}
+            </button>
+          ))}
+        </div>
 
-        {query.trim() ? (
-          results.length === 0 ? (
-            <p className="empty">No matching tiles.</p>
-          ) : (
-            <ul className="search-results">
-              {results.map((tile) => (
-                <li key={tile.id}>
-                  <button
-                    type="button"
-                    className="search-result"
-                    onClick={() => onSelect(tile)}
-                  >
-                    <strong>{tile.name}</strong>
-                  </button>
-                </li>
-              ))}
-            </ul>
-          )
+        {results.length === 0 ? (
+          <p className="empty">No matching tiles.</p>
         ) : (
-          <p className="empty">Type to find a catalog tile you’ve just seen.</p>
+          <ul className="search-results">
+            {results.map((tile) => (
+              <li key={tile.id} className="search-result">
+                <span className="search-result-name">{tile.name}</span>
+                <StatusButtons
+                  value={tile.status}
+                  name={tile.name}
+                  onChange={(status) => onStatusChange(tile.id, status)}
+                />
+              </li>
+            ))}
+          </ul>
         )}
 
         <div className="modal-actions">
           <span />
           <button type="button" className="btn" onClick={onCancel}>
-            Cancel
+            Done
           </button>
         </div>
       </div>

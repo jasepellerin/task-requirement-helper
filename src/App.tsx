@@ -5,7 +5,6 @@ import { StatsWindow } from './components/StatsWindow.tsx'
 import { TileFinder } from './components/TileFinder.tsx'
 import { TileForm } from './components/TileForm.tsx'
 import { Toolbar } from './components/Toolbar.tsx'
-import type { Tile } from './domain/types.ts'
 import { useTiles } from './hooks/useTiles.ts'
 
 type Editor = { mode: 'find' } | { mode: 'edit'; id: string }
@@ -49,15 +48,6 @@ export default function App() {
     setEditor(null)
     setShowStats(false)
     setShowCompleted(true)
-  }
-
-  function selectFound(tile: Tile) {
-    if (tile.status === 'unseen') {
-      setStatus(tile.id, 'locked')
-      closeEditor()
-      return
-    }
-    openEdit(tile.id)
   }
 
   return (
@@ -118,7 +108,7 @@ export default function App() {
       {editor?.mode === 'find' ? (
         <TileFinder
           tiles={tiles}
-          onSelect={selectFound}
+          onStatusChange={setStatus}
           onCancel={closeEditor}
         />
       ) : null}
@@ -130,7 +120,10 @@ export default function App() {
           tile={editingTile}
           onCancel={closeEditor}
           onOpenTile={openEdit}
-          onStatusChange={(status) => setStatus(editor.id, status)}
+          onStatusChange={(status) => {
+            setStatus(editor.id, status)
+            if (status === 'unseen') closeEditor()
+          }}
         />
       ) : null}
     </div>

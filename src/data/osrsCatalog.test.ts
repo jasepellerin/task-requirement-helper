@@ -21,6 +21,14 @@ import {
   userPersistedTiles,
 } from './osrsCatalog.ts'
 
+function catalogSize(): number {
+  return (
+    OSRS_SKILLS.length * SKILL_BRACKETS.length +
+    OSRS_DIARIES.length * DIARY_TIERS.length +
+    OSRS_QUESTS.length
+  )
+}
+
 describe('OSRS skill catalog', () => {
   it('covers non-combat skills and 10 brackets', () => {
     expect(OSRS_SKILLS).toHaveLength(16)
@@ -95,7 +103,7 @@ describe('OSRS skill catalog', () => {
       osrsTileId('crafting', '41-50'),
       osrsTileId('farming', '11-20'),
     ])
-    expect(merged).toHaveLength(412)
+    expect(merged).toHaveLength(catalogSize())
   })
 
   it('ignores unknown ids on merge', () => {
@@ -120,7 +128,7 @@ describe('OSRS skill catalog', () => {
         parentIds: [],
       },
     ])
-    expect(merged).toHaveLength(412)
+    expect(merged).toHaveLength(catalogSize())
     expect(merged.find((tile) => tile.id === 'forest')).toBeUndefined()
     expect(
       merged.find((tile) => tile.id === osrsTileId('attack', '1-10')),
@@ -199,7 +207,7 @@ describe('OSRS achievement diaries', () => {
     expect(tiles.every((tile) => tile.status === 'unseen')).toBe(true)
     expect(OSRS_DIARIES.map((diary) => diary.name)).toContain('Karamja')
     expect(OSRS_DIARIES.every((diary) => diary.wikiTitle.length > 0)).toBe(true)
-    expect(buildOsrsCatalogTiles()).toHaveLength(412)
+    expect(buildOsrsCatalogTiles()).toHaveLength(catalogSize())
   })
 
   it('names tiers and chains harder tiers before skill parents', () => {
@@ -231,9 +239,22 @@ describe('OSRS achievement diaries', () => {
 
 describe('OSRS quests', () => {
   it('seeds quest tiles as unseen with quest and skill parents', () => {
-    expect(OSRS_QUESTS.length).toBe(204)
+    expect(OSRS_QUESTS.map((quest) => quest.id)).toEqual(
+      expect.arrayContaining([
+        'current-affairs',
+        'the-ides-of-milk',
+        'pandemonium',
+        'animal-magnetism',
+      ]),
+    )
     const tiles = buildOsrsQuestTiles()
-    expect(tiles).toHaveLength(204)
+    expect(tiles).toHaveLength(OSRS_QUESTS.length)
+    expect(OSRS_QUESTS.some((quest) => quest.id === 'enter-the-abyss')).toBe(
+      false,
+    )
+    expect(
+      OSRS_QUESTS.some((quest) => quest.id === 'alfred-grimhands-barcrawl'),
+    ).toBe(false)
     expect(tiles.every((tile) => tile.status === 'unseen')).toBe(true)
 
     const animal = tiles.find(
@@ -249,5 +270,18 @@ describe('OSRS quests', () => {
     expect(tileGp(osrsQuestTileId('dragon-slayer-i'))).toBe(10000)
     expect(formatGp(10000)).toBe('10,000 gp')
     expect(tileGp(osrsQuestTileId('cooks-assistant'))).toBeUndefined()
+
+    const current = tiles.find(
+      (tile) => tile.id === osrsQuestTileId('current-affairs'),
+    )
+    expect(current?.parentIds).toEqual([
+      osrsQuestTileId('pandemonium'),
+      osrsTileId('sailing', '21-30'),
+      osrsTileId('fishing', '1-10'),
+    ])
+    expect(
+      tiles.find((tile) => tile.id === osrsQuestTileId('the-ides-of-milk'))
+        ?.parentIds,
+    ).toEqual([])
   })
 })
