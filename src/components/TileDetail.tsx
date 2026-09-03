@@ -1,5 +1,11 @@
 import { useEffect, useId, useMemo, useState } from 'react'
-import { tileGp } from '../data/osrsCatalog.ts'
+import {
+  tileDifficulty,
+  tileGp,
+  tileItems,
+  tileLength,
+  tileRewards,
+} from '../data/osrsCatalog.ts'
 import { formatGp } from '../data/questReqs.ts'
 import { requirementViews } from '../data/requirementViews.ts'
 import { tileWikiUrl } from '../data/wiki.ts'
@@ -14,6 +20,17 @@ type TileDetailProps = {
   onStatusChange?: (status: TileStatus) => void
 }
 
+function difficultyPillClass(difficulty: string): string {
+  const key = difficulty.toLowerCase()
+  if (key.includes('grandmaster')) return 'grandmaster'
+  if (key.includes('novice')) return 'novice'
+  if (key.includes('intermediate')) return 'intermediate'
+  if (key.includes('experienced')) return 'experienced'
+  if (key.includes('master')) return 'master'
+  if (key.includes('special')) return 'special'
+  return 'plain'
+}
+
 export function TileDetail({
   byId,
   tile,
@@ -25,6 +42,10 @@ export function TileDetail({
   const [statusMenuOpen, setStatusMenuOpen] = useState(false)
   const wikiUrl = tileWikiUrl(tile.id)
   const gp = tileGp(tile.id)
+  const difficulty = tileDifficulty(tile.id)
+  const length = tileLength(tile.id)
+  const items = tileItems(tile.id)
+  const rewards = tileRewards(tile.id)
   const reqViews = useMemo(() => requirementViews(tile), [tile])
 
   useEffect(() => {
@@ -82,6 +103,17 @@ export function TileDetail({
           </div>
         </div>
 
+        {difficulty || length ? (
+          <div className="tile-pills">
+            {difficulty ? (
+              <span className={`pill pill-${difficultyPillClass(difficulty)}`}>
+                {difficulty}
+              </span>
+            ) : null}
+            {length ? <span className="pill pill-length">{length}</span> : null}
+          </div>
+        ) : null}
+
         {gp !== undefined ? (
           <p className="tile-gold">Gold {formatGp(gp)}</p>
         ) : null}
@@ -120,6 +152,32 @@ export function TileDetail({
             </ul>
           )}
         </fieldset>
+
+        {items.length > 0 ? (
+          <fieldset className="rel-fieldset">
+            <legend>Items</legend>
+            <ul className="parent-list">
+              {items.map((item, index) => (
+                <li key={`${index}:${item}`} className="parent-row">
+                  {item}
+                </li>
+              ))}
+            </ul>
+          </fieldset>
+        ) : null}
+
+        {rewards.length > 0 ? (
+          <fieldset className="rel-fieldset">
+            <legend>Rewards</legend>
+            <ul className="parent-list">
+              {rewards.map((reward, index) => (
+                <li key={`${index}:${reward}`} className="parent-row">
+                  {reward}
+                </li>
+              ))}
+            </ul>
+          </fieldset>
+        ) : null}
       </div>
     </div>
   )

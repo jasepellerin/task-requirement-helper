@@ -19,7 +19,7 @@ Unlock trees are easy to lose in your head. You want to know:
 - Status: unseen, locked, unlocked, completed (order not enforced)
 - Catalog AND prerequisites; skill wiki levels display as the exact level and store as the covering bracket tile
 - Board: Ready / Possible / Blocked / Unlocked. Completed is a separate view. Unseen is off the board until added from search (or hidden again by marking unseen). Finder stays open for batch status edits.
-- Detail cards are view-only: catalog title, live status, wiki link, exact colored requirements
+- Detail cards are view-only: catalog title, live status, wiki link, quest difficulty/length pills, exact colored requirements, quest items without how-to-get notes, quest/diary rewards
 - Stats window derived from unlocked/completed skill brackets (combat/Slayer fixed at 99)
 - Persist in `localStorage`: `{ id, status }` for catalog tiles whose status is not `unseen`. JSON export/import. Names, parents, and requirement display are rebuilt from the catalog on load/import.
 

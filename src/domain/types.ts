@@ -23,11 +23,13 @@ export type Tile = {
   name: string
   status: TileStatus
   parentIds: string[]
+  starred: boolean
 }
 
 export type StoredTile = {
   id: string
   status: TileStatus
+  starred?: boolean
 }
 
 export type StoreV1 = {

@@ -1,10 +1,12 @@
-import { useState } from 'react'
+import { useMemo, useState } from 'react'
 import { CompletedWindow } from './components/CompletedWindow.tsx'
+import { KindFilters } from './components/KindFilters.tsx'
 import { Columns, TileColumn } from './components/TileColumn.tsx'
 import { StatsWindow } from './components/StatsWindow.tsx'
 import { TileFinder } from './components/TileFinder.tsx'
 import { TileDetail } from './components/TileDetail.tsx'
 import { Toolbar } from './components/Toolbar.tsx'
+import { ALL_KINDS, filterTilesByKind } from './data/osrsCatalog.ts'
 import { useTiles } from './hooks/useTiles.ts'
 
 type Overlay =
@@ -17,14 +19,29 @@ export default function App() {
   const { tiles, byId, groups, setStatus, exportStore, importStore } =
     useTiles()
   const [overlay, setOverlay] = useState<Overlay | null>(null)
+  const [kinds, setKinds] = useState(ALL_KINDS)
 
   const detailTile =
     overlay?.mode === 'detail' ? byId.get(overlay.id) : undefined
-  const visibleCount =
+  const board = useMemo(
+    () => ({
+      ready: filterTilesByKind(groups.ready, kinds),
+      possible: filterTilesByKind(groups.possible, kinds),
+      blocked: filterTilesByKind(groups.blocked, kinds),
+      unlocked: filterTilesByKind(groups.unlocked, kinds),
+    }),
+    [groups, kinds],
+  )
+  const boardCount =
     groups.ready.length +
     groups.possible.length +
     groups.blocked.length +
     groups.unlocked.length
+  const visibleCount =
+    board.ready.length +
+    board.possible.length +
+    board.blocked.length +
+    board.unlocked.length
 
   function openFind() {
     setOverlay({ mode: 'find' })
@@ -56,34 +73,40 @@ export default function App() {
         onImport={importStore}
       />
 
-      {visibleCount === 0 ? (
+      {boardCount > 0 ? (
+        <KindFilters kinds={kinds} onChange={setKinds} label="Filter board" />
+      ) : null}
+
+      {boardCount === 0 ? (
         <p className="hero-empty">Find a tile you’ve just seen.</p>
+      ) : visibleCount === 0 ? (
+        <p className="hero-empty">No matching tiles.</p>
       ) : (
         <Columns className="board-columns">
           <TileColumn
             title="Ready"
-            tiles={groups.ready}
+            tiles={board.ready}
             byId={byId}
             empty="Nothing ready."
             onOpen={openDetail}
           />
           <TileColumn
             title="Possible"
-            tiles={groups.possible}
+            tiles={board.possible}
             byId={byId}
             empty="Nothing possible."
             onOpen={openDetail}
           />
           <TileColumn
             title="Blocked"
-            tiles={groups.blocked}
+            tiles={board.blocked}
             byId={byId}
             empty="Nothing blocked."
             onOpen={openDetail}
           />
           <TileColumn
             title="Unlocked"
-            tiles={groups.unlocked}
+            tiles={board.unlocked}
             byId={byId}
             empty="Nothing unlocked."
             onOpen={openDetail}

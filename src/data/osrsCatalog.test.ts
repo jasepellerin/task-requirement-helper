@@ -13,13 +13,18 @@ import {
   osrsTileId,
   osrsTileName,
   parentIdsFor,
+  filterTilesByKind,
   partitionByKind,
   setStoredStatus,
   SKILL_BRACKETS,
   statusesFromStored,
   storedTilesFromStatuses,
+  tileDifficulty,
   tileGp,
+  tileItems,
   tileKind,
+  tileLength,
+  tileRewards,
   tilesFromStatuses,
 } from './osrsCatalog.ts'
 
@@ -76,6 +81,23 @@ describe('OSRS skill catalog', () => {
     expect(cape && parentIdsFor(cape).at(-1)).toBe(
       osrsTileId('woodcutting', '81-90'),
     )
+  })
+
+  it('parents first-bracket quest unlocks from the skill quest catalog', () => {
+    const herblore = CATALOG_BY_ID.get(osrsTileId('herblore', '1-10'))
+    expect(herblore && parentIdsFor(herblore)).toEqual([
+      osrsQuestTileId('druidic-ritual'),
+    ])
+
+    const sailing = CATALOG_BY_ID.get(osrsTileId('sailing', '1-10'))
+    expect(sailing && parentIdsFor(sailing)).toEqual([
+      osrsQuestTileId('pandemonium'),
+    ])
+
+    const later = CATALOG_BY_ID.get(osrsTileId('herblore', '11-20'))
+    expect(later && parentIdsFor(later)).toEqual([
+      osrsTileId('herblore', '1-10'),
+    ])
   })
 
   it('overlays stored status and keeps catalog names and parents', () => {
@@ -176,6 +198,25 @@ describe('OSRS skill catalog', () => {
     expect(grouped.skill).toHaveLength(1)
     expect(grouped.diary).toHaveLength(1)
     expect(grouped.quest).toHaveLength(1)
+    expect(
+      filterTilesByKind(
+        [
+          grouped.skill[0]!,
+          grouped.diary[0]!,
+          grouped.quest[0]!,
+          {
+            id: 'forest',
+            name: 'Forest',
+            status: 'locked',
+            parentIds: [],
+          },
+        ],
+        { skill: false, diary: true, quest: true },
+      ).map((tile) => tile.id),
+    ).toEqual([
+      osrsDiaryTileId('kandarin', 'easy'),
+      osrsQuestTileId('dragon-slayer-i'),
+    ])
   })
 })
 
@@ -220,6 +261,10 @@ describe('OSRS achievement diaries', () => {
       osrsDiaryTileId('karamja', 'hard'),
     ])
     expect(eliteParents.slice(3).every(isSkillParent)).toBe(true)
+    expect(tileRewards(osrsDiaryTileId('karamja', 'easy'))[0]).toBe(
+      'Karamja gloves 1',
+    )
+    expect(tileRewards(osrsTileId('agility', '1-10'))).toEqual([])
   })
 })
 
@@ -253,6 +298,19 @@ describe('OSRS quests', () => {
     expect(tileGp(osrsQuestTileId('dragon-slayer-i'))).toBe(10000)
     expect(formatGp(10000)).toBe('10,000 gp')
     expect(tileGp(osrsQuestTileId('cooks-assistant'))).toBeUndefined()
+    expect(tileRewards(osrsQuestTileId('cooks-assistant'))).toEqual([
+      '1 Quest point',
+      '300 Cooking experience',
+      'Permission to use the Cook-o-matic 100, which reduces the chance of burning some foods',
+    ])
+    expect(tileRewards(osrsQuestTileId('dragon-slayer-i'))[0]).toBe(
+      '2 Quest points',
+    )
+    expect(tileDifficulty(osrsQuestTileId('cooks-assistant'))).toBe('Novice')
+    expect(tileLength(osrsQuestTileId('cooks-assistant'))).toBe('Very Short')
+    expect(tileItems(osrsQuestTileId('cooks-assistant'))[0]).toMatch(/Egg/i)
+    expect(tileDifficulty(osrsTileId('agility', '1-10'))).toBeUndefined()
+    expect(tileItems(osrsDiaryTileId('kandarin', 'easy'))).toEqual([])
 
     const current = CATALOG_BY_ID.get(osrsQuestTileId('current-affairs'))
     expect(current && parentIdsFor(current)).toEqual([

@@ -12,8 +12,9 @@ function tile(
   status: Tile['status'],
   parentIds: string[] = [],
   name = id,
+  starred = false,
 ): Tile {
-  return { id, name, status, parentIds }
+  return { id, name, status, parentIds, starred }
 }
 
 describe('tileReadiness', () => {
@@ -133,18 +134,18 @@ describe('groupTilesByReadiness', () => {
     expect(groups.completed.map((t) => t.name)).toEqual(['Done'])
   })
 
-  it('sorts skill capes as that skill at 99', () => {
+  it('sorts starred tiles first, then by name', () => {
     const tiles = [
-      tile('cape', 'locked', [], 'Get the Agility skill cape'),
-      tile('high', 'locked', [], 'Agility 81–90'),
-      tile('low', 'locked', [], 'Agility 1–10'),
-      tile('quest', 'locked', [], 'Animal Magnetism'),
+      tile('2', 'locked', [], 'Beta'),
+      tile('1', 'locked', [], 'Alpha'),
+      tile('3', 'locked', [], 'Zed', true),
+      tile('4', 'locked', [], 'Mid', true),
     ]
     expect(groupTilesByReadiness(tiles).ready.map((t) => t.name)).toEqual([
-      'Agility 1–10',
-      'Agility 81–90',
-      'Get the Agility skill cape',
-      'Animal Magnetism',
+      'Mid',
+      'Zed',
+      'Alpha',
+      'Beta',
     ])
   })
 })

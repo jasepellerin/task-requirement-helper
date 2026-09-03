@@ -1,4 +1,4 @@
-import { compareTilesByName } from './search.ts'
+import { compareTilesByStarThenName } from './search.ts'
 import type { Readiness, ReadinessGroups, Tile, TileStatus } from './types.ts'
 
 export function tilesById(tiles: Tile[]): Map<string, Tile> {
@@ -49,12 +49,12 @@ export function groupTilesByReadiness(tiles: Tile[]): ReadinessGroups {
     groups[tileReadiness(tile, byId)].push(tile)
   }
 
-  groups.ready.sort(compareTilesByName)
-  groups.possible.sort(compareTilesByName)
-  groups.blocked.sort(compareTilesByName)
-  groups.unseen.sort(compareTilesByName)
-  groups.unlocked.sort(compareTilesByName)
-  groups.completed.sort(compareTilesByName)
+  groups.ready.sort(compareTilesByStarThenName)
+  groups.possible.sort(compareTilesByStarThenName)
+  groups.blocked.sort(compareTilesByStarThenName)
+  groups.unseen.sort(compareTilesByStarThenName)
+  groups.unlocked.sort(compareTilesByStarThenName)
+  groups.completed.sort(compareTilesByStarThenName)
 
   return groups
 }

@@ -22,6 +22,11 @@ export function compareTilesByName(a: Tile, b: Tile): number {
   return a.name.localeCompare(b.name)
 }
 
+export function compareTilesByStarThenName(a: Tile, b: Tile): number {
+  if (a.starred !== b.starred) return a.starred ? -1 : 1
+  return compareTilesByName(a, b)
+}
+
 function isPrefixMatch(name: string, query: string): boolean {
   return (
     foldSearch(name).startsWith(query) || searchSortKey(name).startsWith(query)

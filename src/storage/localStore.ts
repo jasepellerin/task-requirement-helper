@@ -11,7 +11,8 @@ function isStoredTile(value: unknown): value is StoredTile {
     typeof tile.id === 'string' &&
     tile.id.length > 0 &&
     typeof tile.status === 'string' &&
-    isTileStatus(tile.status)
+    isTileStatus(tile.status) &&
+    (tile.starred === undefined || typeof tile.starred === 'boolean')
   )
 }
 
@@ -22,10 +23,11 @@ export function parseStore(value: unknown): StoreV1 | null {
   if (!record.tiles.every(isStoredTile)) return null
   return {
     version: 1,
-    tiles: record.tiles.map((tile) => ({
-      id: tile.id,
-      status: tile.status,
-    })),
+    tiles: record.tiles.map((tile) => {
+      const stored: StoredTile = { id: tile.id, status: tile.status }
+      if (tile.starred) stored.starred = true
+      return stored
+    }),
   }
 }
 

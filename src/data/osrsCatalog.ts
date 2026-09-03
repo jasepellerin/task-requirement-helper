@@ -5,6 +5,9 @@ import {
   type DiarySkillReq,
 } from './diarySkillReqs.ts'
 import { OSRS_QUESTS, osrsQuestTileId, questReqsFor } from './questReqs.ts'
+import { skillQuestReqsFor } from './skillQuestReqs.ts'
+import { diaryRewardsFor, questRewardsFor } from './rewards.ts'
+import { questDetailsFor } from './questDetails.ts'
 import diariesData from './osrs-diaries.json'
 import diaryTiersData from './diary-tiers.json'
 import bracketsData from './skill-brackets.json'
@@ -43,6 +46,10 @@ export type CatalogDef = {
   kind: TileKind
   wikiTitle: string
   gp?: number
+  rewards?: string[]
+  difficulty?: string
+  length?: string
+  items?: string[]
   reqs: CatalogReq[]
 }
 
@@ -100,7 +107,15 @@ function buildSkillDefs(): CatalogDef[] {
       name: osrsTileName(skill.name, bracket),
       kind: 'skill' as const,
       wikiTitle: skill.name,
-      reqs: ids.slice(0, index).map((id) => ({ type: 'tile' as const, id })),
+      reqs: [
+        ...ids.slice(0, index).map((id) => ({ type: 'tile' as const, id })),
+        ...(bracket.id === '1-10'
+          ? skillQuestReqsFor(skill.id).map((questId) => ({
+              type: 'tile' as const,
+              id: osrsQuestTileId(questId),
+            }))
+          : []),
+      ],
     }))
   })
 }
@@ -108,16 +123,20 @@ function buildSkillDefs(): CatalogDef[] {
 function buildDiaryDefs(): CatalogDef[] {
   return OSRS_DIARIES.flatMap((diary) => {
     const ids = DIARY_TIERS.map((tier) => osrsDiaryTileId(diary.id, tier.id))
-    return DIARY_TIERS.map((tier, index) => ({
-      id: ids[index] ?? osrsDiaryTileId(diary.id, tier.id),
-      name: osrsDiaryTileName(diary.name, tier),
-      kind: 'diary' as const,
-      wikiTitle: diary.wikiTitle,
-      reqs: [
-        ...ids.slice(0, index).map((id) => ({ type: 'tile' as const, id })),
-        ...skillReqs(diarySkillReqsFor(diary.id, tier.id)),
-      ],
-    }))
+    return DIARY_TIERS.map((tier, index) => {
+      const rewards = diaryRewardsFor(diary.id, tier.id)
+      return {
+        id: ids[index] ?? osrsDiaryTileId(diary.id, tier.id),
+        name: osrsDiaryTileName(diary.name, tier),
+        kind: 'diary' as const,
+        wikiTitle: diary.wikiTitle,
+        ...(rewards.length > 0 ? { rewards } : {}),
+        reqs: [
+          ...ids.slice(0, index).map((id) => ({ type: 'tile' as const, id })),
+          ...skillReqs(diarySkillReqsFor(diary.id, tier.id)),
+        ],
+      }
+    })
   })
 }
 
@@ -125,12 +144,18 @@ function buildQuestDefs(): CatalogDef[] {
   return OSRS_QUESTS.map((quest) => {
     const reqs = questReqsFor(quest.id)
     const gp = quest.gp && quest.gp > 0 ? quest.gp : undefined
+    const rewards = questRewardsFor(quest.id)
+    const details = questDetailsFor(quest.id)
     return {
       id: osrsQuestTileId(quest.id),
       name: quest.name,
       kind: 'quest' as const,
       wikiTitle: quest.wikiTitle,
       ...(gp !== undefined ? { gp } : {}),
+      ...(rewards.length > 0 ? { rewards } : {}),
+      ...(details.difficulty ? { difficulty: details.difficulty } : {}),
+      ...(details.length ? { length: details.length } : {}),
+      ...(details.items.length > 0 ? { items: details.items } : {}),
       reqs: [
         ...(reqs?.quests ?? []).map((id) => ({
           type: 'tile' as const,
@@ -161,6 +186,40 @@ export function tileGp(tileId: string): number | undefined {
   return gp && gp > 0 ? gp : undefined
 }
 
+export function tileRewards(tileId: string): string[] {
+  return CATALOG_BY_ID.get(tileId)?.rewards ?? []
+}
+
+export function tileDifficulty(tileId: string): string | undefined {
+  return CATALOG_BY_ID.get(tileId)?.difficulty
+}
+
+export function tileLength(tileId: string): string | undefined {
+  return CATALOG_BY_ID.get(tileId)?.length
+}
+
+export function tileItems(tileId: string): string[] {
+  return CATALOG_BY_ID.get(tileId)?.items ?? []
+}
+
+export type KindFilter = Record<TileKind, boolean>
+
+export const ALL_KINDS: KindFilter = {
+  skill: true,
+  diary: true,
+  quest: true,
+}
+
+export function filterTilesByKind(
+  tiles: readonly Tile[],
+  kinds: KindFilter,
+): Tile[] {
+  return tiles.filter((tile) => {
+    const kind = tileKind(tile.id)
+    return kind !== null && kinds[kind]
+  })
+}
+
 export function partitionByKind(tiles: Tile[]): Record<TileKind, Tile[]> {
   const groups: Record<TileKind, Tile[]> = {
     skill: [],
@@ -175,12 +234,16 @@ export function partitionByKind(tiles: Tile[]): Record<TileKind, Tile[]> {
   return groups
 }
 
-export function tilesFromStatuses(statuses: Map<string, TileStatus>): Tile[] {
+export function tilesFromStatuses(
+  statuses: Map<string, TileStatus>,
+  starred: ReadonlySet<string> = new Set(),
+): Tile[] {
   return CATALOG.map((def) => ({
     id: def.id,
     name: def.name,
     status: statuses.get(def.id) ?? 'unseen',
     parentIds: parentIdsFor(def),
+    starred: starred.has(def.id),
   }))
 }
 
@@ -195,14 +258,27 @@ export function statusesFromStored(
   return statuses
 }
 
+export function starredFromStored(tiles: readonly StoredTile[]): Set<string> {
+  const starred = new Set<string>()
+  for (const tile of tiles) {
+    if (!tile.starred || !CATALOG_BY_ID.has(tile.id)) continue
+    if (tile.status === 'unseen') continue
+    starred.add(tile.id)
+  }
+  return starred
+}
+
 export function storedTilesFromStatuses(
   statuses: Map<string, TileStatus>,
+  starred: ReadonlySet<string> = new Set(),
 ): StoredTile[] {
   const tiles: StoredTile[] = []
   for (const def of CATALOG) {
     const status = statuses.get(def.id)
     if (!status || status === 'unseen') continue
-    tiles.push({ id: def.id, status })
+    const stored: StoredTile = { id: def.id, status }
+    if (starred.has(def.id)) stored.starred = true
+    tiles.push(stored)
   }
   return tiles
 }
@@ -216,5 +292,17 @@ export function setStoredStatus(
   const next = new Map(statuses)
   if (status === 'unseen') next.delete(id)
   else next.set(id, status)
+  return next
+}
+
+export function setStoredStarred(
+  starred: Set<string>,
+  id: string,
+  value: boolean,
+): Set<string> | null {
+  if (!CATALOG_BY_ID.has(id)) return null
+  const next = new Set(starred)
+  if (value) next.add(id)
+  else next.delete(id)
   return next
 }

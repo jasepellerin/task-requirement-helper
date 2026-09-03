@@ -1,20 +1,9 @@
 import { useEffect, useId, useMemo, useState } from 'react'
-import { tileKind, type TileKind } from '../data/osrsCatalog.ts'
+import { ALL_KINDS, filterTilesByKind } from '../data/osrsCatalog.ts'
 import { searchTiles } from '../domain/search.ts'
 import { type Tile, type TileStatus } from '../domain/types.ts'
+import { KindFilters } from './KindFilters.tsx'
 import { StatusButtons } from './StatusPicker.tsx'
-
-const KIND_FILTERS: { id: TileKind; label: string }[] = [
-  { id: 'skill', label: 'Skills' },
-  { id: 'diary', label: 'Diaries' },
-  { id: 'quest', label: 'Quests' },
-]
-
-const ALL_KINDS: Record<TileKind, boolean> = {
-  skill: true,
-  diary: true,
-  quest: true,
-}
 
 type TileFinderProps = {
   tiles: Tile[]
@@ -30,14 +19,7 @@ export function TileFinder({
   const titleId = useId()
   const [query, setQuery] = useState('')
   const [kinds, setKinds] = useState(ALL_KINDS)
-  const catalog = useMemo(
-    () =>
-      tiles.filter((tile) => {
-        const kind = tileKind(tile.id)
-        return kind !== null && kinds[kind]
-      }),
-    [kinds, tiles],
-  )
+  const catalog = useMemo(() => filterTilesByKind(tiles, kinds), [kinds, tiles])
   const results = useMemo(() => searchTiles(catalog, query), [catalog, query])
 
   useEffect(() => {
@@ -67,22 +49,7 @@ export function TileFinder({
             autoFocus
           />
         </label>
-        <div className="kind-filters" role="group" aria-label="Catalog">
-          {KIND_FILTERS.map(({ id, label }) => (
-            <button
-              key={id}
-              type="button"
-              className="btn"
-              aria-pressed={kinds[id]}
-              onMouseDown={(event) => event.preventDefault()}
-              onClick={() =>
-                setKinds((current) => ({ ...current, [id]: !current[id] }))
-              }
-            >
-              {label}
-            </button>
-          ))}
-        </div>
+        <KindFilters kinds={kinds} onChange={setKinds} />
 
         {results.length === 0 ? (
           <p className="empty">No matching tiles.</p>

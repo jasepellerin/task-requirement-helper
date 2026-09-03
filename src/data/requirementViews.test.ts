@@ -8,7 +8,7 @@ import { osrsDiaryTileId, osrsQuestTileId, osrsTileId } from './osrsCatalog.ts'
 import type { Tile } from '../domain/types.ts'
 
 function tile(id: string): Tile {
-  return { id, name: id, status: 'locked', parentIds: [] }
+  return { id, name: id, status: 'locked', parentIds: [], starred: false }
 }
 
 describe('skillReqTitle', () => {
@@ -78,5 +78,18 @@ describe('requirementViews', () => {
       'Farming 21–30',
       'Farming 31–40',
     ])
+  })
+
+  it('lists first-bracket skill quest unlocks by quest name', () => {
+    expect(
+      requirementViews(tile(osrsTileId('herblore', '1-10'))).map(
+        (row) => row.title,
+      ),
+    ).toEqual(['Druidic Ritual'])
+    expect(
+      requirementViews(tile(osrsTileId('sailing', '1-10'))).map(
+        (row) => row.title,
+      ),
+    ).toEqual(['Pandemonium'])
   })
 })

@@ -186,6 +186,10 @@ p {
   text-align: center;
 }
 
+.kind-filters + .hero-empty {
+  margin-top: 0;
+}
+
 .columns {
   display: grid;
   grid-template-columns: repeat(3, minmax(0, 1fr));
@@ -444,6 +448,73 @@ p {
   font-weight: 600;
 }
 
+.tile-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+}
+
+.pill {
+  display: inline-flex;
+  align-items: center;
+  border-radius: 999px;
+  padding: 2px 10px;
+  font-size: 0.78rem;
+  font-weight: 650;
+  line-height: 1.4;
+  border: 1px solid var(--border);
+}
+
+.pill-length,
+.pill-plain {
+  color: var(--muted);
+}
+
+.pill-novice {
+  color: var(--ready);
+  border-color: color-mix(in srgb, var(--ready) 45%, var(--border));
+  background: color-mix(in srgb, var(--ready) 14%, transparent);
+}
+
+.pill-intermediate {
+  color: var(--possible);
+  border-color: color-mix(in srgb, var(--possible) 45%, var(--border));
+  background: color-mix(in srgb, var(--possible) 14%, transparent);
+}
+
+.pill-experienced {
+  color: var(--blocked);
+  border-color: color-mix(in srgb, var(--blocked) 45%, var(--border));
+  background: color-mix(in srgb, var(--blocked) 14%, transparent);
+}
+
+.pill-master {
+  color: var(--req-unseen);
+  border-color: color-mix(in srgb, var(--req-unseen) 45%, var(--border));
+  background: color-mix(in srgb, var(--req-unseen) 14%, transparent);
+}
+
+.pill-grandmaster {
+  color: #7c3aed;
+  border-color: color-mix(in srgb, #7c3aed 45%, var(--border));
+  background: color-mix(in srgb, #7c3aed 14%, transparent);
+}
+
+.pill-special {
+  color: var(--unlocked);
+  border-color: color-mix(in srgb, var(--unlocked) 45%, var(--border));
+  background: color-mix(in srgb, var(--unlocked) 14%, transparent);
+}
+
+@media (prefers-color-scheme: dark) {
+  .pill-grandmaster {
+    color: #c4b5fd;
+    border-color: color-mix(in srgb, #c4b5fd 45%, var(--border));
+    background: color-mix(in srgb, #c4b5fd 14%, transparent);
+  }
+}
+
 .req-name {
   appearance: none;
   font: inherit;
@@ -558,12 +629,16 @@ button.req-name:focus-visible {
 
 .kind-filters {
   display: flex;
+  flex-wrap: wrap;
   gap: 8px;
 }
 
 .kind-filters .btn {
-  flex: 1;
   font-weight: 600;
+}
+
+.modal .kind-filters .btn {
+  flex: 1;
 }
 
 .kind-filters .btn[aria-pressed='true'] {

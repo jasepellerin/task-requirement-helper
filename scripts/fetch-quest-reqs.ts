@@ -12,6 +12,10 @@ import {
   questSlug,
 } from '../src/data/parseQuestreq.ts'
 import type { OsrsQuest, QuestReqs } from '../src/data/questReqs.ts'
+import {
+  parseQuestCardDetails,
+  parseQuestRewards,
+} from '../src/data/parseRewards.ts'
 
 const ROOT = path.join(path.dirname(fileURLToPath(import.meta.url)), '..')
 const WIKI_API = 'https://oldschool.runescape.wiki/api.php'
@@ -153,6 +157,10 @@ async function main(): Promise<void> {
     gp: number
     quests: string[]
     skills: QuestReqs['skills']
+    rewards: string[]
+    difficulty?: string
+    length?: string
+    items: string[]
   }[] = []
 
   for (const title of listTitles) {
@@ -167,17 +175,27 @@ async function main(): Promise<void> {
     }
     const luaEntry = luaByName.get(title)
     const details = parseQuestDetailsReqs(page, skills)
+    const card = parseQuestCardDetails(page)
     kept.push({
       title,
       gp: extractRequiredGp(page),
       quests: luaEntry?.quests ?? details.quests,
       skills: luaEntry?.skills ?? details.skills,
+      rewards: parseQuestRewards(page),
+      difficulty: card.difficulty,
+      length: card.length,
+      items: card.items,
     })
   }
 
   const known = new Set(kept.map((entry) => questSlug(entry.title)))
   const quests: OsrsQuest[] = []
   const reqs: Record<string, QuestReqs> = {}
+  const rewards: Record<string, string[]> = {}
+  const cardDetails: Record<
+    string,
+    { difficulty?: string; length?: string; items?: string[] }
+  > = {}
 
   for (const entry of kept) {
     const id = questSlug(entry.title)
@@ -194,8 +212,18 @@ async function main(): Promise<void> {
         .filter((parentId) => known.has(parentId) && parentId !== id),
       skills: entry.skills,
     }
+    if (entry.rewards.length > 0) rewards[id] = entry.rewards
+    const stored: {
+      difficulty?: string
+      length?: string
+      items?: string[]
+    } = {}
+    if (entry.difficulty) stored.difficulty = entry.difficulty
+    if (entry.length) stored.length = entry.length
+    if (entry.items.length > 0) stored.items = entry.items
+    if (Object.keys(stored).length > 0) cardDetails[id] = stored
     console.log(
-      `${id} quests:${reqs[id].quests.length} skills:${reqs[id].skills.length} gp:${entry.gp || 0}`,
+      `${id} quests:${reqs[id].quests.length} skills:${reqs[id].skills.length} gp:${entry.gp || 0} rewards:${entry.rewards.length} items:${entry.items.length}`,
     )
   }
 
@@ -207,6 +235,16 @@ async function main(): Promise<void> {
   await writeFile(
     path.join(ROOT, 'src/data/osrs-quest-reqs.json'),
     `${JSON.stringify(reqs, null, 2)}\n`,
+    'utf8',
+  )
+  await writeFile(
+    path.join(ROOT, 'src/data/osrs-quest-rewards.json'),
+    `${JSON.stringify(rewards, null, 2)}\n`,
+    'utf8',
+  )
+  await writeFile(
+    path.join(ROOT, 'src/data/osrs-quest-details.json'),
+    `${JSON.stringify(cardDetails, null, 2)}\n`,
     'utf8',
   )
   console.log(`wrote ${quests.length} quests`)

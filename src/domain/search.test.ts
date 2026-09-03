@@ -7,7 +7,7 @@ function tile(
   name: string,
   status: Tile['status'] = 'unseen',
 ): Tile {
-  return { id, name, status, parentIds: [] }
+  return { id, name, status, parentIds: [], starred: false }
 }
 
 describe('foldSearch', () => {
