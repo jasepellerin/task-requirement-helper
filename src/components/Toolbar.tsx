@@ -6,6 +6,7 @@ type ToolbarProps = {
   onCompleted: () => void
   onExport: () => void
   onImport: (text: string) => { ok: true } | { ok: false; error: string }
+  children?: ReactNode
 }
 
 function Icon({ children }: { children: ReactNode }) {
@@ -32,6 +33,7 @@ export function Toolbar({
   onCompleted,
   onExport,
   onImport,
+  children,
 }: ToolbarProps) {
   const fileRef = useRef<HTMLInputElement>(null)
   const menuRef = useRef<HTMLDivElement>(null)
@@ -69,30 +71,42 @@ export function Toolbar({
   return (
     <header className="toolbar">
       <div className="toolbar-start">
-        <h1>SlayerScape Requirements Helper</h1>
+        <h1>SlayerScape</h1>
         <nav className="toolbar-nav" aria-label="Views">
-          <button type="button" className="btn toolbar-link" onClick={onStats}>
-            <Icon>
-              <path d="M4 19V10" />
-              <path d="M10 19V5" />
-              <path d="M16 19V13" />
-              <path d="M22 19H2" />
-            </Icon>
-            Stats
+          <button
+            type="button"
+            className="btn icon-only"
+            aria-label="Stats"
+            title="Stats"
+            onClick={onStats}
+          >
+            <img
+              className="toolbar-wiki-icon"
+              src="/icons/skills.png"
+              alt=""
+              width={22}
+              height={22}
+            />
           </button>
           <button
             type="button"
-            className="btn toolbar-link"
+            className="btn icon-only"
+            aria-label="Completed"
+            title="Completed"
             onClick={onCompleted}
           >
-            <Icon>
-              <circle cx="12" cy="12" r="8" />
-              <path d="m8.5 12 2.5 2.5 4.5-5" />
-            </Icon>
-            Completed
+            <img
+              className="toolbar-wiki-icon"
+              src="/icons/completed.png"
+              alt=""
+              width={22}
+              height={22}
+            />
           </button>
         </nav>
       </div>
+
+      {children ? <div className="toolbar-filters">{children}</div> : null}
 
       <div className="toolbar-end">
         <div className="toolbar-menu" ref={menuRef}>

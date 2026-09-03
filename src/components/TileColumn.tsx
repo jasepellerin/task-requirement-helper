@@ -26,22 +26,24 @@ export function TileColumn({
           {title} <span>{tiles.length}</span>
         </h2>
       </header>
-      {tiles.length === 0 ? (
-        <p className="empty">{empty}</p>
-      ) : (
-        <ul className="tile-list">
-          {tiles.map((tile) => (
-            <li key={tile.id}>
-              <TileCard
-                tile={tile}
-                byId={byId}
-                onOpen={() => onOpen(tile.id)}
-                onStar={(starred) => onStar(tile.id, starred)}
-              />
-            </li>
-          ))}
-        </ul>
-      )}
+      <div className="column-body">
+        {tiles.length === 0 ? (
+          <p className="empty">{empty}</p>
+        ) : (
+          <ul className="tile-list">
+            {tiles.map((tile) => (
+              <li key={tile.id}>
+                <TileCard
+                  tile={tile}
+                  byId={byId}
+                  onOpen={() => onOpen(tile.id)}
+                  onStar={(starred) => onStar(tile.id, starred)}
+                />
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
     </section>
   )
 }

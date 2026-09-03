@@ -91,21 +91,25 @@ export default function App() {
         onCompleted={openCompleted}
         onExport={exportStore}
         onImport={importStore}
-      />
-
-      {boardCount > 0 ? (
-        <div className="board-filters">
-          <input
-            className="board-search"
-            type="search"
-            value={query}
-            onChange={(event) => setQuery(event.target.value)}
-            placeholder="Filter tiles"
-            aria-label="Filter tiles"
-          />
-          <KindFilters kinds={kinds} onChange={setKinds} label="Filter board" />
-        </div>
-      ) : null}
+      >
+        {boardCount > 0 ? (
+          <>
+            <input
+              className="board-search"
+              type="search"
+              value={query}
+              onChange={(event) => setQuery(event.target.value)}
+              placeholder="Filter tiles"
+              aria-label="Filter tiles"
+            />
+            <KindFilters
+              kinds={kinds}
+              onChange={setKinds}
+              label="Filter board"
+            />
+          </>
+        ) : null}
+      </Toolbar>
 
       {boardCount === 0 ? (
         <p className="hero-empty">Find a tile you’ve just seen.</p>
