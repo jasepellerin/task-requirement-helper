@@ -21,7 +21,10 @@ export default function App() {
   const detailTile =
     overlay?.mode === 'detail' ? byId.get(overlay.id) : undefined
   const visibleCount =
-    groups.ready.length + groups.blocked.length + groups.unlocked.length
+    groups.ready.length +
+    groups.possible.length +
+    groups.blocked.length +
+    groups.unlocked.length
 
   function openFind() {
     setOverlay({ mode: 'find' })
@@ -62,6 +65,13 @@ export default function App() {
             tiles={groups.ready}
             byId={byId}
             empty="Nothing ready."
+            onOpen={openDetail}
+          />
+          <TileColumn
+            title="Possible"
+            tiles={groups.possible}
+            byId={byId}
+            empty="Nothing possible."
             onOpen={openDetail}
           />
           <TileColumn

@@ -36,10 +36,11 @@ export type StoreV1 = {
 }
 
 export type Readiness =
-  'unlocked' | 'completed' | 'unseen' | 'ready' | 'blocked'
+  'unlocked' | 'completed' | 'unseen' | 'ready' | 'possible' | 'blocked'
 
 export type ReadinessGroups = {
   ready: Tile[]
+  possible: Tile[]
   blocked: Tile[]
   unseen: Tile[]
   unlocked: Tile[]

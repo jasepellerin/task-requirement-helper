@@ -9,6 +9,10 @@ export function parentIsSatisfied(status: TileStatus | undefined): boolean {
   return status === 'unlocked' || status === 'completed'
 }
 
+export function parentIsOnBoard(status: TileStatus | undefined): boolean {
+  return status === 'locked' || status === 'unlocked' || status === 'completed'
+}
+
 export function blockingParentCount(
   tile: Tile,
   byId: Map<string, Tile>,
@@ -23,17 +27,18 @@ export function tileReadiness(tile: Tile, byId: Map<string, Tile>): Readiness {
   if (tile.status === 'unlocked') return 'unlocked'
   if (tile.status === 'unseen') return 'unseen'
 
-  const allParentsSatisfied = tile.parentIds.every((parentId) => {
-    return parentIsSatisfied(byId.get(parentId)?.status)
-  })
-
-  return allParentsSatisfied ? 'ready' : 'blocked'
+  const parentStatuses = tile.parentIds.map(
+    (parentId) => byId.get(parentId)?.status,
+  )
+  if (parentStatuses.every(parentIsSatisfied)) return 'ready'
+  return parentStatuses.every(parentIsOnBoard) ? 'possible' : 'blocked'
 }
 
 export function groupTilesByReadiness(tiles: Tile[]): ReadinessGroups {
   const byId = tilesById(tiles)
   const groups: ReadinessGroups = {
     ready: [],
+    possible: [],
     blocked: [],
     unseen: [],
     unlocked: [],
@@ -45,6 +50,7 @@ export function groupTilesByReadiness(tiles: Tile[]): ReadinessGroups {
   }
 
   groups.ready.sort(compareTilesByName)
+  groups.possible.sort(compareTilesByName)
   groups.blocked.sort(compareTilesByName)
   groups.unseen.sort(compareTilesByName)
   groups.unlocked.sort(compareTilesByName)

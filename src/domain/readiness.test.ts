@@ -56,17 +56,38 @@ describe('tileReadiness', () => {
     expect(tileReadiness(c, tilesById([a, b, c]))).toBe('ready')
   })
 
-  it('is blocked when a parent is locked', () => {
+  it('is possible when a parent is locked', () => {
     const a = tile('a', 'unlocked')
     const b = tile('b', 'locked')
     const c = tile('c', 'locked', ['a', 'b'])
-    expect(tileReadiness(c, tilesById([a, b, c]))).toBe('blocked')
+    expect(tileReadiness(c, tilesById([a, b, c]))).toBe('possible')
+  })
+
+  it('is possible when every parent is locked', () => {
+    const a = tile('a', 'locked')
+    const b = tile('b', 'locked')
+    const c = tile('c', 'locked', ['a', 'b'])
+    expect(tileReadiness(c, tilesById([a, b, c]))).toBe('possible')
+  })
+
+  it('is possible when parents mix locked and completed', () => {
+    const a = tile('a', 'completed')
+    const b = tile('b', 'locked')
+    const c = tile('c', 'locked', ['a', 'b'])
+    expect(tileReadiness(c, tilesById([a, b, c]))).toBe('possible')
   })
 
   it('is blocked when a parent is unseen', () => {
     const a = tile('a', 'unseen')
     const b = tile('b', 'locked', ['a'])
     expect(tileReadiness(b, tilesById([a, b]))).toBe('blocked')
+  })
+
+  it('is blocked when any parent is unseen even if others are on the board', () => {
+    const a = tile('a', 'locked')
+    const b = tile('b', 'unseen')
+    const c = tile('c', 'locked', ['a', 'b'])
+    expect(tileReadiness(c, tilesById([a, b, c]))).toBe('blocked')
   })
 
   it('is blocked when a parent id is missing', () => {
@@ -100,10 +121,12 @@ describe('groupTilesByReadiness', () => {
       tile('3', 'unlocked', [], 'Zed'),
       tile('4', 'unseen', [], 'Ghost'),
       tile('5', 'locked', ['missing'], 'Wait'),
+      tile('7', 'locked', ['2'], 'Soon'),
       tile('6', 'completed', [], 'Done'),
     ]
     const groups = groupTilesByReadiness(tiles)
     expect(groups.ready.map((t) => t.name)).toEqual(['Alpha', 'Beta'])
+    expect(groups.possible.map((t) => t.name)).toEqual(['Soon'])
     expect(groups.blocked.map((t) => t.name)).toEqual(['Wait'])
     expect(groups.unseen.map((t) => t.name)).toEqual(['Ghost'])
     expect(groups.unlocked.map((t) => t.name)).toEqual(['Zed'])

@@ -14,6 +14,7 @@
   --primary: #1d4ed8;
   --primary-text: #fff;
   --ready: #166534;
+  --possible: #a16207;
   --blocked: #9a3412;
   --unseen: #57534e;
   --unlocked: #1e3a8a;
@@ -34,6 +35,7 @@
     --primary: #60a5fa;
     --primary-text: #0c0a09;
     --ready: #86efac;
+    --possible: #facc15;
     --blocked: #fdba74;
     --unseen: #d6d3d1;
     --unlocked: #93c5fd;
@@ -191,6 +193,16 @@ p {
   align-items: start;
 }
 
+.board-columns {
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+}
+
+@media (max-width: 1280px) {
+  .board-columns {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
 @media (max-width: 1100px) {
   .columns {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -227,10 +239,14 @@ p {
 }
 
 .board-columns .column:nth-child(2) .column-header h2 {
-  color: var(--blocked);
+  color: var(--possible);
 }
 
 .board-columns .column:nth-child(3) .column-header h2 {
+  color: var(--blocked);
+}
+
+.board-columns .column:nth-child(4) .column-header h2 {
   color: var(--unlocked);
 }
 

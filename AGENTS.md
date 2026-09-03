@@ -49,7 +49,8 @@ Typical flow is unseen → locked → unlocked → completed. The app does **not
 - `unlocked` if status is unlocked
 - `unseen` if status is unseen (even if parents are done — you still need to find it)
 - `ready` if locked and every parent is satisfied (or it has no parents)
-- `blocked` if locked and at least one parent is missing or unsatisfied
+- `possible` if locked, not ready, and every parent is at least locked (none unseen or missing)
+- `blocked` if locked and at least one parent is missing or unseen
 
 ### Catalogs
 
@@ -69,7 +70,7 @@ Persist/export `{ id, status }` for catalog tiles whose status is not `unseen`. 
 
 ### UI
 
-- **Board**: Ready / Blocked / Unlocked. Unseen and completed are hidden here.
+- **Board**: Ready / Possible / Blocked / Unlocked. Unseen and completed are hidden here.
 - **Completed**: separate window, split Skills / Diaries / Quests.
 - **Stats**: OSRS-style skill window. Tracked skills use the highest unlocked/completed bracket (else 1). Combat/Slayer always show 99. No total. Clicking a tracked skill opens its covering tile.
 - **Detail card** (click a tile):
