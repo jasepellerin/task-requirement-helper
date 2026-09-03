@@ -1,4 +1,5 @@
 import type { Tile, TileStatus } from '../domain/types.ts'
+import { skillParentsFor } from './diarySkillReqs.ts'
 import diariesData from './osrs-diaries.json'
 import diaryTiersData from './diary-tiers.json'
 import bracketsData from './skill-brackets.json'
@@ -19,6 +20,7 @@ export type SkillBracket = {
 export type OsrsDiary = {
   id: string
   name: string
+  wikiTitle: string
 }
 
 export type DiaryTier = {
@@ -73,7 +75,10 @@ export function buildOsrsDiaryTiles(status: TileStatus = 'unseen'): Tile[] {
       id: ids[index] ?? osrsDiaryTileId(diary.id, tier.id),
       name: osrsDiaryTileName(diary.name, tier),
       status,
-      parentIds: ids.slice(0, index),
+      parentIds: [
+        ...ids.slice(0, index),
+        ...skillParentsFor(diary.id, tier.id),
+      ],
     }))
   })
 }
@@ -98,14 +103,24 @@ export function pruneRemovedOsrsTiles(tiles: Tile[]): Tile[] {
     }))
 }
 
+function syncOsrsCatalogParents(tiles: Tile[]): Tile[] {
+  const catalog = new Map(
+    buildOsrsCatalogTiles().map((tile) => [tile.id, tile]),
+  )
+  return tiles.map((tile) => {
+    const canon = catalog.get(tile.id)
+    if (!canon) return tile
+    return { ...tile, parentIds: canon.parentIds }
+  })
+}
+
 export function mergeOsrsSkillTiles(tiles: Tile[]): Tile[] {
   const pruned = pruneRemovedOsrsTiles(tiles)
   const existingIds = new Set(pruned.map((tile) => tile.id))
   const missing = buildOsrsCatalogTiles().filter(
     (tile) => !existingIds.has(tile.id),
   )
-  if (missing.length === 0) return pruned
-  return [...pruned, ...missing]
+  return syncOsrsCatalogParents([...pruned, ...missing])
 }
 
 export function resetLockedOsrsTilesToUnseen(tiles: Tile[]): Tile[] {

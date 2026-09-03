@@ -1,0 +1,2068 @@
+{
+  "ardougne": {
+    "easy": [
+      {
+        "skill": "thieving",
+        "level": 5
+      }
+    ],
+    "medium": [
+      {
+        "skill": "agility",
+        "level": 39
+      },
+      {
+        "skill": "smithing",
+        "level": 59,
+        "ironman": true
+      },
+      {
+        "skill": "thieving",
+        "level": 38
+      },
+      {
+        "skill": "crafting",
+        "level": 49,
+        "ironman": true
+      },
+      {
+        "skill": "firemaking",
+        "level": 50
+      },
+      {
+        "skill": "fletching",
+        "level": 59,
+        "ironman": true
+      },
+      {
+        "skill": "woodcutting",
+        "level": 36
+      },
+      {
+        "skill": "farming",
+        "level": 31
+      },
+      {
+        "skill": "construction",
+        "level": 10
+      }
+    ],
+    "hard": [
+      {
+        "skill": "mining",
+        "level": 52
+      },
+      {
+        "skill": "agility",
+        "level": 56
+      },
+      {
+        "skill": "smithing",
+        "level": 68
+      },
+      {
+        "skill": "herblore",
+        "level": 45
+      },
+      {
+        "skill": "fishing",
+        "level": 53
+      },
+      {
+        "skill": "thieving",
+        "level": 72
+      },
+      {
+        "skill": "cooking",
+        "level": 53
+      },
+      {
+        "skill": "crafting",
+        "level": 72,
+        "ironman": true
+      },
+      {
+        "skill": "firemaking",
+        "level": 50
+      },
+      {
+        "skill": "fletching",
+        "level": 59,
+        "ironman": true
+      },
+      {
+        "skill": "woodcutting",
+        "level": 50
+      },
+      {
+        "skill": "runecraft",
+        "level": 65
+      },
+      {
+        "skill": "farming",
+        "level": 70
+      },
+      {
+        "skill": "construction",
+        "level": 50
+      },
+      {
+        "skill": "hunter",
+        "level": 59
+      }
+    ],
+    "elite": [
+      {
+        "skill": "mining",
+        "level": 52
+      },
+      {
+        "skill": "agility",
+        "level": 90
+      },
+      {
+        "skill": "smithing",
+        "level": 91
+      },
+      {
+        "skill": "herblore",
+        "level": 45
+      },
+      {
+        "skill": "fishing",
+        "level": 81
+      },
+      {
+        "skill": "thieving",
+        "level": 82
+      },
+      {
+        "skill": "cooking",
+        "level": 91
+      },
+      {
+        "skill": "crafting",
+        "level": 50
+      },
+      {
+        "skill": "firemaking",
+        "level": 50
+      },
+      {
+        "skill": "fletching",
+        "level": 69
+      },
+      {
+        "skill": "woodcutting",
+        "level": 50
+      },
+      {
+        "skill": "runecraft",
+        "level": 65
+      },
+      {
+        "skill": "farming",
+        "level": 85
+      },
+      {
+        "skill": "construction",
+        "level": 50
+      },
+      {
+        "skill": "hunter",
+        "level": 59
+      }
+    ]
+  },
+  "desert": {
+    "easy": [
+      {
+        "skill": "thieving",
+        "level": 21
+      },
+      {
+        "skill": "hunter",
+        "level": 5
+      }
+    ],
+    "medium": [
+      {
+        "skill": "mining",
+        "level": 37
+      },
+      {
+        "skill": "agility",
+        "level": 30
+      },
+      {
+        "skill": "herblore",
+        "level": 36
+      },
+      {
+        "skill": "thieving",
+        "level": 37
+      },
+      {
+        "skill": "crafting",
+        "level": 50
+      },
+      {
+        "skill": "firemaking",
+        "level": 45
+      },
+      {
+        "skill": "woodcutting",
+        "level": 35
+      },
+      {
+        "skill": "construction",
+        "level": 20
+      },
+      {
+        "skill": "hunter",
+        "level": 47
+      }
+    ],
+    "hard": [
+      {
+        "skill": "mining",
+        "level": 60
+      },
+      {
+        "skill": "agility",
+        "level": 70
+      },
+      {
+        "skill": "smithing",
+        "level": 68
+      },
+      {
+        "skill": "herblore",
+        "level": 36
+      },
+      {
+        "skill": "thieving",
+        "level": 65
+      },
+      {
+        "skill": "crafting",
+        "level": 61
+      },
+      {
+        "skill": "firemaking",
+        "level": 60
+      },
+      {
+        "skill": "fletching",
+        "level": 10
+      },
+      {
+        "skill": "woodcutting",
+        "level": 55
+      },
+      {
+        "skill": "construction",
+        "level": 20
+      },
+      {
+        "skill": "hunter",
+        "level": 47
+      }
+    ],
+    "elite": [
+      {
+        "skill": "mining",
+        "level": 60
+      },
+      {
+        "skill": "agility",
+        "level": 70
+      },
+      {
+        "skill": "smithing",
+        "level": 68
+      },
+      {
+        "skill": "herblore",
+        "level": 36
+      },
+      {
+        "skill": "thieving",
+        "level": 91
+      },
+      {
+        "skill": "cooking",
+        "level": 85
+      },
+      {
+        "skill": "crafting",
+        "level": 61
+      },
+      {
+        "skill": "firemaking",
+        "level": 60
+      },
+      {
+        "skill": "fletching",
+        "level": 95
+      },
+      {
+        "skill": "woodcutting",
+        "level": 55
+      },
+      {
+        "skill": "construction",
+        "level": 78
+      },
+      {
+        "skill": "hunter",
+        "level": 47
+      }
+    ]
+  },
+  "falador": {
+    "easy": [
+      {
+        "skill": "mining",
+        "level": 10
+      },
+      {
+        "skill": "agility",
+        "level": 5
+      },
+      {
+        "skill": "smithing",
+        "level": 13
+      },
+      {
+        "skill": "construction",
+        "level": 16
+      }
+    ],
+    "medium": [
+      {
+        "skill": "mining",
+        "level": 40
+      },
+      {
+        "skill": "agility",
+        "level": 42
+      },
+      {
+        "skill": "smithing",
+        "level": 59,
+        "ironman": true
+      },
+      {
+        "skill": "thieving",
+        "level": 40
+      },
+      {
+        "skill": "cooking",
+        "level": 20
+      },
+      {
+        "skill": "crafting",
+        "level": 40
+      },
+      {
+        "skill": "firemaking",
+        "level": 49
+      },
+      {
+        "skill": "fletching",
+        "level": 59,
+        "ironman": true
+      },
+      {
+        "skill": "woodcutting",
+        "level": 30
+      },
+      {
+        "skill": "farming",
+        "level": 47,
+        "ironman": true
+      },
+      {
+        "skill": "construction",
+        "level": 16
+      }
+    ],
+    "hard": [
+      {
+        "skill": "mining",
+        "level": 60
+      },
+      {
+        "skill": "agility",
+        "level": 59
+      },
+      {
+        "skill": "smithing",
+        "level": 59,
+        "ironman": true
+      },
+      {
+        "skill": "herblore",
+        "level": 52
+      },
+      {
+        "skill": "fishing",
+        "level": 53
+      },
+      {
+        "skill": "thieving",
+        "level": 58
+      },
+      {
+        "skill": "cooking",
+        "level": 53
+      },
+      {
+        "skill": "crafting",
+        "level": 40
+      },
+      {
+        "skill": "firemaking",
+        "level": 49
+      },
+      {
+        "skill": "fletching",
+        "level": 59,
+        "ironman": true
+      },
+      {
+        "skill": "woodcutting",
+        "level": 71
+      },
+      {
+        "skill": "runecraft",
+        "level": 56
+      },
+      {
+        "skill": "farming",
+        "level": 47,
+        "ironman": true
+      },
+      {
+        "skill": "construction",
+        "level": 16
+      }
+    ],
+    "elite": [
+      {
+        "skill": "mining",
+        "level": 60
+      },
+      {
+        "skill": "agility",
+        "level": 80
+      },
+      {
+        "skill": "smithing",
+        "level": 59,
+        "ironman": true
+      },
+      {
+        "skill": "herblore",
+        "level": 81
+      },
+      {
+        "skill": "fishing",
+        "level": 53
+      },
+      {
+        "skill": "thieving",
+        "level": 58
+      },
+      {
+        "skill": "cooking",
+        "level": 53
+      },
+      {
+        "skill": "crafting",
+        "level": 40
+      },
+      {
+        "skill": "firemaking",
+        "level": 49
+      },
+      {
+        "skill": "fletching",
+        "level": 59,
+        "ironman": true
+      },
+      {
+        "skill": "woodcutting",
+        "level": 75
+      },
+      {
+        "skill": "runecraft",
+        "level": 88
+      },
+      {
+        "skill": "farming",
+        "level": 91
+      },
+      {
+        "skill": "construction",
+        "level": 16
+      }
+    ]
+  },
+  "fremennik": {
+    "easy": [
+      {
+        "skill": "mining",
+        "level": 20
+      },
+      {
+        "skill": "smithing",
+        "level": 20
+      },
+      {
+        "skill": "thieving",
+        "level": 5
+      },
+      {
+        "skill": "crafting",
+        "level": 23
+      },
+      {
+        "skill": "firemaking",
+        "level": 15
+      },
+      {
+        "skill": "woodcutting",
+        "level": 15
+      },
+      {
+        "skill": "hunter",
+        "level": 11
+      }
+    ],
+    "medium": [
+      {
+        "skill": "mining",
+        "level": 40
+      },
+      {
+        "skill": "agility",
+        "level": 35
+      },
+      {
+        "skill": "smithing",
+        "level": 50
+      },
+      {
+        "skill": "thieving",
+        "level": 42
+      },
+      {
+        "skill": "crafting",
+        "level": 31
+      },
+      {
+        "skill": "firemaking",
+        "level": 40
+      },
+      {
+        "skill": "woodcutting",
+        "level": 50
+      },
+      {
+        "skill": "construction",
+        "level": 37
+      },
+      {
+        "skill": "hunter",
+        "level": 35
+      }
+    ],
+    "hard": [
+      {
+        "skill": "mining",
+        "level": 70
+      },
+      {
+        "skill": "agility",
+        "level": 35
+      },
+      {
+        "skill": "smithing",
+        "level": 60
+      },
+      {
+        "skill": "herblore",
+        "level": 66
+      },
+      {
+        "skill": "fishing",
+        "level": 53
+      },
+      {
+        "skill": "thieving",
+        "level": 75
+      },
+      {
+        "skill": "cooking",
+        "level": 53
+      },
+      {
+        "skill": "crafting",
+        "level": 61
+      },
+      {
+        "skill": "firemaking",
+        "level": 49
+      },
+      {
+        "skill": "woodcutting",
+        "level": 56
+      },
+      {
+        "skill": "construction",
+        "level": 37
+      },
+      {
+        "skill": "hunter",
+        "level": 55
+      }
+    ],
+    "elite": [
+      {
+        "skill": "mining",
+        "level": 70
+      },
+      {
+        "skill": "agility",
+        "level": 80
+      },
+      {
+        "skill": "smithing",
+        "level": 60
+      },
+      {
+        "skill": "herblore",
+        "level": 66
+      },
+      {
+        "skill": "fishing",
+        "level": 53
+      },
+      {
+        "skill": "thieving",
+        "level": 75
+      },
+      {
+        "skill": "cooking",
+        "level": 53
+      },
+      {
+        "skill": "crafting",
+        "level": 80
+      },
+      {
+        "skill": "firemaking",
+        "level": 49
+      },
+      {
+        "skill": "woodcutting",
+        "level": 56
+      },
+      {
+        "skill": "runecraft",
+        "level": 82
+      },
+      {
+        "skill": "construction",
+        "level": 37
+      },
+      {
+        "skill": "hunter",
+        "level": 55
+      }
+    ]
+  },
+  "kandarin": {
+    "easy": [
+      {
+        "skill": "agility",
+        "level": 20
+      },
+      {
+        "skill": "fishing",
+        "level": 16
+      },
+      {
+        "skill": "crafting",
+        "level": 42,
+        "ironman": true
+      },
+      {
+        "skill": "farming",
+        "level": 13
+      }
+    ],
+    "medium": [
+      {
+        "skill": "mining",
+        "level": 30
+      },
+      {
+        "skill": "agility",
+        "level": 36
+      },
+      {
+        "skill": "smithing",
+        "level": 59,
+        "ironman": true
+      },
+      {
+        "skill": "herblore",
+        "level": 48
+      },
+      {
+        "skill": "fishing",
+        "level": 46
+      },
+      {
+        "skill": "crafting",
+        "level": 42,
+        "ironman": true
+      },
+      {
+        "skill": "thieving",
+        "level": 47
+      },
+      {
+        "skill": "cooking",
+        "level": 43
+      },
+      {
+        "skill": "fletching",
+        "level": 59,
+        "ironman": true
+      },
+      {
+        "skill": "woodcutting",
+        "level": 36
+      },
+      {
+        "skill": "farming",
+        "level": 26
+      }
+    ],
+    "hard": [
+      {
+        "skill": "mining",
+        "level": 30
+      },
+      {
+        "skill": "agility",
+        "level": 60
+      },
+      {
+        "skill": "smithing",
+        "level": 75
+      },
+      {
+        "skill": "herblore",
+        "level": 48
+      },
+      {
+        "skill": "fishing",
+        "level": 70
+      },
+      {
+        "skill": "thieving",
+        "level": 53
+      },
+      {
+        "skill": "cooking",
+        "level": 43
+      },
+      {
+        "skill": "crafting",
+        "level": 42,
+        "ironman": true
+      },
+      {
+        "skill": "firemaking",
+        "level": 65
+      },
+      {
+        "skill": "fletching",
+        "level": 70
+      },
+      {
+        "skill": "woodcutting",
+        "level": 60
+      },
+      {
+        "skill": "farming",
+        "level": 26
+      },
+      {
+        "skill": "construction",
+        "level": 50
+      }
+    ],
+    "elite": [
+      {
+        "skill": "mining",
+        "level": 60
+      },
+      {
+        "skill": "agility",
+        "level": 60
+      },
+      {
+        "skill": "smithing",
+        "level": 90
+      },
+      {
+        "skill": "herblore",
+        "level": 86
+      },
+      {
+        "skill": "fishing",
+        "level": 76
+      },
+      {
+        "skill": "thieving",
+        "level": 53
+      },
+      {
+        "skill": "cooking",
+        "level": 80
+      },
+      {
+        "skill": "crafting",
+        "level": 85
+      },
+      {
+        "skill": "firemaking",
+        "level": 85
+      },
+      {
+        "skill": "fletching",
+        "level": 70
+      },
+      {
+        "skill": "woodcutting",
+        "level": 60
+      },
+      {
+        "skill": "farming",
+        "level": 79
+      },
+      {
+        "skill": "construction",
+        "level": 50
+      }
+    ]
+  },
+  "karamja": {
+    "easy": [
+      {
+        "skill": "mining",
+        "level": 40
+      },
+      {
+        "skill": "agility",
+        "level": 15
+      }
+    ],
+    "medium": [
+      {
+        "skill": "mining",
+        "level": 40
+      },
+      {
+        "skill": "agility",
+        "level": 32
+      },
+      {
+        "skill": "herblore",
+        "level": 3
+      },
+      {
+        "skill": "fishing",
+        "level": 65
+      },
+      {
+        "skill": "cooking",
+        "level": 16
+      },
+      {
+        "skill": "crafting",
+        "level": 20
+      },
+      {
+        "skill": "woodcutting",
+        "level": 50
+      },
+      {
+        "skill": "farming",
+        "level": 27
+      },
+      {
+        "skill": "hunter",
+        "level": 41
+      }
+    ],
+    "hard": [
+      {
+        "skill": "mining",
+        "level": 52
+      },
+      {
+        "skill": "agility",
+        "level": 53
+      },
+      {
+        "skill": "smithing",
+        "level": 59,
+        "ironman": true
+      },
+      {
+        "skill": "herblore",
+        "level": 25
+      },
+      {
+        "skill": "fishing",
+        "level": 65
+      },
+      {
+        "skill": "thieving",
+        "level": 50
+      },
+      {
+        "skill": "cooking",
+        "level": 53
+      },
+      {
+        "skill": "crafting",
+        "level": 50
+      },
+      {
+        "skill": "fletching",
+        "level": 59,
+        "ironman": true
+      },
+      {
+        "skill": "woodcutting",
+        "level": 50
+      },
+      {
+        "skill": "runecraft",
+        "level": 44
+      },
+      {
+        "skill": "farming",
+        "level": 27
+      },
+      {
+        "skill": "hunter",
+        "level": 41
+      }
+    ],
+    "elite": [
+      {
+        "skill": "mining",
+        "level": 52
+      },
+      {
+        "skill": "agility",
+        "level": 53
+      },
+      {
+        "skill": "smithing",
+        "level": 59,
+        "ironman": true
+      },
+      {
+        "skill": "herblore",
+        "level": 87
+      },
+      {
+        "skill": "fishing",
+        "level": 65
+      },
+      {
+        "skill": "thieving",
+        "level": 50
+      },
+      {
+        "skill": "cooking",
+        "level": 53
+      },
+      {
+        "skill": "crafting",
+        "level": 50
+      },
+      {
+        "skill": "fletching",
+        "level": 59,
+        "ironman": true
+      },
+      {
+        "skill": "woodcutting",
+        "level": 50
+      },
+      {
+        "skill": "runecraft",
+        "level": 91
+      },
+      {
+        "skill": "farming",
+        "level": 72
+      },
+      {
+        "skill": "hunter",
+        "level": 41
+      }
+    ]
+  },
+  "kourend": {
+    "easy": [
+      {
+        "skill": "mining",
+        "level": 15
+      },
+      {
+        "skill": "herblore",
+        "level": 12
+      },
+      {
+        "skill": "fishing",
+        "level": 20
+      },
+      {
+        "skill": "thieving",
+        "level": 25
+      },
+      {
+        "skill": "construction",
+        "level": 25
+      }
+    ],
+    "medium": [
+      {
+        "skill": "mining",
+        "level": 42
+      },
+      {
+        "skill": "agility",
+        "level": 49
+      },
+      {
+        "skill": "herblore",
+        "level": 12
+      },
+      {
+        "skill": "fishing",
+        "level": 43
+      },
+      {
+        "skill": "thieving",
+        "level": 25
+      },
+      {
+        "skill": "crafting",
+        "level": 31
+      },
+      {
+        "skill": "firemaking",
+        "level": 50
+      },
+      {
+        "skill": "woodcutting",
+        "level": 50
+      },
+      {
+        "skill": "farming",
+        "level": 45
+      },
+      {
+        "skill": "construction",
+        "level": 30
+      },
+      {
+        "skill": "hunter",
+        "level": 53
+      }
+    ],
+    "hard": [
+      {
+        "skill": "mining",
+        "level": 65
+      },
+      {
+        "skill": "agility",
+        "level": 49
+      },
+      {
+        "skill": "smithing",
+        "level": 70
+      },
+      {
+        "skill": "herblore",
+        "level": 31
+      },
+      {
+        "skill": "fishing",
+        "level": 43
+      },
+      {
+        "skill": "thieving",
+        "level": 49
+      },
+      {
+        "skill": "crafting",
+        "level": 61
+      },
+      {
+        "skill": "firemaking",
+        "level": 50
+      },
+      {
+        "skill": "fletching",
+        "level": 25
+      },
+      {
+        "skill": "woodcutting",
+        "level": 60
+      },
+      {
+        "skill": "farming",
+        "level": 74
+      },
+      {
+        "skill": "construction",
+        "level": 30
+      },
+      {
+        "skill": "hunter",
+        "level": 53
+      }
+    ],
+    "elite": [
+      {
+        "skill": "mining",
+        "level": 65
+      },
+      {
+        "skill": "agility",
+        "level": 49
+      },
+      {
+        "skill": "smithing",
+        "level": 70
+      },
+      {
+        "skill": "herblore",
+        "level": 31
+      },
+      {
+        "skill": "fishing",
+        "level": 82
+      },
+      {
+        "skill": "thieving",
+        "level": 49
+      },
+      {
+        "skill": "cooking",
+        "level": 84
+      },
+      {
+        "skill": "crafting",
+        "level": 61
+      },
+      {
+        "skill": "firemaking",
+        "level": 50
+      },
+      {
+        "skill": "fletching",
+        "level": 40
+      },
+      {
+        "skill": "woodcutting",
+        "level": 90
+      },
+      {
+        "skill": "runecraft",
+        "level": 77
+      },
+      {
+        "skill": "farming",
+        "level": 85
+      },
+      {
+        "skill": "construction",
+        "level": 30
+      },
+      {
+        "skill": "hunter",
+        "level": 53
+      }
+    ]
+  },
+  "lumbridge": {
+    "easy": [
+      {
+        "skill": "mining",
+        "level": 15
+      },
+      {
+        "skill": "fishing",
+        "level": 15
+      },
+      {
+        "skill": "firemaking",
+        "level": 15
+      },
+      {
+        "skill": "woodcutting",
+        "level": 15
+      },
+      {
+        "skill": "runecraft",
+        "level": 5
+      }
+    ],
+    "medium": [
+      {
+        "skill": "mining",
+        "level": 15
+      },
+      {
+        "skill": "agility",
+        "level": 20
+      },
+      {
+        "skill": "smithing",
+        "level": 59,
+        "ironman": true
+      },
+      {
+        "skill": "fishing",
+        "level": 30
+      },
+      {
+        "skill": "thieving",
+        "level": 38
+      },
+      {
+        "skill": "crafting",
+        "level": 38
+      },
+      {
+        "skill": "firemaking",
+        "level": 15
+      },
+      {
+        "skill": "fletching",
+        "level": 59,
+        "ironman": true
+      },
+      {
+        "skill": "woodcutting",
+        "level": 36
+      },
+      {
+        "skill": "runecraft",
+        "level": 23
+      },
+      {
+        "skill": "hunter",
+        "level": 42
+      }
+    ],
+    "hard": [
+      {
+        "skill": "mining",
+        "level": 50
+      },
+      {
+        "skill": "agility",
+        "level": 46
+      },
+      {
+        "skill": "smithing",
+        "level": 59,
+        "ironman": true
+      },
+      {
+        "skill": "herblore",
+        "level": 25
+      },
+      {
+        "skill": "fishing",
+        "level": 53
+      },
+      {
+        "skill": "thieving",
+        "level": 53
+      },
+      {
+        "skill": "cooking",
+        "level": 70
+      },
+      {
+        "skill": "crafting",
+        "level": 70
+      },
+      {
+        "skill": "firemaking",
+        "level": 65
+      },
+      {
+        "skill": "fletching",
+        "level": 59,
+        "ironman": true
+      },
+      {
+        "skill": "woodcutting",
+        "level": 57
+      },
+      {
+        "skill": "runecraft",
+        "level": 59
+      },
+      {
+        "skill": "farming",
+        "level": 63
+      },
+      {
+        "skill": "hunter",
+        "level": 42
+      }
+    ],
+    "elite": [
+      {
+        "skill": "mining",
+        "level": 72
+      },
+      {
+        "skill": "agility",
+        "level": 70
+      },
+      {
+        "skill": "smithing",
+        "level": 88
+      },
+      {
+        "skill": "herblore",
+        "level": 70
+      },
+      {
+        "skill": "fishing",
+        "level": 62
+      },
+      {
+        "skill": "thieving",
+        "level": 78
+      },
+      {
+        "skill": "cooking",
+        "level": 72
+      },
+      {
+        "skill": "crafting",
+        "level": 70
+      },
+      {
+        "skill": "firemaking",
+        "level": 75
+      },
+      {
+        "skill": "fletching",
+        "level": 70
+      },
+      {
+        "skill": "woodcutting",
+        "level": 75
+      },
+      {
+        "skill": "runecraft",
+        "level": 76
+      },
+      {
+        "skill": "farming",
+        "level": 70
+      },
+      {
+        "skill": "construction",
+        "level": 70
+      },
+      {
+        "skill": "hunter",
+        "level": 70
+      },
+      {
+        "skill": "sailing",
+        "level": 62
+      }
+    ]
+  },
+  "morytania": {
+    "easy": [
+      {
+        "skill": "cooking",
+        "level": 12
+      },
+      {
+        "skill": "crafting",
+        "level": 15
+      },
+      {
+        "skill": "farming",
+        "level": 47,
+        "ironman": true
+      }
+    ],
+    "medium": [
+      {
+        "skill": "mining",
+        "level": 15
+      },
+      {
+        "skill": "agility",
+        "level": 42
+      },
+      {
+        "skill": "smithing",
+        "level": 50
+      },
+      {
+        "skill": "herblore",
+        "level": 22
+      },
+      {
+        "skill": "fishing",
+        "level": 50
+      },
+      {
+        "skill": "cooking",
+        "level": 40
+      },
+      {
+        "skill": "crafting",
+        "level": 45
+      },
+      {
+        "skill": "fletching",
+        "level": 5
+      },
+      {
+        "skill": "woodcutting",
+        "level": 45
+      },
+      {
+        "skill": "farming",
+        "level": 47,
+        "ironman": true
+      },
+      {
+        "skill": "hunter",
+        "level": 29
+      }
+    ],
+    "hard": [
+      {
+        "skill": "mining",
+        "level": 55
+      },
+      {
+        "skill": "agility",
+        "level": 71
+      },
+      {
+        "skill": "smithing",
+        "level": 50
+      },
+      {
+        "skill": "herblore",
+        "level": 22
+      },
+      {
+        "skill": "fishing",
+        "level": 50
+      },
+      {
+        "skill": "thieving",
+        "level": 53
+      },
+      {
+        "skill": "cooking",
+        "level": 40
+      },
+      {
+        "skill": "crafting",
+        "level": 45
+      },
+      {
+        "skill": "firemaking",
+        "level": 50
+      },
+      {
+        "skill": "fletching",
+        "level": 10
+      },
+      {
+        "skill": "woodcutting",
+        "level": 50
+      },
+      {
+        "skill": "farming",
+        "level": 53
+      },
+      {
+        "skill": "construction",
+        "level": 50
+      },
+      {
+        "skill": "hunter",
+        "level": 29
+      }
+    ],
+    "elite": [
+      {
+        "skill": "mining",
+        "level": 60
+      },
+      {
+        "skill": "agility",
+        "level": 71
+      },
+      {
+        "skill": "smithing",
+        "level": 50
+      },
+      {
+        "skill": "herblore",
+        "level": 22
+      },
+      {
+        "skill": "fishing",
+        "level": 96
+      },
+      {
+        "skill": "thieving",
+        "level": 53
+      },
+      {
+        "skill": "cooking",
+        "level": 40
+      },
+      {
+        "skill": "crafting",
+        "level": 84
+      },
+      {
+        "skill": "firemaking",
+        "level": 80
+      },
+      {
+        "skill": "fletching",
+        "level": 10
+      },
+      {
+        "skill": "woodcutting",
+        "level": 55
+      },
+      {
+        "skill": "farming",
+        "level": 53
+      },
+      {
+        "skill": "construction",
+        "level": 50
+      },
+      {
+        "skill": "hunter",
+        "level": 29
+      }
+    ]
+  },
+  "varrock": {
+    "easy": [
+      {
+        "skill": "mining",
+        "level": 15
+      },
+      {
+        "skill": "agility",
+        "level": 13
+      },
+      {
+        "skill": "fishing",
+        "level": 20
+      },
+      {
+        "skill": "thieving",
+        "level": 5
+      },
+      {
+        "skill": "crafting",
+        "level": 8
+      },
+      {
+        "skill": "runecraft",
+        "level": 9
+      }
+    ],
+    "medium": [
+      {
+        "skill": "mining",
+        "level": 15
+      },
+      {
+        "skill": "agility",
+        "level": 30
+      },
+      {
+        "skill": "herblore",
+        "level": 10
+      },
+      {
+        "skill": "fishing",
+        "level": 20
+      },
+      {
+        "skill": "thieving",
+        "level": 25
+      },
+      {
+        "skill": "crafting",
+        "level": 36
+      },
+      {
+        "skill": "firemaking",
+        "level": 40
+      },
+      {
+        "skill": "runecraft",
+        "level": 9
+      },
+      {
+        "skill": "farming",
+        "level": 30
+      }
+    ],
+    "hard": [
+      {
+        "skill": "mining",
+        "level": 15
+      },
+      {
+        "skill": "agility",
+        "level": 51
+      },
+      {
+        "skill": "herblore",
+        "level": 10
+      },
+      {
+        "skill": "smithing",
+        "level": 20
+      },
+      {
+        "skill": "fishing",
+        "level": 20
+      },
+      {
+        "skill": "thieving",
+        "level": 53
+      },
+      {
+        "skill": "crafting",
+        "level": 36
+      },
+      {
+        "skill": "firemaking",
+        "level": 60
+      },
+      {
+        "skill": "fletching",
+        "level": 10
+      },
+      {
+        "skill": "woodcutting",
+        "level": 60
+      },
+      {
+        "skill": "runecraft",
+        "level": 9
+      },
+      {
+        "skill": "farming",
+        "level": 68
+      },
+      {
+        "skill": "construction",
+        "level": 50
+      },
+      {
+        "skill": "hunter",
+        "level": 69,
+        "ironman": true
+      }
+    ],
+    "elite": [
+      {
+        "skill": "mining",
+        "level": 60
+      },
+      {
+        "skill": "agility",
+        "level": 51
+      },
+      {
+        "skill": "smithing",
+        "level": 89
+      },
+      {
+        "skill": "herblore",
+        "level": 90
+      },
+      {
+        "skill": "fishing",
+        "level": 20
+      },
+      {
+        "skill": "thieving",
+        "level": 53
+      },
+      {
+        "skill": "cooking",
+        "level": 95
+      },
+      {
+        "skill": "crafting",
+        "level": 61
+      },
+      {
+        "skill": "firemaking",
+        "level": 60
+      },
+      {
+        "skill": "fletching",
+        "level": 81
+      },
+      {
+        "skill": "woodcutting",
+        "level": 60
+      },
+      {
+        "skill": "runecraft",
+        "level": 78
+      },
+      {
+        "skill": "farming",
+        "level": 68
+      },
+      {
+        "skill": "construction",
+        "level": 50
+      },
+      {
+        "skill": "hunter",
+        "level": 69,
+        "ironman": true
+      }
+    ]
+  },
+  "western": {
+    "easy": [
+      {
+        "skill": "mining",
+        "level": 15
+      },
+      {
+        "skill": "cooking",
+        "level": 30
+      },
+      {
+        "skill": "fletching",
+        "level": 20
+      },
+      {
+        "skill": "hunter",
+        "level": 9
+      }
+    ],
+    "medium": [
+      {
+        "skill": "mining",
+        "level": 40
+      },
+      {
+        "skill": "agility",
+        "level": 37
+      },
+      {
+        "skill": "smithing",
+        "level": 30
+      },
+      {
+        "skill": "herblore",
+        "level": 18
+      },
+      {
+        "skill": "fishing",
+        "level": 46
+      },
+      {
+        "skill": "cooking",
+        "level": 42
+      },
+      {
+        "skill": "crafting",
+        "level": 25
+      },
+      {
+        "skill": "firemaking",
+        "level": 35
+      },
+      {
+        "skill": "fletching",
+        "level": 20
+      },
+      {
+        "skill": "woodcutting",
+        "level": 35
+      },
+      {
+        "skill": "construction",
+        "level": 5
+      },
+      {
+        "skill": "hunter",
+        "level": 31
+      }
+    ],
+    "hard": [
+      {
+        "skill": "mining",
+        "level": 70
+      },
+      {
+        "skill": "agility",
+        "level": 56
+      },
+      {
+        "skill": "smithing",
+        "level": 45
+      },
+      {
+        "skill": "herblore",
+        "level": 18
+      },
+      {
+        "skill": "fishing",
+        "level": 62
+      },
+      {
+        "skill": "thieving",
+        "level": 75
+      },
+      {
+        "skill": "cooking",
+        "level": 70
+      },
+      {
+        "skill": "crafting",
+        "level": 40
+      },
+      {
+        "skill": "firemaking",
+        "level": 50
+      },
+      {
+        "skill": "fletching",
+        "level": 20
+      },
+      {
+        "skill": "woodcutting",
+        "level": 50
+      },
+      {
+        "skill": "farming",
+        "level": 68
+      },
+      {
+        "skill": "construction",
+        "level": 65
+      },
+      {
+        "skill": "hunter",
+        "level": 69
+      }
+    ],
+    "elite": [
+      {
+        "skill": "mining",
+        "level": 70
+      },
+      {
+        "skill": "agility",
+        "level": 85
+      },
+      {
+        "skill": "smithing",
+        "level": 45
+      },
+      {
+        "skill": "herblore",
+        "level": 18
+      },
+      {
+        "skill": "fishing",
+        "level": 62
+      },
+      {
+        "skill": "thieving",
+        "level": 85
+      },
+      {
+        "skill": "cooking",
+        "level": 70
+      },
+      {
+        "skill": "crafting",
+        "level": 40
+      },
+      {
+        "skill": "firemaking",
+        "level": 50
+      },
+      {
+        "skill": "fletching",
+        "level": 85
+      },
+      {
+        "skill": "woodcutting",
+        "level": 50
+      },
+      {
+        "skill": "farming",
+        "level": 75
+      },
+      {
+        "skill": "construction",
+        "level": 65
+      },
+      {
+        "skill": "hunter",
+        "level": 69
+      }
+    ]
+  },
+  "wilderness": {
+    "easy": [
+      {
+        "skill": "mining",
+        "level": 15
+      },
+      {
+        "skill": "agility",
+        "level": 15
+      }
+    ],
+    "medium": [
+      {
+        "skill": "mining",
+        "level": 55
+      },
+      {
+        "skill": "agility",
+        "level": 52
+      },
+      {
+        "skill": "smithing",
+        "level": 50
+      },
+      {
+        "skill": "woodcutting",
+        "level": 61
+      }
+    ],
+    "hard": [
+      {
+        "skill": "mining",
+        "level": 55
+      },
+      {
+        "skill": "agility",
+        "level": 64
+      },
+      {
+        "skill": "smithing",
+        "level": 75
+      },
+      {
+        "skill": "fishing",
+        "level": 53
+      },
+      {
+        "skill": "woodcutting",
+        "level": 61
+      },
+      {
+        "skill": "hunter",
+        "level": 67
+      }
+    ],
+    "elite": [
+      {
+        "skill": "mining",
+        "level": 85
+      },
+      {
+        "skill": "agility",
+        "level": 64
+      },
+      {
+        "skill": "smithing",
+        "level": 90
+      },
+      {
+        "skill": "herblore",
+        "level": 10
+      },
+      {
+        "skill": "fishing",
+        "level": 85
+      },
+      {
+        "skill": "thieving",
+        "level": 84
+      },
+      {
+        "skill": "cooking",
+        "level": 90
+      },
+      {
+        "skill": "firemaking",
+        "level": 75
+      },
+      {
+        "skill": "fletching",
+        "level": 10
+      },
+      {
+        "skill": "woodcutting",
+        "level": 75
+      },
+      {
+        "skill": "hunter",
+        "level": 67
+      }
+    ]
+  }
+}

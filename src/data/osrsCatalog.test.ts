@@ -60,18 +60,35 @@ describe('OSRS skill catalog', () => {
     expect(cape?.parentIds.at(-1)).toBe(osrsTileId('woodcutting', '81-90'))
   })
 
-  it('does not overwrite existing catalog tiles on merge', () => {
-    const id = osrsTileId('woodcutting', '1-10')
+  it('keeps catalog status and syncs parentIds on merge', () => {
+    const skillId = osrsTileId('woodcutting', '1-10')
+    const diaryId = osrsDiaryTileId('kandarin', 'easy')
     const existing = [
       {
-        id,
+        id: skillId,
         name: 'custom',
         status: 'completed' as const,
+        parentIds: ['stale'],
+      },
+      {
+        id: diaryId,
+        name: 'Kandarin Easy',
+        status: 'locked' as const,
         parentIds: [],
       },
     ]
     const merged = mergeOsrsSkillTiles(existing)
-    expect(merged.find((tile) => tile.id === id)?.status).toBe('completed')
+    const skill = merged.find((tile) => tile.id === skillId)
+    const diary = merged.find((tile) => tile.id === diaryId)
+    expect(skill?.status).toBe('completed')
+    expect(skill?.parentIds).toEqual([])
+    expect(diary?.status).toBe('locked')
+    expect(diary?.parentIds).toEqual([
+      osrsTileId('agility', '11-20'),
+      osrsTileId('fishing', '11-20'),
+      osrsTileId('crafting', '41-50'),
+      osrsTileId('farming', '11-20'),
+    ])
     expect(merged).toHaveLength(208)
   })
 
@@ -139,24 +156,33 @@ describe('OSRS achievement diaries', () => {
     expect(tiles).toHaveLength(48)
     expect(tiles.every((tile) => tile.status === 'unseen')).toBe(true)
     expect(OSRS_DIARIES.map((diary) => diary.name)).toContain('Karamja')
+    expect(OSRS_DIARIES.every((diary) => diary.wikiTitle.length > 0)).toBe(true)
     expect(buildOsrsCatalogTiles()).toHaveLength(208)
   })
 
-  it('names tiers and chains harder tiers on easier ones', () => {
+  it('names tiers and chains harder tiers before skill parents', () => {
     expect(osrsDiaryTileName('Karamja', { id: 'easy', name: 'Easy' })).toBe(
       'Karamja Easy',
     )
     const tiles = buildOsrsDiaryTiles()
     const byId = new Map(tiles.map((tile) => [tile.id, tile]))
+    const isSkillParent = (id: string) =>
+      id.startsWith('osrs:') && !id.startsWith('osrs:diary:')
 
-    expect(byId.get(osrsDiaryTileId('karamja', 'easy'))?.parentIds).toEqual([])
-    expect(byId.get(osrsDiaryTileId('karamja', 'medium'))?.parentIds).toEqual([
-      osrsDiaryTileId('karamja', 'easy'),
-    ])
-    expect(byId.get(osrsDiaryTileId('karamja', 'elite'))?.parentIds).toEqual([
+    const easy = byId.get(osrsDiaryTileId('karamja', 'easy'))
+    expect(easy?.parentIds.every(isSkillParent)).toBe(true)
+    expect(easy?.parentIds.length).toBeGreaterThan(0)
+
+    const medium = byId.get(osrsDiaryTileId('karamja', 'medium'))
+    expect(medium?.parentIds[0]).toBe(osrsDiaryTileId('karamja', 'easy'))
+    expect(medium?.parentIds.slice(1).every(isSkillParent)).toBe(true)
+
+    const elite = byId.get(osrsDiaryTileId('karamja', 'elite'))
+    expect(elite?.parentIds.slice(0, 3)).toEqual([
       osrsDiaryTileId('karamja', 'easy'),
       osrsDiaryTileId('karamja', 'medium'),
       osrsDiaryTileId('karamja', 'hard'),
     ])
+    expect(elite?.parentIds.slice(3).every(isSkillParent)).toBe(true)
   })
 })

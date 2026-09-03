@@ -1,14 +1,30 @@
 [
-  { "id": "ardougne", "name": "Ardougne" },
-  { "id": "desert", "name": "Desert" },
-  { "id": "falador", "name": "Falador" },
-  { "id": "fremennik", "name": "Fremennik Province" },
-  { "id": "kandarin", "name": "Kandarin" },
-  { "id": "karamja", "name": "Karamja" },
-  { "id": "kourend", "name": "Kourend & Kebos" },
-  { "id": "lumbridge", "name": "Lumbridge & Draynor" },
-  { "id": "morytania", "name": "Morytania" },
-  { "id": "varrock", "name": "Varrock" },
-  { "id": "western", "name": "Western Provinces" },
-  { "id": "wilderness", "name": "Wilderness" }
+  { "id": "ardougne", "name": "Ardougne", "wikiTitle": "Ardougne Diary" },
+  { "id": "desert", "name": "Desert", "wikiTitle": "Desert Diary" },
+  { "id": "falador", "name": "Falador", "wikiTitle": "Falador Diary" },
+  {
+    "id": "fremennik",
+    "name": "Fremennik Province",
+    "wikiTitle": "Fremennik Diary"
+  },
+  { "id": "kandarin", "name": "Kandarin", "wikiTitle": "Kandarin Diary" },
+  { "id": "karamja", "name": "Karamja", "wikiTitle": "Karamja Diary" },
+  {
+    "id": "kourend",
+    "name": "Kourend & Kebos",
+    "wikiTitle": "Kourend & Kebos Diary"
+  },
+  {
+    "id": "lumbridge",
+    "name": "Lumbridge & Draynor",
+    "wikiTitle": "Lumbridge & Draynor Diary"
+  },
+  { "id": "morytania", "name": "Morytania", "wikiTitle": "Morytania Diary" },
+  { "id": "varrock", "name": "Varrock", "wikiTitle": "Varrock Diary" },
+  {
+    "id": "western",
+    "name": "Western Provinces",
+    "wikiTitle": "Western Provinces Diary"
+  },
+  { "id": "wilderness", "name": "Wilderness", "wikiTitle": "Wilderness Diary" }
 ]

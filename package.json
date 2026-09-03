@@ -12,7 +12,8 @@
     "typecheck": "tsc -b --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "fetch-diary-reqs": "node --experimental-strip-types scripts/fetch-diary-reqs.ts"
   },
   "dependencies": {
     "react": "^19.2.8",
