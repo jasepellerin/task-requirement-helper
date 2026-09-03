@@ -1,0 +1,44 @@
+{
+  "bone-voyage": [{ "name": "Volcanic Mine", "wikiTitle": "Volcanic Mine" }],
+  "cabin-fever": [
+    { "name": "Trouble Brewing", "wikiTitle": "Trouble Brewing" }
+  ],
+  "darkness-of-hallowvale": [
+    { "name": "Burgh de Rott Ramble", "wikiTitle": "Temple Trekking" }
+  ],
+  "fallen-from-grace": [
+    { "name": "Golem crafting", "wikiTitle": "Golem crafting" }
+  ],
+  "icthlarins-little-helper": [
+    { "name": "Pyramid Plunder", "wikiTitle": "Pyramid Plunder" }
+  ],
+  "in-aid-of-the-myreque": [
+    { "name": "Temple Trekking", "wikiTitle": "Temple Trekking" }
+  ],
+  "jungle-potion": [
+    { "name": "Tai Bwo Wannai Cleanup", "wikiTitle": "Tai Bwo Wannai Cleanup" }
+  ],
+  "prince-ali-rescue": [
+    { "name": "Sorceress's Garden", "wikiTitle": "Sorceress's Garden" }
+  ],
+  "ratcatchers": [{ "name": "Rat Pits", "wikiTitle": "Rat Pits" }],
+  "shades-of-mortton": [
+    { "name": "Shades of Mort'ton", "wikiTitle": "Shades of Mort'ton" }
+  ],
+  "sins-of-the-father": [
+    { "name": "Hallowed Sepulchre", "wikiTitle": "Hallowed Sepulchre" }
+  ],
+  "sleeping-giants": [
+    { "name": "Giants' Foundry", "wikiTitle": "Giants' Foundry" }
+  ],
+  "song-of-the-elves": [
+    { "name": "The Gauntlet", "wikiTitle": "The Gauntlet" }
+  ],
+  "tears-of-guthix": [
+    { "name": "Tears of Guthix", "wikiTitle": "Tears of Guthix" }
+  ],
+  "temple-of-the-eye": [
+    { "name": "Guardians of the Rift", "wikiTitle": "Guardians of the Rift" }
+  ],
+  "the-giant-dwarf": [{ "name": "Blast Furnace", "wikiTitle": "Blast Furnace" }]
+}

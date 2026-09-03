@@ -1,10 +1,12 @@
 import {
+  tileMinigames,
   tileSlayerMaster,
   tileSlayerMonsters,
   tileTeleportItems,
   tileTeleports,
   tileTransport,
 } from '../data/osrsCatalog.ts'
+import { MinigameMark } from './MinigameMark.tsx'
 import { SlayerMasterMark } from './SlayerMasterMark.tsx'
 import { SlayerMonsterMark } from './SlayerMonsterMark.tsx'
 import { TeleportItemMark } from './TeleportItemMark.tsx'
@@ -22,6 +24,7 @@ export function TileUnlockMarks({ tileId, linked }: TileUnlockMarksProps) {
   const transport = tileTransport(tileId)
   const teleports = tileTeleports(tileId)
   const teleportItems = tileTeleportItems(tileId)
+  const minigames = tileMinigames(tileId)
 
   return (
     <>
@@ -39,6 +42,9 @@ export function TileUnlockMarks({ tileId, linked }: TileUnlockMarksProps) {
       ) : null}
       {teleportItems.length > 0 ? (
         <TeleportItemMark items={teleportItems} linked={linked} />
+      ) : null}
+      {minigames.length > 0 ? (
+        <MinigameMark minigames={minigames} linked={linked} />
       ) : null}
     </>
   )

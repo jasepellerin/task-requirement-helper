@@ -17,6 +17,7 @@ import slayerMonstersData from './osrs-quest-slayer-monsters.json'
 import transportData from './osrs-quest-transport.json'
 import teleportsData from './osrs-quest-teleports.json'
 import teleportItemsData from './osrs-quest-teleport-items.json'
+import minigamesData from './osrs-quest-minigames.json'
 
 export type OsrsSkill = {
   id: string
@@ -71,6 +72,11 @@ export type TeleportItemUnlock = {
   icon: string
 }
 
+export type MinigameUnlock = {
+  name: string
+  wikiTitle: string
+}
+
 export type CatalogDef = {
   id: string
   name: string
@@ -87,6 +93,7 @@ export type CatalogDef = {
   transport?: TransportUnlock[]
   teleports?: TeleportUnlock[]
   teleportItems?: TeleportItemUnlock[]
+  minigames?: MinigameUnlock[]
   reqs: CatalogReq[]
 }
 
@@ -108,6 +115,7 @@ const QUEST_TELEPORT_ITEMS = teleportItemsData as Record<
   string,
   TeleportItemUnlock[]
 >
+const QUEST_MINIGAMES = minigamesData as Record<string, MinigameUnlock[]>
 export { OSRS_QUESTS, osrsQuestTileId } from './questReqs.ts'
 export type { OsrsQuest } from './questReqs.ts'
 
@@ -202,6 +210,7 @@ function buildQuestDefs(): CatalogDef[] {
     const transport = QUEST_TRANSPORT[quest.id]
     const teleports = QUEST_TELEPORTS[quest.id]
     const teleportItems = QUEST_TELEPORT_ITEMS[quest.id]
+    const minigames = QUEST_MINIGAMES[quest.id]
     return {
       id: osrsQuestTileId(quest.id),
       name: quest.name,
@@ -220,6 +229,7 @@ function buildQuestDefs(): CatalogDef[] {
       ...(transport && transport.length > 0 ? { transport } : {}),
       ...(teleports && teleports.length > 0 ? { teleports } : {}),
       ...(teleportItems && teleportItems.length > 0 ? { teleportItems } : {}),
+      ...(minigames && minigames.length > 0 ? { minigames } : {}),
       reqs: [
         ...(reqs?.quests ?? []).map((id) => ({
           type: 'tile' as const,
@@ -290,6 +300,10 @@ export function tileTeleports(tileId: string): TeleportUnlock[] {
 
 export function tileTeleportItems(tileId: string): TeleportItemUnlock[] {
   return CATALOG_BY_ID.get(tileId)?.teleportItems ?? []
+}
+
+export function tileMinigames(tileId: string): MinigameUnlock[] {
+  return CATALOG_BY_ID.get(tileId)?.minigames ?? []
 }
 
 export type KindFilter = Record<TileKind, boolean>

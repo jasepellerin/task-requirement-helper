@@ -2,7 +2,7 @@ import { tileGp } from '../data/osrsCatalog.ts'
 import { formatGp } from '../data/questReqs.ts'
 import { blockingParentCount } from '../domain/readiness.ts'
 import type { Tile } from '../domain/types.ts'
-import { StarButton } from './StatusPicker.tsx'
+import { LockIcon, StarButton } from './StatusPicker.tsx'
 import { TileUnlockMarks } from './TileUnlockMarks.tsx'
 
 type TileCardProps = {
@@ -28,7 +28,16 @@ export function TileCard({ tile, byId, onOpen, onStar }: TileCardProps) {
             {gp !== undefined ? (
               <span className="tile-gold">{formatGp(gp)}</span>
             ) : null}
-            {blocking > 0 ? <span>Blocked by {blocking}</span> : null}
+            {blocking > 0 ? (
+              <span
+                className="tile-card-blocked"
+                title={`Blocked by ${blocking}`}
+              >
+                <LockIcon />
+                <span className="sr-only">Blocked by </span>
+                {blocking}
+              </span>
+            ) : null}
           </p>
         ) : null}
       </button>

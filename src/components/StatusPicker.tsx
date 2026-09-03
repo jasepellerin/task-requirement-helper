@@ -78,6 +78,23 @@ export function StarButton({
   )
 }
 
+function LockGlyph() {
+  return (
+    <>
+      <rect x="4" y="11" width="16" height="10" rx="2" />
+      <path d="M8 11V8a4 4 0 0 1 8 0v3" />
+    </>
+  )
+}
+
+export function LockIcon() {
+  return (
+    <Icon>
+      <LockGlyph />
+    </Icon>
+  )
+}
+
 export function StatusIcon({ status }: { status: TileStatus }) {
   return (
     <span className={`status-glyph status-glyph-${status}`}>
@@ -90,12 +107,7 @@ export function StatusIcon({ status }: { status: TileStatus }) {
             <circle cx="12" cy="12" r="3" />
           </>
         ) : null}
-        {status === 'locked' ? (
-          <>
-            <rect x="4" y="11" width="16" height="10" rx="2" />
-            <path d="M8 11V8a4 4 0 0 1 8 0v3" />
-          </>
-        ) : null}
+        {status === 'locked' ? <LockGlyph /> : null}
         {status === 'unlocked' ? (
           <>
             <rect x="4" y="11" width="16" height="10" rx="2" />

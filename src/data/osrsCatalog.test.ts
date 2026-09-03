@@ -27,6 +27,7 @@ import {
   tileItems,
   tileKind,
   tileLength,
+  tileMinigames,
   tileRewards,
   tileSlayerMaster,
   tileSlayerMonsters,
@@ -537,6 +538,38 @@ describe('OSRS quests', () => {
     expect(tileTeleportItems(osrsTileId('agility', '1-10'))).toEqual([])
     const marked = CATALOG.filter((def) => (def.teleportItems?.length ?? 0) > 0)
     expect(marked).toHaveLength(18)
+    expect(marked.every((def) => def.kind === 'quest')).toBe(true)
+  })
+
+  it('marks quests that unlock minigames', () => {
+    expect(tileMinigames(osrsQuestTileId('temple-of-the-eye'))).toEqual([
+      { name: 'Guardians of the Rift', wikiTitle: 'Guardians of the Rift' },
+    ])
+    expect(tileMinigames(osrsQuestTileId('sleeping-giants'))).toEqual([
+      { name: "Giants' Foundry", wikiTitle: "Giants' Foundry" },
+    ])
+    expect(tileMinigames(osrsQuestTileId('tears-of-guthix'))).toEqual([
+      { name: 'Tears of Guthix', wikiTitle: 'Tears of Guthix' },
+    ])
+    expect(tileMinigames(osrsQuestTileId('sins-of-the-father'))).toEqual([
+      { name: 'Hallowed Sepulchre', wikiTitle: 'Hallowed Sepulchre' },
+    ])
+    expect(tileMinigames(osrsQuestTileId('song-of-the-elves'))).toEqual([
+      { name: 'The Gauntlet', wikiTitle: 'The Gauntlet' },
+    ])
+    expect(tileMinigames(osrsQuestTileId('in-aid-of-the-myreque'))).toEqual([
+      { name: 'Temple Trekking', wikiTitle: 'Temple Trekking' },
+    ])
+    expect(tileMinigames(osrsQuestTileId('darkness-of-hallowvale'))).toEqual([
+      { name: 'Burgh de Rott Ramble', wikiTitle: 'Temple Trekking' },
+    ])
+    expect(tileMinigames(osrsQuestTileId('the-giant-dwarf'))).toEqual([
+      { name: 'Blast Furnace', wikiTitle: 'Blast Furnace' },
+    ])
+    expect(tileMinigames(osrsQuestTileId('cooks-assistant'))).toEqual([])
+    expect(tileMinigames(osrsTileId('agility', '1-10'))).toEqual([])
+    const marked = CATALOG.filter((def) => (def.minigames?.length ?? 0) > 0)
+    expect(marked).toHaveLength(16)
     expect(marked.every((def) => def.kind === 'quest')).toBe(true)
   })
 })
