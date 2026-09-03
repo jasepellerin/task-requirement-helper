@@ -71,6 +71,20 @@ p {
   justify-content: space-between;
   align-items: center;
   gap: 16px;
+}
+
+.toolbar-start,
+.toolbar-end,
+.toolbar-nav,
+.toolbar-actions,
+.modal-actions-end {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.toolbar-start {
+  min-width: 0;
   flex-wrap: wrap;
 }
 
@@ -79,16 +93,65 @@ p {
   letter-spacing: -0.04em;
 }
 
-.empty,
-.hero-empty {
-  color: var(--muted);
+.btn.toolbar-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  border-color: transparent;
+  background: transparent;
+  padding: 8px 10px;
 }
 
-.toolbar-actions,
-.modal-actions-end {
+.btn.toolbar-link:hover,
+.btn.toolbar-link:focus-visible {
+  border-color: var(--border);
+  background: var(--card);
+}
+
+.btn.icon-only {
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  display: grid;
+  place-items: center;
+}
+
+.toolbar-menu {
+  position: relative;
+}
+
+.toolbar-menu-list {
+  position: absolute;
+  top: calc(100% + 6px);
+  right: 0;
+  min-width: 148px;
+  padding: 6px;
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  box-shadow: 0 10px 24px rgb(0 0 0 / 0.12);
+  z-index: 20;
   display: flex;
-  gap: 8px;
-  flex-wrap: wrap;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.toolbar-menu-item {
+  appearance: none;
+  width: 100%;
+  text-align: left;
+  font: inherit;
+  color: inherit;
+  background: transparent;
+  border: 0;
+  border-radius: 8px;
+  padding: 8px 10px;
+  cursor: pointer;
+}
+
+.toolbar-menu-item:hover,
+.toolbar-menu-item:focus-visible {
+  background: color-mix(in srgb, var(--primary) 10%, transparent);
 }
 
 .btn {
@@ -178,6 +241,12 @@ p {
 
 .completed-modal .column-header h2 {
   color: var(--completed);
+}
+
+.column-header span,
+.empty,
+.hero-empty {
+  color: var(--muted);
 }
 
 .column-header span,
