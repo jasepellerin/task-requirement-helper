@@ -33,8 +33,12 @@ export function tileGp(tileId: string): number | undefined {
   return quest?.gp && quest.gp > 0 ? quest.gp : undefined
 }
 
+export function questReqsFor(questId: string): QuestReqs | undefined {
+  return QUEST_REQS[questId]
+}
+
 export function questParentsFor(questId: string): string[] {
-  const reqs = QUEST_REQS[questId]
+  const reqs = questReqsFor(questId)
   if (!reqs) return []
   const questIds = reqs.quests.map((id) => osrsQuestTileId(id))
   const skillIds = reqs.skills.map(

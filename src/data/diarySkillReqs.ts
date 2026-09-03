@@ -1,6 +1,7 @@
 import reqsData from './osrs-diary-skill-reqs.json'
 import bracketsData from './skill-brackets.json'
 import type {
+  DiarySkillReq,
   DiarySkillReqsFile,
   DiarySkillTier,
 } from './parseDiaryWikitext.ts'
@@ -28,9 +29,15 @@ export function coveringBracketId(level: number): string {
   return bracket?.id ?? '91-99'
 }
 
+export function diarySkillReqsFor(
+  diaryId: string,
+  tierId: string,
+): DiarySkillReq[] {
+  return DIARY_SKILL_REQS[diaryId]?.[tierId as DiarySkillTier] ?? []
+}
+
 export function skillParentsFor(diaryId: string, tierId: string): string[] {
-  const reqs = DIARY_SKILL_REQS[diaryId]?.[tierId as DiarySkillTier] ?? []
-  const ids = reqs.map(
+  const ids = diarySkillReqsFor(diaryId, tierId).map(
     (req) => `osrs:${req.skill}:${coveringBracketId(req.level)}`,
   )
   return [...new Set(ids)]

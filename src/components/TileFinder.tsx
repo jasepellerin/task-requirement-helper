@@ -1,5 +1,6 @@
 import { useEffect, useId, useMemo, useState } from 'react'
 import { formatGp, tileGp } from '../data/questReqs.ts'
+import { requirementSummary } from '../data/requirementViews.ts'
 import { searchTiles } from '../domain/search.ts'
 import { STATUS_LABEL, type Tile } from '../domain/types.ts'
 
@@ -13,15 +14,7 @@ type TileFinderProps = {
 function resultMeta(tile: Tile, tiles: Tile[]): string {
   const gp = tileGp(tile.id)
   const gold = gp !== undefined ? formatGp(gp) : null
-  const parents =
-    tile.parentIds.length === 0
-      ? 'No prerequisites'
-      : tile.parentIds
-          .map(
-            (id) =>
-              tiles.find((candidate) => candidate.id === id)?.name ?? 'Missing',
-          )
-          .join(', ')
+  const parents = requirementSummary(tile, tiles)
   return gold ? `${gold} · ${parents}` : parents
 }
 

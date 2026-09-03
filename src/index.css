@@ -332,6 +332,11 @@ p {
   min-width: 0;
 }
 
+.req-title {
+  font-weight: 600;
+  overflow-wrap: anywhere;
+}
+
 .req-name {
   appearance: none;
   font: inherit;
@@ -345,8 +350,22 @@ p {
   overflow-wrap: anywhere;
 }
 
-.req-name:hover {
+.req-name:hover,
+.req-cover:hover {
   color: var(--primary);
+}
+
+.req-cover {
+  appearance: none;
+  font: inherit;
+  font-size: inherit;
+  font-weight: 500;
+  color: inherit;
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  text-align: left;
 }
 
 .req-blocking {

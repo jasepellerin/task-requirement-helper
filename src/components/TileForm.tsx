@@ -1,5 +1,6 @@
 import { useEffect, useId, useMemo, useState } from 'react'
 import { formatGp, tileGp } from '../data/questReqs.ts'
+import { requirementViews } from '../data/requirementViews.ts'
 import { tileWikiUrl } from '../data/wiki.ts'
 import { wouldCreateCycle } from '../domain/graph.ts'
 import { parentIsSatisfied } from '../domain/readiness.ts'
@@ -25,8 +26,9 @@ type TileFormProps = {
   onOpenTile?: (id: string) => void
 }
 
-function parentLabel(tiles: Tile[], id: string): string {
-  return tiles.find((candidate) => candidate.id === id)?.name ?? 'Missing'
+function parentStatusText(parent: Tile | undefined, blocking: boolean): string {
+  if (!parent) return 'Missing · blocking'
+  return `${STATUS_LABEL[parent.status]}${blocking ? ' · blocking' : ''}`
 }
 
 export function TileForm({
@@ -57,6 +59,13 @@ export function TileForm({
     })
     return searchTiles(pool, parentQuery)
   }, [parentIds, parentQuery, tile, tiles])
+
+  const reqViews = useMemo(() => {
+    const current: Tile = tile
+      ? { ...tile, parentIds }
+      : { id: '', name, status, parentIds }
+    return requirementViews(current, tiles)
+  }, [name, parentIds, status, tile, tiles])
 
   useEffect(() => {
     function onKey(event: KeyboardEvent) {
@@ -133,45 +142,74 @@ export function TileForm({
 
         <fieldset className="rel-fieldset">
           <legend>Required</legend>
-          {parentIds.length === 0 ? (
+          {reqViews.length === 0 ? (
             <p className="empty">No requirements.</p>
           ) : (
             <ul className="parent-list">
-              {parentIds.map((id) => {
-                const parent = tiles.find((candidate) => candidate.id === id)
+              {reqViews.map((row) => {
+                const parent = tiles.find(
+                  (candidate) => candidate.id === row.parentId,
+                )
                 const blocking = !parentIsSatisfied(parent?.status)
-                const label = parentLabel(tiles, id)
+                const statusText = parentStatusText(parent, blocking)
+                const open = Boolean(parent && onOpenTile)
                 return (
-                  <li key={id} className="parent-row">
+                  <li key={row.key} className="parent-row">
                     <div className="req-main">
-                      {parent && onOpenTile ? (
-                        <button
-                          type="button"
-                          className="req-name"
-                          onClick={() => onOpenTile(id)}
-                        >
-                          {label}
-                        </button>
+                      {row.coverLabel ? (
+                        <>
+                          <span className="req-title">{row.title}</span>
+                          <span
+                            className={blocking ? 'req-blocking' : 'req-met'}
+                          >
+                            {open ? (
+                              <button
+                                type="button"
+                                className="req-cover"
+                                onClick={() => onOpenTile?.(row.parentId)}
+                              >
+                                {row.coverLabel}
+                              </button>
+                            ) : (
+                              row.coverLabel
+                            )}
+                            {` · ${statusText}`}
+                          </span>
+                        </>
                       ) : (
-                        <span>{label}</span>
+                        <>
+                          {open ? (
+                            <button
+                              type="button"
+                              className="req-name"
+                              onClick={() => onOpenTile?.(row.parentId)}
+                            >
+                              {row.title}
+                            </button>
+                          ) : (
+                            <span className="req-title">{row.title}</span>
+                          )}
+                          <span
+                            className={blocking ? 'req-blocking' : 'req-met'}
+                          >
+                            {statusText}
+                          </span>
+                        </>
                       )}
-                      <span className={blocking ? 'req-blocking' : 'req-met'}>
-                        {parent
-                          ? `${STATUS_LABEL[parent.status]}${blocking ? ' · blocking' : ''}`
-                          : 'Missing · blocking'}
-                      </span>
                     </div>
-                    <button
-                      type="button"
-                      className="btn ghost"
-                      onClick={() =>
-                        setParentIds((current) =>
-                          current.filter((item) => item !== id),
-                        )
-                      }
-                    >
-                      Remove
-                    </button>
+                    {row.catalog ? null : (
+                      <button
+                        type="button"
+                        className="btn ghost"
+                        onClick={() =>
+                          setParentIds((current) =>
+                            current.filter((item) => item !== row.parentId),
+                          )
+                        }
+                      >
+                        Remove
+                      </button>
+                    )}
                   </li>
                 )
               })}
