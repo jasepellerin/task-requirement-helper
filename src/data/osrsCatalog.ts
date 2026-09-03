@@ -54,6 +54,13 @@ export function isOsrsCatalogId(id: string): boolean {
   return id.startsWith('osrs:')
 }
 
+export function hideOsrsCatalogTile(tiles: Tile[], id: string): Tile[] | null {
+  if (!isOsrsCatalogId(id)) return null
+  return tiles.map((tile) =>
+    tile.id === id ? { ...tile, status: 'unseen' } : tile,
+  )
+}
+
 export function userPersistedTiles(tiles: Tile[]): Tile[] {
   return tiles.filter(
     (tile) => !isOsrsCatalogId(tile.id) || tile.status !== 'unseen',

@@ -7,6 +7,7 @@ import {
   updateTile,
 } from '../domain/store.ts'
 import {
+  hideOsrsCatalogTile,
   mergeOsrsSkillTiles,
   resetLockedOsrsTilesToUnseen,
   userPersistedTiles,
@@ -71,7 +72,8 @@ export function useTiles() {
 
   const remove = useCallback(
     (id: string) => {
-      setTiles(deleteTile(tiles, id))
+      const hidden = hideOsrsCatalogTile(tiles, id)
+      setTiles(hidden ?? deleteTile(tiles, id))
     },
     [tiles],
   )

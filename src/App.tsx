@@ -3,6 +3,7 @@ import { Columns, TileColumn } from './components/TileColumn.tsx'
 import { TileFinder } from './components/TileFinder.tsx'
 import { TileForm } from './components/TileForm.tsx'
 import { Toolbar } from './components/Toolbar.tsx'
+import { isOsrsCatalogId } from './data/osrsCatalog.ts'
 import type { Tile, TileInput } from './domain/types.ts'
 import { useTiles } from './hooks/useTiles.ts'
 
@@ -67,9 +68,14 @@ export default function App() {
     openEdit(tile.id)
   }
 
-  function confirmDelete() {
+  const editingCatalog =
+    editingTile !== undefined && isOsrsCatalogId(editingTile.id)
+
+  function confirmRemove() {
     if (!editingTile) return
-    if (!window.confirm(`Delete “${editingTile.name}”?`)) return
+    if (!editingCatalog && !window.confirm(`Delete “${editingTile.name}”?`)) {
+      return
+    }
     remove(editingTile.id)
     closeEditor()
   }
@@ -137,7 +143,9 @@ export default function App() {
           error={formError}
           onSubmit={submit}
           onCancel={closeEditor}
-          onDelete={editor.mode === 'edit' ? confirmDelete : undefined}
+          onDelete={editor.mode === 'edit' ? confirmRemove : undefined}
+          deleteLabel={editingCatalog ? 'Remove from board' : 'Delete'}
+          deleteDanger={!editingCatalog}
           onOpenTile={editor.mode === 'edit' ? openEdit : undefined}
         />
       ) : null}

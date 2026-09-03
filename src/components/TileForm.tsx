@@ -20,6 +20,8 @@ type TileFormProps = {
   onSubmit: (input: TileInput) => void
   onCancel: () => void
   onDelete?: () => void
+  deleteLabel?: string
+  deleteDanger?: boolean
   onOpenTile?: (id: string) => void
 }
 
@@ -34,6 +36,8 @@ export function TileForm({
   onSubmit,
   onCancel,
   onDelete,
+  deleteLabel = 'Delete',
+  deleteDanger = true,
   onOpenTile,
 }: TileFormProps) {
   const titleId = useId()
@@ -211,8 +215,12 @@ export function TileForm({
 
         <div className="modal-actions">
           {onDelete ? (
-            <button type="button" className="btn danger" onClick={onDelete}>
-              Delete
+            <button
+              type="button"
+              className={deleteDanger ? 'btn danger' : 'btn'}
+              onClick={onDelete}
+            >
+              {deleteLabel}
             </button>
           ) : (
             <span />

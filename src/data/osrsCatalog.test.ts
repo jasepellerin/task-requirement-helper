@@ -6,6 +6,7 @@ import {
   buildOsrsQuestTiles,
   buildOsrsSkillTiles,
   DIARY_TIERS,
+  hideOsrsCatalogTile,
   mergeOsrsSkillTiles,
   OSRS_DIARIES,
   OSRS_QUESTS,
@@ -174,6 +175,28 @@ describe('OSRS skill catalog', () => {
       locked,
       'custom',
     ])
+  })
+
+  it('hides catalog tiles instead of deleting them', () => {
+    const id = osrsTileId('agility', '21-30')
+    const tiles = [
+      {
+        id,
+        name: 'Agility 21–30',
+        status: 'locked' as const,
+        parentIds: [],
+      },
+      {
+        id: 'custom',
+        name: 'Forest',
+        status: 'completed' as const,
+        parentIds: [],
+      },
+    ]
+    const hidden = hideOsrsCatalogTile(tiles, id)
+    expect(hidden?.find((tile) => tile.id === id)?.status).toBe('unseen')
+    expect(hidden?.map((tile) => tile.id)).toEqual([id, 'custom'])
+    expect(hideOsrsCatalogTile(tiles, 'custom')).toBeNull()
   })
 })
 
