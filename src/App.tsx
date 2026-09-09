@@ -1,7 +1,6 @@
 import { useMemo, useState } from 'react'
 import { CompletedWindow } from './components/CompletedWindow.tsx'
-import { KindFilters } from './components/KindFilters.tsx'
-import { SearchBar } from './components/SearchBar.tsx'
+import { FilterBar } from './components/FilterBar.tsx'
 import { Columns, TileColumn } from './components/TileColumn.tsx'
 import { StatsWindow } from './components/StatsWindow.tsx'
 import { TileFinder } from './components/TileFinder.tsx'
@@ -80,6 +79,14 @@ export default function App() {
   return (
     <div className="app">
       <Toolbar
+        activeView={
+          overlay?.mode === 'stats'
+            ? 'stats'
+            : overlay?.mode === 'completed' ||
+                (overlay?.mode === 'detail' && overlay.from === 'completed')
+              ? 'completed'
+              : null
+        }
         onNew={openFind}
         onStats={openStats}
         onCompleted={openCompleted}
@@ -87,14 +94,13 @@ export default function App() {
         onImport={importStore}
       >
         {boardCount > 0 ? (
-          <>
-            <SearchBar value={query} onChange={setQuery} />
-            <KindFilters
-              kinds={kinds}
-              onChange={setKinds}
-              label="Filter board"
-            />
-          </>
+          <FilterBar
+            query={query}
+            onQueryChange={setQuery}
+            kinds={kinds}
+            onKindsChange={setKinds}
+            kindsLabel="Filter board"
+          />
         ) : null}
       </Toolbar>
 

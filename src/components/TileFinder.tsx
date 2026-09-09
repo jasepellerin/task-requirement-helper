@@ -2,9 +2,8 @@ import { useEffect, useId, useMemo, useState } from 'react'
 import { ALL_KINDS, filterTilesByKind } from '../data/osrsCatalog.ts'
 import { searchTiles } from '../domain/search.ts'
 import { type Tile, type TileStatus } from '../domain/types.ts'
-import { KindFilters } from './KindFilters.tsx'
-import { SearchBar } from './SearchBar.tsx'
-import { CloseButton, StatusButtons } from './StatusPicker.tsx'
+import { FilterBar } from './FilterBar.tsx'
+import { CloseButton, StatusPicker } from './StatusPicker.tsx'
 import { TileUnlockMarks } from './TileUnlockMarks.tsx'
 
 type TileFinderProps = {
@@ -25,17 +24,23 @@ export function TileFinder({
   const titleId = useId()
   const [query, setQuery] = useState('')
   const [kinds, setKinds] = useState(ALL_KINDS)
+  const [openStatusId, setOpenStatusId] = useState<string | null>(null)
   const catalog = useMemo(() => filterTilesByKind(tiles, kinds), [kinds, tiles])
   const results = useMemo(() => searchTiles(catalog, query), [catalog, query])
 
   useEffect(() => {
     if (paused) return
     function onKey(event: KeyboardEvent) {
-      if (event.key === 'Escape') onCancel()
+      if (event.key !== 'Escape') return
+      if (openStatusId) {
+        setOpenStatusId(null)
+        return
+      }
+      onCancel()
     }
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
-  }, [onCancel, paused])
+  }, [onCancel, openStatusId, paused])
 
   if (paused) return null
 
@@ -54,8 +59,14 @@ export function TileFinder({
             <CloseButton onClick={onCancel} />
           </div>
         </div>
-        <SearchBar value={query} onChange={setQuery} label="Search" autoFocus />
-        <KindFilters kinds={kinds} onChange={setKinds} />
+        <FilterBar
+          query={query}
+          onQueryChange={setQuery}
+          kinds={kinds}
+          onKindsChange={setKinds}
+          searchPlaceholder="Search"
+          searchAutoFocus
+        />
 
         {results.length === 0 ? (
           <p className="empty">No matching tiles.</p>
@@ -71,9 +82,12 @@ export function TileFinder({
                   <span>{tile.name}</span>
                   <TileUnlockMarks tileId={tile.id} />
                 </button>
-                <StatusButtons
+                <StatusPicker
                   value={tile.status}
-                  name={tile.name}
+                  open={openStatusId === tile.id}
+                  onOpenChange={(open) =>
+                    setOpenStatusId(open ? tile.id : null)
+                  }
                   onChange={(status) => onStatusChange(tile.id, status)}
                 />
               </li>

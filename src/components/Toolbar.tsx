@@ -2,6 +2,7 @@ import { useEffect, useId, useRef, useState, type ReactNode } from 'react'
 import { assetUrl } from '../assetUrl.ts'
 
 type ToolbarProps = {
+  activeView?: 'stats' | 'completed' | null
   onNew: () => void
   onStats: () => void
   onCompleted: () => void
@@ -29,6 +30,7 @@ function Icon({ children }: { children: ReactNode }) {
 }
 
 export function Toolbar({
+  activeView = null,
   onNew,
   onStats,
   onCompleted,
@@ -78,12 +80,12 @@ export function Toolbar({
             href="https://www.slayerscape.io/"
             target="_blank"
             rel="noopener noreferrer"
-            className="btn icon-only"
+            className="toolbar-nav-btn"
             aria-label="SlayerScape"
             title="SlayerScape"
           >
             <img
-              className="toolbar-slayerscape-icon"
+              className="toolbar-wiki-icon"
               src={assetUrl('/icons/slayer.png')}
               alt=""
               width={22}
@@ -92,8 +94,9 @@ export function Toolbar({
           </a>
           <button
             type="button"
-            className="btn icon-only"
+            className="toolbar-nav-btn"
             aria-label="Stats"
+            aria-pressed={activeView === 'stats'}
             title="Stats"
             onClick={onStats}
           >
@@ -107,8 +110,9 @@ export function Toolbar({
           </button>
           <button
             type="button"
-            className="btn icon-only"
+            className="toolbar-nav-btn"
             aria-label="Completed"
+            aria-pressed={activeView === 'completed'}
             title="Completed"
             onClick={onCompleted}
           >

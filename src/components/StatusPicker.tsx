@@ -1,4 +1,13 @@
-import { useEffect, useId, useRef, useState, type ReactNode } from 'react'
+import {
+  useEffect,
+  useId,
+  useLayoutEffect,
+  useRef,
+  useState,
+  type CSSProperties,
+  type ReactNode,
+} from 'react'
+import { createPortal } from 'react-dom'
 import {
   STATUS_LABEL,
   TILE_STATUSES,
@@ -207,38 +216,6 @@ export function StatusIcon({
   )
 }
 
-type StatusButtonsProps = {
-  value: TileStatus
-  name: string
-  onChange: (status: TileStatus) => void
-}
-
-export function StatusButtons({ value, name, onChange }: StatusButtonsProps) {
-  return (
-    <div
-      className="status-buttons"
-      role="radiogroup"
-      aria-label={`${name} status`}
-    >
-      {TILE_STATUSES.map((status) => (
-        <button
-          key={status}
-          type="button"
-          className="btn icon-ghost"
-          role="radio"
-          aria-checked={status === value}
-          aria-label={STATUS_LABEL[status]}
-          title={STATUS_LABEL[status]}
-          onMouseDown={(event) => event.preventDefault()}
-          onClick={() => onChange(status)}
-        >
-          <StatusIcon status={status} />
-        </button>
-      ))}
-    </div>
-  )
-}
-
 type StatusPickerProps = {
   value: TileStatus
   open: boolean
@@ -254,23 +231,50 @@ export function StatusPicker({
 }: StatusPickerProps) {
   const menuId = useId()
   const rootRef = useRef<HTMLDivElement>(null)
-  const skipPlay = useRef(true)
+  const menuRef = useRef<HTMLDivElement>(null)
   const [playId, setPlayId] = useState(0)
+  const [menuBox, setMenuBox] = useState<CSSProperties | null>(null)
 
-  useEffect(() => {
-    if (skipPlay.current) {
-      skipPlay.current = false
-      return
+  function select(status: TileStatus) {
+    if (status !== value) setPlayId((id) => id + 1)
+    onChange(status)
+    onOpenChange(false)
+  }
+
+  useLayoutEffect(() => {
+    if (!open) return
+    function place() {
+      const root = rootRef.current
+      if (!root) return
+      const rect = root.getBoundingClientRect()
+      const flip = window.innerHeight - rect.bottom < 196
+      setMenuBox({
+        right: window.innerWidth - rect.right,
+        ...(flip
+          ? { bottom: window.innerHeight - rect.top + 6, top: 'auto' }
+          : { top: rect.bottom + 6, bottom: 'auto' }),
+      })
     }
-    setPlayId((id) => id + 1)
-  }, [value])
+    place()
+    window.addEventListener('resize', place)
+    document.addEventListener('scroll', place, true)
+    return () => {
+      window.removeEventListener('resize', place)
+      document.removeEventListener('scroll', place, true)
+    }
+  }, [open])
 
   useEffect(() => {
     if (!open) return
     function onPointer(event: PointerEvent) {
-      if (!rootRef.current?.contains(event.target as Node)) {
-        onOpenChange(false)
+      const target = event.target as Node
+      if (
+        rootRef.current?.contains(target) ||
+        menuRef.current?.contains(target)
+      ) {
+        return
       }
+      onOpenChange(false)
     }
     document.addEventListener('pointerdown', onPointer)
     return () => document.removeEventListener('pointerdown', onPointer)
@@ -297,8 +301,7 @@ export function StatusPicker({
           }
           onClick={() => {
             if (next === value) return
-            onChange(next)
-            onOpenChange(false)
+            select(next)
           }}
         >
           {playId > 0 ? (
@@ -327,26 +330,34 @@ export function StatusPicker({
           <ChevronDownIcon />
         </button>
       </div>
-      {open ? (
-        <div className="status-menu" id={menuId} role="menu">
-          {TILE_STATUSES.map((status) => (
-            <button
-              key={status}
-              type="button"
-              className="status-menu-item"
-              role="menuitemradio"
-              aria-checked={status === value}
-              onClick={() => {
-                onChange(status)
-                onOpenChange(false)
-              }}
+      {open && menuBox
+        ? createPortal(
+            <div
+              ref={menuRef}
+              className="status-menu"
+              id={menuId}
+              role="menu"
+              style={menuBox}
             >
-              <StatusIcon status={status} />
-              {STATUS_LABEL[status]}
-            </button>
-          ))}
-        </div>
-      ) : null}
+              {TILE_STATUSES.map((status) => (
+                <button
+                  key={status}
+                  type="button"
+                  className="status-menu-item"
+                  role="menuitemradio"
+                  aria-checked={status === value}
+                  onClick={() => {
+                    select(status)
+                  }}
+                >
+                  <StatusIcon status={status} />
+                  {STATUS_LABEL[status]}
+                </button>
+              ))}
+            </div>,
+            document.body,
+          )
+        : null}
     </div>
   )
 }

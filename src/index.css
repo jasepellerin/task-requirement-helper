@@ -101,6 +101,9 @@ p {
 .toolbar-start {
   grid-area: start;
   min-width: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
 .toolbar-filters {
@@ -116,16 +119,16 @@ p {
   grid-area: end;
 }
 
-.toolbar-start,
-.toolbar-end,
-.toolbar-nav {
+.toolbar-end {
   display: flex;
   align-items: center;
   gap: 8px;
 }
 
-.toolbar-filters .kind-filters {
-  flex-shrink: 0;
+.toolbar-filters .filter-pack {
+  flex: 1 1 280px;
+  min-width: 0;
+  max-width: 36rem;
 }
 
 @media (max-width: 1200px) {
@@ -146,6 +149,44 @@ p {
 .toolbar h1 {
   font-size: 1.4rem;
   letter-spacing: -0.03em;
+}
+
+.toolbar-nav {
+  display: flex;
+  flex-shrink: 0;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--card);
+  box-shadow: var(--highlight);
+  overflow: hidden;
+}
+
+.toolbar-nav-btn {
+  appearance: none;
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  display: grid;
+  place-items: center;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  color: inherit;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.toolbar-nav-btn + .toolbar-nav-btn {
+  box-shadow: inset 1px 0 0 var(--border);
+}
+
+.toolbar-nav-btn:hover,
+.toolbar-nav-btn:focus-visible {
+  background: color-mix(in srgb, var(--primary) 10%, transparent);
+}
+
+.toolbar-nav-btn[aria-pressed='true'] {
+  background: color-mix(in srgb, var(--primary) 16%, transparent);
 }
 
 .toolbar-wiki-icon {
@@ -233,10 +274,9 @@ p {
   min-width: 0;
 }
 
-.toolbar-filters .search-bar {
+.toolbar-filters .filter-pack .search-bar {
   flex: 1 1 140px;
-  min-width: 120px;
-  max-width: 220px;
+  min-width: 100px;
 }
 
 .field .search-bar {
@@ -580,23 +620,6 @@ p {
   color: var(--star);
 }
 
-.status-buttons {
-  display: flex;
-  flex-shrink: 0;
-}
-
-.status-buttons .btn.icon-ghost {
-  width: 32px;
-  height: 32px;
-  opacity: 0.38;
-}
-
-.status-buttons .btn.icon-ghost[aria-checked='true'],
-.status-buttons .btn.icon-ghost:hover,
-.status-buttons .btn.icon-ghost:focus-visible {
-  opacity: 1;
-}
-
 .status-picker {
   position: relative;
   overflow: visible;
@@ -775,16 +798,14 @@ p {
 }
 
 .status-menu {
-  position: absolute;
-  top: calc(100% + 6px);
-  right: 0;
+  position: fixed;
   min-width: 168px;
   padding: 6px;
   background: var(--card);
   border: 1px solid var(--border);
   border-radius: 10px;
   box-shadow: var(--shadow), var(--highlight);
-  z-index: 20;
+  z-index: 30;
   display: flex;
   flex-direction: column;
   gap: 2px;
@@ -1108,15 +1129,78 @@ button.req-name:focus-visible {
   font-weight: 400;
 }
 
+.filter-pack {
+  display: flex;
+  align-items: stretch;
+  flex-shrink: 0;
+  min-width: 0;
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  background: var(--card);
+  box-shadow: var(--highlight);
+  overflow: hidden;
+}
+
+.filter-pack .search-bar {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+.filter-pack .search-bar input {
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+}
+
+.filter-pack .search-bar input:hover,
+.filter-pack .search-bar input:focus {
+  border-color: transparent;
+  outline: none;
+}
+
+.filter-pack:focus-within {
+  border-color: color-mix(in srgb, var(--primary) 55%, var(--border));
+}
+
 .kind-filters {
   display: flex;
-  flex-wrap: wrap;
-  gap: 8px;
   flex-shrink: 0;
+  align-items: stretch;
+}
+
+.filter-pack .kind-filters {
+  border-left: 1px solid var(--border);
 }
 
 .kind-filters .btn {
   font-weight: 600;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  padding: 8px 12px;
+}
+
+.kind-filters .btn + .btn {
+  box-shadow: inset 1px 0 0 var(--border);
+}
+
+.kind-filters .btn:hover,
+.kind-filters .btn:focus-visible {
+  border-color: transparent;
+  background: color-mix(in srgb, var(--primary) 10%, transparent);
+}
+
+.modal .filter-pack {
+  flex-direction: column;
+}
+
+.modal .filter-pack .search-bar {
+  flex: none;
+}
+
+.modal .filter-pack .kind-filters {
+  border-left: 0;
+  border-top: 1px solid var(--border);
 }
 
 .modal .kind-filters .btn {
@@ -1124,8 +1208,7 @@ button.req-name:focus-visible {
 }
 
 .kind-filters .btn[aria-pressed='true'] {
-  border-color: var(--primary);
-  background: color-mix(in srgb, var(--primary) 14%, transparent);
+  background: color-mix(in srgb, var(--primary) 16%, transparent);
 }
 
 .kind-filters .btn[aria-pressed='false'] {
@@ -1153,6 +1236,10 @@ button.req-name:focus-visible {
   border-radius: 8px;
   padding: 8px 6px 8px 12px;
   box-shadow: var(--highlight);
+}
+
+.search-result .status-picker {
+  flex-shrink: 0;
 }
 
 .search-result-name {
