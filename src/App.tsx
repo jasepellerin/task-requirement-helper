@@ -1,6 +1,7 @@
 import { useMemo, useState } from 'react'
 import { CompletedWindow } from './components/CompletedWindow.tsx'
 import { KindFilters } from './components/KindFilters.tsx'
+import { SearchBar } from './components/SearchBar.tsx'
 import { Columns, TileColumn } from './components/TileColumn.tsx'
 import { StatsWindow } from './components/StatsWindow.tsx'
 import { TileFinder } from './components/TileFinder.tsx'
@@ -8,14 +9,13 @@ import { TileDetail } from './components/TileDetail.tsx'
 import { Toolbar } from './components/Toolbar.tsx'
 import { ALL_KINDS, filterTilesByKind } from './data/osrsCatalog.ts'
 import { tileMatchesPrioritySkills } from './data/prioritySkills.ts'
+import {
+  closeOverlayState,
+  openDetailOverlay,
+  type Overlay,
+} from './domain/overlay.ts'
 import { filterTilesByQuery } from './domain/search.ts'
 import { useTiles } from './hooks/useTiles.ts'
-
-type Overlay =
-  | { mode: 'find' }
-  | { mode: 'detail'; id: string; from?: 'find' }
-  | { mode: 'stats' }
-  | { mode: 'completed' }
 
 export default function App() {
   const {
@@ -62,20 +62,11 @@ export default function App() {
   }
 
   function openDetail(id: string) {
-    setOverlay((prev) => {
-      const fromFind =
-        prev?.mode === 'find' ||
-        (prev?.mode === 'detail' && prev.from === 'find')
-      return fromFind
-        ? { mode: 'detail', id, from: 'find' }
-        : { mode: 'detail', id }
-    })
+    setOverlay((prev) => openDetailOverlay(prev, id))
   }
 
   function closeOverlay() {
-    setOverlay((prev) =>
-      prev?.mode === 'detail' && prev.from === 'find' ? { mode: 'find' } : null,
-    )
+    setOverlay(closeOverlayState)
   }
 
   function openStats() {
@@ -97,14 +88,7 @@ export default function App() {
       >
         {boardCount > 0 ? (
           <>
-            <input
-              className="board-search"
-              type="search"
-              value={query}
-              onChange={(event) => setQuery(event.target.value)}
-              placeholder="Filter tiles"
-              aria-label="Filter tiles"
-            />
+            <SearchBar value={query} onChange={setQuery} />
             <KindFilters
               kinds={kinds}
               onChange={setKinds}
@@ -163,9 +147,11 @@ export default function App() {
         </Columns>
       )}
 
-      {overlay?.mode === 'completed' ? (
+      {overlay?.mode === 'completed' ||
+      (overlay?.mode === 'detail' && overlay.from === 'completed') ? (
         <CompletedWindow
           completed={groups.completed}
+          paused={overlay.mode === 'detail'}
           onClose={closeOverlay}
           onOpen={openDetail}
         />

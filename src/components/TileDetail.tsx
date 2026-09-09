@@ -76,7 +76,7 @@ export function TileDetail({
   }, [onCancel, statusMenuOpen])
 
   return (
-    <div className="modal-backdrop" onClick={onCancel}>
+    <div className="modal-backdrop tile-detail-backdrop" onClick={onCancel}>
       <div
         className="modal tile-modal"
         role="dialog"

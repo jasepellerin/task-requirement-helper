@@ -3,6 +3,7 @@ import { ALL_KINDS, filterTilesByKind } from '../data/osrsCatalog.ts'
 import { searchTiles } from '../domain/search.ts'
 import { type Tile, type TileStatus } from '../domain/types.ts'
 import { KindFilters } from './KindFilters.tsx'
+import { SearchBar } from './SearchBar.tsx'
 import { CloseButton, StatusButtons } from './StatusPicker.tsx'
 import { TileUnlockMarks } from './TileUnlockMarks.tsx'
 
@@ -53,15 +54,7 @@ export function TileFinder({
             <CloseButton onClick={onCancel} />
           </div>
         </div>
-        <label className="field">
-          Search
-          <input
-            value={query}
-            onChange={(event) => setQuery(event.target.value)}
-            placeholder="Filter tiles"
-            autoFocus
-          />
-        </label>
+        <SearchBar value={query} onChange={setQuery} label="Search" autoFocus />
         <KindFilters kinds={kinds} onChange={setKinds} />
 
         {results.length === 0 ? (

@@ -5,6 +5,7 @@ import { CloseButton } from './StatusPicker.tsx'
 
 type CompletedWindowProps = {
   completed: Tile[]
+  paused?: boolean
   onClose: () => void
   onOpen: (id: string) => void
 }
@@ -46,6 +47,7 @@ function CompletedList({ title, tiles, empty, onOpen }: CompletedListProps) {
 
 export function CompletedWindow({
   completed,
+  paused = false,
   onClose,
   onOpen,
 }: CompletedWindowProps) {
@@ -53,19 +55,25 @@ export function CompletedWindow({
   const groups = useMemo(() => partitionByKind(completed), [completed])
 
   useEffect(() => {
+    if (paused) return
     function onKey(event: KeyboardEvent) {
       if (event.key === 'Escape') onClose()
     }
     window.addEventListener('keydown', onKey)
     return () => window.removeEventListener('keydown', onKey)
-  }, [onClose])
+  }, [onClose, paused])
 
   return (
-    <div className="modal-backdrop" onClick={onClose}>
+    <div
+      className="modal-backdrop"
+      aria-hidden={paused || undefined}
+      inert={paused}
+      onClick={paused ? undefined : onClose}
+    >
       <div
         className="modal completed-modal"
         role="dialog"
-        aria-modal="true"
+        aria-modal={!paused}
         aria-labelledby={titleId}
         onClick={(event) => event.stopPropagation()}
       >

@@ -18,6 +18,11 @@ export function isTileStatus(value: string): value is TileStatus {
   return (TILE_STATUSES as readonly string[]).includes(value)
 }
 
+export function nextTileStatus(status: TileStatus): TileStatus {
+  const index = TILE_STATUSES.indexOf(status)
+  return TILE_STATUSES[Math.min(index + 1, TILE_STATUSES.length - 1)] ?? status
+}
+
 export type Tile = {
   id: string
   name: string

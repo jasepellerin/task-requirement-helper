@@ -227,10 +227,24 @@ p {
   text-align: center;
 }
 
-.board-search {
+.search-bar {
+  position: relative;
+  display: flex;
+  min-width: 0;
+}
+
+.toolbar-filters .search-bar {
   flex: 1 1 140px;
   min-width: 120px;
   max-width: 220px;
+}
+
+.field .search-bar {
+  width: 100%;
+}
+
+.search-bar input {
+  width: 100%;
   font: inherit;
   color: inherit;
   background: var(--card);
@@ -239,13 +253,36 @@ p {
   padding: 8px 12px;
 }
 
-.board-search:hover {
+.search-bar:has(.search-bar-clear) input {
+  padding-right: 36px;
+}
+
+.search-bar input[type='search']::-webkit-search-cancel-button,
+.search-bar input[type='search']::-webkit-search-decoration {
+  appearance: none;
+}
+
+.search-bar input:hover {
   border-color: var(--primary);
 }
 
-.board-search:focus {
+.search-bar input:focus {
   outline: 2px solid var(--primary);
   outline-offset: 1px;
+}
+
+.btn.icon-ghost.search-bar-clear {
+  position: absolute;
+  top: 50%;
+  right: 4px;
+  transform: translateY(-50%);
+  width: 28px;
+  height: 28px;
+}
+
+.search-bar-clear svg {
+  width: 16px;
+  height: 16px;
 }
 
 .columns {
@@ -562,11 +599,74 @@ p {
 
 .status-picker {
   position: relative;
+  overflow: visible;
+}
+
+.status-picker-split {
+  display: flex;
+  align-items: stretch;
+  border: 1px solid transparent;
+  border-radius: 8px;
+}
+
+.status-picker-split:hover,
+.status-picker-split:focus-within,
+.status-picker-split:has([aria-expanded='true']) {
+  border-color: var(--border);
+  background: color-mix(in srgb, var(--primary) 8%, transparent);
+}
+
+.status-picker-split .btn.icon-ghost {
+  border-color: transparent;
+  background: transparent;
+}
+
+.status-picker-split .btn.icon-ghost:hover,
+.status-picker-split .btn.icon-ghost:focus-visible,
+.status-picker-split .btn.icon-ghost[aria-expanded='true'] {
+  border-color: transparent;
+  background: transparent;
+}
+
+.status-picker-advance {
+  position: relative;
+  overflow: visible;
+}
+
+.status-picker-toggle {
+  width: 22px;
+}
+
+.status-picker-toggle svg {
+  width: 14px;
+  height: 14px;
+  transition: transform 0.18s ease;
+}
+
+.status-picker-toggle[aria-expanded='true'] svg {
+  transform: rotate(180deg);
 }
 
 .status-glyph {
   display: grid;
   place-items: center;
+}
+
+.status-icon-svg {
+  overflow: visible;
+}
+
+.status-body {
+  fill: var(--card);
+}
+
+.status-menu-item:hover .status-body,
+.status-menu-item:focus-visible .status-body {
+  fill: color-mix(in srgb, var(--primary) 10%, var(--card));
+}
+
+.status-menu-item[aria-checked='true'] .status-body {
+  fill: color-mix(in srgb, var(--primary) 14%, var(--card));
 }
 
 .status-glyph-unseen {
@@ -585,6 +685,95 @@ p {
   color: var(--completed);
 }
 
+.status-flash {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.status-flash::before {
+  content: '';
+  position: absolute;
+  inset: 5px;
+  border-radius: 999px;
+  border: 1.5px solid var(--status-flash);
+  animation: status-ring 0.5s ease-out forwards;
+}
+
+.status-flash-unseen {
+  --status-flash: var(--unseen);
+}
+
+.status-flash-locked {
+  --status-flash: var(--muted);
+}
+
+.status-flash-unlocked {
+  --status-flash: var(--unlocked);
+}
+
+.status-flash-completed {
+  --status-flash: var(--completed);
+}
+
+.status-flash-completed::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 42%;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: var(--completed);
+  box-shadow:
+    7px -6px 0 0 var(--completed),
+    -7px -5px 0 0 var(--completed),
+    1px -10px 0 0 var(--completed);
+  animation: status-spark 0.5s ease-out forwards;
+}
+
+.status-glyph-play.status-glyph-unseen {
+  animation: unseen-pop 0.46s cubic-bezier(0.22, 1.4, 0.36, 1);
+}
+
+.status-glyph-play.status-glyph-unseen .status-slash {
+  stroke-dasharray: 28;
+  animation: slash-draw 0.32s ease-out;
+}
+
+.status-glyph-play.status-glyph-unseen .status-eye {
+  animation: eye-hide 0.4s ease-out;
+}
+
+.status-glyph-play.status-glyph-locked {
+  animation: lock-thud 0.42s cubic-bezier(0.34, 1.4, 0.64, 1);
+}
+
+.status-glyph-play.status-glyph-locked .status-shackle {
+  transform-box: fill-box;
+  transform-origin: 0 100%;
+  animation: lock-shackle 0.42s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.status-glyph-play.status-glyph-unlocked {
+  animation: unlock-lift 0.48s cubic-bezier(0.22, 1.4, 0.36, 1);
+}
+
+.status-glyph-play.status-glyph-unlocked .status-shackle {
+  transform-box: fill-box;
+  transform-origin: 0 100%;
+  animation: unlock-shackle 0.48s cubic-bezier(0.22, 1.5, 0.36, 1);
+}
+
+.status-glyph-play.status-glyph-completed {
+  animation: check-pop 0.44s cubic-bezier(0.22, 1.5, 0.36, 1);
+}
+
+.status-glyph-play.status-glyph-completed .status-check {
+  stroke-dasharray: 24;
+  animation: check-draw 0.36s ease-out;
+}
+
 .status-menu {
   position: absolute;
   top: calc(100% + 6px);
@@ -599,6 +788,8 @@ p {
   display: flex;
   flex-direction: column;
   gap: 2px;
+  transform-origin: top right;
+  animation: status-menu-in 0.16s ease-out;
 }
 
 .status-menu-item {
@@ -740,25 +931,6 @@ button.req-name:focus-visible {
   color: var(--req-completed);
 }
 
-.field input {
-  width: 100%;
-  font: inherit;
-  color: inherit;
-  background: var(--card);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  padding: 8px 12px;
-}
-
-.field input:hover {
-  border-color: var(--primary);
-}
-
-.field input:focus {
-  outline: 2px solid var(--primary);
-  outline-offset: 1px;
-}
-
 .modal-backdrop {
   position: fixed;
   inset: 0;
@@ -767,6 +939,10 @@ button.req-name:focus-visible {
   place-items: center;
   padding: 16px;
   z-index: 10;
+}
+
+.tile-detail-backdrop {
+  z-index: 11;
 }
 
 .modal {
@@ -1172,4 +1348,158 @@ a.unlock-mark:focus-visible,
 .stats-priority-mark svg {
   width: 14px;
   height: 14px;
+}
+
+@keyframes status-ring {
+  from {
+    transform: scale(0.55);
+    opacity: 0.85;
+  }
+  to {
+    transform: scale(1.5);
+    opacity: 0;
+  }
+}
+
+@keyframes status-spark {
+  0% {
+    transform: translate(-50%, 0) scale(0.4);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-50%, -8px) scale(1.15);
+    opacity: 0;
+  }
+}
+
+@keyframes unseen-pop {
+  0% {
+    transform: scale(0.72) rotate(-10deg);
+    opacity: 0.35;
+  }
+  55% {
+    transform: scale(1.12) rotate(4deg);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1) rotate(0);
+  }
+}
+
+@keyframes slash-draw {
+  from {
+    stroke-dashoffset: 28;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes eye-hide {
+  0% {
+    opacity: 1;
+  }
+  40% {
+    opacity: 0.35;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+
+@keyframes lock-thud {
+  0% {
+    transform: scale(0.82) translateY(-3px);
+  }
+  55% {
+    transform: scale(1.08) translateY(1px);
+  }
+  75% {
+    transform: scale(0.96) rotate(-3deg);
+  }
+  100% {
+    transform: scale(1) rotate(0);
+  }
+}
+
+@keyframes lock-shackle {
+  0% {
+    transform: rotate(-48deg) translateY(-2px);
+  }
+  70% {
+    transform: rotate(8deg);
+  }
+  100% {
+    transform: rotate(0);
+  }
+}
+
+@keyframes unlock-lift {
+  0% {
+    transform: scale(0.9) translateY(2px);
+  }
+  45% {
+    transform: scale(1.1) translateY(-2px);
+  }
+  100% {
+    transform: scale(1) translateY(0);
+  }
+}
+
+@keyframes unlock-shackle {
+  0% {
+    transform: rotate(46deg);
+  }
+  55% {
+    transform: rotate(-10deg);
+  }
+  100% {
+    transform: rotate(0);
+  }
+}
+
+@keyframes check-pop {
+  0% {
+    transform: scale(0.55);
+  }
+  60% {
+    transform: scale(1.18);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+@keyframes check-draw {
+  from {
+    stroke-dashoffset: 24;
+  }
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+
+@keyframes status-menu-in {
+  from {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.96);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .status-flash,
+  .status-glyph-play,
+  .status-glyph-play .status-slash,
+  .status-glyph-play .status-eye,
+  .status-glyph-play .status-shackle,
+  .status-glyph-play .status-check,
+  .status-menu,
+  .status-picker-toggle svg {
+    animation: none;
+    transition: none;
+  }
 }
