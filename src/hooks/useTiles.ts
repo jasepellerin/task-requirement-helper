@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import {
-  applyStoredStar,
+  setStoredStarred,
   setStoredStatus,
   starredFromStored,
   statusesFromStored,
@@ -56,20 +56,15 @@ export function useTiles() {
     setProgress((current) => {
       const nextStatuses = setStoredStatus(current.statuses, id, status)
       if (!nextStatuses) return current
-      if (status !== 'unseen' || !current.starred.has(id)) {
-        return { ...current, statuses: nextStatuses }
-      }
-      const nextStarred = new Set(current.starred)
-      nextStarred.delete(id)
-      return { ...current, statuses: nextStatuses, starred: nextStarred }
+      return { ...current, statuses: nextStatuses }
     })
   }, [])
 
   const setStarred = useCallback((id: string, value: boolean) => {
     setProgress((current) => {
-      const next = applyStoredStar(current.statuses, current.starred, id, value)
-      if (!next) return current
-      return { ...current, ...next }
+      const nextStarred = setStoredStarred(current.starred, id, value)
+      if (!nextStarred) return current
+      return { ...current, starred: nextStarred }
     })
   }, [])
 

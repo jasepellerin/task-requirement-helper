@@ -366,7 +366,6 @@ export function starredFromStored(tiles: readonly StoredTile[]): Set<string> {
   const starred = new Set<string>()
   for (const tile of tiles) {
     if (!tile.starred || !CATALOG_BY_ID.has(tile.id)) continue
-    if (tile.status === 'unseen') continue
     starred.add(tile.id)
   }
   return starred
@@ -379,9 +378,10 @@ export function storedTilesFromStatuses(
   const tiles: StoredTile[] = []
   for (const def of CATALOG) {
     const status = statuses.get(def.id)
-    if (!status || status === 'unseen') continue
-    const stored: StoredTile = { id: def.id, status }
-    if (starred.has(def.id)) stored.starred = true
+    const isStarred = starred.has(def.id)
+    if (!status && !isStarred) continue
+    const stored: StoredTile = { id: def.id, status: status ?? 'unseen' }
+    if (isStarred) stored.starred = true
     tiles.push(stored)
   }
   return tiles
@@ -409,20 +409,4 @@ export function setStoredStarred(
   if (value) next.add(id)
   else next.delete(id)
   return next
-}
-
-export function applyStoredStar(
-  statuses: Map<string, TileStatus>,
-  starred: Set<string>,
-  id: string,
-  value: boolean,
-): { statuses: Map<string, TileStatus>; starred: Set<string> } | null {
-  const nextStarred = setStoredStarred(starred, id, value)
-  if (!nextStarred) return null
-  if (!value || statuses.has(id)) {
-    return { statuses, starred: nextStarred }
-  }
-  const nextStatuses = setStoredStatus(statuses, id, 'locked')
-  if (!nextStatuses) return { statuses, starred: nextStarred }
-  return { statuses: nextStatuses, starred: nextStarred }
 }

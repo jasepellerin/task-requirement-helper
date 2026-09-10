@@ -42,6 +42,15 @@ describe('parseStore', () => {
         ],
       }),
     ).toEqual(slim)
+    expect(
+      parseStore({
+        version: 1,
+        tiles: [{ id: 'c', status: 'unseen', starred: true }],
+      }),
+    ).toEqual({
+      version: 1,
+      tiles: [{ id: 'c', status: 'unseen', starred: true }],
+    })
   })
 
   it('keeps priority skills and drops an empty list', () => {

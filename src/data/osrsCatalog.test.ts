@@ -1,5 +1,4 @@
 import { describe, expect, it } from 'vitest'
-import type { TileStatus } from '../domain/types.ts'
 import { formatGp } from './questReqs.ts'
 import {
   CATALOG,
@@ -14,7 +13,6 @@ import {
   osrsTileId,
   osrsTileName,
   parentIdsFor,
-  applyStoredStar,
   filterTilesByKind,
   partitionByKind,
   setStoredStarred,
@@ -168,47 +166,34 @@ describe('OSRS skill catalog', () => {
 
   it('overlays and persists starred flags on stored tiles', () => {
     const locked = osrsTileId('agility', '21-30')
-    const stored = statusesFromStored([{ id: locked, status: 'locked' }])
+    const unseen = osrsTileId('woodcutting', '1-10')
+    const stored = statusesFromStored([
+      { id: locked, status: 'locked' },
+      { id: unseen, status: 'unseen', starred: true },
+    ])
     const starred = starredFromStored([
       { id: locked, status: 'locked', starred: true },
-      {
-        id: osrsTileId('woodcutting', '1-10'),
-        status: 'unseen',
-        starred: true,
-      },
+      { id: unseen, status: 'unseen', starred: true },
       { id: 'forest', status: 'locked', starred: true },
     ])
-    expect([...starred]).toEqual([locked])
+    expect([...starred]).toEqual([locked, unseen])
+    expect(stored.has(unseen)).toBe(false)
     expect(
       tilesFromStatuses(stored, starred).find((tile) => tile.id === locked)
         ?.starred,
     ).toBe(true)
-    expect(storedTilesFromStatuses(stored, starred)).toEqual([
-      { id: locked, status: 'locked', starred: true },
-    ])
+    expect(
+      tilesFromStatuses(stored, starred).find((tile) => tile.id === unseen),
+    ).toMatchObject({ status: 'unseen', starred: true })
+    expect(storedTilesFromStatuses(stored, starred)).toEqual(
+      expect.arrayContaining([
+        { id: locked, status: 'locked', starred: true },
+        { id: unseen, status: 'unseen', starred: true },
+      ]),
+    )
+    expect(storedTilesFromStatuses(stored, starred)).toHaveLength(2)
     expect(setStoredStarred(starred, 'forest', true)).toBeNull()
     expect(setStoredStarred(starred, locked, false)?.has(locked)).toBe(false)
-  })
-
-  it('locks unseen tiles when starring so the favorite can persist', () => {
-    const id = osrsTileId('agility', '1-10')
-    const locked = osrsTileId('agility', '21-30')
-    const statuses = new Map<string, TileStatus>([[locked, 'locked']])
-    const starred = new Set<string>()
-
-    expect(applyStoredStar(statuses, starred, 'forest', true)).toBeNull()
-
-    const fromUnseen = applyStoredStar(statuses, starred, id, true)
-    expect(fromUnseen?.statuses.get(id)).toBe('locked')
-    expect(fromUnseen?.starred.has(id)).toBe(true)
-
-    const alreadyOnBoard = applyStoredStar(statuses, starred, locked, true)
-    expect(alreadyOnBoard?.statuses).toBe(statuses)
-    expect(alreadyOnBoard?.starred.has(locked)).toBe(true)
-
-    const unstar = applyStoredStar(statuses, new Set([id]), id, false)
-    expect(unstar?.statuses).toBe(statuses)
-    expect(unstar?.starred.has(id)).toBe(false)
   })
 
   it('rejects unknown ids when setting status', () => {
