@@ -1,4 +1,5 @@
 import { describe, expect, it } from 'vitest'
+import type { TileStatus } from '../domain/types.ts'
 import { formatGp } from './questReqs.ts'
 import {
   CATALOG,
@@ -13,6 +14,7 @@ import {
   osrsTileId,
   osrsTileName,
   parentIdsFor,
+  applyStoredStar,
   filterTilesByKind,
   partitionByKind,
   setStoredStarred,
@@ -186,6 +188,27 @@ describe('OSRS skill catalog', () => {
     ])
     expect(setStoredStarred(starred, 'forest', true)).toBeNull()
     expect(setStoredStarred(starred, locked, false)?.has(locked)).toBe(false)
+  })
+
+  it('locks unseen tiles when starring so the favorite can persist', () => {
+    const id = osrsTileId('agility', '1-10')
+    const locked = osrsTileId('agility', '21-30')
+    const statuses = new Map<string, TileStatus>([[locked, 'locked']])
+    const starred = new Set<string>()
+
+    expect(applyStoredStar(statuses, starred, 'forest', true)).toBeNull()
+
+    const fromUnseen = applyStoredStar(statuses, starred, id, true)
+    expect(fromUnseen?.statuses.get(id)).toBe('locked')
+    expect(fromUnseen?.starred.has(id)).toBe(true)
+
+    const alreadyOnBoard = applyStoredStar(statuses, starred, locked, true)
+    expect(alreadyOnBoard?.statuses).toBe(statuses)
+    expect(alreadyOnBoard?.starred.has(locked)).toBe(true)
+
+    const unstar = applyStoredStar(statuses, new Set([id]), id, false)
+    expect(unstar?.statuses).toBe(statuses)
+    expect(unstar?.starred.has(id)).toBe(false)
   })
 
   it('rejects unknown ids when setting status', () => {

@@ -95,12 +95,10 @@ export function TileDetail({
           ) : null}
           <h2 id={titleId}>{tile.name}</h2>
           <div className="modal-title-actions">
-            {tile.status !== 'unseen' ? (
-              <StarButton
-                starred={tile.starred}
-                onChange={(starred) => onStarChange?.(starred)}
-              />
-            ) : null}
+            <StarButton
+              starred={tile.starred}
+              onChange={(starred) => onStarChange?.(starred)}
+            />
             <StatusPicker
               value={tile.status}
               open={statusMenuOpen}

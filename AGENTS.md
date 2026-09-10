@@ -74,7 +74,7 @@ Persist/export `{ id, status, starred? }` for catalog tiles whose status is not 
 - **Completed**: separate window, split Skills / Diaries / Quests.
 - **Stats**: OSRS-style skill window. Tracked skills use the highest unlocked/completed bracket (else 1). Combat/Slayer always show 99. No total. Clicking a tracked skill toggles it as priority (gold outline; up-arrow when selected). Combat/Slayer still open the wiki. Priority floats that skill’s bracket tiles only.
 - **Detail card** (click a tile):
-  - View-only. Header: catalog title, wiki infobox thumbnail on quests, live status icon (menu, saves immediately), star (on-board tiles), wiki (external-link icon), X to close.
+  - View-only. Header: catalog title, wiki infobox thumbnail on quests, live status icon (menu, saves immediately), star (starring unseen also locks it onto the board), wiki (external-link icon), X to close.
   - Status icons: slashed eye = unseen, lock = locked, open lock = unlocked, check = completed. Marking unseen takes it off the board.
   - **Required**: one line per parent. Quest/diary parents use the tile name. Skill reqs use the exact wiki level (`45 Farming`, `42 Crafting (Ironman)`). Color is the covering/parent tile status: red unseen, orange locked, yellow unlocked, green completed. Click opens that tile.
   - Quest cards show difficulty and length as pills, Gold when the wiki lists required coins, Unlocks lines with the Slayer Master icon, Slayer skill icon, Transportation icon, teleport spell icon, teleport-item sprite, and/or minigame map icon when the quest unlocks a master, Slayer monsters, a transport network, a teleport spell, a teleport item, or a minigame, and an Items section for required items (wiki how-to-get notes are dropped).

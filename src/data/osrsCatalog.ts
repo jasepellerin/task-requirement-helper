@@ -410,3 +410,19 @@ export function setStoredStarred(
   else next.delete(id)
   return next
 }
+
+export function applyStoredStar(
+  statuses: Map<string, TileStatus>,
+  starred: Set<string>,
+  id: string,
+  value: boolean,
+): { statuses: Map<string, TileStatus>; starred: Set<string> } | null {
+  const nextStarred = setStoredStarred(starred, id, value)
+  if (!nextStarred) return null
+  if (!value || statuses.has(id)) {
+    return { statuses, starred: nextStarred }
+  }
+  const nextStatuses = setStoredStatus(statuses, id, 'locked')
+  if (!nextStatuses) return { statuses, starred: nextStarred }
+  return { statuses: nextStatuses, starred: nextStarred }
+}

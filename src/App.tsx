@@ -50,11 +50,6 @@ export default function App() {
     groups.possible.length +
     groups.blocked.length +
     groups.unlocked.length
-  const visibleCount =
-    board.ready.length +
-    board.possible.length +
-    board.blocked.length +
-    board.unlocked.length
 
   function openFind() {
     setOverlay({ mode: 'find' })
@@ -106,8 +101,6 @@ export default function App() {
 
       {boardCount === 0 ? (
         <p className="hero-empty">Add your tiles with the + button above.</p>
-      ) : visibleCount === 0 ? (
-        <p className="hero-empty">No matching tiles.</p>
       ) : (
         <Columns className="board-columns">
           <TileColumn
