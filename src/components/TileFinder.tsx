@@ -3,13 +3,14 @@ import { ALL_KINDS, filterTilesByKind } from '../data/osrsCatalog.ts'
 import { searchTiles } from '../domain/search.ts'
 import { type Tile, type TileStatus } from '../domain/types.ts'
 import { FilterBar } from './FilterBar.tsx'
-import { CloseButton, StatusPicker } from './StatusPicker.tsx'
+import { CloseButton, StarButton, StatusPicker } from './StatusPicker.tsx'
 import { TileUnlockMarks } from './TileUnlockMarks.tsx'
 
 type TileFinderProps = {
   tiles: Tile[]
   paused?: boolean
   onStatusChange: (id: string, status: TileStatus) => void
+  onStarChange: (id: string, starred: boolean) => void
   onOpen: (id: string) => void
   onCancel: () => void
 }
@@ -18,6 +19,7 @@ export function TileFinder({
   tiles,
   paused = false,
   onStatusChange,
+  onStarChange,
   onOpen,
   onCancel,
 }: TileFinderProps) {
@@ -82,6 +84,10 @@ export function TileFinder({
                   <span>{tile.name}</span>
                   <TileUnlockMarks tileId={tile.id} />
                 </button>
+                <StarButton
+                  starred={tile.starred}
+                  onChange={(starred) => onStarChange(tile.id, starred)}
+                />
                 <StatusPicker
                   value={tile.status}
                   open={openStatusId === tile.id}

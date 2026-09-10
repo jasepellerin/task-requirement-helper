@@ -448,6 +448,8 @@ p {
 
 .tile-card {
   position: relative;
+  display: flex;
+  align-items: flex-start;
   border: 1px solid var(--border);
   border-radius: 8px;
   overflow: hidden;
@@ -464,21 +466,18 @@ p {
 
 .tile-card-hit {
   appearance: none;
-  width: 100%;
+  flex: 1;
+  min-width: 0;
   text-align: left;
   font: inherit;
   color: inherit;
   background: transparent;
   border: 0;
-  padding: 10px 36px 10px 12px;
+  padding: 10px 8px 10px 12px;
   cursor: pointer;
   display: flex;
   flex-direction: column;
   gap: 4px;
-}
-
-.tile-card-priority .tile-card-hit {
-  padding-right: 64px;
 }
 
 .tile-card h3 {
@@ -533,12 +532,10 @@ p {
 }
 
 .tile-card-marks {
-  position: absolute;
-  top: 4px;
-  right: 4px;
-  z-index: 1;
   display: flex;
   align-items: center;
+  flex-shrink: 0;
+  padding: 4px 4px 4px 0;
 }
 
 .tile-card-priority-mark {
@@ -1238,7 +1235,8 @@ button.req-name:focus-visible {
   box-shadow: var(--highlight);
 }
 
-.search-result .status-picker {
+.search-result .status-picker,
+.search-result .star-btn {
   flex-shrink: 0;
 }
 

@@ -112,6 +112,7 @@ export default function App() {
             isPriority={(id) => tileMatchesPrioritySkills(id, prioritySkills)}
             onOpen={openDetail}
             onStar={setStarred}
+            onStatus={setStatus}
           />
           <TileColumn
             title="Ready"
@@ -122,6 +123,7 @@ export default function App() {
             isPriority={(id) => tileMatchesPrioritySkills(id, prioritySkills)}
             onOpen={openDetail}
             onStar={setStarred}
+            onStatus={setStatus}
           />
           <TileColumn
             title="Possible"
@@ -132,6 +134,7 @@ export default function App() {
             isPriority={(id) => tileMatchesPrioritySkills(id, prioritySkills)}
             onOpen={openDetail}
             onStar={setStarred}
+            onStatus={setStatus}
           />
           <TileColumn
             title="Blocked"
@@ -142,6 +145,7 @@ export default function App() {
             isPriority={(id) => tileMatchesPrioritySkills(id, prioritySkills)}
             onOpen={openDetail}
             onStar={setStarred}
+            onStatus={setStatus}
           />
         </Columns>
       )}
@@ -171,6 +175,7 @@ export default function App() {
           tiles={tiles}
           paused={overlay.mode === 'detail'}
           onStatusChange={setStatus}
+          onStarChange={setStarred}
           onOpen={openDetail}
           onCancel={closeOverlay}
         />

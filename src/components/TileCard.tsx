@@ -1,12 +1,13 @@
-import type { ReactNode } from 'react'
+import { useState, type ReactNode } from 'react'
 import { tileGp } from '../data/osrsCatalog.ts'
 import { formatGp } from '../data/questReqs.ts'
 import { blockingParentCounts } from '../domain/readiness.ts'
-import type { Tile } from '../domain/types.ts'
+import type { Tile, TileStatus } from '../domain/types.ts'
 import {
   LockIcon,
   PriorityIcon,
   StarButton,
+  StatusPicker,
   UnseenIcon,
 } from './StatusPicker.tsx'
 import { TileUnlockMarks } from './TileUnlockMarks.tsx'
@@ -17,6 +18,7 @@ type TileCardProps = {
   priority?: boolean
   onOpen: () => void
   onStar: (starred: boolean) => void
+  onStatus: (status: TileStatus) => void
 }
 
 function BlockerCount({
@@ -46,7 +48,9 @@ export function TileCard({
   priority = false,
   onOpen,
   onStar,
+  onStatus,
 }: TileCardProps) {
+  const [statusOpen, setStatusOpen] = useState(false)
   const gp = tileGp(tile.id)
   const { locked, unseen } = blockingParentCounts(tile, byId)
 
@@ -86,6 +90,12 @@ export function TileCard({
           </span>
         ) : null}
         <StarButton starred={tile.starred} onChange={onStar} />
+        <StatusPicker
+          value={tile.status}
+          open={statusOpen}
+          onOpenChange={setStatusOpen}
+          onChange={onStatus}
+        />
       </div>
     </article>
   )

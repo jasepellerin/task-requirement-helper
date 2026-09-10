@@ -70,7 +70,7 @@ Persist/export `{ id, status, starred? }` for catalog tiles whose status is not 
 
 ### UI
 
-- **Board**: Unlocked / Ready / Possible / Blocked. Unseen and completed are hidden here. Starred tiles sort to the top of their column, then priority skill tiles, then name. Priority skill cards show a display-only up-arrow next to the star. Cards show unmet parent counts as lock (locked) and slashed eye (unseen/missing); a zero count is omitted. Unified filter bar: name search (same folding as the finder) plus independent Skills / Diaries / Quests toggles in one control.
+- **Board**: Unlocked / Ready / Possible / Blocked. Unseen and completed are hidden here. Starred tiles sort to the top of their column, then priority skill tiles, then name. Priority skill cards show a display-only up-arrow next to the star. Cards use the same star and status split control as the finder and detail card. Cards show unmet parent counts as lock (locked) and slashed eye (unseen/missing); a zero count is omitted. Unified filter bar: name search (same folding as the finder) plus independent Skills / Diaries / Quests toggles in one control.
 - **Completed**: separate window, split Skills / Diaries / Quests.
 - **Stats**: OSRS-style skill window. Tracked skills use the highest unlocked/completed bracket (else 1). Combat/Slayer always show 99. No total. Clicking a tracked skill toggles it as priority (gold outline; up-arrow when selected). Combat/Slayer still open the wiki. Priority floats that skill’s bracket tiles only.
 - **Detail card** (click a tile):
@@ -79,6 +79,6 @@ Persist/export `{ id, status, starred? }` for catalog tiles whose status is not 
   - **Required**: one line per parent. Quest/diary parents use the tile name. Skill reqs use the exact wiki level (`45 Farming`, `42 Crafting (Ironman)`). Color is the covering/parent tile status: red unseen, orange locked, yellow unlocked, green completed. Click opens that tile.
   - Quest cards show difficulty and length as pills, Gold when the wiki lists required coins, Unlocks lines with the Slayer Master icon, Slayer skill icon, Transportation icon, teleport spell icon, teleport-item sprite, and/or minigame map icon when the quest unlocks a master, Slayer monsters, a transport network, a teleport spell, a teleport item, or a minigame, and an Items section for required items (wiki how-to-get notes are dropped).
   - Quest and diary cards list completion rewards from the wiki.
-- **Finder** (`+`): search skills, diaries, and quests. Independent Skills / Diaries / Quests toggles. Empty search lists all alphabetized tiles for the active filters. Leading A / An / The is ignored for prefix and A–Z. Skill cape tiles sort as `{skill} 99`. Each result uses the same status split control as the detail card (current status; click advances; chevron opens all four). Stays open for batch edits.
+- **Finder** (`+`): search skills, diaries, and quests. Independent Skills / Diaries / Quests toggles. Empty search lists all alphabetized tiles for the active filters. Leading A / An / The is ignored for prefix and A–Z. Skill cape tiles sort as `{skill} 99`. Each result uses the same star and status split control as the detail card (current status; click advances; chevron opens all four). Stays open for batch edits.
 
 See [docs/GOAL.md](docs/GOAL.md) for the high-level goal.

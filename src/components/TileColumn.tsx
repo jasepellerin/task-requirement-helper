@@ -1,5 +1,5 @@
 import type { ReactNode } from 'react'
-import type { Tile } from '../domain/types.ts'
+import type { Tile, TileStatus } from '../domain/types.ts'
 import { TileCard } from './TileCard.tsx'
 
 type TileColumnTone = 'ready' | 'possible' | 'blocked' | 'unlocked'
@@ -13,6 +13,7 @@ type TileColumnProps = {
   isPriority?: (id: string) => boolean
   onOpen: (id: string) => void
   onStar: (id: string, starred: boolean) => void
+  onStatus: (id: string, status: TileStatus) => void
 }
 
 export function TileColumn({
@@ -24,6 +25,7 @@ export function TileColumn({
   isPriority,
   onOpen,
   onStar,
+  onStatus,
 }: TileColumnProps) {
   return (
     <section className={`column column-${tone}`}>
@@ -45,6 +47,7 @@ export function TileColumn({
                   priority={isPriority?.(tile.id) ?? false}
                   onOpen={() => onOpen(tile.id)}
                   onStar={(starred) => onStar(tile.id, starred)}
+                  onStatus={(status) => onStatus(tile.id, status)}
                 />
               </li>
             ))}
