@@ -49,8 +49,8 @@ Typical flow is unseen → locked → unlocked → completed. The app does **not
 - `unlocked` if status is unlocked
 - `unseen` if status is unseen (even if parents are done — you still need to find it)
 - `ready` if locked and every parent is satisfied (or it has no parents)
-- `possible` if locked, not ready, and every parent is at least locked (none unseen or missing)
-- `blocked` if locked and at least one parent is missing or unseen
+- `possible` if locked, not ready, and every parent is either satisfied or locked with readiness `ready` or `possible` (you can work the whole chain with tiles already on the board). A parent that is `blocked` does not make the child `possible`.
+- `blocked` if locked (seen, on the board) and at least one parent is missing, unseen, or itself `blocked` (depends on unseen somewhere in the chain). `blocked` is not unseen.
 
 ### Catalogs
 
@@ -70,7 +70,7 @@ Persist/export `{ id, status, starred?, revealedAt?, unlockedAt?, completedAt? }
 
 ### UI
 
-- **Board**: Unlocked / Ready / Possible / Blocked. Unseen and completed are hidden here. Starred tiles sort to the top of their column, then priority skill tiles, then name. Priority skill cards show a display-only up-arrow next to the star. Cards use the same star and status split control as the finder and detail card. Cards show unmet parent counts as lock (locked) and slashed eye (unseen/missing); a zero count is omitted. Unified filter bar: name search (same folding as the finder) plus independent Skills / Diaries / Quests toggles in one control.
+- **Board**: Unlocked / Ready / Possible / Blocked. Unseen and completed are hidden here. Starred tiles sort to the top of their column, then priority skill tiles, then name. Priority skill cards show a display-only up-arrow next to the star. Cards use the same star and status split control as the finder and detail card. Cards show unmet parent counts as lock (locked parents, including locked-but-blocked) and slashed eye (unseen/missing only); a zero count is omitted. Unified filter bar: name search (same folding as the finder) plus independent Skills / Diaries / Quests toggles in one control.
 - **Completed**: separate window, split Skills / Diaries / Quests.
 - **Stats**: OSRS-style skill window. Tracked skills use the highest unlocked/completed bracket (else 1). Combat/Slayer always show 99. No total. Clicking a tracked skill toggles it as priority (gold outline; up-arrow when selected). Combat/Slayer still open the wiki. Priority floats that skill’s bracket tiles only.
 - **Detail card** (click a tile):

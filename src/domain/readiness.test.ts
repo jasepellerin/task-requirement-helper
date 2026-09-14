@@ -96,6 +96,39 @@ describe('tileReadiness', () => {
     const child = tile('c', 'locked', ['missing'])
     expect(tileReadiness(child, tilesById([child]))).toBe('blocked')
   })
+
+  it('is blocked when a locked parent is itself blocked by unseen', () => {
+    const unseen = tile('g', 'unseen')
+    const parent = tile('p', 'locked', ['g'])
+    const child = tile('c', 'locked', ['p'])
+    const byId = tilesById([unseen, parent, child])
+    expect(tileReadiness(parent, byId)).toBe('blocked')
+    expect(tileReadiness(child, byId)).toBe('blocked')
+  })
+
+  it('is possible down an all-locked chain', () => {
+    const leaf = tile('a', 'locked')
+    const mid = tile('b', 'locked', ['a'])
+    const top = tile('c', 'locked', ['b'])
+    const byId = tilesById([leaf, mid, top])
+    expect(tileReadiness(leaf, byId)).toBe('ready')
+    expect(tileReadiness(mid, byId)).toBe('possible')
+    expect(tileReadiness(top, byId)).toBe('possible')
+  })
+
+  it('is blocked when any parent chain has nested unseen', () => {
+    const readyLeaf = tile('ok', 'locked')
+    const clean = tile('clean', 'locked', ['ok'])
+    const unseen = tile('g', 'unseen')
+    const blocked = tile('bad', 'locked', ['g'])
+    const child = tile('c', 'locked', ['clean', 'bad'])
+    expect(
+      tileReadiness(
+        child,
+        tilesById([readyLeaf, clean, unseen, blocked, child]),
+      ),
+    ).toBe('blocked')
+  })
 })
 
 describe('blockingParentCounts', () => {
@@ -139,6 +172,18 @@ describe('blockingParentCounts', () => {
     const child = tile('c', 'locked', ['a', 'b'])
     expect(blockingParentCounts(child, tilesById([a, b, child]))).toEqual({
       locked: 0,
+      unseen: 0,
+    })
+  })
+
+  it('counts a locked-but-blocked parent as locked, not unseen', () => {
+    const unseen = tile('g', 'unseen')
+    const parent = tile('p', 'locked', ['g'])
+    const child = tile('c', 'locked', ['p'])
+    expect(
+      blockingParentCounts(child, tilesById([unseen, parent, child])),
+    ).toEqual({
+      locked: 1,
       unseen: 0,
     })
   })

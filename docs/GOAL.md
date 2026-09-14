@@ -7,8 +7,8 @@ Local OSRS unlock tracker for skills, diaries, and quests. No server. Mark tiles
 Unlock trees are easy to lose in your head. You want to know:
 
 - What is **ready** to unlock (on the board, every parent already unlocked or completed)
-- What is **possible** (on the board, every parent is at least locked — none still unseen)
-- What is **blocked** (on the board, but a prerequisite is unseen or missing)
+- What is **possible** (on the board, and you can work it using only tiles already on the board: every parent is unlocked/completed, or locked and itself ready/possible)
+- What is **blocked** (on the board / seen, but a prerequisite is unseen, missing, or itself blocked because something further up the chain is still unseen)
 - What is **unseen** (in the catalog, not on the board yet)
 - What you already **unlocked** (have it, not finished)
 - What you **completed**

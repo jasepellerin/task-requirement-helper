@@ -10,8 +10,18 @@ export function parentIsSatisfied(status: TileStatus | undefined): boolean {
   return status === 'unlocked' || status === 'completed'
 }
 
-export function parentIsOnBoard(status: TileStatus | undefined): boolean {
-  return status === 'locked' || status === 'unlocked' || status === 'completed'
+function parentSupportsPossible(
+  parentId: string,
+  byId: Map<string, Tile>,
+  memo: Map<string, Readiness>,
+  visiting: Set<string>,
+): boolean {
+  const parent = byId.get(parentId)
+  if (!parent) return false
+  if (parentIsSatisfied(parent.status)) return true
+  if (parent.status !== 'locked') return false
+  const readiness = tileReadiness(parent, byId, memo, visiting)
+  return readiness === 'ready' || readiness === 'possible'
 }
 
 export function blockingParentCounts(
@@ -29,16 +39,43 @@ export function blockingParentCounts(
   return { locked, unseen }
 }
 
-export function tileReadiness(tile: Tile, byId: Map<string, Tile>): Readiness {
-  if (tile.status === 'completed') return 'completed'
-  if (tile.status === 'unlocked') return 'unlocked'
-  if (tile.status === 'unseen') return 'unseen'
+export function tileReadiness(
+  tile: Tile,
+  byId: Map<string, Tile>,
+  memo: Map<string, Readiness> = new Map(),
+  visiting: Set<string> = new Set(),
+): Readiness {
+  const cached = memo.get(tile.id)
+  if (cached) return cached
+  if (visiting.has(tile.id)) return 'blocked'
 
-  const parentStatuses = tile.parentIds.map(
-    (parentId) => byId.get(parentId)?.status,
+  if (tile.status === 'completed') {
+    memo.set(tile.id, 'completed')
+    return 'completed'
+  }
+  if (tile.status === 'unlocked') {
+    memo.set(tile.id, 'unlocked')
+    return 'unlocked'
+  }
+  if (tile.status === 'unseen') {
+    memo.set(tile.id, 'unseen')
+    return 'unseen'
+  }
+
+  visiting.add(tile.id)
+  const ready = tile.parentIds.every((parentId) =>
+    parentIsSatisfied(byId.get(parentId)?.status),
   )
-  if (parentStatuses.every(parentIsSatisfied)) return 'ready'
-  return parentStatuses.every(parentIsOnBoard) ? 'possible' : 'blocked'
+  const result: Readiness = ready
+    ? 'ready'
+    : tile.parentIds.every((parentId) =>
+          parentSupportsPossible(parentId, byId, memo, visiting),
+        )
+      ? 'possible'
+      : 'blocked'
+  visiting.delete(tile.id)
+  memo.set(tile.id, result)
+  return result
 }
 
 export function groupTilesByReadiness(
@@ -46,6 +83,7 @@ export function groupTilesByReadiness(
   prioritySkills: ReadonlySet<string> = new Set(),
 ): ReadinessGroups {
   const byId = tilesById(tiles)
+  const memo = new Map<string, Readiness>()
   const groups: ReadinessGroups = {
     ready: [],
     possible: [],
@@ -56,7 +94,7 @@ export function groupTilesByReadiness(
   }
 
   for (const tile of tiles) {
-    groups[tileReadiness(tile, byId)].push(tile)
+    groups[tileReadiness(tile, byId, memo)].push(tile)
   }
 
   const compare = (a: Tile, b: Tile) =>
