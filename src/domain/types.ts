@@ -23,19 +23,25 @@ export function nextTileStatus(status: TileStatus): TileStatus {
   return TILE_STATUSES[Math.min(index + 1, TILE_STATUSES.length - 1)] ?? status
 }
 
+export type TileStamps = {
+  revealedAt?: number
+  unlockedAt?: number
+  completedAt?: number
+}
+
 export type Tile = {
   id: string
   name: string
   status: TileStatus
   parentIds: string[]
   starred: boolean
-}
+} & TileStamps
 
 export type StoredTile = {
   id: string
   status: TileStatus
   starred?: boolean
-}
+} & TileStamps
 
 export type StoreV1 = {
   version: 1

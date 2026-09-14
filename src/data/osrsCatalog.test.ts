@@ -18,6 +18,7 @@ import {
   setStoredStarred,
   setStoredStatus,
   SKILL_BRACKETS,
+  stampsFromStored,
   starredFromStored,
   statusesFromStored,
   storedTilesFromStatuses,
@@ -194,6 +195,63 @@ describe('OSRS skill catalog', () => {
     expect(storedTilesFromStatuses(stored, starred)).toHaveLength(2)
     expect(setStoredStarred(starred, 'forest', true)).toBeNull()
     expect(setStoredStarred(starred, locked, false)?.has(locked)).toBe(false)
+  })
+
+  it('overlays and persists last unlock and complete stamps', () => {
+    const locked = osrsTileId('agility', '21-30')
+    const unseen = osrsTileId('woodcutting', '1-10')
+    const stored = [
+      {
+        id: locked,
+        status: 'unlocked' as const,
+        revealedAt: 5,
+        unlockedAt: 10,
+        completedAt: 20,
+      },
+      { id: unseen, status: 'unseen' as const, starred: true, unlockedAt: 30 },
+      { id: 'forest', status: 'unlocked' as const, unlockedAt: 40 },
+    ]
+    const stamps = stampsFromStored(stored)
+    expect(stamps.get(locked)).toEqual({
+      revealedAt: 5,
+      unlockedAt: 10,
+      completedAt: 20,
+    })
+    expect(stamps.get(unseen)).toEqual({ unlockedAt: 30 })
+    expect(stamps.has('forest')).toBe(false)
+    const tiles = tilesFromStatuses(
+      statusesFromStored(stored),
+      starredFromStored(stored),
+      stamps,
+    )
+    expect(tiles.find((tile) => tile.id === locked)).toMatchObject({
+      revealedAt: 5,
+      unlockedAt: 10,
+      completedAt: 20,
+    })
+    expect(
+      storedTilesFromStatuses(
+        statusesFromStored(stored),
+        starredFromStored(stored),
+        stamps,
+      ),
+    ).toEqual(
+      expect.arrayContaining([
+        {
+          id: locked,
+          status: 'unlocked',
+          revealedAt: 5,
+          unlockedAt: 10,
+          completedAt: 20,
+        },
+        {
+          id: unseen,
+          status: 'unseen',
+          starred: true,
+          unlockedAt: 30,
+        },
+      ]),
+    )
   })
 
   it('rejects unknown ids when setting status', () => {

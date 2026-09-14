@@ -1,4 +1,10 @@
-import type { StoredTile, Tile, TileStatus } from '../domain/types.ts'
+import { hasTileStamps, pickTileStamps } from '../domain/stamps.ts'
+import type {
+  StoredTile,
+  Tile,
+  TileStamps,
+  TileStatus,
+} from '../domain/types.ts'
 import {
   coveringBracketId,
   diarySkillReqsFor,
@@ -341,14 +347,18 @@ export function partitionByKind(tiles: Tile[]): Record<TileKind, Tile[]> {
 export function tilesFromStatuses(
   statuses: Map<string, TileStatus>,
   starred: ReadonlySet<string> = new Set(),
+  stamps: ReadonlyMap<string, TileStamps> = new Map(),
 ): Tile[] {
-  return CATALOG.map((def) => ({
-    id: def.id,
-    name: def.name,
-    status: statuses.get(def.id) ?? 'unseen',
-    parentIds: parentIdsFor(def),
-    starred: starred.has(def.id),
-  }))
+  return CATALOG.map((def) => {
+    return {
+      id: def.id,
+      name: def.name,
+      status: statuses.get(def.id) ?? 'unseen',
+      parentIds: parentIdsFor(def),
+      starred: starred.has(def.id),
+      ...pickTileStamps(stamps.get(def.id)),
+    }
+  })
 }
 
 export function statusesFromStored(
@@ -371,9 +381,21 @@ export function starredFromStored(tiles: readonly StoredTile[]): Set<string> {
   return starred
 }
 
+export function stampsFromStored(
+  tiles: readonly StoredTile[],
+): Map<string, TileStamps> {
+  const stamps = new Map<string, TileStamps>()
+  for (const tile of tiles) {
+    if (!CATALOG_BY_ID.has(tile.id) || !hasTileStamps(tile)) continue
+    stamps.set(tile.id, pickTileStamps(tile))
+  }
+  return stamps
+}
+
 export function storedTilesFromStatuses(
   statuses: Map<string, TileStatus>,
   starred: ReadonlySet<string> = new Set(),
+  stamps: ReadonlyMap<string, TileStamps> = new Map(),
 ): StoredTile[] {
   const tiles: StoredTile[] = []
   for (const def of CATALOG) {
@@ -382,6 +404,7 @@ export function storedTilesFromStatuses(
     if (!status && !isStarred) continue
     const stored: StoredTile = { id: def.id, status: status ?? 'unseen' }
     if (isStarred) stored.starred = true
+    Object.assign(stored, pickTileStamps(stamps.get(def.id)))
     tiles.push(stored)
   }
   return tiles

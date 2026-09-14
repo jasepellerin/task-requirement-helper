@@ -31,6 +31,41 @@ describe('parseStore', () => {
     expect(parseStore(slim)).toEqual(slim)
   })
 
+  it('keeps last unlock and complete stamps', () => {
+    const withStamps = {
+      version: 1 as const,
+      tiles: [
+        {
+          id: 'a',
+          status: 'unlocked' as const,
+          revealedAt: 5,
+          unlockedAt: 10,
+          completedAt: 20,
+        },
+        { id: 'b', status: 'locked' as const },
+      ],
+    }
+    expect(parseStore(withStamps)).toEqual(withStamps)
+    expect(
+      parseStore({
+        version: 1,
+        tiles: [{ id: 'a', status: 'locked', revealedAt: 'now' }],
+      }),
+    ).toBeNull()
+    expect(
+      parseStore({
+        version: 1,
+        tiles: [{ id: 'a', status: 'unlocked', unlockedAt: 'now' }],
+      }),
+    ).toBeNull()
+    expect(
+      parseStore({
+        version: 1,
+        tiles: [{ id: 'a', status: 'completed', completedAt: -1 }],
+      }),
+    ).toBeNull()
+  })
+
   it('keeps starred flags and drops starred: false', () => {
     expect(parseStore(starred)).toEqual(starred)
     expect(

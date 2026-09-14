@@ -10,12 +10,19 @@ import {
 import { formatGp } from '../data/questReqs.ts'
 import { requirementViews } from '../data/requirementViews.ts'
 import { tileWikiUrl, wikiFileUrl } from '../data/wiki.ts'
+import {
+  formatTileStamp,
+  formatTileStampFull,
+  hasTileStamps,
+} from '../domain/stamps.ts'
 import { STATUS_LABEL, type Tile, type TileStatus } from '../domain/types.ts'
 import { TileUnlockMarks } from './TileUnlockMarks.tsx'
 import {
   CloseButton,
   ExternalLinkIcon,
+  RevealedIcon,
   StarButton,
+  StatusIcon,
   StatusPicker,
 } from './StatusPicker.tsx'
 
@@ -26,6 +33,30 @@ type TileDetailProps = {
   onOpenTile?: (id: string) => void
   onStatusChange?: (status: TileStatus) => void
   onStarChange?: (starred: boolean) => void
+}
+
+const STAMP_CHIPS = [
+  { key: 'revealedAt', kind: 'revealed', label: 'Revealed' },
+  { key: 'unlockedAt', kind: 'unlocked', label: 'Unlocked' },
+  { key: 'completedAt', kind: 'completed', label: 'Completed' },
+] as const
+
+function StampChip({
+  kind,
+  label,
+  at,
+}: {
+  kind: 'revealed' | 'unlocked' | 'completed'
+  label: string
+  at: number
+}) {
+  const title = `${label} ${formatTileStampFull(at)}`
+  return (
+    <span className={`pill stamp-pill stamp-${kind}`} title={title}>
+      {kind === 'revealed' ? <RevealedIcon /> : <StatusIcon status={kind} />}
+      {formatTileStamp(at)}
+    </span>
+  )
 }
 
 function difficultyPillClass(difficulty: string): string {
@@ -136,6 +167,16 @@ export function TileDetail({
 
         {gp !== undefined ? (
           <p className="tile-gold">Gold {formatGp(gp)}</p>
+        ) : null}
+
+        {hasTileStamps(tile) ? (
+          <div className="tile-stamps">
+            {STAMP_CHIPS.map(({ key, kind, label }) => {
+              const at = tile[key]
+              if (at === undefined) return null
+              return <StampChip key={key} kind={kind} label={label} at={at} />
+            })}
+          </div>
         ) : null}
 
         <fieldset className="rel-fieldset">

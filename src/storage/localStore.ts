@@ -1,4 +1,5 @@
 import { storedPrioritySkills } from '../data/prioritySkills.ts'
+import { pickTileStamps } from '../domain/stamps.ts'
 import { isTileStatus, type StoreV1, type StoredTile } from '../domain/types.ts'
 
 export const STORAGE_KEY = 'tiles:v1'
@@ -15,6 +16,10 @@ export function buildStore(
   return store
 }
 
+function isStamp(value: unknown): value is number {
+  return typeof value === 'number' && Number.isFinite(value) && value >= 0
+}
+
 function isStoredTile(value: unknown): value is StoredTile {
   if (typeof value !== 'object' || value === null) return false
   const tile = value as Record<string, unknown>
@@ -23,7 +28,10 @@ function isStoredTile(value: unknown): value is StoredTile {
     tile.id.length > 0 &&
     typeof tile.status === 'string' &&
     isTileStatus(tile.status) &&
-    (tile.starred === undefined || typeof tile.starred === 'boolean')
+    (tile.starred === undefined || typeof tile.starred === 'boolean') &&
+    (tile.revealedAt === undefined || isStamp(tile.revealedAt)) &&
+    (tile.unlockedAt === undefined || isStamp(tile.unlockedAt)) &&
+    (tile.completedAt === undefined || isStamp(tile.completedAt))
   )
 }
 
@@ -49,6 +57,7 @@ export function parseStore(value: unknown): StoreV1 | null {
     record.tiles.map((tile) => {
       const stored: StoredTile = { id: tile.id, status: tile.status }
       if (tile.starred) stored.starred = true
+      Object.assign(stored, pickTileStamps(tile))
       return stored
     }),
     new Set(record.prioritySkills),

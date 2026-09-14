@@ -842,6 +842,46 @@ p {
   color: var(--gold);
 }
 
+.tile-stamps {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  align-items: center;
+}
+
+.stamp-pill {
+  gap: 4px;
+  padding: 2px 8px 2px 5px;
+  font-size: 0.72rem;
+}
+
+.stamp-pill svg {
+  width: 13px;
+  height: 13px;
+}
+
+.stamp-pill .status-body {
+  fill: color-mix(in srgb, currentColor 12%, var(--card));
+}
+
+.stamp-revealed {
+  color: var(--unseen);
+  border-color: color-mix(in srgb, var(--unseen) 45%, var(--border));
+  background: color-mix(in srgb, var(--unseen) 14%, transparent);
+}
+
+.stamp-unlocked {
+  color: var(--unlocked);
+  border-color: color-mix(in srgb, var(--unlocked) 45%, var(--border));
+  background: color-mix(in srgb, var(--unlocked) 14%, transparent);
+}
+
+.stamp-completed {
+  color: var(--completed);
+  border-color: color-mix(in srgb, var(--completed) 45%, var(--border));
+  background: color-mix(in srgb, var(--completed) 14%, transparent);
+}
+
 .tile-card-stats .tile-gold {
   font-size: inherit;
 }

@@ -6,6 +6,11 @@ import { FilterBar } from './FilterBar.tsx'
 import { CloseButton, StarButton, StatusPicker } from './StatusPicker.tsx'
 import { TileUnlockMarks } from './TileUnlockMarks.tsx'
 
+const NAME_STATUS_CLASS: Partial<Record<TileStatus, string>> = {
+  completed: 'req-completed',
+  unlocked: 'req-unlocked',
+}
+
 type TileFinderProps = {
   tiles: Tile[]
   paused?: boolean
@@ -81,7 +86,9 @@ export function TileFinder({
                   className="search-result-name"
                   onClick={() => onOpen(tile.id)}
                 >
-                  <span>{tile.name}</span>
+                  <span className={NAME_STATUS_CLASS[tile.status]}>
+                    {tile.name}
+                  </span>
                   <TileUnlockMarks tileId={tile.id} />
                 </button>
                 <StarButton

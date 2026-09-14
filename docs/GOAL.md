@@ -19,9 +19,9 @@ Unlock trees are easy to lose in your head. You want to know:
 - Status: unseen, locked, unlocked, completed (order not enforced)
 - Catalog AND prerequisites; skill wiki levels display as the exact level and store as the covering bracket tile
 - Board: Unlocked / Ready / Possible / Blocked. Completed is a separate view. Unseen is off the board until added from search (or hidden again by marking unseen). Finder stays open for batch status edits. Starred tiles sort to the top of their column, then priority skill tiles. Priority skill cards show a display-only up-arrow next to the star. Board cards and finder rows use the same star and status split control as the detail card.
-- Detail cards are view-only: catalog title, wiki infobox thumbnail on quests, live status, star (unseen favorites stay unseen and off the board), wiki link, quest difficulty/length pills, Slayer Master / Slayer monster / transportation / teleport spell / teleport item / minigame unlock badges, exact colored requirements, quest items without how-to-get notes, quest/diary rewards
+- Detail cards are view-only: catalog title, wiki infobox thumbnail on quests, live status, star (unseen favorites stay unseen and off the board), wiki link, last revealed/unlocked/completed chips, quest difficulty/length pills, Slayer Master / Slayer monster / transportation / teleport spell / teleport item / minigame unlock badges, exact colored requirements, quest items without how-to-get notes, quest/diary rewards
 - Stats window derived from unlocked/completed skill brackets (combat/Slayer fixed at 99). Clicking a tracked skill toggles priority; that skill’s bracket tiles float up on the board.
-- Persist in `localStorage`: `{ id, status, starred? }` for catalog tiles whose status is not `unseen`, plus starred unseen tiles, plus optional `prioritySkills`. JSON export/import. Names, parents, and requirement display are rebuilt from the catalog on load/import.
+- Persist in `localStorage`: `{ id, status, starred?, revealedAt?, unlockedAt?, completedAt? }` for catalog tiles whose status is not `unseen`, plus starred unseen tiles, plus optional `prioritySkills`. JSON export/import. Names, parents, and requirement display are rebuilt from the catalog on load/import. Last revealed/unlock/complete times show on the detail card as chips.
 
 ## Out of scope
 

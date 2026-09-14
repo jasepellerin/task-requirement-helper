@@ -179,6 +179,23 @@ export function UnseenIcon() {
   )
 }
 
+function RevealedGlyph() {
+  return (
+    <>
+      <path d="M2.2 12C3.8 9.2 7.2 6 12 6s8.2 3.2 9.8 6c-1.6 2.8-5 6-9.8 6s-8.2-3.2-9.8-6Z" />
+      <circle cx="12" cy="12" r="3" />
+    </>
+  )
+}
+
+export function RevealedIcon() {
+  return (
+    <Icon>
+      <RevealedGlyph />
+    </Icon>
+  )
+}
+
 function ChevronDownIcon() {
   return (
     <Icon>

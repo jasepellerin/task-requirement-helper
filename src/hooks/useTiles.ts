@@ -2,6 +2,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react'
 import {
   setStoredStarred,
   setStoredStatus,
+  stampsFromStored,
   starredFromStored,
   statusesFromStored,
   storedTilesFromStatuses,
@@ -11,6 +12,7 @@ import {
   prioritySkillsFromStored,
   setStoredPrioritySkill,
 } from '../data/prioritySkills.ts'
+import { applyStatusStamp } from '../domain/stamps.ts'
 import { groupTilesByReadiness, tilesById } from '../domain/readiness.ts'
 import type { TileStatus } from '../domain/types.ts'
 import {
@@ -26,16 +28,17 @@ function loadProgress() {
   return {
     statuses: statusesFromStored(store.tiles),
     starred: starredFromStored(store.tiles),
+    stamps: stampsFromStored(store.tiles),
     prioritySkills: prioritySkillsFromStored(store.prioritySkills),
   }
 }
 
 export function useTiles() {
-  const [{ statuses, starred, prioritySkills }, setProgress] =
+  const [{ statuses, starred, stamps, prioritySkills }, setProgress] =
     useState(loadProgress)
   const tiles = useMemo(
-    () => tilesFromStatuses(statuses, starred),
-    [starred, statuses],
+    () => tilesFromStatuses(statuses, starred, stamps),
+    [starred, stamps, statuses],
   )
   const byId = useMemo(() => tilesById(tiles), [tiles])
   const groups = useMemo(
@@ -44,8 +47,11 @@ export function useTiles() {
   )
   const store = useMemo(
     () =>
-      buildStore(storedTilesFromStatuses(statuses, starred), prioritySkills),
-    [prioritySkills, starred, statuses],
+      buildStore(
+        storedTilesFromStatuses(statuses, starred, stamps),
+        prioritySkills,
+      ),
+    [prioritySkills, starred, stamps, statuses],
   )
 
   useEffect(() => {
@@ -56,7 +62,18 @@ export function useTiles() {
     setProgress((current) => {
       const nextStatuses = setStoredStatus(current.statuses, id, status)
       if (!nextStatuses) return current
-      return { ...current, statuses: nextStatuses }
+      const previous = current.statuses.get(id) ?? 'unseen'
+      return {
+        ...current,
+        statuses: nextStatuses,
+        stamps: applyStatusStamp(
+          current.stamps,
+          id,
+          previous,
+          status,
+          Date.now(),
+        ),
+      }
     })
   }, [])
 
@@ -92,6 +109,7 @@ export function useTiles() {
     setProgress({
       statuses: statusesFromStored(parsed.tiles),
       starred: starredFromStored(parsed.tiles),
+      stamps: stampsFromStored(parsed.tiles),
       prioritySkills: prioritySkillsFromStored(parsed.prioritySkills),
     })
     return { ok: true as const }

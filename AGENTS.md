@@ -66,7 +66,7 @@ Load/import overlays stored statuses onto the catalog.
 
 ### Persistence
 
-Persist/export `{ id, status, starred? }` for catalog tiles whose status is not `unseen`, plus starred unseen tiles (`status: 'unseen', starred: true`), plus optional `prioritySkills` (catalog skill ids). Names, parents, and requirement display live in the catalog and are rebuilt on load/import. Old full-tile JSON still imports (name/`parentIds` ignored).
+Persist/export `{ id, status, starred?, revealedAt?, unlockedAt?, completedAt? }` for catalog tiles whose status is not `unseen`, plus starred unseen tiles (`status: 'unseen', starred: true`), plus optional `prioritySkills` (catalog skill ids). `revealedAt` is the most recent time the tile left unseen; `unlockedAt` / `completedAt` are the most recent times those statuses were set. Leaving a status keeps the last stamp. Names, parents, and requirement display live in the catalog and are rebuilt on load/import. Old full-tile JSON still imports (name/`parentIds` ignored).
 
 ### UI
 
@@ -74,7 +74,7 @@ Persist/export `{ id, status, starred? }` for catalog tiles whose status is not 
 - **Completed**: separate window, split Skills / Diaries / Quests.
 - **Stats**: OSRS-style skill window. Tracked skills use the highest unlocked/completed bracket (else 1). Combat/Slayer always show 99. No total. Clicking a tracked skill toggles it as priority (gold outline; up-arrow when selected). Combat/Slayer still open the wiki. Priority floats that skill’s bracket tiles only.
 - **Detail card** (click a tile):
-  - View-only. Header: catalog title, wiki infobox thumbnail on quests, live status icon (menu, saves immediately), star (including unseen favorites, which stay off the board), wiki (external-link icon), X to close.
+  - View-only. Header: catalog title, wiki infobox thumbnail on quests, live status icon (menu, saves immediately), star (including unseen favorites, which stay off the board), wiki (external-link icon), X to close. Last revealed / unlocked / completed times show on this card only as compact icon chips (eye / open lock / check).
   - Status icons: slashed eye = unseen, lock = locked, open lock = unlocked, check = completed. Marking unseen takes it off the board.
   - **Required**: one line per parent. Quest/diary parents use the tile name. Skill reqs use the exact wiki level (`45 Farming`, `42 Crafting (Ironman)`). Color is the covering/parent tile status: red unseen, orange locked, yellow unlocked, green completed. Click opens that tile.
   - Quest cards show difficulty and length as pills, Gold when the wiki lists required coins, Unlocks lines with the Slayer Master icon, Slayer skill icon, Transportation icon, teleport spell icon, teleport-item sprite, and/or minigame map icon when the quest unlocks a master, Slayer monsters, a transport network, a teleport spell, a teleport item, or a minigame, and an Items section for required items (wiki how-to-get notes are dropped).
