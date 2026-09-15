@@ -6,6 +6,7 @@ import {
   osrsTileId,
   type CatalogReq,
 } from './osrsCatalog.ts'
+import { skillReqKey } from './skillReqs.ts'
 
 export type RequirementView = {
   key: string
@@ -47,7 +48,7 @@ function viewForReq(req: CatalogReq): RequirementView {
     }
   }
   return {
-    key: `skill:${req.skill}:${req.level}:${req.ironman ? 'im' : 'main'}`,
+    key: `skill:${skillReqKey(req)}`,
     parentId: coveringSkillTile(req.skill, req.level).id,
     title: skillReqTitle(req.skill, req.level, req.ironman),
   }

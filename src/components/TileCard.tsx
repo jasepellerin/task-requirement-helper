@@ -3,13 +3,8 @@ import { tileGp } from '../data/osrsCatalog.ts'
 import { formatGp } from '../data/questReqs.ts'
 import { blockingParentCounts } from '../domain/readiness.ts'
 import type { Tile, TileStatus } from '../domain/types.ts'
-import {
-  LockIcon,
-  PriorityIcon,
-  StarButton,
-  StatusPicker,
-  UnseenIcon,
-} from './StatusPicker.tsx'
+import { LockIcon, PriorityIcon, StarButton, UnseenIcon } from './icons.tsx'
+import { StatusPicker } from './StatusPicker.tsx'
 import { TileUnlockMarks } from './TileUnlockMarks.tsx'
 
 type TileCardProps = {

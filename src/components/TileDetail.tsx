@@ -23,8 +23,8 @@ import {
   RevealedIcon,
   StarButton,
   StatusIcon,
-  StatusPicker,
-} from './StatusPicker.tsx'
+} from './icons.tsx'
+import { StatusPicker } from './StatusPicker.tsx'
 
 type TileDetailProps = {
   byId: Map<string, Tile>

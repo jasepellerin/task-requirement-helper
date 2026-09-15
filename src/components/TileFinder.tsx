@@ -3,7 +3,8 @@ import { ALL_KINDS, filterTilesByKind } from '../data/osrsCatalog.ts'
 import { searchTiles } from '../domain/search.ts'
 import { type Tile, type TileStatus } from '../domain/types.ts'
 import { FilterBar } from './FilterBar.tsx'
-import { CloseButton, StarButton, StatusPicker } from './StatusPicker.tsx'
+import { CloseButton, StarButton } from './icons.tsx'
+import { StatusPicker } from './StatusPicker.tsx'
 import { TileUnlockMarks } from './TileUnlockMarks.tsx'
 
 const NAME_STATUS_CLASS: Partial<Record<TileStatus, string>> = {

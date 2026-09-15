@@ -1,10 +1,9 @@
-import { Fragment } from 'react'
 import { assetUrl } from '../assetUrl.ts'
-import type { SlayerMonsterUnlock } from '../data/osrsCatalog.ts'
-import { wikiPageUrl } from '../data/wiki.ts'
+import type { WikiUnlock } from '../data/osrsCatalog.ts'
+import { WikiUnlockListMark } from './WikiUnlockListMark.tsx'
 
 type SlayerMonsterMarkProps = {
-  monsters: readonly SlayerMonsterUnlock[]
+  monsters: readonly WikiUnlock[]
   linked?: boolean
 }
 
@@ -20,41 +19,16 @@ function SlayerMonsterIcon() {
   )
 }
 
-function slayerMonsterLabel(monsters: readonly SlayerMonsterUnlock[]): string {
-  return `Unlocks ${monsters.map((monster) => monster.name).join(', ')}`
-}
-
 export function SlayerMonsterMark({
   monsters,
   linked,
 }: SlayerMonsterMarkProps) {
-  if (monsters.length === 0) return null
-  const label = slayerMonsterLabel(monsters)
-  if (linked) {
-    return (
-      <span className="slayer-mark">
-        <SlayerMonsterIcon />
-        <span>
-          Unlocks{' '}
-          {monsters.map((monster, index) => (
-            <Fragment key={monster.wikiTitle}>
-              {index > 0 ? ', ' : null}
-              <a
-                href={wikiPageUrl(monster.wikiTitle)}
-                target="_blank"
-                rel="noreferrer"
-              >
-                {monster.name}
-              </a>
-            </Fragment>
-          ))}
-        </span>
-      </span>
-    )
-  }
   return (
-    <span className="slayer-mark" title={label} aria-label={label}>
-      <SlayerMonsterIcon />
-    </span>
+    <WikiUnlockListMark
+      items={monsters}
+      icon={<SlayerMonsterIcon />}
+      linked={linked}
+      className="slayer-mark"
+    />
   )
 }

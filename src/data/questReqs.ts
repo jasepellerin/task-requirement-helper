@@ -1,6 +1,7 @@
 import overrideData from './osrs-quest-req-overrides.json'
 import reqsData from './osrs-quest-reqs.json'
 import questsData from './osrs-quests.json'
+import { skillReqKey, type SkillLevelReq } from './skillReqs.ts'
 
 export type OsrsQuest = {
   id: string
@@ -9,11 +10,7 @@ export type OsrsQuest = {
   gp?: number
 }
 
-export type QuestSkillReq = {
-  skill: string
-  level: number
-  ironman?: boolean
-}
+export type QuestSkillReq = SkillLevelReq
 
 export type QuestReqs = {
   quests: string[]
@@ -34,10 +31,6 @@ export function formatGp(gp: number): string {
   return `${gp.toLocaleString('en-US')} gp`
 }
 
-function skillKey(req: QuestSkillReq): string {
-  return `${req.skill}:${req.level}:${req.ironman ? 'im' : ''}`
-}
-
 export function mergeQuestReqs(
   base: QuestReqs | undefined,
   extra: Partial<QuestReqs> | undefined,
@@ -53,9 +46,9 @@ export function mergeQuestReqs(
   }
 
   const skills = [...(base?.skills ?? [])]
-  const seenSkills = new Set(skills.map(skillKey))
+  const seenSkills = new Set(skills.map(skillReqKey))
   for (const req of extra?.skills ?? []) {
-    const key = skillKey(req)
+    const key = skillReqKey(req)
     if (seenSkills.has(key)) continue
     seenSkills.add(key)
     skills.push(req)

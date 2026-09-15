@@ -1,10 +1,9 @@
-import { Fragment } from 'react'
 import { assetUrl } from '../assetUrl.ts'
-import type { TeleportUnlock } from '../data/osrsCatalog.ts'
-import { wikiPageUrl } from '../data/wiki.ts'
+import type { WikiUnlock } from '../data/osrsCatalog.ts'
+import { WikiUnlockListMark } from './WikiUnlockListMark.tsx'
 
 type TeleportMarkProps = {
-  spells: readonly TeleportUnlock[]
+  spells: readonly WikiUnlock[]
   linked?: boolean
 }
 
@@ -20,38 +19,12 @@ function TeleportIcon() {
   )
 }
 
-function teleportLabel(spells: readonly TeleportUnlock[]): string {
-  return `Unlocks ${spells.map((spell) => spell.name).join(', ')}`
-}
-
 export function TeleportMark({ spells, linked }: TeleportMarkProps) {
-  if (spells.length === 0) return null
-  const label = teleportLabel(spells)
-  if (linked) {
-    return (
-      <span className="unlock-mark">
-        <TeleportIcon />
-        <span>
-          Unlocks{' '}
-          {spells.map((spell, index) => (
-            <Fragment key={`${spell.wikiTitle}:${spell.name}`}>
-              {index > 0 ? ', ' : null}
-              <a
-                href={wikiPageUrl(spell.wikiTitle)}
-                target="_blank"
-                rel="noreferrer"
-              >
-                {spell.name}
-              </a>
-            </Fragment>
-          ))}
-        </span>
-      </span>
-    )
-  }
   return (
-    <span className="unlock-mark" title={label} aria-label={label}>
-      <TeleportIcon />
-    </span>
+    <WikiUnlockListMark
+      items={spells}
+      icon={<TeleportIcon />}
+      linked={linked}
+    />
   )
 }

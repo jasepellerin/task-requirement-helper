@@ -1,7 +1,11 @@
 import { useMemo, useState } from 'react'
 import { CompletedWindow } from './components/CompletedWindow.tsx'
 import { FilterBar } from './components/FilterBar.tsx'
-import { Columns, TileColumn } from './components/TileColumn.tsx'
+import {
+  Columns,
+  TileColumn,
+  type TileColumnTone,
+} from './components/TileColumn.tsx'
 import { StatsWindow } from './components/StatsWindow.tsx'
 import { TileFinder } from './components/TileFinder.tsx'
 import { TileDetail } from './components/TileDetail.tsx'
@@ -15,6 +19,17 @@ import {
 } from './domain/overlay.ts'
 import { filterTilesByQuery } from './domain/search.ts'
 import { useTiles } from './hooks/useTiles.ts'
+
+const BOARD_COLUMNS: {
+  title: string
+  tone: TileColumnTone
+  key: 'unlocked' | 'ready' | 'possible' | 'blocked'
+}[] = [
+  { title: 'Unlocked', tone: 'unlocked', key: 'unlocked' },
+  { title: 'Ready', tone: 'ready', key: 'ready' },
+  { title: 'Possible', tone: 'possible', key: 'possible' },
+  { title: 'Blocked', tone: 'blocked', key: 'blocked' },
+]
 
 export default function App() {
   const {
@@ -103,50 +118,20 @@ export default function App() {
         <p className="hero-empty">Add your tiles with the + button above.</p>
       ) : (
         <Columns className="board-columns">
-          <TileColumn
-            title="Unlocked"
-            tone="unlocked"
-            tiles={board.unlocked}
-            byId={byId}
-            empty="No matching tiles."
-            isPriority={(id) => tileMatchesPrioritySkills(id, prioritySkills)}
-            onOpen={openDetail}
-            onStar={setStarred}
-            onStatus={setStatus}
-          />
-          <TileColumn
-            title="Ready"
-            tone="ready"
-            tiles={board.ready}
-            byId={byId}
-            empty="No matching tiles."
-            isPriority={(id) => tileMatchesPrioritySkills(id, prioritySkills)}
-            onOpen={openDetail}
-            onStar={setStarred}
-            onStatus={setStatus}
-          />
-          <TileColumn
-            title="Possible"
-            tone="possible"
-            tiles={board.possible}
-            byId={byId}
-            empty="No matching tiles."
-            isPriority={(id) => tileMatchesPrioritySkills(id, prioritySkills)}
-            onOpen={openDetail}
-            onStar={setStarred}
-            onStatus={setStatus}
-          />
-          <TileColumn
-            title="Blocked"
-            tone="blocked"
-            tiles={board.blocked}
-            byId={byId}
-            empty="No matching tiles."
-            isPriority={(id) => tileMatchesPrioritySkills(id, prioritySkills)}
-            onOpen={openDetail}
-            onStar={setStarred}
-            onStatus={setStatus}
-          />
+          {BOARD_COLUMNS.map((column) => (
+            <TileColumn
+              key={column.key}
+              title={column.title}
+              tone={column.tone}
+              tiles={board[column.key]}
+              byId={byId}
+              empty="No matching tiles."
+              isPriority={(id) => tileMatchesPrioritySkills(id, prioritySkills)}
+              onOpen={openDetail}
+              onStar={setStarred}
+              onStatus={setStatus}
+            />
+          ))}
         </Columns>
       )}
 

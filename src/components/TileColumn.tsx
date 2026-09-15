@@ -2,7 +2,7 @@ import type { ReactNode } from 'react'
 import type { Tile, TileStatus } from '../domain/types.ts'
 import { TileCard } from './TileCard.tsx'
 
-type TileColumnTone = 'ready' | 'possible' | 'blocked' | 'unlocked'
+export type TileColumnTone = 'ready' | 'possible' | 'blocked' | 'unlocked'
 
 type TileColumnProps = {
   title: string

@@ -1,17 +1,12 @@
 import { useCallback, useEffect, useMemo, useState } from 'react'
 import {
+  progressFromStore,
   setStoredStarred,
   setStoredStatus,
-  stampsFromStored,
-  starredFromStored,
-  statusesFromStored,
   storedTilesFromStatuses,
   tilesFromStatuses,
-} from '../data/osrsCatalog.ts'
-import {
-  prioritySkillsFromStored,
-  setStoredPrioritySkill,
-} from '../data/prioritySkills.ts'
+} from '../data/tileProgress.ts'
+import { setStoredPrioritySkill } from '../data/prioritySkills.ts'
 import { applyStatusStamp } from '../domain/stamps.ts'
 import { groupTilesByReadiness, tilesById } from '../domain/readiness.ts'
 import type { TileStatus } from '../domain/types.ts'
@@ -23,19 +18,10 @@ import {
   saveStore,
 } from '../storage/localStore.ts'
 
-function loadProgress() {
-  const store = loadStore()
-  return {
-    statuses: statusesFromStored(store.tiles),
-    starred: starredFromStored(store.tiles),
-    stamps: stampsFromStored(store.tiles),
-    prioritySkills: prioritySkillsFromStored(store.prioritySkills),
-  }
-}
-
 export function useTiles() {
-  const [{ statuses, starred, stamps, prioritySkills }, setProgress] =
-    useState(loadProgress)
+  const [{ statuses, starred, stamps, prioritySkills }, setProgress] = useState(
+    () => progressFromStore(loadStore()),
+  )
   const tiles = useMemo(
     () => tilesFromStatuses(statuses, starred, stamps),
     [starred, stamps, statuses],
@@ -106,12 +92,7 @@ export function useTiles() {
     if (!parsed) {
       return { ok: false as const, error: 'Invalid tiles JSON' }
     }
-    setProgress({
-      statuses: statusesFromStored(parsed.tiles),
-      starred: starredFromStored(parsed.tiles),
-      stamps: stampsFromStored(parsed.tiles),
-      prioritySkills: prioritySkillsFromStored(parsed.prioritySkills),
-    })
+    setProgress(progressFromStore(parsed))
     return { ok: true as const }
   }, [])
 

@@ -1,5 +1,5 @@
 import { useId, useRef } from 'react'
-import { CloseIcon } from './StatusPicker.tsx'
+import { CloseIcon } from './icons.tsx'
 
 type SearchBarProps = {
   value: string

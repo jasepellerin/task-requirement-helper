@@ -1,9 +1,9 @@
 import { assetUrl } from '../assetUrl.ts'
-import type { SlayerMasterUnlock } from '../data/osrsCatalog.ts'
+import type { WikiUnlock } from '../data/osrsCatalog.ts'
 import { wikiPageUrl } from '../data/wiki.ts'
 
 type SlayerMasterMarkProps = {
-  master: SlayerMasterUnlock
+  master: WikiUnlock
   linked?: boolean
 }
 

@@ -1,5 +1,6 @@
 import { useEffect, useId, useRef, useState, type ReactNode } from 'react'
 import { assetUrl } from '../assetUrl.ts'
+import { Icon } from './icons.tsx'
 
 type ToolbarProps = {
   activeView?: 'stats' | 'completed' | null
@@ -9,24 +10,6 @@ type ToolbarProps = {
   onExport: () => void
   onImport: (text: string) => { ok: true } | { ok: false; error: string }
   children?: ReactNode
-}
-
-function Icon({ children }: { children: ReactNode }) {
-  return (
-    <svg
-      viewBox="0 0 24 24"
-      width="18"
-      height="18"
-      fill="none"
-      stroke="currentColor"
-      strokeWidth="1.75"
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      aria-hidden="true"
-    >
-      {children}
-    </svg>
-  )
 }
 
 export function Toolbar({

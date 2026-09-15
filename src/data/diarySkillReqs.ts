@@ -1,15 +1,12 @@
 import reqsData from './osrs-diary-skill-reqs.json'
 import bracketsData from './skill-brackets.json'
+import type { SkillLevelReq } from './skillReqs.ts'
 
 export const DIARY_SKILL_TIERS = ['easy', 'medium', 'hard', 'elite'] as const
 
 export type DiarySkillTier = (typeof DIARY_SKILL_TIERS)[number]
 
-export type DiarySkillReq = {
-  skill: string
-  level: number
-  ironman?: boolean
-}
+export type DiarySkillReq = SkillLevelReq
 
 export type DiaryTierSkillReqs = Record<DiarySkillTier, DiarySkillReq[]>
 

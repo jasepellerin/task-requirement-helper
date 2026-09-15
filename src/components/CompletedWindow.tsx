@@ -1,7 +1,7 @@
 import { useEffect, useId, useMemo } from 'react'
 import { partitionByKind } from '../data/osrsCatalog.ts'
 import type { Tile } from '../domain/types.ts'
-import { CloseButton } from './StatusPicker.tsx'
+import { CloseButton } from './icons.tsx'
 
 type CompletedWindowProps = {
   completed: Tile[]

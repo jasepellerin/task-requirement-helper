@@ -7,7 +7,7 @@ import {
 } from '../data/skillLevels.ts'
 import { wikiPageUrl } from '../data/wiki.ts'
 import type { Tile } from '../domain/types.ts'
-import { PriorityIcon } from './StatusPicker.tsx'
+import { PriorityIcon } from './icons.tsx'
 
 type StatsWindowProps = {
   tiles: Tile[]

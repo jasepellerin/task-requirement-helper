@@ -15,13 +15,7 @@ import {
   parentIdsFor,
   filterTilesByKind,
   partitionByKind,
-  setStoredStarred,
-  setStoredStatus,
   SKILL_BRACKETS,
-  stampsFromStored,
-  starredFromStored,
-  statusesFromStored,
-  storedTilesFromStatuses,
   tileDifficulty,
   tileGp,
   tileImage,
@@ -35,8 +29,16 @@ import {
   tileTeleportItems,
   tileTeleports,
   tileTransport,
-  tilesFromStatuses,
 } from './osrsCatalog.ts'
+import {
+  setStoredStarred,
+  setStoredStatus,
+  stampsFromStored,
+  starredFromStored,
+  statusesFromStored,
+  storedTilesFromStatuses,
+  tilesFromStatuses,
+} from './tileProgress.ts'
 
 function catalogSize(): number {
   return (

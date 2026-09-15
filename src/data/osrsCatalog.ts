@@ -1,15 +1,6 @@
-import { hasTileStamps, pickTileStamps } from '../domain/stamps.ts'
-import type {
-  StoredTile,
-  Tile,
-  TileStamps,
-  TileStatus,
-} from '../domain/types.ts'
-import {
-  coveringBracketId,
-  diarySkillReqsFor,
-  type DiarySkillReq,
-} from './diarySkillReqs.ts'
+import type { Tile } from '../domain/types.ts'
+import { coveringBracketId, diarySkillReqsFor } from './diarySkillReqs.ts'
+import type { SkillLevelReq } from './skillReqs.ts'
 import { OSRS_QUESTS, osrsQuestTileId, questReqsFor } from './questReqs.ts'
 import { skillQuestReqsFor } from './skillQuestReqs.ts'
 import { diaryRewardsFor, questRewardsFor } from './rewards.ts'
@@ -49,39 +40,14 @@ export type DiaryTier = {
 }
 
 export type CatalogReq =
-  | { type: 'tile'; id: string }
-  | { type: 'skill'; skill: string; level: number; ironman?: boolean }
+  { type: 'tile'; id: string } | ({ type: 'skill' } & SkillLevelReq)
 
-export type SlayerMasterUnlock = {
+export type WikiUnlock = {
   name: string
   wikiTitle: string
 }
 
-export type SlayerMonsterUnlock = {
-  name: string
-  wikiTitle: string
-}
-
-export type TransportUnlock = {
-  name: string
-  wikiTitle: string
-}
-
-export type TeleportUnlock = {
-  name: string
-  wikiTitle: string
-}
-
-export type TeleportItemUnlock = {
-  name: string
-  wikiTitle: string
-  icon: string
-}
-
-export type MinigameUnlock = {
-  name: string
-  wikiTitle: string
-}
+export type TeleportItemUnlock = WikiUnlock & { icon: string }
 
 export type CatalogDef = {
   id: string
@@ -94,12 +60,12 @@ export type CatalogDef = {
   length?: string
   items?: string[]
   image?: string
-  slayerMaster?: SlayerMasterUnlock
-  slayerMonsters?: SlayerMonsterUnlock[]
-  transport?: TransportUnlock[]
-  teleports?: TeleportUnlock[]
+  slayerMaster?: WikiUnlock
+  slayerMonsters?: WikiUnlock[]
+  transport?: WikiUnlock[]
+  teleports?: WikiUnlock[]
   teleportItems?: TeleportItemUnlock[]
-  minigames?: MinigameUnlock[]
+  minigames?: WikiUnlock[]
   reqs: CatalogReq[]
 }
 
@@ -107,21 +73,15 @@ export const OSRS_SKILLS = skillsData as OsrsSkill[]
 export const SKILL_BRACKETS = bracketsData as SkillBracket[]
 export const OSRS_DIARIES = diariesData as OsrsDiary[]
 export const DIARY_TIERS = diaryTiersData as DiaryTier[]
-const QUEST_SLAYER_MASTERS = slayerMastersData as Record<
-  string,
-  SlayerMasterUnlock
->
-const QUEST_SLAYER_MONSTERS = slayerMonstersData as Record<
-  string,
-  SlayerMonsterUnlock[]
->
-const QUEST_TRANSPORT = transportData as Record<string, TransportUnlock[]>
-const QUEST_TELEPORTS = teleportsData as Record<string, TeleportUnlock[]>
+const QUEST_SLAYER_MASTERS = slayerMastersData as Record<string, WikiUnlock>
+const QUEST_SLAYER_MONSTERS = slayerMonstersData as Record<string, WikiUnlock[]>
+const QUEST_TRANSPORT = transportData as Record<string, WikiUnlock[]>
+const QUEST_TELEPORTS = teleportsData as Record<string, WikiUnlock[]>
 const QUEST_TELEPORT_ITEMS = teleportItemsData as Record<
   string,
   TeleportItemUnlock[]
 >
-const QUEST_MINIGAMES = minigamesData as Record<string, MinigameUnlock[]>
+const QUEST_MINIGAMES = minigamesData as Record<string, WikiUnlock[]>
 export { OSRS_QUESTS, osrsQuestTileId } from './questReqs.ts'
 export type { OsrsQuest } from './questReqs.ts'
 
@@ -144,7 +104,7 @@ export function osrsDiaryTileName(diaryName: string, tier: DiaryTier): string {
   return `${diaryName} ${tier.name}`
 }
 
-function skillReqs(reqs: readonly DiarySkillReq[]): CatalogReq[] {
+function skillReqs(reqs: readonly SkillLevelReq[]): CatalogReq[] {
   return reqs.map((req) => ({
     type: 'skill',
     skill: req.skill,
@@ -286,21 +246,19 @@ export function tileImage(tileId: string): string | undefined {
   return CATALOG_BY_ID.get(tileId)?.image
 }
 
-export function tileSlayerMaster(
-  tileId: string,
-): SlayerMasterUnlock | undefined {
+export function tileSlayerMaster(tileId: string): WikiUnlock | undefined {
   return CATALOG_BY_ID.get(tileId)?.slayerMaster
 }
 
-export function tileSlayerMonsters(tileId: string): SlayerMonsterUnlock[] {
+export function tileSlayerMonsters(tileId: string): WikiUnlock[] {
   return CATALOG_BY_ID.get(tileId)?.slayerMonsters ?? []
 }
 
-export function tileTransport(tileId: string): TransportUnlock[] {
+export function tileTransport(tileId: string): WikiUnlock[] {
   return CATALOG_BY_ID.get(tileId)?.transport ?? []
 }
 
-export function tileTeleports(tileId: string): TeleportUnlock[] {
+export function tileTeleports(tileId: string): WikiUnlock[] {
   return CATALOG_BY_ID.get(tileId)?.teleports ?? []
 }
 
@@ -308,7 +266,7 @@ export function tileTeleportItems(tileId: string): TeleportItemUnlock[] {
   return CATALOG_BY_ID.get(tileId)?.teleportItems ?? []
 }
 
-export function tileMinigames(tileId: string): MinigameUnlock[] {
+export function tileMinigames(tileId: string): WikiUnlock[] {
   return CATALOG_BY_ID.get(tileId)?.minigames ?? []
 }
 
@@ -342,94 +300,4 @@ export function partitionByKind(tiles: Tile[]): Record<TileKind, Tile[]> {
     groups[kind].push(tile)
   }
   return groups
-}
-
-export function tilesFromStatuses(
-  statuses: Map<string, TileStatus>,
-  starred: ReadonlySet<string> = new Set(),
-  stamps: ReadonlyMap<string, TileStamps> = new Map(),
-): Tile[] {
-  return CATALOG.map((def) => {
-    return {
-      id: def.id,
-      name: def.name,
-      status: statuses.get(def.id) ?? 'unseen',
-      parentIds: parentIdsFor(def),
-      starred: starred.has(def.id),
-      ...pickTileStamps(stamps.get(def.id)),
-    }
-  })
-}
-
-export function statusesFromStored(
-  tiles: readonly StoredTile[],
-): Map<string, TileStatus> {
-  const statuses = new Map<string, TileStatus>()
-  for (const tile of tiles) {
-    if (!CATALOG_BY_ID.has(tile.id) || tile.status === 'unseen') continue
-    statuses.set(tile.id, tile.status)
-  }
-  return statuses
-}
-
-export function starredFromStored(tiles: readonly StoredTile[]): Set<string> {
-  const starred = new Set<string>()
-  for (const tile of tiles) {
-    if (!tile.starred || !CATALOG_BY_ID.has(tile.id)) continue
-    starred.add(tile.id)
-  }
-  return starred
-}
-
-export function stampsFromStored(
-  tiles: readonly StoredTile[],
-): Map<string, TileStamps> {
-  const stamps = new Map<string, TileStamps>()
-  for (const tile of tiles) {
-    if (!CATALOG_BY_ID.has(tile.id) || !hasTileStamps(tile)) continue
-    stamps.set(tile.id, pickTileStamps(tile))
-  }
-  return stamps
-}
-
-export function storedTilesFromStatuses(
-  statuses: Map<string, TileStatus>,
-  starred: ReadonlySet<string> = new Set(),
-  stamps: ReadonlyMap<string, TileStamps> = new Map(),
-): StoredTile[] {
-  const tiles: StoredTile[] = []
-  for (const def of CATALOG) {
-    const status = statuses.get(def.id)
-    const isStarred = starred.has(def.id)
-    if (!status && !isStarred) continue
-    const stored: StoredTile = { id: def.id, status: status ?? 'unseen' }
-    if (isStarred) stored.starred = true
-    Object.assign(stored, pickTileStamps(stamps.get(def.id)))
-    tiles.push(stored)
-  }
-  return tiles
-}
-
-export function setStoredStatus(
-  statuses: Map<string, TileStatus>,
-  id: string,
-  status: TileStatus,
-): Map<string, TileStatus> | null {
-  if (!CATALOG_BY_ID.has(id)) return null
-  const next = new Map(statuses)
-  if (status === 'unseen') next.delete(id)
-  else next.set(id, status)
-  return next
-}
-
-export function setStoredStarred(
-  starred: Set<string>,
-  id: string,
-  value: boolean,
-): Set<string> | null {
-  if (!CATALOG_BY_ID.has(id)) return null
-  const next = new Set(starred)
-  if (value) next.add(id)
-  else next.delete(id)
-  return next
 }

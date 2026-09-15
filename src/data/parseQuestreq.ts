@@ -1,7 +1,7 @@
-import type { DiarySkillReq } from './diarySkillReqs.ts'
 import type { CatalogSkill } from './parseDiaryWikitext.ts'
+import { skillReqKey, type SkillLevelReq } from './skillReqs.ts'
 
-export type ParsedQuestSkills = DiarySkillReq
+export type ParsedQuestSkills = SkillLevelReq
 
 export type ParsedQuestEntry = {
   name: string
@@ -318,7 +318,7 @@ export function parseQuestDetailsReqs(
     const stars = leadingStars(line)
     if (stars <= 1) {
       for (const req of parseSkillReqsFromLine(line, catalogSkills)) {
-        const key = `${req.skill}:${req.level}:${req.ironman ? 'im' : ''}`
+        const key = skillReqKey(req)
         if (seenSkills.has(key)) continue
         seenSkills.add(key)
         skills.push(req)
