@@ -14,6 +14,7 @@ import slayerMonstersData from './osrs-quest-slayer-monsters.json'
 import transportData from './osrs-quest-transport.json'
 import teleportsData from './osrs-quest-teleports.json'
 import teleportItemsData from './osrs-quest-teleport-items.json'
+import spellbooksData from './osrs-quest-spellbooks.json'
 import minigamesData from './osrs-quest-minigames.json'
 
 export type OsrsSkill = {
@@ -49,6 +50,8 @@ export type WikiUnlock = {
 
 export type TeleportItemUnlock = WikiUnlock & { icon: string }
 
+export type SpellbookUnlock = WikiUnlock & { icon: string }
+
 export type CatalogDef = {
   id: string
   name: string
@@ -65,6 +68,7 @@ export type CatalogDef = {
   transport?: WikiUnlock[]
   teleports?: WikiUnlock[]
   teleportItems?: TeleportItemUnlock[]
+  spellbooks?: SpellbookUnlock[]
   minigames?: WikiUnlock[]
   reqs: CatalogReq[]
 }
@@ -81,6 +85,7 @@ const QUEST_TELEPORT_ITEMS = teleportItemsData as Record<
   string,
   TeleportItemUnlock[]
 >
+const QUEST_SPELLBOOKS = spellbooksData as Record<string, SpellbookUnlock[]>
 const QUEST_MINIGAMES = minigamesData as Record<string, WikiUnlock[]>
 export { OSRS_QUESTS, osrsQuestTileId } from './questReqs.ts'
 export type { OsrsQuest } from './questReqs.ts'
@@ -176,6 +181,7 @@ function buildQuestDefs(): CatalogDef[] {
     const transport = QUEST_TRANSPORT[quest.id]
     const teleports = QUEST_TELEPORTS[quest.id]
     const teleportItems = QUEST_TELEPORT_ITEMS[quest.id]
+    const spellbooks = QUEST_SPELLBOOKS[quest.id]
     const minigames = QUEST_MINIGAMES[quest.id]
     return {
       id: osrsQuestTileId(quest.id),
@@ -195,6 +201,7 @@ function buildQuestDefs(): CatalogDef[] {
       ...(transport && transport.length > 0 ? { transport } : {}),
       ...(teleports && teleports.length > 0 ? { teleports } : {}),
       ...(teleportItems && teleportItems.length > 0 ? { teleportItems } : {}),
+      ...(spellbooks && spellbooks.length > 0 ? { spellbooks } : {}),
       ...(minigames && minigames.length > 0 ? { minigames } : {}),
       reqs: [
         ...(reqs?.quests ?? []).map((id) => ({
@@ -264,6 +271,10 @@ export function tileTeleports(tileId: string): WikiUnlock[] {
 
 export function tileTeleportItems(tileId: string): TeleportItemUnlock[] {
   return CATALOG_BY_ID.get(tileId)?.teleportItems ?? []
+}
+
+export function tileSpellbooks(tileId: string): SpellbookUnlock[] {
+  return CATALOG_BY_ID.get(tileId)?.spellbooks ?? []
 }
 
 export function tileMinigames(tileId: string): WikiUnlock[] {

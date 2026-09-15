@@ -1,0 +1,23 @@
+{
+  "a-kingdom-divided": [
+    {
+      "name": "Arceuus spellbook",
+      "wikiTitle": "Arceuus spellbook",
+      "icon": "arceuus-spellbook.png"
+    }
+  ],
+  "desert-treasure-i": [
+    {
+      "name": "Ancient Magicks",
+      "wikiTitle": "Ancient Magicks",
+      "icon": "ancient-spellbook.png"
+    }
+  ],
+  "lunar-diplomacy": [
+    {
+      "name": "Lunar spellbook",
+      "wikiTitle": "Lunar spellbook",
+      "icon": "lunar-spellbook.png"
+    }
+  ]
+}

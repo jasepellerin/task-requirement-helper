@@ -235,8 +235,8 @@ export function extractTemplate(source: string, name: string): string | null {
 export function parseCoinAmounts(text: string): number[] {
   const amounts: number[] = []
   const patterns = [
-    /(\d{1,3}(?:,\d{3})+|\d+)\s*\[\[coins?(?:\|[^\]]*)?\]\]/gi,
-    /(\d{1,3}(?:,\d{3})+|\d+)\s+coins\b/gi,
+    /(\d{1,3}(?:,\d{3})+|\d+)\+?\s*\[\[coins?(?:\|[^\]]*)?\]\]/gi,
+    /(\d{1,3}(?:,\d{3})+|\d+)\+?\s+coins\b/gi,
     /\{\{[Cc]oins\|(\d+)\}\}/g,
   ]
   for (const pattern of patterns) {
@@ -249,12 +249,28 @@ export function parseCoinAmounts(text: string): number[] {
   return amounts
 }
 
+function topLevelWikiListText(text: string): string {
+  const lines: string[] = []
+  for (const raw of text.split('\n')) {
+    const trimmed = raw.trim()
+    const match = /^(\*+)\s*(.*)$/.exec(trimmed)
+    if (match?.[1]) {
+      if (match[1].length > 1) continue
+      lines.push(match[2] ?? '')
+      continue
+    }
+    lines.push(trimmed)
+  }
+  return lines.join('\n')
+}
+
 export function extractRequiredGp(wikitext: string): number {
   const template = extractTemplate(wikitext, 'Quest details')
   if (!template) return 0
   const fields = parseWikiTemplateFields(template)
   const required = [fields.items, fields.ironman]
     .filter((value): value is string => Boolean(value))
+    .map(topLevelWikiListText)
     .join('\n')
   const amounts = parseCoinAmounts(required)
   return amounts.length === 0 ? 0 : Math.max(...amounts)

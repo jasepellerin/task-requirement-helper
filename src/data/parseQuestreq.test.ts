@@ -178,9 +178,22 @@ describe('parseQuestDetailsReqs', () => {
   })
 })
 
+const SHADES_ITEMS = `
+{{Quest details
+|items = * 1000+ [[coins]] (bring plenty of money just in case)
+* 1 [[hammer]]
+**Using a [[Flamtaer hammer]] is '''highly recommended'''. An additional 13,000 coins allows you to buy a [[Flamtaer hammer]] from Razmire.
+|recommended = * [[Food]]
+}}
+`
+
 describe('extractRequiredGp', () => {
   it('takes the largest required coin amount and ignores recommended', () => {
     expect(extractRequiredGp(DRAGON_SLAYER_ITEMS)).toBe(10000)
     expect(extractRequiredGp(PIRATE_ITEMS)).toBe(60)
+  })
+
+  it('reads N+ coins and ignores nested how-to-get amounts', () => {
+    expect(extractRequiredGp(SHADES_ITEMS)).toBe(1000)
   })
 })

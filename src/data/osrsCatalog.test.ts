@@ -26,6 +26,7 @@ import {
   tileRewards,
   tileSlayerMaster,
   tileSlayerMonsters,
+  tileSpellbooks,
   tileTeleportItems,
   tileTeleports,
   tileTransport,
@@ -403,6 +404,7 @@ describe('OSRS quests', () => {
       osrsTileId('woodcutting', '31-40'),
     ])
     expect(tileGp(osrsQuestTileId('dragon-slayer-i'))).toBe(10000)
+    expect(tileGp(osrsQuestTileId('shades-of-mortton'))).toBe(1000)
     expect(formatGp(10000)).toBe('10,000 gp')
     expect(tileGp(osrsQuestTileId('cooks-assistant'))).toBeUndefined()
     expect(tileRewards(osrsQuestTileId('cooks-assistant'))).toEqual([
@@ -525,16 +527,43 @@ describe('OSRS quests', () => {
     expect(tileTeleports(osrsQuestTileId('watchtower'))).toEqual([
       { name: 'Watchtower Teleport', wikiTitle: 'Watchtower Teleport' },
     ])
-    expect(tileTeleports(osrsQuestTileId('desert-treasure-i'))).toEqual([
-      { name: 'Ancient Magicks teleports', wikiTitle: 'Ancient Magicks' },
-    ])
-    expect(tileTeleports(osrsQuestTileId('lunar-diplomacy'))).toEqual([
-      { name: 'Lunar teleports', wikiTitle: 'Lunar spells' },
-    ])
+    expect(tileTeleports(osrsQuestTileId('desert-treasure-i'))).toEqual([])
+    expect(tileTeleports(osrsQuestTileId('lunar-diplomacy'))).toEqual([])
     expect(tileTeleports(osrsQuestTileId('cooks-assistant'))).toEqual([])
     expect(tileTeleports(osrsTileId('agility', '1-10'))).toEqual([])
     const marked = CATALOG.filter((def) => (def.teleports?.length ?? 0) > 0)
-    expect(marked).toHaveLength(12)
+    expect(marked).toHaveLength(10)
+    expect(marked.every((def) => def.kind === 'quest')).toBe(true)
+  })
+
+  it('marks quests that unlock magic spellbooks', () => {
+    expect(tileSpellbooks(osrsQuestTileId('desert-treasure-i'))).toEqual([
+      {
+        name: 'Ancient Magicks',
+        wikiTitle: 'Ancient Magicks',
+        icon: 'ancient-spellbook.png',
+      },
+    ])
+    expect(tileSpellbooks(osrsQuestTileId('lunar-diplomacy'))).toEqual([
+      {
+        name: 'Lunar spellbook',
+        wikiTitle: 'Lunar spellbook',
+        icon: 'lunar-spellbook.png',
+      },
+    ])
+    expect(tileSpellbooks(osrsQuestTileId('a-kingdom-divided'))).toEqual([
+      {
+        name: 'Arceuus spellbook',
+        wikiTitle: 'Arceuus spellbook',
+        icon: 'arceuus-spellbook.png',
+      },
+    ])
+    expect(tileSpellbooks(osrsQuestTileId('dream-mentor'))).toEqual([])
+    expect(tileSpellbooks(osrsQuestTileId('plague-city'))).toEqual([])
+    expect(tileSpellbooks(osrsQuestTileId('cooks-assistant'))).toEqual([])
+    expect(tileSpellbooks(osrsTileId('agility', '1-10'))).toEqual([])
+    const marked = CATALOG.filter((def) => (def.spellbooks?.length ?? 0) > 0)
+    expect(marked).toHaveLength(3)
     expect(marked.every((def) => def.kind === 'quest')).toBe(true)
   })
 
